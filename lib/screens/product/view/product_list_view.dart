@@ -5,7 +5,9 @@ import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/data/product/product.dart';
 import 'package:e_commerce/screens/product/controller/product_list_controller.dart';
 import 'package:e_commerce/widgets/back_button.dart';
+import 'package:e_commerce/widgets/discount_price_widget.dart';
 import 'package:e_commerce/widgets/drawer/view/filter_drawer_view.dart';
+import 'package:e_commerce/widgets/rating_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -26,11 +28,11 @@ class ProductListView extends GetView<ProductListController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildBackButtonOrTitle(),
-              buildTextWithFilter(),
+              backButtonOrTitleWidget(),
+              textWithFilterWidget(),
               Expanded(
                 child: SingleChildScrollView(
-                  child: buildProductList(),
+                  child: productListWidget(),
                 ),
               ),
             ],
@@ -40,7 +42,7 @@ class ProductListView extends GetView<ProductListController> {
     );
   }
 
-  Widget buildBackButtonOrTitle() {
+  Widget backButtonOrTitleWidget() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -62,16 +64,18 @@ class ProductListView extends GetView<ProductListController> {
     );
   }
 
-  Widget buildTextWithFilter() {
+  Widget textWithFilterWidget() {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'Found ${controller.productList.length.toString()} Results',
-            softWrap: true,
-            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+          Obx(
+            () => Text(
+              'Found ${controller.productList.length.toString()} Results',
+              softWrap: true,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
           ),
           Builder(builder: (context) {
             return IconButton(
@@ -86,7 +90,7 @@ class ProductListView extends GetView<ProductListController> {
     );
   }
 
-  Widget buildProductList() {
+  Widget productListWidget() {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Obx(
@@ -101,14 +105,14 @@ class ProductListView extends GetView<ProductListController> {
           ),
           itemBuilder: (context, index) {
             final ProductDto item = controller.productList[index];
-            return buildProduct(item);
+            return productWidget(item, index);
           },
         ),
       ),
     );
   }
 
-  Widget buildProduct(ProductDto item) {
+  Widget productWidget(ProductDto item, int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -132,25 +136,32 @@ class ProductListView extends GetView<ProductListController> {
                   backgroundColor: Colors.white,
                   child: IconButton(
                     padding: EdgeInsets.zero,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.favorite,
-                      color: AppColors.lightGray,
+                      color: item.isFavorite
+                          ? AppColors.lightRed
+                          : AppColors.lightGray,
                       size: 18,
                     ),
-                    onPressed: () {
-                      // Handle the button press
-                      print('Button Pressed');
-                    },
+                    onPressed: () => controller.toggleFavorite(index),
                   ),
                 ),
               ),
             ],
           ),
         ),
-        Text(item.name!),
-        Text(item.price!.toString()),
-        Text(item.discountPrice!.toString()),
-        Text(item.rating!.toString()),
+        const SizedBox(height: 10),
+        Text(
+          item.name!,
+          style: const TextStyle(
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        DiscountPriceWidget(
+          discountPrice: item.discountPrice!,
+          price: item.price!,
+        ),
+        RatingWidget(value: item.rating ?? 0)
       ],
     );
   }

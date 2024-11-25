@@ -20,6 +20,7 @@ dependencies:
   dio_cookie_manager: ^2.0.0
   cookie_jar: ^3.0.1
   searchfield: ^1.1.8
+  custom_rating_bar: ^3.0.0
 
 dev_dependencies:
   flutter_test:

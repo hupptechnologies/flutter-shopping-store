@@ -12,7 +12,15 @@ class ProductListController extends GetxController {
     super.onInit();
 
     final arguments = Get.arguments;
-    title.value = arguments['title'].toString().toFirstUppercase();
+    title.value = arguments['title'].toString().toFirstLatterUppercase();
     productList.value = productDtoFromJson(DummyData.productList);
+  }
+
+  void toggleFavorite(int index) {
+    if (index != -1) {
+      final bool isFavorite = !productList[index].isFavorite;
+      productList[index].isFavorite = isFavorite;
+      productList.refresh();
+    }
   }
 }
