@@ -16,11 +16,24 @@ class RatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RatingBar(
+    if (onRatingChanged != null) {
+      return RatingBar(
+        isHalfAllowed: true,
+        filledIcon: Icons.star_rate_rounded,
+        emptyIcon: Icons.star_border_rounded,
+        onRatingChanged: onRatingChanged,
+        initialRating: value,
+        halfFilledIcon: Icons.star_half_rounded,
+        filledColor: AppColors.lightGreen,
+        halfFilledColor: AppColors.lightGreen,
+        size: size,
+      );
+    }
+
+    return RatingBar.readOnly(
       isHalfAllowed: true,
       filledIcon: Icons.star_rate_rounded,
       emptyIcon: Icons.star_border_rounded,
-      onRatingChanged: onRatingChanged,
       initialRating: value,
       halfFilledIcon: Icons.star_half_rounded,
       filledColor: AppColors.lightGreen,

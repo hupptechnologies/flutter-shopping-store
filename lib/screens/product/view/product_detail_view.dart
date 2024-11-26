@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
 import 'package:e_commerce/widgets/back_button.dart';
@@ -6,6 +7,7 @@ import 'package:e_commerce/widgets/color_widget.dart';
 import 'package:e_commerce/widgets/description_accordion.dart';
 import 'package:e_commerce/widgets/favorite_widget.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
+import 'package:e_commerce/widgets/review_card_widget.dart';
 import 'package:e_commerce/widgets/review_widget.dart';
 import 'package:e_commerce/widgets/size_widget.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +104,24 @@ class ProductDetailView extends GetView<ProductDetailController> {
                     ),
                     const ReviewWidget(
                       ratings: [0, 3, 5, 12, 80],
-                    )
+                    ),
+                    ListView.builder(
+                        itemCount: 3,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            child: ReviewCardWidget(
+                              image: ImageConstant.category1,
+                              name: 'Jennifer Rose',
+                              reting: 4.5,
+                              time: '5m ago',
+                              message:
+                                  'I love it.  Awesome customer service!! Helped me out with adding an additional item to my order. Thanks again!',
+                            ),
+                          );
+                        }),
                   ],
                 ),
               ),
