@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/widgets/accordion_text_icon.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -35,65 +36,36 @@ class _DescriptionAccordionState extends State<DescriptionAccordion> {
 
     return Padding(
       padding: const EdgeInsets.only(top: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: toggleExpanded,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: AccordionTextIcon(
+        title: 'Description',
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: RichText(
+            text: TextSpan(
+              text: displayText,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
               children: [
-                const Text(
-                  'Description',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                if (fullText.length > 80)
+                  TextSpan(
+                    text: isReadMore ? 'Read Less' : 'Read More',
+                    style: const TextStyle(
+                      color: AppColors.lightGreen,
+                      decoration: TextDecoration.underline,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        setState(() {
+                          isReadMore = !isReadMore;
+                        });
+                      },
                   ),
-                ),
-                Icon(
-                  isExpanded
-                      ? Icons.keyboard_arrow_down
-                      : Icons.keyboard_arrow_right,
-                ),
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 8),
-            child: Divider(),
-          ),
-          Visibility(
-            visible: isExpanded,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: RichText(
-                text: TextSpan(
-                  text: displayText,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                  children: [
-                    if (fullText.length > 80)
-                      TextSpan(
-                        text: isReadMore ? 'Read Less' : 'Read More',
-                        style: const TextStyle(
-                          color: AppColors.lightGreen,
-                          decoration: TextDecoration.underline,
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            setState(() {
-                              isReadMore = !isReadMore;
-                            });
-                          },
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

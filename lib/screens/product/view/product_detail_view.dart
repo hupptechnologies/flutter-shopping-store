@@ -2,10 +2,12 @@ import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
+import 'package:e_commerce/widgets/accordion_text_icon.dart';
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/color_widget.dart';
 import 'package:e_commerce/widgets/description_accordion.dart';
 import 'package:e_commerce/widgets/favorite_widget.dart';
+import 'package:e_commerce/widgets/product_card.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
 import 'package:e_commerce/widgets/review_widget.dart';
 import 'package:e_commerce/widgets/size_widget.dart';
@@ -86,29 +88,34 @@ class ProductDetailView extends GetView<ProductDetailController> {
                 Expanded(
                   child: SingleChildScrollView(
                     controller: scrollController,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: MarginPadding.homeHorPadding,
-                      ),
-                      child: Column(
-                        children: [
-                          titleOrPriceWidget(),
-                          ratingWidget(),
-                          const Divider(),
-                          colorOrSizeWidget(),
-                          const Divider(),
-                          const DescriptionAccordion(
-                            description:
-                                "This is the basic description of the product. "
-                                "It provides an overview of the product and its features. "
-                                "Here is the additional information that appears when you click Read More. "
-                                "This detailed explanation helps the user understand the product better.",
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: MarginPadding.homeHorPadding,
                           ),
-                          const ReviewWidget(
-                            ratings: [0, 3, 5, 12, 80],
+                          child: Column(
+                            children: [
+                              titleOrPriceWidget(),
+                              ratingWidget(),
+                              const Divider(),
+                              colorOrSizeWidget(),
+                              const Divider(),
+                              const DescriptionAccordion(
+                                description:
+                                    "This is the basic description of the product. "
+                                    "It provides an overview of the product and its features. "
+                                    "Here is the additional information that appears when you click Read More. "
+                                    "This detailed explanation helps the user understand the product better.",
+                              ),
+                              const ReviewWidget(
+                                ratings: [0, 3, 5, 12, 80],
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        similarProductWidget(),
+                      ],
                     ),
                   ),
                 ),
@@ -253,6 +260,40 @@ class ProductDetailView extends GetView<ProductDetailController> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget similarProductWidget() {
+    return AccordionTextIcon(
+      title: 'Similar Product',
+      isExpanded: true,
+      padding: MarginPadding.homeHorPadding,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Obx(
+          () => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Row(
+              children:
+                  List.generate(controller.similarProducts.length, (index) {
+                final item = controller.similarProducts[index];
+                return Padding(
+                  padding: EdgeInsets.only(
+                    left: index == 0 ? MarginPadding.homeHorPadding : 0,
+                    right: MarginPadding.homeHorPadding,
+                  ),
+                  child: ProductCard(
+                    name: item.name!,
+                    image: item.image,
+                    width: 130,
+                    price: '\$ ${item.discountPrice.toString()}',
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ),
       ),
     );
   }

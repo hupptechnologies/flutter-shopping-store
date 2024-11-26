@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/widgets/accordion_text_icon.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
 import 'package:e_commerce/widgets/review_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -29,76 +30,47 @@ class _ReviewWidgetState extends State<ReviewWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: toggleExpanded,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Reviews',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-                Icon(
-                  isExpanded
-                      ? Icons.keyboard_arrow_down
-                      : Icons.keyboard_arrow_right,
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 8),
-            child: Divider(),
-          ),
-          Visibility(
-            visible: isExpanded,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Column(
-                children: [
-                  ratingOutOfOrRatingBarWidget(),
-                  ListView.builder(
-                    itemCount: widget.ratings.length,
-                    reverse: true,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return progressBarORratingWidget(
-                        index: index + 1,
-                        value: widget.ratings[index],
-                      );
-                    },
-                  ),
-                  reviewOrWriteTitleWidget(),
-                  ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15),
-                        child: ReviewCardWidget(
-                          image: ImageConstant.category1,
-                          name: 'Jennifer Rose',
-                          reting: 4.5,
-                          time: '5m ago',
-                          message:
-                              'I love it.  Awesome customer service!! Helped me out with adding an additional item to my order. Thanks again!',
-                        ),
-                      );
-                    },
-                  ),
-                ],
+      child: AccordionTextIcon(
+        title: 'Reviews',
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Column(
+            children: [
+              ratingOutOfOrRatingBarWidget(),
+              ListView.builder(
+                itemCount: widget.ratings.length,
+                reverse: true,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return progressBarORratingWidget(
+                    index: index + 1,
+                    value: widget.ratings[index],
+                  );
+                },
               ),
-            ),
-          )
-        ],
+              reviewOrWriteTitleWidget(),
+              ListView.builder(
+                itemCount: 3,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: ReviewCardWidget(
+                      image: ImageConstant.category1,
+                      name: 'Jennifer Rose',
+                      reting: 4.5,
+                      time: '5m ago',
+                      message:
+                          'I love it.  Awesome customer service!! Helped me out with adding an additional item to my order. Thanks again!',
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

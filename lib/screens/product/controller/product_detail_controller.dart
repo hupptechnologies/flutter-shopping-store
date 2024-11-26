@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController {
   late Rx<ProductDto> productDetail;
+  late RxList<ProductDto> similarProducts;
   late RxList<String> colors;
   late RxList<Map<String, dynamic>> sizes = DummyData.sizes.obs;
 
@@ -39,6 +40,7 @@ class ProductDetailController extends GetxController {
 
   ProductDto findByIdProduct(int id) {
     final productList = productDtoFromJson(DummyData.productList);
+    similarProducts = RxList<ProductDto>(productList);
     final product = productList.firstWhere(
       (item) => item.id == id,
       orElse: () => productList[0],
