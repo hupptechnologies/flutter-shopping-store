@@ -1,3 +1,4 @@
+import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,15 +6,7 @@ class FilterController extends GetxController {
   late Rx<RangeValues> rangeSlider = const RangeValues(0, 100).obs;
   late RxSet<int> selectedColors = <int>{}.obs;
 
-  final List<String> colors = [
-    'CE8722',
-    'DC4447',
-    '181E27',
-    '44565C',
-    'E4E4E4',
-    '6D4F44',
-    'DFA8A9',
-  ];
+  final List<String> colors = DummyData.colors;
 
   final List<Map<String, dynamic>> categoryList = [
     {'id': 1, 'name': 'Jeans'},

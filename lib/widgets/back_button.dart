@@ -1,8 +1,12 @@
+import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:flutter/material.dart';
 
 class BuildBackButton extends StatelessWidget {
-  const BuildBackButton({super.key, required this.backPage});
-  final VoidCallback backPage;
+  final VoidCallback? backPage;
+  const BuildBackButton({
+    super.key,
+    this.backPage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +26,7 @@ class BuildBackButton extends StatelessWidget {
         ],
       ),
       child: IconButton(
-        onPressed: () => backPage(),
+        onPressed: () => backPage != null ? backPage!() : CommonGetX.backPage(),
         icon: const Icon(
           Icons.arrow_back_ios_rounded,
           color: Colors.black,

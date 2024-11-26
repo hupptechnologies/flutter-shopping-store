@@ -2,6 +2,7 @@ import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/widgets/build_range_slider.dart';
+import 'package:e_commerce/widgets/color_widget.dart';
 import 'package:e_commerce/widgets/drawer/controller/filter_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -102,24 +103,9 @@ class FilterDrawerView extends GetView<FilterController> {
             bool isSelected = controller.selectedColors.contains(index);
             return GestureDetector(
               onTap: () => controller.toggleColor(index),
-              child: Container(
-                padding:
-                    isSelected ? const EdgeInsets.all(1.5) : EdgeInsets.zero,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: isSelected
-                      ? Border.all(color: Colors.black, width: 1.5)
-                      : null,
-                ),
-                child: Container(
-                  width: 22,
-                  height: 22,
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.hexToColor(entry.value),
-                  ),
-                ),
+              child: ColorWidget(
+                color: entry.value,
+                isSelected: isSelected,
               ),
             );
           }).toList(),

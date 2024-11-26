@@ -11,7 +11,9 @@ import 'package:e_commerce/screens/home/view/home_view.dart';
 import 'package:e_commerce/screens/intro/view/intro_view.dart';
 import 'package:e_commerce/screens/auth/sign_up/binding/sign_up_binding.dart';
 import 'package:e_commerce/screens/auth/sign_up/view/sign_up_view.dart';
+import 'package:e_commerce/screens/product/binding/product_detail_binging.dart';
 import 'package:e_commerce/screens/product/binding/product_list_binding.dart';
+import 'package:e_commerce/screens/product/view/product_detail_view.dart';
 import 'package:e_commerce/screens/product/view/product_list_view.dart';
 import 'package:e_commerce/screens/search/binding/search_binging.dart';
 import 'package:e_commerce/screens/search/view/search_view.dart';
@@ -69,6 +71,12 @@ class AppPages {
       name: AppRoutes.productList,
       page: () => const ProductListView(),
       binding: ProductListBinding(),
+      transition: Transition.rightToLeftWithFade,
+    ),
+    GetPage(
+      name: AppRoutes.productDetail,
+      page: () => const ProductDetailView(),
+      binding: ProductDetailBinging(),
       transition: Transition.rightToLeftWithFade,
     ),
   ];

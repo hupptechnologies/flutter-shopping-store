@@ -7,6 +7,7 @@ import 'package:e_commerce/screens/product/controller/product_list_controller.da
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/discount_price_widget.dart';
 import 'package:e_commerce/widgets/drawer/view/filter_drawer_view.dart';
+import 'package:e_commerce/widgets/favorite_widget.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -105,49 +106,41 @@ class ProductListView extends GetView<ProductListController> {
           ),
           itemBuilder: (context, index) {
             final ProductDto item = controller.productList[index];
-            return productWidget(item, index);
+            return productWidget(item);
           },
         ),
       ),
     );
   }
 
-  Widget productWidget(ProductDto item, int index) {
+  Widget productWidget(ProductDto item) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 220,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: AppColors.lightGray,
-            image: DecorationImage(
-              image: AssetImage(item.image),
-              fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () => controller.onTapProduct(item.id),
+          child: Container(
+            height: 220,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: AppColors.lightGray,
+              image: DecorationImage(
+                image: AssetImage(item.image),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: Stack(
-            children: [
-              Positioned(
-                top: 10,
-                right: 10,
-                child: CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Colors.white,
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: Icon(
-                      Icons.favorite,
-                      color: item.isFavorite
-                          ? AppColors.lightRed
-                          : AppColors.lightGray,
-                      size: 18,
-                    ),
-                    onPressed: () => controller.toggleFavorite(index),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 10,
+                  right: 10,
+                  child: FavoriteWidget(
+                    isFavorite: item.isFavorite,
+                    onPressed: () => controller.toggleFavorite(item.id),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 10),

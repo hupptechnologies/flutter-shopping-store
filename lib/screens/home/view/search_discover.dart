@@ -204,42 +204,45 @@ class SearchDiscover extends GetView<SearchDiscoverController> {
           final hasSubCategory = item.subCategory?.isNotEmpty ?? false;
           return Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Text on the left side
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: isSubCategory ? 25 : 16.0,
-                      right: 16.0,
-                      top: 10,
-                      bottom: 10,
-                    ),
-                    child: Text(
-                      item.name,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        overflow: TextOverflow.ellipsis,
+              GestureDetector(
+                onTap: () => controller.onTapProduct(item.name),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Text on the left side
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: isSubCategory ? 25 : 16.0,
+                        right: 16.0,
+                        top: 10,
+                        bottom: 10,
                       ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '${item.item} Items',
-                        style: TextStyle(
-                          color: AppColors.darkGray.withOpacity(0.6),
+                      child: Text(
+                        item.name,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(width: 5),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        color: AppColors.darkGray,
-                        size: 15,
-                      ),
-                    ],
-                  )
-                ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          '${item.item} Items',
+                          style: TextStyle(
+                            color: AppColors.darkGray.withOpacity(0.6),
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: AppColors.darkGray,
+                          size: 15,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
               if (hasSubCategory) ...[
                 const Divider(thickness: 1.0, color: AppColors.lightGray),

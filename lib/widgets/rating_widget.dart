@@ -18,11 +18,11 @@ class RatingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RatingBar(
       isHalfAllowed: true,
-      filledIcon: Icons.star,
-      emptyIcon: Icons.star_border,
+      filledIcon: Icons.star_rate_rounded,
+      emptyIcon: Icons.star_border_rounded,
       onRatingChanged: onRatingChanged,
       initialRating: value,
-      halfFilledIcon: Icons.star_half,
+      halfFilledIcon: Icons.star_half_rounded,
       filledColor: AppColors.lightGreen,
       halfFilledColor: AppColors.lightGreen,
       size: size,

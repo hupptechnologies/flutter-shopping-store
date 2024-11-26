@@ -77,4 +77,20 @@ abstract class DummyData {
       'image': ImageConstant.category2,
     }
   ]);
+
+  static final List<String> colors = [
+    'CE8722',
+    'DC4447',
+    '181E27',
+    '44565C',
+    'E4E4E4',
+    '6D4F44',
+    'DFA8A9',
+  ];
+
+  static final List<Map<String, dynamic>> sizes = [
+    {'id': 1, 'value': 'S'},
+    {'id': 2, 'value': 'M'},
+    {'id': 3, 'value': 'L'}
+  ];
 }

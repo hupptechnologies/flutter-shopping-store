@@ -63,4 +63,8 @@ class SearchDiscoverController extends GetxController {
   void searchPage() {
     Get.toNamed(AppRoutes.search);
   }
+
+  void onTapProduct(String name) {
+    Get.toNamed(AppRoutes.productList, arguments: {'title': name});
+  }
 }

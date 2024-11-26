@@ -9,4 +9,5 @@ abstract class AppRoutes {
   static const home = '/home';
   static const search = '/search';
   static const productList = '/producatList';
+  static const productDetail = '/productDetail';
 }
