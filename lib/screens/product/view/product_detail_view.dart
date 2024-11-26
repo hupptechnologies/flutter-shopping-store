@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
@@ -28,10 +29,76 @@ class ProductDetailView extends GetView<ProductDetailController> {
             width: double.infinity,
             color: Colors.white,
             child: Obx(
-              () => Image.asset(controller.prodcut.image),
+              () => CarouselSlider(
+                items: controller.images.map((image) {
+                  return Builder(
+                    builder: (BuildContext context) {
+                      return Image.asset(
+                        image,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      );
+                    },
+                  );
+                }).toList(),
+                carouselController: controller.carouselController,
+                options: CarouselOptions(
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  viewportFraction: 1.0,
+                  initialPage: controller.currentImage.value,
+                  autoPlay: false,
+                  enlargeCenterPage: true,
+                  enableInfiniteScroll: false,
+                  onPageChanged: (index, reason) {
+                    controller.changeImage(index);
+                  },
+                ),
+              ),
             ),
           ),
           backButtonAndFavorite(),
+          Obx(
+            () => Positioned(
+              bottom: controller.size.value,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(controller.images.length, (index) {
+                  final isSelected = index == controller.currentImage.value;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: GestureDetector(
+                      onTap: () => controller.carouselController.animateToPage(
+                        index,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
+                      ),
+                      child: Container(
+                        padding: isSelected
+                            ? const EdgeInsets.all(1)
+                            : EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: isSelected
+                              ? Border.all(color: AppColors.darkGray, width: 1)
+                              : null,
+                        ),
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.darkGray,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
           scrollableSheet()
         ],
       ),
@@ -63,92 +130,94 @@ class ProductDetailView extends GetView<ProductDetailController> {
 
   Widget scrollableSheet() {
     return DraggableScrollableSheet(
-        initialChildSize: 0.48,
-        maxChildSize: 0.65,
-        minChildSize: 0.48,
-        builder: (context, scrollController) {
-          return Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(20),
+      controller: controller.draggableScrollableController,
+      initialChildSize: 0.48,
+      maxChildSize: 0.6,
+      minChildSize: 0.48,
+      builder: (context, scrollController) {
+        return Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 4,
+                spreadRadius: 1,
+                offset: const Offset(0, 2),
               ),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 4,
-                  spreadRadius: 1,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: scrollController,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: MarginPadding.homeHorPadding,
-                          ),
-                          child: Column(
-                            children: [
-                              titleOrPriceWidget(),
-                              ratingWidget(),
-                              const Divider(),
-                              colorOrSizeWidget(),
-                              const Divider(),
-                              const DescriptionAccordion(
-                                description:
-                                    "This is the basic description of the product. "
-                                    "It provides an overview of the product and its features. "
-                                    "Here is the additional information that appears when you click Read More. "
-                                    "This detailed explanation helps the user understand the product better.",
-                              ),
-                              const ReviewWidget(
-                                ratings: [0, 3, 5, 12, 80],
-                              ),
-                            ],
-                          ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: scrollController,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: MarginPadding.homeHorPadding,
                         ),
-                        similarProductWidget(),
-                      ],
-                    ),
+                        child: Column(
+                          children: [
+                            titleOrPriceWidget(),
+                            ratingWidget(),
+                            const Divider(),
+                            colorOrSizeWidget(),
+                            const Divider(),
+                            const DescriptionAccordion(
+                              description:
+                                  "This is the basic description of the product. "
+                                  "It provides an overview of the product and its features. "
+                                  "Here is the additional information that appears when you click Read More. "
+                                  "This detailed explanation helps the user understand the product better.",
+                            ),
+                            const ReviewWidget(
+                              ratings: [0, 3, 5, 12, 80],
+                            ),
+                          ],
+                        ),
+                      ),
+                      similarProductWidget(),
+                    ],
                   ),
                 ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: AppColors.darkGray,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
+              ),
+              Container(
+                decoration: const BoxDecoration(
+                  color: AppColors.darkGray,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(ImageConstant.shoppingIcon),
-                        const SizedBox(width: 10),
-                        const Text(
-                          'Add To Cart',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        )
-                      ],
-                    ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(ImageConstant.shoppingIcon),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'Add To Cart',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
-          );
-        });
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget titleOrPriceWidget() {
