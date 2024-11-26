@@ -7,10 +7,10 @@ import 'package:e_commerce/widgets/color_widget.dart';
 import 'package:e_commerce/widgets/description_accordion.dart';
 import 'package:e_commerce/widgets/favorite_widget.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
-import 'package:e_commerce/widgets/review_card_widget.dart';
 import 'package:e_commerce/widgets/review_widget.dart';
 import 'package:e_commerce/widgets/size_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ProductDetailView extends GetView<ProductDetailController> {
@@ -19,20 +19,19 @@ class ProductDetailView extends GetView<ProductDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              color: Colors.white,
-              child: Obx(
-                () => Image.asset(controller.prodcut.image),
-              ),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          Container(
+            width: double.infinity,
+            color: Colors.white,
+            child: Obx(
+              () => Image.asset(controller.prodcut.image),
             ),
-            backButtonAndFavorite(),
-            scrollableSheet()
-          ],
-        ),
+          ),
+          backButtonAndFavorite(),
+          scrollableSheet()
+        ],
       ),
     );
   }
@@ -40,7 +39,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
   Widget backButtonAndFavorite() {
     return Padding(
       padding: EdgeInsets.only(
-        top: MarginPadding.homeTopPadding,
+        top: MarginPadding.homeTopPadding * 2.5,
         left: MarginPadding.homeHorPadding,
         right: MarginPadding.homeHorPadding,
       ),
@@ -62,9 +61,9 @@ class ProductDetailView extends GetView<ProductDetailController> {
 
   Widget scrollableSheet() {
     return DraggableScrollableSheet(
-        initialChildSize: 0.55,
+        initialChildSize: 0.48,
         maxChildSize: 0.65,
-        minChildSize: 0.55,
+        minChildSize: 0.48,
         builder: (context, scrollController) {
           return Container(
             clipBehavior: Clip.hardEdge,
@@ -82,49 +81,64 @@ class ProductDetailView extends GetView<ProductDetailController> {
                 ),
               ],
             ),
-            child: SingleChildScrollView(
-              controller: scrollController,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: MarginPadding.homeHorPadding,
-                ),
-                child: Column(
-                  children: [
-                    titleOrPriceWidget(),
-                    ratingWidget(),
-                    const Divider(),
-                    colorOrSizeWidget(),
-                    const Divider(),
-                    const DescriptionAccordion(
-                      description:
-                          "This is the basic description of the product. "
-                          "It provides an overview of the product and its features. "
-                          "Here is the additional information that appears when you click Read More. "
-                          "This detailed explanation helps the user understand the product better.",
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: MarginPadding.homeHorPadding,
+                      ),
+                      child: Column(
+                        children: [
+                          titleOrPriceWidget(),
+                          ratingWidget(),
+                          const Divider(),
+                          colorOrSizeWidget(),
+                          const Divider(),
+                          const DescriptionAccordion(
+                            description:
+                                "This is the basic description of the product. "
+                                "It provides an overview of the product and its features. "
+                                "Here is the additional information that appears when you click Read More. "
+                                "This detailed explanation helps the user understand the product better.",
+                          ),
+                          const ReviewWidget(
+                            ratings: [0, 3, 5, 12, 80],
+                          ),
+                        ],
+                      ),
                     ),
-                    const ReviewWidget(
-                      ratings: [0, 3, 5, 12, 80],
-                    ),
-                    ListView.builder(
-                        itemCount: 3,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 15),
-                            child: ReviewCardWidget(
-                              image: ImageConstant.category1,
-                              name: 'Jennifer Rose',
-                              reting: 4.5,
-                              time: '5m ago',
-                              message:
-                                  'I love it.  Awesome customer service!! Helped me out with adding an additional item to my order. Thanks again!',
-                            ),
-                          );
-                        }),
-                  ],
+                  ),
                 ),
-              ),
+                Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.darkGray,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(ImageConstant.shoppingIcon),
+                        const SizedBox(width: 10),
+                        const Text(
+                          'Add To Cart',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
           );
         });
@@ -132,7 +146,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
 
   Widget titleOrPriceWidget() {
     return Padding(
-      padding: const EdgeInsets.only(top: 35),
+      padding: const EdgeInsets.only(top: 40),
       child: Obx(
         () => Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

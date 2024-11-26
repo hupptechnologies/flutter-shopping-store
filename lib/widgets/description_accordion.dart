@@ -52,8 +52,8 @@ class _DescriptionAccordionState extends State<DescriptionAccordion> {
                 ),
                 Icon(
                   isExpanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_right,
                 ),
               ],
             ),

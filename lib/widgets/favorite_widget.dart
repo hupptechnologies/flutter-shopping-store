@@ -37,7 +37,6 @@ class FavoriteWidget extends StatelessWidget {
         child: Icon(
           Icons.favorite,
           color: isFavorite ? AppColors.lightRed : AppColors.lightGray,
-          size: 20,
         ),
       ),
     );

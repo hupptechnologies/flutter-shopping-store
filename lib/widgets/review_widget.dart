@@ -1,5 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
+import 'package:e_commerce/widgets/review_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class ReviewWidget extends StatefulWidget {
@@ -15,7 +17,7 @@ class ReviewWidget extends StatefulWidget {
 }
 
 class _ReviewWidgetState extends State<ReviewWidget> {
-  bool isExpanded = true;
+  bool isExpanded = false;
 
   void toggleExpanded() {
     setState(() {
@@ -44,8 +46,8 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                 ),
                 Icon(
                   isExpanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_right,
                 ),
               ],
             ),
@@ -61,7 +63,6 @@ class _ReviewWidgetState extends State<ReviewWidget> {
               child: Column(
                 children: [
                   ratingOutOfOrRatingBarWidget(),
-                  const SizedBox(height: 10),
                   ListView.builder(
                     itemCount: widget.ratings.length,
                     reverse: true,
@@ -75,6 +76,24 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                     },
                   ),
                   reviewOrWriteTitleWidget(),
+                  ListView.builder(
+                    itemCount: 3,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        child: ReviewCardWidget(
+                          image: ImageConstant.category1,
+                          name: 'Jennifer Rose',
+                          reting: 4.5,
+                          time: '5m ago',
+                          message:
+                              'I love it.  Awesome customer service!! Helped me out with adding an additional item to my order. Thanks again!',
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -175,7 +194,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
 
   Widget reviewOrWriteTitleWidget() {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
+      padding: const EdgeInsets.only(top: 15, bottom: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
