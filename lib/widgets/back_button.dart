@@ -10,24 +10,25 @@ class BuildBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 35,
-      height: 35,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 4,
-            spreadRadius: 1,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: IconButton(
-        onPressed: () => backPage != null ? backPage!() : CommonGetX.backPage(),
-        icon: const Icon(
+    return GestureDetector(
+      onTap: () => backPage != null ? backPage!() : CommonGetX.backPage(),
+      child: Container(
+        width: 35,
+        height: 35,
+        margin: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 4,
+              spreadRadius: 1,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Icon(
           Icons.arrow_back_ios_rounded,
           color: Colors.black,
           size: 18,
