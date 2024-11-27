@@ -6,6 +6,8 @@ import 'package:e_commerce/screens/auth/password/binding/password_binding.dart';
 import 'package:e_commerce/screens/auth/password/view/password_view.dart';
 import 'package:e_commerce/screens/auth/verification-code/binding/verification_code_binding.dart';
 import 'package:e_commerce/screens/auth/verification-code/view/verification_code_view.dart';
+import 'package:e_commerce/screens/cart/binding/cart_binding.dart';
+import 'package:e_commerce/screens/cart/view/cart_view.dart';
 import 'package:e_commerce/screens/home/binding/home_binding.dart';
 import 'package:e_commerce/screens/home/view/home_view.dart';
 import 'package:e_commerce/screens/intro/view/intro_view.dart';
@@ -29,55 +31,51 @@ class AppPages {
       name: AppRoutes.signUp,
       page: () => const SignUpView(),
       binding: SignUpBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.login,
       page: () => const LoginView(),
       binding: LoginBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.forgetPassword,
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinging(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.verificationCode,
       page: () => const VerificationCodeView(),
       binding: VerificationCodeBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.password,
       page: () => const PasswordView(),
       binding: PasswordBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.home,
       page: () => const HomeView(),
       binding: HomeBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.search,
       page: () => const SearchView(),
       binding: SearchBinging(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.productList,
       page: () => const ProductListView(),
       binding: ProductListBinding(),
-      transition: Transition.rightToLeftWithFade,
     ),
     GetPage(
       name: AppRoutes.productDetail,
       page: () => const ProductDetailView(),
       binding: ProductDetailBinging(),
-      transition: Transition.rightToLeftWithFade,
+    ),
+    GetPage(
+      name: AppRoutes.cartList,
+      page: () => const CartView(),
+      binding: CartBinding(),
     ),
   ];
 }

@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.home,
       getPages: AppPages.pages,
+      defaultTransition: Transition.rightToLeftWithFade,
     );
   }
 }
