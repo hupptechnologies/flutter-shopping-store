@@ -1,3 +1,4 @@
+import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/data/product/product.dart';
 import 'package:e_commerce/screens/cart/controller/cart_controller.dart';
@@ -13,42 +14,49 @@ class CartView extends GetView<CartController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MarginPadding.homeHorPadding,
-            vertical: MarginPadding.homeTopPadding,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              backButtonOrTitle(),
-              const SizedBox(height: 20),
-              cartListWidget(),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            backButtonOrTitle(),
+            const SizedBox(height: 20),
+            Expanded(
+              child: Column(
+                children: [
+                  cartListWidget(),
+                  proceedToCheckoutWidget(),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget backButtonOrTitle() {
-    return const Stack(
-      children: [
-        BuildBackButton(),
-        Padding(
-          padding: EdgeInsets.only(top: 7),
-          child: Center(
-            child: Text(
-              'Your Cart',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: MarginPadding.homeHorPadding,
+        vertical: MarginPadding.homeTopPadding,
+      ),
+      child: const Stack(
+        children: [
+          BuildBackButton(),
+          Padding(
+            padding: EdgeInsets.only(top: 7),
+            child: Center(
+              child: Text(
+                'Your Cart',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -59,6 +67,9 @@ class CartView extends GetView<CartController> {
           () => ListView.builder(
               itemCount: controller.carts.length,
               shrinkWrap: true,
+              padding: EdgeInsets.symmetric(
+                horizontal: MarginPadding.homeHorPadding,
+              ),
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 final ProductDto item = controller.carts[index];
@@ -76,6 +87,108 @@ class CartView extends GetView<CartController> {
                 );
               }),
         ),
+      ),
+    );
+  }
+
+  Widget proceedToCheckoutWidget() {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        vertical: MarginPadding.homeTopPadding,
+        horizontal: MarginPadding.homeHorPadding,
+      ),
+      margin: EdgeInsets.zero,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 10,
+            spreadRadius: 5,
+          ),
+        ],
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      child: Column(
+        children: [
+          Obx(
+            () => titleWithPriceWidget(
+                title: 'Product Price',
+                price: '\$ ${controller.productPrice.value.toString()}'),
+          ),
+          const Divider(),
+          titleWithPriceWidget(title: 'Shipping', price: 'Freeship'),
+          const Divider(),
+          Obx(
+            () => titleWithPriceWidget(
+              title: 'SubTotal',
+              price: '\$ ${controller.productPrice.value.toString()}',
+              isTotalWidget: true,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: Obx(
+              () => SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: controller.selectingCart.isNotEmpty
+                      ? controller.proceedToCheckout
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.darkGray,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    splashFactory: NoSplash.splashFactory,
+                  ),
+                  child: Text(
+                    'Proceed to checkout',
+                    style: TextStyle(
+                      color: controller.selectingCart.isEmpty
+                          ? AppColors.dartGratWithOpaity5
+                          : Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget titleWithPriceWidget({
+    required String title,
+    required String price,
+    bool isTotalWidget = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: !isTotalWidget ? AppColors.dartGratWithOpaity5 : null,
+              fontSize: 14,
+              fontWeight: isTotalWidget ? FontWeight.bold : null,
+            ),
+          ),
+          Text(
+            price,
+            style: TextStyle(
+              fontSize: isTotalWidget ? 18 : 14,
+              fontWeight: isTotalWidget ? FontWeight.bold : null,
+            ),
+          )
+        ],
       ),
     );
   }

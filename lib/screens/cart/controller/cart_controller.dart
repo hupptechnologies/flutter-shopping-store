@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class CartController extends GetxController {
   late RxList<ProductDto> carts;
   late RxSet<int> selectingCart;
+  late RxInt productPrice = 0.obs;
 
   @override
   void onInit() {
@@ -14,7 +15,7 @@ class CartController extends GetxController {
   }
 
   void findCart() {
-    final result = productDtoFromJson(DummyData.productList).sublist(0, 3);
+    final result = productDtoFromJson(DummyData.productList).sublist(0, 4);
     carts = RxList<ProductDto>(result);
   }
 
@@ -24,6 +25,20 @@ class CartController extends GetxController {
     } else {
       selectingCart.add(id);
     }
+    sumProductPrice();
+  }
+
+  void sumProductPrice() {
+    final total = carts
+        .where((item) => selectingCart.contains(item.id))
+        .map((item) => item.discountPrice ?? 0)
+        .fold(0.0, (sum, price) => sum + price);
+
+    productPrice.value = total.toInt();
+  }
+
+  void proceedToCheckout() {
+    print('object');
   }
 
   void incrementDecrementQuantity(int id, bool isIncrement) {
