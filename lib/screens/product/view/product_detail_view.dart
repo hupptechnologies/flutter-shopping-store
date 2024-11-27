@@ -187,29 +187,32 @@ class ProductDetailView extends GetView<ProductDetailController> {
                   ),
                 ),
               ),
-              Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.darkGray,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
+              GestureDetector(
+                onTap: controller.onTapAddToCart,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.darkGray,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 24),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(ImageConstant.shoppingIcon),
-                      const SizedBox(width: 10),
-                      const Text(
-                        'Add To Cart',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      )
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(ImageConstant.shoppingIcon),
+                        const SizedBox(width: 10),
+                        const Text(
+                          'Add To Cart',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

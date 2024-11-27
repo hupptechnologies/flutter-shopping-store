@@ -13,6 +13,9 @@ class ProductDto {
   final double? discountPrice;
   final double? rating;
   final String image;
+  final int? size;
+  final int? color;
+  final int? quantity;
   bool isFavorite;
 
   ProductDto({
@@ -23,6 +26,9 @@ class ProductDto {
     this.rating,
     required this.image,
     this.isFavorite = false,
+    this.size,
+    this.color,
+    this.quantity,
   });
 
   factory ProductDto.fromRawJson(String str) =>
@@ -37,6 +43,9 @@ class ProductDto {
         discountPrice: (json["discountPrice"] as num).toDouble(),
         rating: (json["rating"] as num).toDouble(),
         image: json["image"],
+        size: json["size"],
+        color: json["color"],
+        quantity: json["quantity"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,5 +56,8 @@ class ProductDto {
         "rating": rating,
         "image": image,
         "isFavorite": isFavorite,
+        "size": size,
+        "color": color,
+        "quantity": quantity,
       };
 }

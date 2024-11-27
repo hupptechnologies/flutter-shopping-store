@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/data/product/product.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -62,6 +63,10 @@ class ProductDetailController extends GetxController {
 
   void toggleSize(int id) {
     seletedSize.value = seletedSize.value == id ? 0 : id;
+  }
+
+  void onTapAddToCart() {
+    Get.toNamed(AppRoutes.cartList);
   }
 
   ProductDto findByIdProduct(int id) {
