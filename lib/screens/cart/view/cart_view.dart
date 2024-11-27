@@ -23,33 +23,7 @@ class CartView extends GetView<CartController> {
             children: [
               backButtonOrTitle(),
               const SizedBox(height: 20),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Obx(
-                    () => ListView.builder(
-                        itemCount: controller.carts.length,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          final ProductDto item = controller.carts[index];
-                          final bool isSelected =
-                              controller.selectingCart.contains(item.id);
-                          print('isSelected, $isSelected');
-                          print(
-                              'controller.selectingCart, ${controller.selectingCart}');
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: CartCardWidget(
-                              product: controller.carts[index],
-                              toggleSelectingCart:
-                                  controller.toggleSelectingCart,
-                              isSelected: isSelected,
-                            ),
-                          );
-                        }),
-                  ),
-                ),
-              ),
+              cartListWidget(),
             ],
           ),
         ),
@@ -75,6 +49,34 @@ class CartView extends GetView<CartController> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget cartListWidget() {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: Obx(
+          () => ListView.builder(
+              itemCount: controller.carts.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final ProductDto item = controller.carts[index];
+                final bool isSelected =
+                    controller.selectingCart.contains(item.id);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: CartCardWidget(
+                    product: controller.carts[index],
+                    toggleSelectingCart: controller.toggleSelectingCart,
+                    isSelected: isSelected,
+                    incrementDecrementQuantity:
+                        controller.incrementDecrementQuantity,
+                  ),
+                );
+              }),
+        ),
+      ),
     );
   }
 }

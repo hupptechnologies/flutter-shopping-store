@@ -25,4 +25,15 @@ class CartController extends GetxController {
       selectingCart.add(id);
     }
   }
+
+  void incrementDecrementQuantity(int id, bool isIncrement) {
+    final cart = carts.firstWhere((item) => item.id == id);
+
+    if (isIncrement) {
+      cart.quantity = (cart.quantity) + 1;
+    } else if (cart.quantity > 0) {
+      cart.quantity = (cart.quantity) - 1;
+    }
+    carts.refresh();
+  }
 }

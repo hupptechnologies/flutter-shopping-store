@@ -6,12 +6,14 @@ class CartCardWidget extends StatelessWidget {
   final ProductDto product;
   final Function(int) toggleSelectingCart;
   final bool isSelected;
+  final Function(int, bool) incrementDecrementQuantity;
 
   const CartCardWidget({
     super.key,
     required this.product,
     required this.toggleSelectingCart,
     required this.isSelected,
+    required this.incrementDecrementQuantity,
   });
 
   @override
@@ -118,21 +120,21 @@ class CartCardWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       child: Row(
         children: [
-          quantityButtonWidget(Icons.remove),
+          quantityButtonWidget(Icons.remove, false),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6),
-            child: Text(
-                product.quantity != null ? product.quantity.toString() : '1',
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(product.quantity.toString(),
                 style: TextStyle(color: AppColors.dartGratWithOpaity5)),
           ),
-          quantityButtonWidget(Icons.add),
+          quantityButtonWidget(Icons.add, true),
         ],
       ),
     );
   }
 
-  Widget quantityButtonWidget(IconData icon) {
+  Widget quantityButtonWidget(IconData icon, bool isIncrement) {
     return InkWell(
+      onTap: () => incrementDecrementQuantity(product.id, isIncrement),
       child: Icon(icon, size: 15, color: AppColors.dartGratWithOpaity5),
     );
   }

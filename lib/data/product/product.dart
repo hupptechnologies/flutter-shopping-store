@@ -15,7 +15,7 @@ class ProductDto {
   final String image;
   final int? size;
   final int? color;
-  final int? quantity;
+  int quantity;
   bool isFavorite;
 
   ProductDto({
@@ -28,7 +28,7 @@ class ProductDto {
     this.isFavorite = false,
     this.size,
     this.color,
-    this.quantity,
+    this.quantity = 1,
   });
 
   factory ProductDto.fromRawJson(String str) =>
@@ -45,7 +45,6 @@ class ProductDto {
         image: json["image"],
         size: json["size"],
         color: json["color"],
-        quantity: json["quantity"],
       );
 
   Map<String, dynamic> toJson() => {
