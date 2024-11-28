@@ -3,6 +3,7 @@ import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/data/product/product.dart';
 import 'package:e_commerce/screens/cart/controller/cart_controller.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
+import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:e_commerce/widgets/cart_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -106,28 +107,10 @@ class CartView extends GetView<CartController> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: Obx(
-              () => SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: controller.selectingCart.isNotEmpty
-                      ? controller.proceedToCheckout
-                      : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.darkGray,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    splashFactory: NoSplash.splashFactory,
-                  ),
-                  child: Text(
-                    'Proceed to checkout',
-                    style: TextStyle(
-                      color: controller.selectingCart.isEmpty
-                          ? AppColors.dartGratWithOpaity5
-                          : Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+              () => ButtonWidget(
+                title: 'Proceed to checkout',
+                onPressed: controller.proceedToCheckout,
+                isDisable: controller.selectingCart.isEmpty,
               ),
             ),
           ),
