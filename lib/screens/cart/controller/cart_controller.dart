@@ -1,5 +1,6 @@
 import 'package:e_commerce/data/product/product.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
@@ -38,7 +39,7 @@ class CartController extends GetxController {
   }
 
   void proceedToCheckout() {
-    print('object');
+    Get.toNamed(AppRoutes.checkout);
   }
 
   void incrementDecrementQuantity(int id, bool isIncrement) {

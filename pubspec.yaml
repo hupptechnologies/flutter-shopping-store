@@ -21,6 +21,7 @@ dependencies:
   cookie_jar: ^3.0.1
   searchfield: ^1.1.8
   custom_rating_bar: ^3.0.0
+  easy_stepper: ^0.8.5+1
 
 dev_dependencies:
   flutter_test:

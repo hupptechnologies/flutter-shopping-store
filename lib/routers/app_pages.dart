@@ -8,6 +8,8 @@ import 'package:e_commerce/screens/auth/verification-code/binding/verification_c
 import 'package:e_commerce/screens/auth/verification-code/view/verification_code_view.dart';
 import 'package:e_commerce/screens/cart/binding/cart_binding.dart';
 import 'package:e_commerce/screens/cart/view/cart_view.dart';
+import 'package:e_commerce/screens/checkout/binding/checkout_bindings.dart';
+import 'package:e_commerce/screens/checkout/view/checkout_view.dart';
 import 'package:e_commerce/screens/home/binding/home_binding.dart';
 import 'package:e_commerce/screens/home/view/home_view.dart';
 import 'package:e_commerce/screens/intro/view/intro_view.dart';
@@ -76,6 +78,11 @@ class AppPages {
       name: AppRoutes.cartList,
       page: () => const CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.checkout,
+      page: () => const CheckoutView(),
+      binding: CheckoutBindings(),
     ),
   ];
 }

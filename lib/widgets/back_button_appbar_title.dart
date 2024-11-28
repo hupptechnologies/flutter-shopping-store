@@ -11,23 +11,26 @@ class BackButtonAppbarTitle extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.white,
-      centerTitle: centerTitle,
-      scrolledUnderElevation: 0,
-      leading: Padding(
-        padding: EdgeInsets.only(left: MarginPadding.homeHorPadding),
-        child: const BuildBackButton(),
+    return Padding(
+      padding: const EdgeInsets.only(top: 6),
+      child: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: centerTitle,
+        scrolledUnderElevation: 0,
+        leading: Padding(
+          padding: EdgeInsets.only(left: MarginPadding.homeHorPadding),
+          child: const BuildBackButton(),
+        ),
+        title: title != null && title!.isNotEmpty
+            ? Text(
+                title!,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : null,
       ),
-      title: title != null && title!.isNotEmpty
-          ? Text(
-              title!,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          : null,
     );
   }
 
