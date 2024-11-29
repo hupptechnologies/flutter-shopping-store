@@ -12,6 +12,8 @@ class PaymentView extends GetView<PaymentController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         paymentMethodSelectingWidget(),
+        const SizedBox(height: 50),
+        creditCartWidget(),
       ],
     );
   }
@@ -91,6 +93,60 @@ class PaymentView extends GetView<PaymentController> {
               ),
             ),
           ],
+        ],
+      ),
+    );
+  }
+
+  Widget creditCartWidget() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            color: AppColors.lightGray,
+            blurRadius: 5,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: const Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(Icons.view_sidebar),
+              Text('Trust bank'),
+            ],
+          ),
+          SizedBox(height: 35),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('1234', style: TextStyle(fontSize: 20)),
+              Text('1234', style: TextStyle(fontSize: 20)),
+              Text('1234', style: TextStyle(fontSize: 20)),
+              Text('1234', style: TextStyle(fontSize: 20)),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('CART HOLDER', style: TextStyle(fontSize: 12)),
+              Text('VALID THRU', style: TextStyle(fontSize: 12)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('ASBD ABCD', style: TextStyle(fontSize: 16)),
+              Text('02/2022', style: TextStyle(fontSize: 16)),
+            ],
+          ),
         ],
       ),
     );

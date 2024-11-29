@@ -3,6 +3,7 @@ abstract class ImageConstant {
   static const String intro1 = 'assets/intro1.png';
   static const String intro2 = 'assets/intro2.png';
   static const String intro3 = 'assets/intro3.png';
+
   static const String mac = 'assets/mac.svg';
   static const String google = 'assets/google.svg';
   static const String facebook = 'assets/facebook.svg';
@@ -19,6 +20,9 @@ abstract class ImageConstant {
   static const String bellIcon = 'assets/svg/icons/bell.svg';
   static const String filterIcon = 'assets/svg/icons/filter_big.svg';
   static const String trashIcon = 'assets/svg/icons/trash.svg';
+  static const String locationIcon = 'assets/svg/icons/locationIcon.svg';
+  static const String cardIcon = 'assets/svg/icons/cardIcon.svg';
+  static const String doneIcon = 'assets/svg/icons/doneIcon.svg';
 
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';
