@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/screens/checkout/controller/checkout_controller.dart';
 import 'package:e_commerce/screens/checkout/view/order_complete_view.dart';
@@ -6,6 +7,7 @@ import 'package:e_commerce/screens/checkout/view/payment_view.dart';
 import 'package:e_commerce/screens/checkout/view/shipping_view.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class CheckoutView extends GetView<CheckoutController> {
@@ -65,19 +67,19 @@ class CheckoutView extends GetView<CheckoutController> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.min,
           children: [
-            stepperIconWidget(Icons.location_on, 0),
+            stepperIconWidget(ImageConstant.locationIcon, 0),
             dividerWidget(),
-            stepperIconWidget(Icons.payment_rounded, 1),
+            stepperIconWidget(ImageConstant.cardIcon, 1),
             dividerWidget(),
-            stepperIconWidget(Icons.check_circle_rounded, 2),
+            stepperIconWidget(ImageConstant.doneIcon, 2),
           ],
         ),
       ),
     );
   }
 
-  Widget stepperIconWidget(IconData icon, int index) {
-    return Icon(
+  Widget stepperIconWidget(String icon, int index) {
+    return SvgPicture.asset(
       icon,
       color: controller.currentStep.value >= index
           ? Colors.black

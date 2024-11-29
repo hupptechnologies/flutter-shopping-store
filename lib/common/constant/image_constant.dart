@@ -23,6 +23,9 @@ abstract class ImageConstant {
   static const String locationIcon = 'assets/svg/icons/locationIcon.svg';
   static const String cardIcon = 'assets/svg/icons/cardIcon.svg';
   static const String doneIcon = 'assets/svg/icons/doneIcon.svg';
+  static const String moneyIcon = 'assets/svg/icons/moneyIcon.svg';
+  static const String creditCardIcon = 'assets/svg/icons/creditCardIcon.svg';
+  static const String dot3Icon = 'assets/svg/icons/3dotIcon.svg';
 
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';

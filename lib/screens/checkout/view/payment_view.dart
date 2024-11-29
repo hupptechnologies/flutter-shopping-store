@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/screens/checkout/controller/payment_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class PaymentView extends GetView<PaymentController> {
@@ -56,7 +57,7 @@ class PaymentView extends GetView<PaymentController> {
   }
 
   Widget _buildContainer({
-    required IconData icon,
+    required String icon,
     required String? label,
     required bool isSelected,
   }) {
@@ -77,10 +78,11 @@ class PaymentView extends GetView<PaymentController> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            color: isSelected ? Colors.white : AppColors.dartGratWithOpaity5,
-            size: label != null ? 25 : 50,
+          Expanded(
+            child: SvgPicture.asset(
+              icon,
+              color: isSelected ? Colors.white : AppColors.dartGratWithOpaity5,
+            ),
           ),
           if (label != null) ...[
             const SizedBox(height: 10),

@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:get/get.dart';
 
 class PaymentController extends GetxController {
   final List<Map<String, dynamic>> paymentMethodCart = [
     {
-      "icon": Icons.money_rounded,
+      "icon": ImageConstant.moneyIcon,
       "label": "Cash",
     },
     {
-      "icon": Icons.credit_card_rounded,
+      "icon": ImageConstant.creditCardIcon,
       "label": "Credit Card",
     },
     {
-      "icon": Icons.more_horiz_outlined,
+      "icon": ImageConstant.dot3Icon,
     },
   ];
 
