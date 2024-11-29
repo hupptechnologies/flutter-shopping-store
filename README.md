@@ -1,16 +1,16 @@
-# e_commerce
+# Flutter - Shopping-Store-App
+###### Design courtesy : https://www.figma.com/design/vCExD5ZOAuRMW3DjLwxwya/FluxStore-(Community)
 
-E-commerce Flutter project.
 
-## Getting Started
+### Features
+    - Add to favourite
+    - Add to cart
+    - Search for product
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+### Screen-shot
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Alt text](./app-images/Home_1.jpg?raw=true "Home Screen")
+![Alt text](./app-images/Search_2.jpg?raw=true "Search")
+![Alt text](./app-images/Search_filter.jpg?raw=true "Filter")
+![Alt text](./app-images/Product_detail_4.jpg?raw=true "Product Details")
