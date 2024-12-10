@@ -31,6 +31,7 @@ abstract class ImageConstant {
   static const String mastercardIcon = 'assets/svg/icons/mastercard.svg';
   static const String alipayIcon = 'assets/svg/icons/alipay.svg';
   static const String amexIcon = 'assets/svg/icons/amex.svg';
+  static const String orderIcon = 'assets/svg/icons/order.svg';
 
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';

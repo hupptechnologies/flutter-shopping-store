@@ -48,7 +48,7 @@ class CheckoutView extends GetView<CheckoutController> {
                     child: ObxValue(
                       (index) {
                         if (index.value == 1) {
-                          return const PaymentView();
+                          return PaymentView(nextStep: controller.nextStep);
                         } else if (index.value == 2) {
                           return const OrderCompleteView();
                         }
@@ -113,12 +113,15 @@ class CheckoutView extends GetView<CheckoutController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'STEP ${controller.currentStep.value + 1}',
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
+            if (controller.currentStep.value < 2)
+              Text(
+                'STEP ${controller.currentStep.value + 1}',
+                style: const TextStyle(
+                  fontSize: 12,
+                ),
+              )
+            else
+              const SizedBox(height: 15),
             Text(
               controller.stepperTitle[controller.currentStep.value],
               style: const TextStyle(

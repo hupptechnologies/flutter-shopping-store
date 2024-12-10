@@ -11,7 +11,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class PaymentView extends GetView<PaymentController> {
-  const PaymentView({super.key});
+  final Function? nextStep;
+
+  const PaymentView({
+    super.key,
+    this.nextStep,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -106,11 +111,11 @@ class PaymentView extends GetView<PaymentController> {
                 }),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
               child: ButtonWidget(
                 title: 'Place my order',
-                onPressed: null,
+                onPressed: nextStep,
                 isDisable: false,
               ),
             ),
