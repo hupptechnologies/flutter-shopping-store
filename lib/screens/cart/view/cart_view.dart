@@ -17,18 +17,14 @@ class CartView extends GetView<CartController> {
       appBar:
           const BackButtonAppbarTitle(title: 'Your cart', centerTitle: true),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  cartListWidget(),
-                  proceedToCheckoutWidget(),
-                ],
-              ),
-            ),
-          ],
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              cartListWidget(),
+              proceedToCheckoutWidget(),
+            ],
+          ),
         ),
       ),
     );

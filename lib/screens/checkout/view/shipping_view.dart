@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/forms_constant.dart';
+import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/screens/checkout/controller/shipping_controller.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,26 +17,31 @@ class ShippingView extends GetView<ShippingController> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ...shippingFormWidget(),
-        const SizedBox(height: 30),
-        ...shippingMethodWidget(),
-        const SizedBox(height: 30),
-        ...couponCodeWidget(),
-        const SizedBox(height: 30),
-        ...billingAddressWidget(),
-        const SizedBox(height: 30),
-        Obx(
-          () => ButtonWidget(
-            title: 'Continue to payment',
-            onPressed: nextStep,
-            isDisable: !controller.isContinuePayment,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: MarginPadding.homeHorPadding,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...shippingFormWidget(),
+          const SizedBox(height: 30),
+          ...shippingMethodWidget(),
+          const SizedBox(height: 30),
+          ...couponCodeWidget(),
+          const SizedBox(height: 30),
+          ...billingAddressWidget(),
+          const SizedBox(height: 30),
+          Obx(
+            () => ButtonWidget(
+              title: 'Continue to payment',
+              onPressed: nextStep,
+              isDisable: !controller.isContinuePayment,
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
-      ],
+          const SizedBox(height: 10),
+        ],
+      ),
     );
   }
 

@@ -27,6 +27,10 @@ abstract class ImageConstant {
   static const String creditCardIcon = 'assets/svg/icons/creditCardIcon.svg';
   static const String dot3Icon = 'assets/svg/icons/3dotIcon.svg';
   static const String visaIcon = 'assets/svg/icons/visa-logo.svg';
+  static const String payPalIcon = 'assets/svg/icons/payPal.svg';
+  static const String mastercardIcon = 'assets/svg/icons/mastercard.svg';
+  static const String alipayIcon = 'assets/svg/icons/alipay.svg';
+  static const String amexIcon = 'assets/svg/icons/amex.svg';
 
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';

@@ -23,15 +23,24 @@ class CheckoutView extends GetView<CheckoutController> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: MarginPadding.homeHorPadding,
             vertical: MarginPadding.homeTopPadding,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              stepperIconRowWidget(),
-              stepperTitleWidget(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: MarginPadding.homeHorPadding,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    stepperIconRowWidget(),
+                    stepperTitleWidget(),
+                  ],
+                ),
+              ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 10),
