@@ -1,7 +1,7 @@
 import 'package:e_commerce/screens/home/view/dashboard_view.dart';
 import 'package:e_commerce/screens/home/view/profile_view.dart';
 import 'package:e_commerce/screens/home/view/search_discover.dart';
-import 'package:e_commerce/screens/home/view/shoping_view.dart';
+import 'package:e_commerce/screens/orders/view/orders_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   final List<Widget> screens = [
     const DashboardView(),
     const SearchDiscover(),
-    const ShopingView(),
+    const OrdersView(),
     const ProfileView(),
   ];
 
