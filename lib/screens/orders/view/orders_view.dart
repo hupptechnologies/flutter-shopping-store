@@ -16,7 +16,6 @@ class OrdersView extends StatelessWidget {
         child: Column(
           children: [
             TabBar(
-              isScrollable: false,
               tabs: OrderStatus.values.map((value) {
                 return tab(value.name.toFirstLatterUppercase());
               }).toList(),
