@@ -2,6 +2,7 @@ import 'package:e_commerce/data/product/product.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/extension/string_extensions.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ProductListController extends GetxController {
@@ -27,7 +28,9 @@ class ProductListController extends GetxController {
   }
 
   void onTapProduct(int id) {
-    print('onTapProduct   $id');
+    if (kDebugMode) {
+      print('onTapProduct   $id');
+    }
     Get.toNamed(AppRoutes.productDetail, arguments: {'id': id});
   }
 }

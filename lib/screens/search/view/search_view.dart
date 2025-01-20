@@ -2,6 +2,7 @@ import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/search/controller/search_controller.dart';
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/drawer/view/filter_drawer_view.dart';
@@ -80,7 +81,7 @@ class SearchView extends GetView<CustomSearchController> {
                       borderRadius: BorderRadius.circular(25),
                     ),
                     filled: true,
-                    fillColor: AppColors.lightGray.withOpacity(0.5),
+                    fillColor: AppColors.lightGray.withOpacityValue(0.5),
                     contentPadding: const EdgeInsets.symmetric(vertical: 15),
                   ),
                   textAlign: TextAlign.start,
@@ -105,7 +106,7 @@ class SearchView extends GetView<CustomSearchController> {
             const SizedBox(width: 12),
             Container(
               decoration: BoxDecoration(
-                color: AppColors.lightGray.withOpacity(0.5),
+                color: AppColors.lightGray.withOpacityValue(0.5),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: IconButton(
@@ -139,7 +140,7 @@ class SearchView extends GetView<CustomSearchController> {
                   Text(
                     'Recent Searches',
                     style: TextStyle(
-                      color: AppColors.darkGray.withOpacity(0.5),
+                      color: AppColors.darkGray.withOpacityValue(0.5),
                       fontSize: 15,
                     ),
                   ),
@@ -147,7 +148,7 @@ class SearchView extends GetView<CustomSearchController> {
                     onTap: () => controller.clearReactSearch(),
                     child: SvgPicture.asset(
                       ImageConstant.trashIcon,
-                      color: AppColors.darkGray.withOpacity(0.7),
+                      color: AppColors.darkGray.withOpacityValue(0.7),
                     ),
                   ),
                 ],
@@ -171,7 +172,7 @@ class SearchView extends GetView<CustomSearchController> {
             return Container(
               padding: const EdgeInsets.only(left: 15),
               decoration: BoxDecoration(
-                color: AppColors.lightGray.withOpacity(0.5),
+                color: AppColors.lightGray.withOpacityValue(0.5),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
@@ -180,7 +181,7 @@ class SearchView extends GetView<CustomSearchController> {
                   Text(
                     chip,
                     style: TextStyle(
-                      color: AppColors.darkGray.withOpacity(0.5),
+                      color: AppColors.darkGray.withOpacityValue(0.5),
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
@@ -189,7 +190,7 @@ class SearchView extends GetView<CustomSearchController> {
                     onPressed: () => controller.removeRecentSearch(index),
                     icon: Icon(
                       Icons.close,
-                      color: AppColors.darkGray.withOpacity(0.5),
+                      color: AppColors.darkGray.withOpacityValue(0.5),
                       size: 20,
                     ),
                   )

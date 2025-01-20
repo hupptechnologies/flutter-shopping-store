@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/home/controller/home_controller.dart';
 import 'package:e_commerce/widgets/appbar/view/common_app_bar.dart';
 import 'package:e_commerce/widgets/drawer/view/drawer_view.dart';
@@ -38,7 +39,7 @@ class HomeView extends GetView<HomeController> {
             currentIndex: controller.selectedIndex.value,
             onTap: controller.changeTabIndex,
             selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black.withOpacity(0.2),
+            unselectedItemColor: Colors.black.withOpacityValue(0.2),
             showSelectedLabels: false,
             showUnselectedLabels: false,
             iconSize: 26,
@@ -54,7 +55,7 @@ class HomeView extends GetView<HomeController> {
         borderRadius: _bottomNavBorderRadius,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withOpacityValue(0.15),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, -2),
@@ -103,7 +104,7 @@ class HomeView extends GetView<HomeController> {
         iconPath,
         width: 25,
         height: 25,
-        color: isSelected ? Colors.black : Colors.black.withOpacity(0.2),
+        color: isSelected ? Colors.black : Colors.black.withOpacityValue(0.2),
       ),
       label: label,
       backgroundColor: Colors.white,

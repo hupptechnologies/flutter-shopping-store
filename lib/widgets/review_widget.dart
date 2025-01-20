@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/widgets/accordion_text_icon.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
 import 'package:e_commerce/widgets/review_card_widget.dart';
@@ -93,7 +94,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
               Text(
                 'OUT OF 5',
                 style: TextStyle(
-                  color: AppColors.darkGray.withOpacity(0.5),
+                  color: AppColors.darkGray.withOpacityValue(0.5),
                 ),
               )
             ],
@@ -110,7 +111,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
             Text(
               '83 ratings',
               style: TextStyle(
-                color: AppColors.darkGray.withOpacity(0.5),
+                color: AppColors.darkGray.withOpacityValue(0.5),
               ),
             )
           ],
@@ -132,7 +133,7 @@ class _ReviewWidgetState extends State<ReviewWidget> {
           Text(
             index.toString(),
             style: TextStyle(
-              color: AppColors.darkGray.withOpacity(0.5),
+              color: AppColors.darkGray.withOpacityValue(0.5),
             ),
           ),
           const SizedBox(width: 10),

@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/data/product/product.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 
 class CartCardWidget extends StatelessWidget {
@@ -25,7 +26,7 @@ class CartCardWidget extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.08),
+            color: Colors.grey.withOpacityValue(0.08),
             offset: const Offset(0, 0),
             blurRadius: 1,
             spreadRadius: 2,

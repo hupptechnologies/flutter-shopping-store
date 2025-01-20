@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 
 class SizeWidget extends StatelessWidget {
@@ -26,7 +27,7 @@ class SizeWidget extends StatelessWidget {
           style: TextStyle(
             color: isSelected
                 ? Colors.white70
-                : AppColors.darkGray.withOpacity(0.5),
+                : AppColors.darkGray.withOpacityValue(0.5),
           ),
         ),
       ),

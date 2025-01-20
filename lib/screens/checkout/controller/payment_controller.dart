@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class PaymentController extends GetxController {
@@ -37,10 +38,14 @@ class PaymentController extends GetxController {
   }
 
   void addCreditCard() {
-    print('Add new Credit card');
+    if (kDebugMode) {
+      print('Add new Credit card');
+    }
   }
 
   void termsAndConditions() {
-    print('Terms and Conditions');
+    if (kDebugMode) {
+      print('Terms and Conditions');
+    }
   }
 }

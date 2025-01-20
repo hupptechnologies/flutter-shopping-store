@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/utils/common_getx.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 
 class BuildBackButton extends StatelessWidget {
@@ -21,14 +22,14 @@ class BuildBackButton extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withOpacityValue(0.2),
               blurRadius: 4,
               spreadRadius: 1,
               offset: const Offset(0, 2),
             ),
           ],
         ),
-        child: Icon(
+        child: const Icon(
           Icons.arrow_back_ios_rounded,
           color: Colors.black,
           size: 18,

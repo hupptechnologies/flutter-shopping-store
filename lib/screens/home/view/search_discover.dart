@@ -2,6 +2,7 @@ import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/data/search/search_box.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/home/controller/search_discover_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,7 +38,7 @@ class SearchDiscover extends GetView<SearchDiscoverController> {
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25),
-                  color: AppColors.lightGray.withOpacity(0.5),
+                  color: AppColors.lightGray.withOpacityValue(0.5),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -61,7 +62,7 @@ class SearchDiscover extends GetView<SearchDiscoverController> {
           const SizedBox(width: 12),
           Container(
             decoration: BoxDecoration(
-              color: AppColors.lightGray.withOpacity(0.5),
+              color: AppColors.lightGray.withOpacityValue(0.5),
               borderRadius: BorderRadius.circular(15),
             ),
             child: IconButton(
@@ -143,8 +144,8 @@ class SearchDiscover extends GetView<SearchDiscoverController> {
                           shape: BoxShape.circle,
                           gradient: RadialGradient(
                             colors: [
-                              color.withOpacity(0.3),
-                              Colors.white.withOpacity(0.2),
+                              color.withOpacityValue(0.3),
+                              Colors.white.withOpacityValue(0.2),
                             ],
                           ),
                         ),
@@ -156,8 +157,8 @@ class SearchDiscover extends GetView<SearchDiscoverController> {
                           shape: BoxShape.circle,
                           gradient: RadialGradient(
                             colors: [
-                              color.withOpacity(0.5),
-                              Colors.white.withOpacity(0.25),
+                              color.withOpacityValue(0.5),
+                              Colors.white.withOpacityValue(0.25),
                             ],
                           ),
                         ),
@@ -230,7 +231,7 @@ class SearchDiscover extends GetView<SearchDiscoverController> {
                         Text(
                           '${item.item} Items',
                           style: TextStyle(
-                            color: AppColors.darkGray.withOpacity(0.6),
+                            color: AppColors.darkGray.withOpacityValue(0.6),
                           ),
                         ),
                         const SizedBox(width: 5),

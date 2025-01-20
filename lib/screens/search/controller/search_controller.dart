@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/widgets/drawer/controller/filter_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:searchfield/searchfield.dart';
@@ -92,7 +93,9 @@ class CustomSearchController extends GetxController {
     final String? title = selected.item!['name'];
     if (id != null) {
       clearSearchField();
-      print(filterController.selectedColors);
+      if (kDebugMode) {
+        print(filterController.selectedColors);
+      }
       Get.toNamed(AppRoutes.productList, arguments: {'id': id, 'title': title});
     }
   }

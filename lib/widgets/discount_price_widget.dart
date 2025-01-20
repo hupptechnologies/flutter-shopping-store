@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 
 class DiscountPriceWidget extends StatelessWidget {
@@ -27,10 +28,10 @@ class DiscountPriceWidget extends StatelessWidget {
         Text(
           '\$ $price',
           style: TextStyle(
-              color: AppColors.darkGray.withOpacity(0.5),
+              color: AppColors.darkGray.withOpacityValue(0.5),
               decoration: TextDecoration.lineThrough,
               decorationThickness: 1,
-              decorationColor: AppColors.darkGray.withOpacity(0.5)),
+              decorationColor: AppColors.darkGray.withOpacityValue(0.5)),
         ),
       ],
     );

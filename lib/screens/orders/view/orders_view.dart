@@ -1,10 +1,12 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/extension/string_extensions.dart';
+import 'package:e_commerce/screens/orders/controller/order_controller.dart';
 import 'package:e_commerce/widgets/order_info_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class OrdersView extends StatelessWidget {
+class OrdersView extends GetView<OrderController> {
   const OrdersView({super.key});
 
   @override

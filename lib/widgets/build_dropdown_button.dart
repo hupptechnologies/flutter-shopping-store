@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 
 class BuildDropdownButton extends StatelessWidget {
@@ -22,7 +23,7 @@ class BuildDropdownButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           width: 1,
-          color: AppColors.darkGray.withOpacity(0.5),
+          color: AppColors.darkGray.withOpacityValue(0.5),
         ),
       ),
       child: DropdownButton(

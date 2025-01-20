@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteWidget extends StatelessWidget {
@@ -26,7 +27,7 @@ class FavoriteWidget extends StatelessWidget {
           boxShadow: [
             if (isBoxShadow)
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withOpacityValue(0.2),
                 blurRadius: 4,
                 offset: const Offset(0, 2),
               )

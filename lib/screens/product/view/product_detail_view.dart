@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
 import 'package:e_commerce/widgets/accordion_text_icon.dart';
 import 'package:e_commerce/widgets/back_button.dart';
@@ -144,7 +145,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withOpacityValue(0.2),
                 blurRadius: 4,
                 spreadRadius: 1,
                 offset: const Offset(0, 2),
@@ -276,7 +277,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
                 Text(
                   'Color',
                   style: TextStyle(
-                    color: AppColors.darkGray.withOpacity(0.8),
+                    color: AppColors.darkGray.withOpacityValue(0.8),
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -309,7 +310,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
                 Text(
                   'Size',
                   style: TextStyle(
-                    color: AppColors.darkGray.withOpacity(0.8),
+                    color: AppColors.darkGray.withOpacityValue(0.8),
                   ),
                 ),
                 const SizedBox(height: 15),

@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/data/product/product.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/cart/controller/cart_controller.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
@@ -73,7 +74,7 @@ class CartView extends GetView<CartController> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: Colors.grey.withOpacityValue(0.2),
             blurRadius: 10,
             spreadRadius: 5,
           ),

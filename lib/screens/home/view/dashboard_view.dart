@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/home/controller/dashboard_controller.dart';
 import 'package:e_commerce/widgets/product_card.dart';
 import 'package:e_commerce/widgets/row_text_with_showall.dart';
@@ -139,7 +140,7 @@ class DashboardView extends GetView<DashboardController> {
                     borderRadius: BorderRadius.circular(6),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.08),
+                        color: Colors.grey.withOpacityValue(0.08),
                         offset: const Offset(0, 0),
                         blurRadius: 1,
                         spreadRadius: 2,
@@ -550,66 +551,66 @@ class DashboardView extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildCategoryCard(Map<String, String> item) {
-    return SizedBox(
-      width: 120,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Card(
-            elevation: 4,
-            margin: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Container(
-                height: 180,
-                color: AppColors.lightGray,
-                child: item['image'] != null && item['image']!.isNotEmpty
-                    ? Image.asset(
-                        item['image']!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: AppColors.lightGray,
-                            child: const Center(
-                              child: Icon(
-                                Icons.image,
-                                color: AppColors.darkGray,
-                              ),
-                            ),
-                          );
-                        },
-                      )
-                    : Container(
-                        color: AppColors.lightGray,
-                        child: const Center(
-                          child: Icon(
-                            Icons.image,
-                            color: AppColors.darkGray,
-                          ),
-                        ),
-                      ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          Text(
-            item['category']!,
-            style: const TextStyle(
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          Text(
-            item['price']!,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildCategoryCard(Map<String, String> item) {
+  //   return SizedBox(
+  //     width: 120,
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Card(
+  //           elevation: 4,
+  //           margin: EdgeInsets.zero,
+  //           shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(15),
+  //           ),
+  //           child: ClipRRect(
+  //             borderRadius: BorderRadius.circular(15),
+  //             child: Container(
+  //               height: 180,
+  //               color: AppColors.lightGray,
+  //               child: item['image'] != null && item['image']!.isNotEmpty
+  //                   ? Image.asset(
+  //                       item['image']!,
+  //                       fit: BoxFit.cover,
+  //                       errorBuilder: (context, error, stackTrace) {
+  //                         return Container(
+  //                           color: AppColors.lightGray,
+  //                           child: const Center(
+  //                             child: Icon(
+  //                               Icons.image,
+  //                               color: AppColors.darkGray,
+  //                             ),
+  //                           ),
+  //                         );
+  //                       },
+  //                     )
+  //                   : Container(
+  //                       color: AppColors.lightGray,
+  //                       child: const Center(
+  //                         child: Icon(
+  //                           Icons.image,
+  //                           color: AppColors.darkGray,
+  //                         ),
+  //                       ),
+  //                     ),
+  //             ),
+  //           ),
+  //         ),
+  //         const SizedBox(
+  //           height: 5,
+  //         ),
+  //         Text(
+  //           item['category']!,
+  //           style: const TextStyle(
+  //             overflow: TextOverflow.ellipsis,
+  //           ),
+  //         ),
+  //         Text(
+  //           item['price']!,
+  //           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

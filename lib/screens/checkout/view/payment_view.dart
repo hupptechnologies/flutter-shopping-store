@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/checkout/controller/payment_controller.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:e_commerce/widgets/credit_card_widget.dart';
@@ -45,7 +46,7 @@ class PaymentView extends GetView<PaymentController> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withOpacityValue(0.2),
               blurRadius: 10,
               spreadRadius: 5,
             ),
@@ -321,7 +322,7 @@ class PaymentView extends GetView<PaymentController> {
         color: isSelected ? AppColors.darkGray : Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.09),
+            color: Colors.grey.withOpacityValue(0.09),
             offset: const Offset(1, 1),
             blurRadius: 3,
             spreadRadius: 2.5,

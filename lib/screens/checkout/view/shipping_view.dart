@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/forms_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
+import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/checkout/controller/shipping_controller.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
@@ -200,7 +201,7 @@ class ShippingView extends GetView<ShippingController> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: AppColors.lightGray.withOpacity(0.5),
+            color: AppColors.lightGray.withOpacityValue(0.5),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
