@@ -51,7 +51,7 @@ class OrderDetailsController extends GetxController {
   }
 
   void ratePage() {
-    Get.toNamed(AppRoutes.home);
+    Get.toNamed(AppRoutes.rating);
   }
 
   void goToOrderTrack () {

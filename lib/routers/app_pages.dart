@@ -21,6 +21,8 @@ import 'package:e_commerce/screens/product/binding/product_detail_binging.dart';
 import 'package:e_commerce/screens/product/binding/product_list_binding.dart';
 import 'package:e_commerce/screens/product/view/product_detail_view.dart';
 import 'package:e_commerce/screens/product/view/product_list_view.dart';
+import 'package:e_commerce/screens/rating/binding/rating_binding.dart';
+import 'package:e_commerce/screens/rating/view/rating_view.dart';
 import 'package:e_commerce/screens/search/binding/search_binging.dart';
 import 'package:e_commerce/screens/search/view/search_view.dart';
 import 'package:e_commerce/screens/splash_screen/view/splash_screen_view.dart';
@@ -90,6 +92,11 @@ class AppPages {
       name: AppRoutes.orderDetails,
       page: () => const OrderDetailsView(),
       binding: OrderDetailsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.rating,
+      page: () => const RatingView(),
+      binding: RatingBinding(),
     ),
   ];
 }
