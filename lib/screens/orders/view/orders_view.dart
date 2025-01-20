@@ -76,6 +76,7 @@ class OrdersView extends GetView<OrderController> {
               status: status,
               subtotal: 100,
               trackingNumber: 'IK12457524',
+              onTapDetails: controller.onTapOrderDetails,
             ),
           );
         },

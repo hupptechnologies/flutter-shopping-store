@@ -1,7 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 // ignore: constant_identifier_names
 enum OrderStatus { PENDING, DELIVERED, CANCELLED }
@@ -13,6 +11,7 @@ class OrderInfoCardWidget extends StatelessWidget {
   final int quantity;
   final double subtotal;
   final OrderStatus status;
+  final Function(OrderStatus status) onTapDetails;
 
   const OrderInfoCardWidget({
     super.key,
@@ -22,6 +21,7 @@ class OrderInfoCardWidget extends StatelessWidget {
     required this.quantity,
     required this.subtotal,
     required this.status,
+    required this.onTapDetails
   });
 
   TextStyle _labelStyle() => TextStyle(
@@ -126,7 +126,7 @@ class OrderInfoCardWidget extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => Get.toNamed(AppRoutes.orderDetails),
+                onTap: () => onTapDetails(status),
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 25, vertical: 5),

@@ -1,9 +1,9 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/screens/orders/controller/order_details_controller.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
+import 'package:e_commerce/widgets/order_info_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -42,28 +42,32 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
   }
 
   Widget orderStatusCard() {
-    return buildContainer(
-      padding: 20,
-      color: AppColors.darkGray,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Your order is delivered',
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
-              SizedBox(height: 6),
-              Text(
-                'Rate product to get 5 points for collect.',
-                style: TextStyle(fontSize: 10, color: Colors.white),
-              ),
-            ],
-          ),
-          SvgPicture.asset(ImageConstant.deliveredIcon)
-        ],
+    final message = controller.getStatusMessage();
+    return GestureDetector(
+      onTap: controller.goToOrderTrack,
+      child: buildContainer(
+        padding: 20,
+        color: AppColors.darkGray,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  message['title']!,
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  message['subtitle']!,
+                  style: const TextStyle(fontSize: 10, color: Colors.white),
+                ),
+              ],
+            ),
+            SvgPicture.asset(message['image']!)
+          ],
+        ),
       ),
     );
   }
@@ -121,29 +125,40 @@ class OrderDetailsView extends GetView<OrderDetailsController> {
   Widget backOrRateButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-              flex: 6,
-              child: ButtonWidget(
-                isDisable: false,
-                title: 'Return home',
-                isBorder: true,
-                verticalPadding: 12,
-                onPressed: controller.returnHomePage,
-              )),
-          const SizedBox(width: 30),
-          Expanded(
-            flex: 4,
-            child: ButtonWidget(
-              title: 'Rate',
-              isDisable: false,
-              verticalPadding: 12,
-              onPressed: controller.ratePage,
-            ),
-          )
-        ],
+      child: Obx(() {
+          if (controller.status.value == OrderStatus.DELIVERED) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    flex: 6,
+                    child: ButtonWidget(
+                      isDisable: false,
+                      title: 'Return home',
+                      isBorder: true,
+                      verticalPadding: 12,
+                      onPressed: controller.returnHomePage,
+                    )),
+                const SizedBox(width: 30),
+                Expanded(
+                  flex: 4,
+                  child: ButtonWidget(
+                    title: 'Rate',
+                    isDisable: false,
+                    verticalPadding: 12,
+                    onPressed: controller.ratePage,
+                  ),
+                )
+              ],
+            );
+          }
+          return ButtonWidget(
+            title: 'Continue shopping',
+            isDisable: false,
+            verticalPadding: 12,
+            onPressed: controller.returnHomePage,
+          );
+        },
       ),
     );
   }
