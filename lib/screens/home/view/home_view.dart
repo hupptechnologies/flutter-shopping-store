@@ -17,7 +17,7 @@ class HomeView extends GetView<HomeController> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
-          child: Obx(() => CommonAppBar(title: controller.currentTitle)),
+          child: Obx(appBar),
         ),
         drawer: const CommonDrawerView(),
         drawerEnableOpenDragGesture: false,
@@ -25,6 +25,13 @@ class HomeView extends GetView<HomeController> {
         bottomNavigationBar: _buildBottomNavigationBar(),
       ),
     );
+  }
+
+  Widget appBar() {
+    if (controller.isLastScreen) {
+      return const SizedBox.shrink();
+    }
+    return CommonAppBar(title: controller.currentTitle);
   }
 
   Widget _buildBottomNavigationBar() {

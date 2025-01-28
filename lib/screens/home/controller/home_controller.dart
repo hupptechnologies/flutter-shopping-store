@@ -19,6 +19,7 @@ class HomeController extends GetxController {
 
   Widget get currentScreen => screens[selectedIndex.value];
   String get currentTitle => title[selectedIndex.value];
+  bool get isLastScreen => selectedIndex.value == screens.length - 1; 
 
   void changeTabIndex(int index) {
     selectedIndex.value = index;
