@@ -16,7 +16,9 @@ import 'package:e_commerce/screens/intro/view/intro_view.dart';
 import 'package:e_commerce/screens/auth/sign_up/binding/sign_up_binding.dart';
 import 'package:e_commerce/screens/auth/sign_up/view/sign_up_view.dart';
 import 'package:e_commerce/screens/orders/binding/order_details_binding.dart';
+import 'package:e_commerce/screens/orders/binding/order_track_binding.dart';
 import 'package:e_commerce/screens/orders/view/order_details_view.dart';
+import 'package:e_commerce/screens/orders/view/order_track_view.dart';
 import 'package:e_commerce/screens/product/binding/product_detail_binging.dart';
 import 'package:e_commerce/screens/product/binding/product_list_binding.dart';
 import 'package:e_commerce/screens/product/view/product_detail_view.dart';
@@ -98,5 +100,10 @@ class AppPages {
       page: () => const RatingView(),
       binding: RatingBinding(),
     ),
+    GetPage(
+      name: AppRoutes.orderTrack,
+      page: () => const OrderTrackView(),
+      binding: OrderTrackBinding(),
+    )
   ];
 }

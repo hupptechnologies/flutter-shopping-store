@@ -23,6 +23,7 @@ dependencies:
   searchfield: ^1.2.2
   custom_rating_bar: ^3.0.0
   easy_stepper: ^0.8.5+1
+  order_tracker: ^0.0.2
 
 dev_dependencies:
   flutter_test:

@@ -58,6 +58,6 @@ class OrderDetailsController extends GetxController {
     if (status.value != OrderStatus.PENDING) {
       return;
     }
-    print('Goto order Track page');
+    Get.toNamed(AppRoutes.orderTrack);
   }
 }

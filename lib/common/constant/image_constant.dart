@@ -37,6 +37,7 @@ abstract class ImageConstant {
   static const String cancelledIcon = 'assets/svg/icons/cancel.svg';
   static const String giftIcon = 'assets/svg/icons/gift.svg';
   static const String cameraIcon = 'assets/svg/icons/camera.svg';
+  static const String clickHandIcon = 'assets/svg/icons/clickhand.svg';
 
 
   static const String categoryHome = 'assets/image/category_home.png';
