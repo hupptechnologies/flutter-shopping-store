@@ -1,4 +1,7 @@
+import 'package:e_commerce/common/enum/address_enum.dart';
+
 class AddressDto {
+  int id = 0;
   String firstName = '';
   String lastName = '';
   String streetName = '';
@@ -7,6 +10,22 @@ class AddressDto {
   String state = '';
   String zipCode = '';
   String phoneNumber = '';
+  AddressEnum type;
+  bool isSelected = false;
+
+  AddressDto({
+    this.id = 0,
+    this.firstName = '',
+    this.lastName = '',
+    this.streetName = '',
+    this.country = '',
+    this.city = '',
+    this.state = '',
+    this.zipCode = '',
+    this.phoneNumber = '',
+    this.type = AddressEnum.home,
+    this.isSelected = false,
+  });
 
   bool get isValid =>
       firstName.isNotEmpty &&

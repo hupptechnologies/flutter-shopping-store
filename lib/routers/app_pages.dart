@@ -1,3 +1,5 @@
+import 'package:e_commerce/screens/address/binding/address_binding.dart';
+import 'package:e_commerce/screens/address/view/address_view.dart';
 import 'package:e_commerce/screens/auth/forget-password/binding/forget_password_binging.dart';
 import 'package:e_commerce/screens/auth/forget-password/view/forget_password_view.dart';
 import 'package:e_commerce/screens/auth/login/binding/login_binding.dart';
@@ -104,6 +106,11 @@ class AppPages {
       name: AppRoutes.orderTrack,
       page: () => const OrderTrackView(),
       binding: OrderTrackBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.address,
+      page: () => const AddressView(),
+      binding: AddressBinding(),
     )
   ];
 }

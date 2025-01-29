@@ -52,19 +52,22 @@ class ProfileView extends GetView<ProfileController> {
           final item = controller.menuList[index];
           return Column(
             children: [
-              GestureDetector(
+              InkWell(
                 onTap: () => controller.onTopMenu(item.type),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Icon(item.icon, color: AppColors.dartGratWithOpaity5),
-                      const SizedBox(width: 20),
-                      Text(item.label),
-                      const Spacer(),
-                      if (item.type != ProfileMenuEnum.logout)
-                        const Icon(Icons.arrow_forward_ios),
-                    ],
+                  child: Container(
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Icon(item.icon, color: AppColors.dartGratWithOpaity5),
+                        const SizedBox(width: 20),
+                        Text(item.label),
+                        const Spacer(),
+                        if (item.type != ProfileMenuEnum.logout)
+                          const Icon(Icons.arrow_forward_ios),
+                      ],
+                    ),
                   ),
                 ),
               ),

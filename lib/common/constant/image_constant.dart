@@ -38,7 +38,8 @@ abstract class ImageConstant {
   static const String giftIcon = 'assets/svg/icons/gift.svg';
   static const String cameraIcon = 'assets/svg/icons/camera.svg';
   static const String clickHandIcon = 'assets/svg/icons/clickhand.svg';
-
+  static const String officeIcon = 'assets/svg/icons/office_icon.svg';
+  static const String addressHomeIcon = 'assets/svg/icons/address_home.svg';
 
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';

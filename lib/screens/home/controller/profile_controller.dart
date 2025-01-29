@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/enum/profile_menu_enum.dart';
 import 'package:e_commerce/data/profile/profile_menu.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,6 +36,12 @@ class ProfileController extends GetxController {
   void onTopMenu(ProfileMenuEnum menu) {
     if (kDebugMode) {
       print(menu);
+    }
+    switch (menu) {
+      case ProfileMenuEnum.address:
+        Get.toNamed(AppRoutes.address);
+        break;
+      default:
     }
   }
 }
