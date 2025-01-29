@@ -1,5 +1,5 @@
-import 'package:e_commerce/screens/address/binding/address_binding.dart';
-import 'package:e_commerce/screens/address/view/address_view.dart';
+import 'package:e_commerce/screens/profile/address/binding/address_binding.dart';
+import 'package:e_commerce/screens/profile/address/view/address_view.dart';
 import 'package:e_commerce/screens/auth/forget-password/binding/forget_password_binging.dart';
 import 'package:e_commerce/screens/auth/forget-password/view/forget_password_view.dart';
 import 'package:e_commerce/screens/auth/login/binding/login_binding.dart';

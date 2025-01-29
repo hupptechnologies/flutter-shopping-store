@@ -3,7 +3,7 @@ import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/common/enum/address_enum.dart';
 import 'package:e_commerce/data/address/address_dto.dart';
-import 'package:e_commerce/screens/address/controller/address_controller.dart';
+import 'package:e_commerce/screens/profile/address/controller/address_controller.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
@@ -119,8 +119,8 @@ class AddressView extends GetView<AddressController> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      const Text(
-                        'SBI Building, street 3, Software Park',
+                       Text(
+                        address.getAddressLine(),  
                         overflow: TextOverflow.visible,
                         softWrap: true,
                       )

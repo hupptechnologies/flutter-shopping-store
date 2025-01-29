@@ -78,4 +78,8 @@ class AddressDto {
         break;
     }
   }
+
+  String getAddressLine() {
+    return '$streetName, $city, $state - $zipCode, $country';
+  }
 }
