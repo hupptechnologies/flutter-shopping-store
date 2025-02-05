@@ -34,8 +34,11 @@ class SettingView extends GetView<SettingController> {
                 key: controller.formKey,
                 child: const Column(
                   children: [
-                    SelectProfile(),
-                    SizedBox(height: 90),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 30),
+                      child: SelectProfile(),
+                    ),
+                    SizedBox(height: 60),
                     SettingProfileForm(),
                   ],
                 ),
