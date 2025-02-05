@@ -1,3 +1,5 @@
+import 'package:e_commerce/screens/notification/binding/notification_binding.dart';
+import 'package:e_commerce/screens/notification/view/notification_view.dart';
 import 'package:e_commerce/screens/profile/address/binding/address_binding.dart';
 import 'package:e_commerce/screens/profile/address/view/address_view.dart';
 import 'package:e_commerce/screens/auth/forget-password/binding/forget_password_binging.dart';
@@ -132,6 +134,11 @@ class AppPages {
       name: AppRoutes.addPayment,
       page: () => const AddPaymentView(),
       binding: AddPaymentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.notification,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
     ),
   ];
 }

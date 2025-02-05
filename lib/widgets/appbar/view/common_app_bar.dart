@@ -1,17 +1,16 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
-import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/widgets/appbar/controller/appbar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CommonAppBar extends GetView<AppbarController>
+    implements PreferredSizeWidget {
   final String title;
   const CommonAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    final AppbarController controller = Get.find<AppbarController>();
     return AppBar(
       backgroundColor: Colors.white,
       leading: Padding(
@@ -35,7 +34,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Obx(() => Stack(
                 children: [
                   IconButton(
-                    onPressed: () => CommonSnackbar.success('Notifications'),
+                    onPressed: controller.gotoNotification,
                     icon: SvgPicture.asset(ImageConstant.bellIcon),
                   ),
                   if (controller.notificationCount.value > 0)

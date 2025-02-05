@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,9 @@ class PopScopeWrapper<T> extends StatelessWidget {
       onPopInvokedWithResult: (bool didPop, dynamic result) {
         if (didPop) {
           if (Get.isRegistered<T>()) {
+            if (kDebugMode) {
+              print('Deleting $T.....');
+            }
             Get.delete<T>();
           }
         }
