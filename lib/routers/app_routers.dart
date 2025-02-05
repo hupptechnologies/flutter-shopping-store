@@ -18,4 +18,5 @@ abstract class AppRoutes {
   static const address = '/address';
   static const profileSetting = '/profile-setting';
   static const payment = '/payment';
+  static const addPayment = '/add-payment';
 }

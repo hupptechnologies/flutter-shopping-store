@@ -1,8 +1,10 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
+import 'package:e_commerce/screens/profile/payments/controller/payments_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class PaymentsAddTitleWidget extends StatelessWidget {
+class PaymentsAddTitleWidget extends GetView<PaymentsController> {
   const PaymentsAddTitleWidget({super.key});
 
   @override
@@ -12,10 +14,10 @@ class PaymentsAddTitleWidget extends StatelessWidget {
         vertical: 40,
         horizontal: MarginPadding.homeHorPadding,
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             'Card Management',
             style: TextStyle(
               fontSize: 16,
@@ -23,7 +25,8 @@ class PaymentsAddTitleWidget extends StatelessWidget {
             ),
           ),
           InkWell(
-            child: Row(
+            onTap: controller.gotoAddCard,
+            child: const Row(
               children: [
                 Text(
                   'Add new',

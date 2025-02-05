@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
 
 class PaymentsController extends GetxController {
@@ -9,4 +10,8 @@ class PaymentsController extends GetxController {
     ImageConstant.alipayIcon,
     ImageConstant.amexIcon,
   ];
+
+  void gotoAddCard () {
+    Get.toNamed(AppRoutes.addPayment);
+  }
 }
