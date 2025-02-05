@@ -40,8 +40,12 @@ class ProfileController extends GetxController {
     switch (menu) {
       case ProfileMenuEnum.address:
         Get.toNamed(AppRoutes.address);
-        break;
+        return;
+      case ProfileMenuEnum.payment:
+        Get.toNamed(AppRoutes.payment);
+        return;
       default:
+        return;
     }
   }
 

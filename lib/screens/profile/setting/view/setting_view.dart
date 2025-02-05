@@ -3,6 +3,7 @@ import 'package:e_commerce/screens/profile/setting/controller/setting_controller
 import 'package:e_commerce/screens/profile/setting/view/widget/select_profile.dart';
 import 'package:e_commerce/screens/profile/setting/view/widget/setting_profile_form.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
+import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,13 +12,7 @@ class SettingView extends GetView<SettingController> {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: true,
-      onPopInvokedWithResult: (bool didPop, dynamic result) {
-        if (didPop) {
-          Get.delete<SettingController>();
-        }
-      },
+    return PopScopeWrapper<SettingController>(
       child: Scaffold(
         appBar: const BackButtonAppbarTitle(
           centerTitle: true,

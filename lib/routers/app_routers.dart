@@ -17,4 +17,5 @@ abstract class AppRoutes {
   static const orderTrack = '/order-track';
   static const address = '/address';
   static const profileSetting = '/profile-setting';
+  static const payment = '/payment';
 }

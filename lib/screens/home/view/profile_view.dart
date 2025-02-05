@@ -56,7 +56,7 @@ class ProfileView extends GetView<ProfileController> {
                 onTap: () => controller.onTapMenu(item.type),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: Row(
                       children: [
