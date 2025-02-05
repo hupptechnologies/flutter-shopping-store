@@ -21,7 +21,12 @@ class HomeView extends GetView<HomeController> {
         ),
         drawer: const CommonDrawerView(),
         drawerEnableOpenDragGesture: false,
-        body: Obx(() => controller.currentScreen),
+        body: Obx(
+          () => IndexedStack(
+            index: controller.selectedIndex.value,
+            children: controller.screens,
+          ),
+        ),
         bottomNavigationBar: _buildBottomNavigationBar(),
       ),
     );
