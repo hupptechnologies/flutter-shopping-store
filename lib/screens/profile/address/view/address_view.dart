@@ -43,8 +43,13 @@ class AddressView extends GetView<AddressController> {
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  child:
-                      ButtonWidget(title: 'Add new address', isDisable: false),
+                  child: FractionallySizedBox(
+                    widthFactor: 0.7,
+                    child: ButtonWidget(
+                      title: 'Add new address',
+                      isDisable: false,
+                    ),
+                  ),
                 )
               ],
             ),
@@ -119,8 +124,8 @@ class AddressView extends GetView<AddressController> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                       Text(
-                        address.getAddressLine(),  
+                      Text(
+                        address.getAddressLine(),
                         overflow: TextOverflow.visible,
                         softWrap: true,
                       )

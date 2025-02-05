@@ -64,11 +64,13 @@ class SettingProfileForm extends GetView<SettingController> {
           ],
         ),
         const SizedBox(height: 90),
-        ButtonWidget(
-          title: 'Save change',
-          isDisable: false,
-          verticalPadding: 12,
-          onPressed: controller.saveChange,
+        FractionallySizedBox(
+          widthFactor: 0.7,
+          child: ButtonWidget(
+            title: 'Save change',
+            isDisable: false,
+            onPressed: controller.saveChange,
+          ),
         ),
       ],
     );
