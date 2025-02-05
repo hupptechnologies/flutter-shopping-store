@@ -53,7 +53,7 @@ class ProfileView extends GetView<ProfileController> {
           return Column(
             children: [
               InkWell(
-                onTap: () => controller.onTopMenu(item.type),
+                onTap: () => controller.onTapMenu(item.type),
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: Container(
@@ -111,7 +111,11 @@ class ProfileView extends GetView<ProfileController> {
             ],
           ),
           const Spacer(),
-          const Icon(Icons.settings),
+          IconButton(
+            onPressed: controller.onTapSetting,
+            icon: const Icon(Icons.settings),
+            visualDensity: const VisualDensity(horizontal: -4.0),
+          )
         ],
       ),
     );

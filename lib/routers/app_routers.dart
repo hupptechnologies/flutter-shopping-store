@@ -16,4 +16,5 @@ abstract class AppRoutes {
   static const rating = '/rating';
   static const orderTrack = '/order-track';
   static const address = '/address';
+  static const profileSetting = '/profile-setting';
 }

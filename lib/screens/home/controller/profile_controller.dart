@@ -33,7 +33,7 @@ class ProfileController extends GetxController {
         type: ProfileMenuEnum.logout),
   ];
 
-  void onTopMenu(ProfileMenuEnum menu) {
+  void onTapMenu(ProfileMenuEnum menu) {
     if (kDebugMode) {
       print(menu);
     }
@@ -43,5 +43,9 @@ class ProfileController extends GetxController {
         break;
       default:
     }
+  }
+
+  void onTapSetting() {
+    Get.toNamed(AppRoutes.profileSetting);
   }
 }

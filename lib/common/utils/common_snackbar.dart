@@ -17,9 +17,9 @@ abstract class CommonSnackbar {
   /// ```dart
   /// CommonSnackbar.error('An error occurred');
   /// ```
-  static void error(String message, {SnackPosition? position}) {
+  static void error(String message, {String title = 'Error', SnackPosition? position}) {
     Get.snackbar(
-      'Error',
+      title,
       message,
       snackPosition: position ?? commonPosition,
       backgroundColor: AppColors.offRed,
