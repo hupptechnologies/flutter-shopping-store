@@ -40,6 +40,13 @@ abstract class ImageConstant {
   static const String clickHandIcon = 'assets/svg/icons/clickhand.svg';
   static const String officeIcon = 'assets/svg/icons/office_icon.svg';
   static const String addressHomeIcon = 'assets/svg/icons/address_home.svg';
+  static const String favoriteFillIcon = 'assets/svg/icons/favorite_fill.svg';
+  static const String locationFillIcon = 'assets/svg/icons/location.svg';
+  static const String logoutIcon = 'assets/svg/icons/logout.svg';
+  static const String starFillIcon = 'assets/svg/icons/star_fill.svg';
+  static const String tickeIcon = 'assets/svg/icons/ticket.svg';
+  static const String walletIcon = 'assets/svg/icons/wallet.svg';
+  static const String rightArrowIcon = 'assets/svg/icons/right_arrow.svg';
 
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';

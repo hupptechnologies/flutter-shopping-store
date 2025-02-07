@@ -1,34 +1,34 @@
+import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/enum/profile_menu_enum.dart';
 import 'package:e_commerce/data/profile/profile_menu.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   final List<ProfileMenu> menuList = [
     ProfileMenu(
-        icon: Icons.location_on,
+        icon: ImageConstant.locationFillIcon,
         label: 'Address',
         type: ProfileMenuEnum.address),
     ProfileMenu(
-        icon: Icons.payments,
+        icon: ImageConstant.walletIcon,
         label: 'Payment method',
         type: ProfileMenuEnum.payment),
     ProfileMenu(
-        icon: Icons.confirmation_number_sharp,
+        icon: ImageConstant.tickeIcon,
         label: 'Voucher',
         type: ProfileMenuEnum.voucher),
     ProfileMenu(
-        icon: Icons.favorite_rounded,
+        icon: ImageConstant.favoriteFillIcon,
         label: 'My Wishlist',
         type: ProfileMenuEnum.wishlist),
     ProfileMenu(
-        icon: Icons.star_rate_rounded,
+        icon: ImageConstant.starFillIcon,
         label: 'Rate this app',
         type: ProfileMenuEnum.rate),
     ProfileMenu(
-        icon: Icons.logout_rounded,
+        icon: ImageConstant.logoutIcon,
         label: 'Log out',
         type: ProfileMenuEnum.logout),
   ];

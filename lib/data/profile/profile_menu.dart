@@ -1,8 +1,7 @@
 import 'package:e_commerce/common/enum/profile_menu_enum.dart';
-import 'package:flutter/material.dart';
 
 class ProfileMenu {
-  IconData icon;
+  String icon;
   String label;
   ProfileMenuEnum type;
 

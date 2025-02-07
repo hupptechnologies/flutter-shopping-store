@@ -5,6 +5,7 @@ import 'package:e_commerce/common/enum/profile_menu_enum.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/home/controller/profile_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -60,12 +61,15 @@ class ProfileView extends GetView<ProfileController> {
                     width: double.infinity,
                     child: Row(
                       children: [
-                        Icon(item.icon, color: AppColors.dartGratWithOpaity5),
+                        SvgPicture.asset(item.icon),
                         const SizedBox(width: 20),
                         Text(item.label),
                         const Spacer(),
                         if (item.type != ProfileMenuEnum.logout)
-                          const Icon(Icons.arrow_forward_ios),
+                          SvgPicture.asset(
+                            ImageConstant.rightArrowIcon,
+                            height: 20
+                          ),
                       ],
                     ),
                   ),
