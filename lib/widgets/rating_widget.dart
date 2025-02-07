@@ -6,12 +6,14 @@ class RatingWidget extends StatelessWidget {
   final double value;
   final void Function(double)? onRatingChanged;
   final double size;
+  final Color filledColor;
 
   const RatingWidget({
     super.key,
     required this.value,
     this.onRatingChanged,
     this.size = 16,
+    this.filledColor = AppColors.lightGreen,
   });
 
   @override
@@ -24,8 +26,8 @@ class RatingWidget extends StatelessWidget {
         onRatingChanged: onRatingChanged,
         initialRating: value,
         halfFilledIcon: Icons.star_half_rounded,
-        filledColor: AppColors.lightGreen,
-        halfFilledColor: AppColors.lightGreen,
+        filledColor: filledColor,
+        halfFilledColor: filledColor,
         size: size,
       );
     }
@@ -36,8 +38,8 @@ class RatingWidget extends StatelessWidget {
       emptyIcon: Icons.star_border_rounded,
       initialRating: value,
       halfFilledIcon: Icons.star_half_rounded,
-      filledColor: AppColors.lightGreen,
-      halfFilledColor: AppColors.lightGreen,
+      filledColor: filledColor,
+      halfFilledColor: filledColor,
       size: size,
     );
   }

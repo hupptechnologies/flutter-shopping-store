@@ -27,6 +27,8 @@ import 'package:e_commerce/screens/product/binding/product_detail_binging.dart';
 import 'package:e_commerce/screens/product/binding/product_list_binding.dart';
 import 'package:e_commerce/screens/product/view/product_detail_view.dart';
 import 'package:e_commerce/screens/product/view/product_list_view.dart';
+import 'package:e_commerce/screens/profile/feedback/binding/feedback_binding.dart';
+import 'package:e_commerce/screens/profile/feedback/view/feedback_view.dart';
 import 'package:e_commerce/screens/profile/payments/binding/add_payment_binding.dart';
 import 'package:e_commerce/screens/profile/payments/binding/payments_binding.dart';
 import 'package:e_commerce/screens/profile/payments/view/add_payment_view.dart';
@@ -139,6 +141,11 @@ class AppPages {
       name: AppRoutes.notification,
       page: () => const NotificationView(),
       binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.feedback,
+      page: () => const FeedbackView(),
+      binding: FeedbackBinding(),
     ),
   ];
 }

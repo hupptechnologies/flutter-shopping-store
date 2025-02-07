@@ -20,4 +20,5 @@ abstract class AppRoutes {
   static const String payment = '/payment';
   static const String addPayment = '/add-payment';
   static const String notification = '/notifications';
+  static const String feedback = '/feedback';
 }
