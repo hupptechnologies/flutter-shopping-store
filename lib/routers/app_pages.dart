@@ -1,3 +1,7 @@
+import 'package:e_commerce/screens/aboutUs/binding/about_us_binding.dart';
+import 'package:e_commerce/screens/aboutUs/view/about_us_view.dart';
+import 'package:e_commerce/screens/appSetting/binding/app_setting_binding.dart';
+import 'package:e_commerce/screens/appSetting/view/app_setting_view.dart';
 import 'package:e_commerce/screens/notification/binding/notification_binding.dart';
 import 'package:e_commerce/screens/notification/view/notification_view.dart';
 import 'package:e_commerce/screens/profile/address/binding/address_binding.dart';
@@ -41,6 +45,8 @@ import 'package:e_commerce/screens/search/binding/search_binging.dart';
 import 'package:e_commerce/screens/search/view/search_view.dart';
 import 'package:e_commerce/screens/splash_screen/view/splash_screen_view.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/screens/support/binding/support_binding.dart';
+import 'package:e_commerce/screens/support/view/support_view.dart';
 import 'package:get/get.dart';
 
 class AppPages {
@@ -146,6 +152,21 @@ class AppPages {
       name: AppRoutes.feedback,
       page: () => const FeedbackView(),
       binding: FeedbackBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.appSetting,
+      page: () => const AppSettingView(),
+      binding: AppSettingBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.support,
+      page: () => const SupportView(),
+      binding: SupportBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.aboutUs,
+      page: () => const AboutUsView(),
+      binding: AboutUsBinding(),
     ),
   ];
 }

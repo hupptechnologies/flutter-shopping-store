@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/screens/home/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,19 +50,25 @@ class CustomDrawerController extends GetxController {
     {
       "icon": ImageConstant.settingIcon,
       "title": "Setting",
-      "path": "",
+      "path": AppRoutes.appSetting,
     },
     {
       "icon": ImageConstant.supportIcon,
       "title": "Support",
-      "path": "",
+      "path": AppRoutes.support,
     },
     {
       "icon": ImageConstant.aboutUsIcon,
       "title": "About us",
-      "path": "",
+      "path": AppRoutes.aboutUs,
     }
   ];
+
+  get currentRoute => ![
+        AppRoutes.appSetting,
+        AppRoutes.support,
+        AppRoutes.aboutUs
+      ].contains(Get.currentRoute);
 
   void toggleTheme(bool darkMode) {
     isDarkMode.value = darkMode;

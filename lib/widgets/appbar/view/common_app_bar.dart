@@ -7,7 +7,12 @@ import 'package:get/get.dart';
 class CommonAppBar extends GetView<AppbarController>
     implements PreferredSizeWidget {
   final String title;
-  const CommonAppBar({super.key, required this.title});
+  final bool isNotication;
+  const CommonAppBar({
+    super.key,
+    required this.title,
+    this.isNotication = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,26 +34,27 @@ class CommonAppBar extends GetView<AppbarController>
       ),
       centerTitle: true,
       actions: [
-        Padding(
-          padding: const EdgeInsets.only(right: 16),
-          child: Obx(() => Stack(
-                children: [
-                  IconButton(
-                    onPressed: controller.gotoNotification,
-                    icon: SvgPicture.asset(ImageConstant.bellIcon),
-                  ),
-                  if (controller.notificationCount.value > 0)
-                    const Positioned(
-                      right: 14,
-                      top: 14,
-                      child: CircleAvatar(
-                        radius: 5,
-                        backgroundColor: Colors.red,
-                      ),
+        if (isNotication)
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Obx(() => Stack(
+                  children: [
+                    IconButton(
+                      onPressed: controller.gotoNotification,
+                      icon: SvgPicture.asset(ImageConstant.bellIcon),
                     ),
-                ],
-              )),
-        )
+                    if (controller.notificationCount.value > 0)
+                      const Positioned(
+                        right: 14,
+                        top: 14,
+                        child: CircleAvatar(
+                          radius: 5,
+                          backgroundColor: Colors.red,
+                        ),
+                      ),
+                  ],
+                )),
+          )
       ],
     );
   }

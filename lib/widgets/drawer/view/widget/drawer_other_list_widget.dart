@@ -16,10 +16,11 @@ class DrawerOtherListWidget extends GetView<CustomDrawerController> {
         controller.otherNavbarList.length,
         (index) {
           final item = controller.otherNavbarList[index];
+          final isSelected = Get.currentRoute == item['path'];
           return DrawerListItemWidget(
             title: item['title'],
-            isSelected: false,
-            onTap: null,
+            isSelected: isSelected,
+            onTap: () => Get.toNamed(item['path']),
             icon: item['icon'],
           );
         },

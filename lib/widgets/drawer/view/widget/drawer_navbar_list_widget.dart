@@ -17,7 +17,8 @@ class DrawerNavbarListWidget extends GetView<CustomDrawerController> {
         (index) {
           final item = controller.navBarList[index];
           final isSelected =
-              item['index'] == controller.homeController.selectedIndex.value;
+              item['index'] == controller.homeController.selectedIndex.value &&
+                  controller.currentRoute;
           return DrawerListItemWidget(
             title: item['title'],
             isSelected: isSelected,
