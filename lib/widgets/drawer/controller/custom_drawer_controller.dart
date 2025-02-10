@@ -73,4 +73,13 @@ class CustomDrawerController extends GetxController {
   void toggleTheme(bool darkMode) {
     isDarkMode.value = darkMode;
   }
+
+  void changeTabIndex(int index) {
+    homeController.changeTabIndex(index);
+    if (Get.currentRoute == AppRoutes.home) {
+      Get.back();
+    } else {
+      Get.toNamed(AppRoutes.home);
+    }
+  }
 }

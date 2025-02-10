@@ -1,6 +1,16 @@
 import 'package:e_commerce/screens/aboutUs/binding/about_us_binding.dart';
 import 'package:e_commerce/screens/aboutUs/view/about_us_view.dart';
 import 'package:e_commerce/screens/appSetting/binding/app_setting_binding.dart';
+import 'package:e_commerce/screens/appSetting/screens/chat/binding/chat_bindings.dart';
+import 'package:e_commerce/screens/appSetting/screens/chat/view/chat_view.dart';
+import 'package:e_commerce/screens/appSetting/screens/language/binding/language_bindings.dart';
+import 'package:e_commerce/screens/appSetting/screens/language/view/language_view.dart';
+import 'package:e_commerce/screens/appSetting/screens/notification/binding/setting_notification_bindings.dart';
+import 'package:e_commerce/screens/appSetting/screens/notification/view/setting_notification_view.dart';
+import 'package:e_commerce/screens/appSetting/screens/policy/binding/policy_bindings.dart';
+import 'package:e_commerce/screens/appSetting/screens/policy/view/policy_view.dart';
+import 'package:e_commerce/screens/appSetting/screens/terms/binding/terms_bindings.dart';
+import 'package:e_commerce/screens/appSetting/screens/terms/view/terms_view.dart';
 import 'package:e_commerce/screens/appSetting/view/app_setting_view.dart';
 import 'package:e_commerce/screens/notification/binding/notification_binding.dart';
 import 'package:e_commerce/screens/notification/view/notification_view.dart';
@@ -167,6 +177,31 @@ class AppPages {
       name: AppRoutes.aboutUs,
       page: () => const AboutUsView(),
       binding: AboutUsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.appSettingLanguage,
+      page: () => const LanguageView(),
+      binding: LanguageBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.appSettingNotification,
+      page: () => const SettingNotificationView(),
+      binding: SettingNotificationBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.appSettingTerms,
+      page: () => const TermsView(),
+      binding: TermsBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.appSettingPolicy,
+      page: () => const PolicyView(),
+      binding: PolicyBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.appSettingChat,
+      page: () => const ChatView(),
+      binding: ChatBindings(),
     ),
   ];
 }

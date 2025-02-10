@@ -22,10 +22,7 @@ class DrawerNavbarListWidget extends GetView<CustomDrawerController> {
           return DrawerListItemWidget(
             title: item['title'],
             isSelected: isSelected,
-            onTap: () {
-              controller.homeController.changeTabIndex(item['index']);
-              Get.back();
-            },
+            onTap: () => controller.changeTabIndex(item['index']),
             icon: item['icon'],
           );
         },
