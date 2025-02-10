@@ -41,12 +41,12 @@ class HomeView extends GetView<HomeController> {
 
   Widget _buildBottomNavigationBar() {
     return Container(
-      height: 65,
       decoration: _bottomNavBarDecoration(),
       child: ClipRRect(
         borderRadius: _bottomNavBorderRadius,
         child: Obx(
           () => BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.white,
             currentIndex: controller.selectedIndex.value,
             onTap: controller.changeTabIndex,

@@ -8,8 +8,18 @@ class CustomDrawerController extends GetxController {
   RxBool isDarkMode = false.obs;
 
   final List themes = [
-    {"icon": Icons.light_mode_outlined, "text": "Light", "isDark": false},
-    {"icon": Icons.dark_mode_outlined, "text": "Dark", "isDark": true},
+    {
+      "icon": Icons.light_mode_outlined,
+      "selectedIcon": Icons.light_mode_rounded,
+      "text": "Light",
+      "isDark": false
+    },
+    {
+      "icon": Icons.dark_mode_outlined,
+      "selectedIcon": Icons.dark_mode_rounded,
+      "text": "Dark",
+      "isDark": true
+    },
   ];
 
   final List navBarList = [
