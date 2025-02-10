@@ -21,7 +21,7 @@ class CommonDrawerView extends StatelessWidget {
           const DrawerProfileWidget(),
           const DrawerNavbarListWidget(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 13),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 13),
             child: ListTile(
               title: const Text('OTHER'),
               titleTextStyle: TextStyle(
