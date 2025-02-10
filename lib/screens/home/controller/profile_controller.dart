@@ -47,6 +47,8 @@ class ProfileController extends GetxController {
       case ProfileMenuEnum.rate:
         Get.toNamed(AppRoutes.feedback);
         return;
+      case ProfileMenuEnum.logout:
+        Get.offAllNamed(AppRoutes.home);
       default:
         return;
     }

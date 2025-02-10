@@ -1,4 +1,3 @@
-import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/common/enum/profile_menu_enum.dart';
@@ -66,10 +65,8 @@ class ProfileView extends GetView<ProfileController> {
                         Text(item.label),
                         const Spacer(),
                         if (item.type != ProfileMenuEnum.logout)
-                          SvgPicture.asset(
-                            ImageConstant.rightArrowIcon,
-                            height: 20
-                          ),
+                          SvgPicture.asset(ImageConstant.rightArrowIcon,
+                              height: 20),
                       ],
                     ),
                   ),
@@ -88,15 +85,9 @@ class ProfileView extends GetView<ProfileController> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
-          Container(
-            width: 70,
-            height: 70,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                  image: AssetImage(ImageConstant.category1),
-                  fit: BoxFit.cover),
-            ),
+          const CircleAvatar(
+            backgroundImage: AssetImage(ImageConstant.category1),
+            radius: 35,
           ),
           const SizedBox(
             width: 20,
