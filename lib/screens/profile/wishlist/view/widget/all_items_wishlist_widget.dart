@@ -15,7 +15,7 @@ class AllItemsWishlistWidget extends GetView<WishlistController> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 1),
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 24),
       child: Obx(
         () {
           if (controller.allItems.isEmpty) {
