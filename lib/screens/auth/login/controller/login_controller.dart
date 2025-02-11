@@ -100,6 +100,6 @@ class LoginController extends GetxController {
   }
 
   void homePage() {
-    Get.toNamed(AppRoutes.home);
+    Get.offAllNamed(AppRoutes.home);
   }
 }

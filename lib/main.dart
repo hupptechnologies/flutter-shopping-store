@@ -29,13 +29,18 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: storage.read('isLogin') ?? false
-          ? AppRoutes.home
-          : storage.read('isIntro') ?? false
-              ? AppRoutes.login
-              : AppRoutes.index,
+      initialRoute: getInitialRoute(),
       getPages: AppPages.pages,
       defaultTransition: Transition.rightToLeftWithFade,
     );
+  }
+
+  String getInitialRoute() {
+    bool isLoggedIn = storage.read('isLogin') ?? false;
+    bool isIntroShown = storage.read('isIntro') ?? false;
+
+    if (isLoggedIn) return AppRoutes.home;
+    if (isIntroShown) return AppRoutes.login;
+    return AppRoutes.index;
   }
 }
