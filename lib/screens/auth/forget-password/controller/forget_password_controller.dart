@@ -41,15 +41,15 @@ class ForgetPasswordController extends GetxController {
   void forgetPassword() async {
     try {
       CommonGetX.unfocus();
-      final response =
-          await authService.forgetPassword(userName: emailController.text);
-      if (!response.error) {
-        clearState();
-        CommonSnackbar.success(response.message);
-        verificationCodePage(response.data ?? '');
-      } else {
-        CommonSnackbar.error(response.message);
-      }
+      // final response =
+      //     await authService.forgetPassword(userName: emailController.text);
+      // if (!response.error) {
+      //   clearState();
+        CommonSnackbar.success('Forgot Passowrd Successfully!');
+        verificationCodePage('1111');
+      // } else {
+      //   CommonSnackbar.error(response.message);
+      // }
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }

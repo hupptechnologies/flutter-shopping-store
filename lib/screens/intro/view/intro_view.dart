@@ -5,6 +5,7 @@ import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class IntroView extends StatefulWidget {
   const IntroView({super.key});
@@ -14,6 +15,7 @@ class IntroView extends StatefulWidget {
 }
 
 class _IntroViewState extends State<IntroView> {
+  final box = GetStorage();
   int _currentIndex = 0;
   final CarouselSliderController _carouselController =
       CarouselSliderController();
@@ -43,6 +45,7 @@ class _IntroViewState extends State<IntroView> {
   }
 
   void _shoppingNow() {
+    box.write('isIntro', true);
     Get.offNamed(AppRoutes.login);
   }
 

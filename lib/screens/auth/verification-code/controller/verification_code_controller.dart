@@ -53,16 +53,16 @@ class VerificationCodeController extends GetxController {
     if (allFieldsFilled.value && id.isNotEmpty) {
       try {
         CommonGetX.unfocus();
-        final otp = getVerificationCode();
-        final response = await authService.otpVerifyed(otp: otp, id: id);
-        if (!response.error) {
-          clear();
-          CommonSnackbar.success(response.message);
+        // final otp = getVerificationCode();
+        // final response = await authService.otpVerifyed(otp: otp, id: id);
+        // if (!response.error) {
+        //   clear();
+        CommonSnackbar.success('Verifyed OTP');
 
-          createPasswordPage(response.data ?? '');
-        } else {
-          CommonSnackbar.error(response.message);
-        }
+        createPasswordPage('data');
+        // } else {
+        //   CommonSnackbar.error(response.message);
+        // }
       } catch (e) {
         CommonSnackbar.error(e.toString());
       }

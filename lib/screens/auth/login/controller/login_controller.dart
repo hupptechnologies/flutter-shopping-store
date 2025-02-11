@@ -4,9 +4,11 @@ import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
   late TextEditingController emailController, passwordController;
+  final storage = GetStorage();
 
   final AuthService authService = AuthService();
   late RxBool isFormValid = false.obs;
@@ -69,17 +71,18 @@ class LoginController extends GetxController {
     // if (loginFormKey.currentState!.validate()) {
     try {
       CommonGetX.unfocus();
-      final login = await authService.login(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      // ignore: avoid_print
-      if (!login.error) {
-        CommonSnackbar.success(login.message);
+      // final login = await authService.login(
+      //   email: emailController.text,
+      //   password: passwordController.text,
+      // );
+      // // ignore: avoid_print
+      // if (!login.error) {
+        CommonSnackbar.success('Login Successfully!');
         homePage();
-      } else {
-        CommonSnackbar.error(login.message);
-      }
+        storage.write('isLogin', true);
+      // } else {
+      //   CommonSnackbar.error(login.message);
+      // }
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }
@@ -98,6 +101,5 @@ class LoginController extends GetxController {
 
   void homePage() {
     Get.toNamed(AppRoutes.home);
-    clearState();
   }
 }

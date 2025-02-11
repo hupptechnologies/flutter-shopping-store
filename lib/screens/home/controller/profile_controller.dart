@@ -3,8 +3,10 @@ import 'package:e_commerce/common/enum/profile_menu_enum.dart';
 import 'package:e_commerce/data/profile/profile_menu.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ProfileController extends GetxController {
+  final storage = GetStorage();
   final List<ProfileMenu> menuList = [
     ProfileMenu(
         icon: ImageConstant.locationFillIcon,
@@ -50,7 +52,9 @@ class ProfileController extends GetxController {
         Get.toNamed(AppRoutes.feedback);
         return;
       case ProfileMenuEnum.logout:
-        Get.offAllNamed(AppRoutes.home);
+        storage.remove('isLogin');
+        Get.offAllNamed(AppRoutes.login);
+        return;
     }
   }
 

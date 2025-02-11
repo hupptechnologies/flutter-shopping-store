@@ -4,20 +4,21 @@ import 'package:e_commerce/widgets/ignore_text_scale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // Transparent status bar
-    statusBarIconBrightness:
-        Brightness.dark, // Dark icons for light backgrounds
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
   ));
-  runApp(const IgnoreTextScale(child: MyApp()));
+  await GetStorage.init();
+  runApp(IgnoreTextScale(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final storage = GetStorage();
+  MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -28,7 +29,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.home,
+      initialRoute: storage.read('isLogin') ?? false
+          ? AppRoutes.home
+          : storage.read('isIntro') ?? false
+              ? AppRoutes.login
+              : AppRoutes.index,
       getPages: AppPages.pages,
       defaultTransition: Transition.rightToLeftWithFade,
     );

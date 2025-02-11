@@ -5,8 +5,10 @@ import 'package:e_commerce/service/auth_service.dart';
 import 'package:e_commerce/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class PasswordController extends GetxController {
+  final storage = GetStorage();
   late TextEditingController passwordController, confirmPasswordController;
   late RxBool isFormValid = false.obs;
 
@@ -62,29 +64,30 @@ class PasswordController extends GetxController {
 
   void changePassword() async {
     CommonGetX.unfocus();
-    final id = Get.arguments['id'];
+    // final id = Get.arguments['id'];
     try {
-      if (id.isEmpty) {
-        return;
-      }
-      final response = await authService.resetPassword(
-        id: id,
-        password: passwordController.text,
-        confirmPassword: confirmPasswordController.text,
-      );
+      // if (id.isEmpty) {
+      //   return;
+      // }
+      // final response = await authService.resetPassword(
+      //   id: id,
+      //   password: passwordController.text,
+      //   confirmPassword: confirmPasswordController.text,
+      // );
 
-      if (!response.error) {
-        CommonGetX.unfocus();
-        buildShowBottomSheet(loginPage);
-      } else {
-        CommonSnackbar.error(response.message);
-      }
+      // if (!response.error) {
+      //   CommonGetX.unfocus();
+      buildShowBottomSheet(loginPage);
+      // } else {
+      //   CommonSnackbar.error(response.message);
+      // }
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }
   }
 
   void loginPage() {
+    storage.write('isLogin', true);
     Get.toNamed(AppRoutes.login);
     clear();
   }

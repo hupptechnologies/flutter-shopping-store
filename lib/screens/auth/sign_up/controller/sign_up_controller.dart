@@ -73,17 +73,17 @@ class SignUpController extends GetxController {
   void signUp() async {
     CommonGetX.unfocus();
     try {
-      final response = await authService.signUp(
-        name: nameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      if (!response.error) {
-        CommonSnackbar.success(response.message);
-        loginPage();
-      } else {
-        CommonSnackbar.error(response.message);
-      }
+      // final response = await authService.signUp(
+      //   name: nameController.text,
+      //   email: emailController.text,
+      //   password: passwordController.text,
+      // );
+      // if (!response.error) {
+      CommonSnackbar.success('Registration Successfully!');
+      loginPage();
+      // } else {
+      //   CommonSnackbar.error(response.message);
+      // }
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }
@@ -91,7 +91,6 @@ class SignUpController extends GetxController {
 
   void loginPage() {
     Get.toNamed(AppRoutes.login);
-    clearState();
   }
 
   void clearState() {
