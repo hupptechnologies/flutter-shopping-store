@@ -1,4 +1,6 @@
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RowTextWithShowall extends StatelessWidget {
   const RowTextWithShowall(
@@ -20,9 +22,12 @@ class RowTextWithShowall extends StatelessWidget {
             text,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          const Text(
-            'Show all',
-            style: TextStyle(fontSize: 14, color: Colors.black54),
+          InkWell(
+            child: const Text(
+              'Show all',
+              style: TextStyle(fontSize: 14, color: Colors.black54),
+            ),
+            onTap: () => Get.toNamed(AppRoutes.productList, arguments: {'title': text}),
           ),
         ],
       ),

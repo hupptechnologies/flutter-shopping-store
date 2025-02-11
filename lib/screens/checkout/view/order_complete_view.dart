@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,10 +26,10 @@ class OrderCompleteView extends StatelessWidget {
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
-            const ButtonWidget(
+            ButtonWidget(
               title: 'Continue shopping',
               isDisable: false,
-              onPressed: null,
+              onPressed: () => Get.toNamed(AppRoutes.home),
             ),
           ],
         ),

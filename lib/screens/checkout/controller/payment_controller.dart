@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -38,9 +39,7 @@ class PaymentController extends GetxController {
   }
 
   void addCreditCard() {
-    if (kDebugMode) {
-      print('Add new Credit card');
-    }
+    Get.toNamed(AppRoutes.addPayment);
   }
 
   void termsAndConditions() {
