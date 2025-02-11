@@ -19,6 +19,7 @@ abstract class AppRoutes {
   static const String profileSetting = '/profile-setting';
   static const String payment = '/payment';
   static const String voucher = '/voucher';
+  static const String wishlist = '/wishlist';
   static const String addPayment = '/add-payment';
   static const String notification = '/notifications';
   static const String feedback = '/feedback';

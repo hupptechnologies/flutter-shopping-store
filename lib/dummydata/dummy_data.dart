@@ -93,4 +93,37 @@ abstract class DummyData {
     {'id': 2, 'value': 'M'},
     {'id': 3, 'value': 'L'}
   ];
+
+  static final List boardsList = [
+    {
+      "title": 'Going out outfits',
+      "conunt": 36,
+      "firstImage": ImageConstant.category1,
+      "secoundImage": ImageConstant.category2,
+      "thirdImages": [
+        [ImageConstant.categoryHome, ImageConstant.category1],
+        [ImageConstant.category1, ImageConstant.category2]
+      ],
+    },
+    {
+      "title": 'Office Fashion',
+      "conunt": 201,
+      "firstImage": ImageConstant.category2,
+      "secoundImage": ImageConstant.category1,
+      "thirdImages": [
+        [ImageConstant.category1, ImageConstant.category2],
+        [ImageConstant.categoryHome, ImageConstant.category1],
+      ],
+    },
+    {
+      "title": 'Going out outfits',
+      "conunt": 10,
+      "firstImage": ImageConstant.category1,
+      "secoundImage": ImageConstant.category2,
+      "thirdImages": [
+        [ImageConstant.categoryHome, ImageConstant.category1],
+        [ImageConstant.category1, ImageConstant.category2]
+      ],
+    },
+  ];
 }
