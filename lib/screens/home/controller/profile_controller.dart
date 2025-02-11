@@ -44,6 +44,9 @@ class ProfileController extends GetxController {
       case ProfileMenuEnum.payment:
         Get.toNamed(AppRoutes.payment);
         return;
+      case ProfileMenuEnum.voucher:
+        Get.toNamed(AppRoutes.voucher);
+        return;
       case ProfileMenuEnum.rate:
         Get.toNamed(AppRoutes.feedback);
         return;

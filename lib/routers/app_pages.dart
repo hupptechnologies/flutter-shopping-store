@@ -49,6 +49,8 @@ import 'package:e_commerce/screens/profile/payments/view/add_payment_view.dart';
 import 'package:e_commerce/screens/profile/payments/view/payments_view.dart';
 import 'package:e_commerce/screens/profile/setting/binding/setting_binding.dart';
 import 'package:e_commerce/screens/profile/setting/view/setting_view.dart';
+import 'package:e_commerce/screens/profile/voucher/binding/voucher_binding.dart';
+import 'package:e_commerce/screens/profile/voucher/view/voucher_view.dart';
 import 'package:e_commerce/screens/rating/binding/rating_binding.dart';
 import 'package:e_commerce/screens/rating/view/rating_view.dart';
 import 'package:e_commerce/screens/search/binding/search_binging.dart';
@@ -147,6 +149,11 @@ class AppPages {
       name: AppRoutes.payment,
       page: () => const PaymentsView(),
       binding: PaymentsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.voucher,
+      page: () => const VoucherView(),
+      binding: VoucherBinding(),
     ),
     GetPage(
       name: AppRoutes.addPayment,

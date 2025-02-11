@@ -16,7 +16,7 @@ class AppSettingView extends GetView<AppSettingController> {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: CommonAppBar(
-          title: 'Setting',
+          title: 'Settings',
           isNotication: false,
         ),
       ),
