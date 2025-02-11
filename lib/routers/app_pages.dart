@@ -14,6 +14,8 @@ import 'package:e_commerce/screens/appSetting/screens/terms/view/terms_view.dart
 import 'package:e_commerce/screens/appSetting/view/app_setting_view.dart';
 import 'package:e_commerce/screens/notification/binding/notification_binding.dart';
 import 'package:e_commerce/screens/notification/view/notification_view.dart';
+import 'package:e_commerce/screens/profile/addAddress/binding/add_address_binding.dart';
+import 'package:e_commerce/screens/profile/addAddress/view/add_address_view.dart';
 import 'package:e_commerce/screens/profile/address/binding/address_binding.dart';
 import 'package:e_commerce/screens/profile/address/view/address_view.dart';
 import 'package:e_commerce/screens/auth/forget-password/binding/forget_password_binging.dart';
@@ -141,6 +143,11 @@ class AppPages {
       name: AppRoutes.address,
       page: () => const AddressView(),
       binding: AddressBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addAddress,
+      page: () => const AddAddressView(),
+      binding: AddAddressBinding(),
     ),
     GetPage(
       name: AppRoutes.profileSetting,

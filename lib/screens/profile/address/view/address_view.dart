@@ -6,6 +6,7 @@ import 'package:e_commerce/data/address/address_dto.dart';
 import 'package:e_commerce/screens/profile/address/controller/address_controller.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
+import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,43 +16,46 @@ class AddressView extends GetView<AddressController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const BackButtonAppbarTitle(
-        title: 'Delivery address',
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MarginPadding.homeHorPadding,
-            vertical: MarginPadding.homeTopPadding,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.list.length,
-                  itemBuilder: (context, index) {
-                    final address = controller.list[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: addressCard(address),
-                    );
-                  },
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: FractionallySizedBox(
-                    widthFactor: 0.7,
-                    child: ButtonWidget(
-                      title: 'Add new address',
-                      isDisable: false,
-                    ),
+    return PopScopeWrapper<AddressController>(
+      child: Scaffold(
+        appBar: const BackButtonAppbarTitle(
+          title: 'Delivery address',
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MarginPadding.homeHorPadding,
+              vertical: MarginPadding.homeTopPadding,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.list.length,
+                    itemBuilder: (context, index) {
+                      final address = controller.list[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: addressCard(address),
+                      );
+                    },
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: FractionallySizedBox(
+                      widthFactor: 0.7,
+                      child: ButtonWidget(
+                        title: 'Add new address',
+                        isDisable: false,
+                        onPressed: controller.gotoAddAddress,
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

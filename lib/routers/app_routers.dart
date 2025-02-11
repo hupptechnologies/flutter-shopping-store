@@ -16,6 +16,7 @@ abstract class AppRoutes {
   static const String rating = '/rating';
   static const String orderTrack = '/order-track';
   static const String address = '/address';
+  static const String addAddress = '/add-address';
   static const String profileSetting = '/profile-setting';
   static const String payment = '/payment';
   static const String voucher = '/voucher';

@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/enum/address_enum.dart';
 import 'package:e_commerce/data/address/address_dto.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
 
 class AddressController extends GetxController {
@@ -38,5 +39,9 @@ class AddressController extends GetxController {
       address.isSelected = address.id == id;
     }
     update();
+  }
+
+  void gotoAddAddress() {
+    Get.toNamed(AppRoutes.addAddress);
   }
 }
