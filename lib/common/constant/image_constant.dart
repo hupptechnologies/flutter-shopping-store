@@ -48,7 +48,6 @@ abstract class ImageConstant {
   static const String walletIcon = 'assets/svg/icons/wallet.svg';
   static const String rightArrowIcon = 'assets/svg/icons/right_arrow.svg';
   static const String settingIcon = 'assets/svg/icons/setting.svg';
-  static const String supportIcon = 'assets/svg/icons/support.svg';
   static const String aboutUsIcon = 'assets/svg/icons/about_us.svg';
   static const String bellDuotoneIcon = 'assets/svg/icons/bell_duotone.svg';
   static const String chatSupportIcon = 'assets/svg/icons/chat_support.svg';

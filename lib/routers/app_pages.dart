@@ -61,8 +61,6 @@ import 'package:e_commerce/screens/search/binding/search_binging.dart';
 import 'package:e_commerce/screens/search/view/search_view.dart';
 import 'package:e_commerce/screens/splash_screen/view/splash_screen_view.dart';
 import 'package:e_commerce/routers/app_routers.dart';
-import 'package:e_commerce/screens/support/binding/support_binding.dart';
-import 'package:e_commerce/screens/support/view/support_view.dart';
 import 'package:get/get.dart';
 
 class AppPages {
@@ -188,11 +186,6 @@ class AppPages {
       name: AppRoutes.appSetting,
       page: () => const AppSettingView(),
       binding: AppSettingBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.support,
-      page: () => const SupportView(),
-      binding: SupportBinding(),
     ),
     GetPage(
       name: AppRoutes.aboutUs,

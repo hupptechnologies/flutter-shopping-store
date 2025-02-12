@@ -53,22 +53,14 @@ class CustomDrawerController extends GetxController {
       "path": AppRoutes.appSetting,
     },
     {
-      "icon": ImageConstant.supportIcon,
-      "title": "Support",
-      "path": AppRoutes.support,
-    },
-    {
       "icon": ImageConstant.aboutUsIcon,
       "title": "About us",
       "path": AppRoutes.aboutUs,
     }
   ];
 
-  get currentRoute => ![
-        AppRoutes.appSetting,
-        AppRoutes.support,
-        AppRoutes.aboutUs
-      ].contains(Get.currentRoute);
+  get currentRoute =>
+      ![AppRoutes.appSetting, AppRoutes.aboutUs].contains(Get.currentRoute);
 
   void toggleTheme(bool darkMode) {
     isDarkMode.value = darkMode;
