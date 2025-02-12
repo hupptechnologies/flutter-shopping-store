@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfig } from './config/database.config';
+import { UserModule } from './module/user/user.module';
+import { BcryptService } from './services/bcrypt/bcrypt.service';
 
 @Module({
 	imports: [
@@ -14,8 +16,9 @@ import { DatabaseConfig } from './config/database.config';
 			imports: [ConfigModule],
 			useClass: DatabaseConfig,
 		}),
+		UserModule,
 	],
 	controllers: [AppController],
-	providers: [AppService],
+	providers: [AppService, BcryptService],
 })
 export class AppModule {}
