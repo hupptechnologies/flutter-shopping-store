@@ -20,7 +20,7 @@ class DrawerOtherListWidget extends GetView<CustomDrawerController> {
           return DrawerListItemWidget(
             title: item['title'],
             isSelected: isSelected,
-            onTap: () => Get.toNamed(item['path']),
+            onTap: () => controller.otherNavBarTap(item['path']),
             icon: item['icon'],
           );
         },

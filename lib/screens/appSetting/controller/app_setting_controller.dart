@@ -21,7 +21,7 @@ class AppSettingController extends GetxController {
     },
     {
       'icon': ImageConstant.aboutUsIcon,
-      'title': 'Pricavy Policy',
+      'title': 'Privacy Policy',
       'path': AppRoutes.appSettingPolicy
     },
     {

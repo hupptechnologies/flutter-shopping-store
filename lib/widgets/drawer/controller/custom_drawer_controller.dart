@@ -82,4 +82,9 @@ class CustomDrawerController extends GetxController {
       Get.toNamed(AppRoutes.home);
     }
   }
+
+  void otherNavBarTap(String path) {
+    Get.back();
+    Get.toNamed(path);
+  }
 }
