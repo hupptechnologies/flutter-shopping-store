@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ResponseInterceptor } from './interceptors/response/response.interceptor';
+import { LoggingInterceptor } from './interceptors/logging/logging.interceptor';
 
 class Application {
 	private readonly logger = new Logger(Application.name);
@@ -21,7 +22,7 @@ class Application {
 	}
 
 	private configureApp(app: INestApplication<AppModule>): number {
-		app.useGlobalInterceptors(new ResponseInterceptor());
+		app.useGlobalInterceptors(new ResponseInterceptor(), new LoggingInterceptor());
 
 		const configService = app.get(ConfigService);
 

@@ -1,6 +1,8 @@
 import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
+import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 
+@Loggable()
 @Injectable()
 export class BcryptService {
 	private readonly saltRounds = 10;

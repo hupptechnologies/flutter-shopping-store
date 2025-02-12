@@ -3,7 +3,9 @@ import { User } from './entities/user.entity';
 import { BcryptService } from 'src/services/bcrypt/bcrypt.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserRepository } from './user.repository';
+import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 
+@Loggable()
 @Injectable()
 export class UserService {
 	constructor(
