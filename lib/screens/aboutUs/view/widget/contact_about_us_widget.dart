@@ -17,52 +17,55 @@ class ContactAboutUsWidget extends GetView<AboutAsController> {
           (index) {
             final item = controller.contacts[index];
             return Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(15),
-                decoration: const BoxDecoration(
-                  color: AppColors.lightGray,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+              child: GestureDetector(
+                onTap: () => controller.openContacts(item['type']),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  decoration: const BoxDecoration(
+                    color: AppColors.lightGray,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
                   ),
-                ),
-                child: Column(
-                  spacing: 5,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
+                  child: Column(
+                    spacing: 5,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                          color: AppColors.black,
                         ),
-                        color: AppColors.black,
+                        child: Icon(
+                          item['icon'],
+                          color: AppColors.white,
+                          size: 22,
+                        ),
                       ),
-                      child: Icon(
-                        item['icon'],
-                        color: AppColors.white,
-                        size: 22,
+                      Text(
+                        item['title'].toString(),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
-                    ),
-                    Text(
-                      item['title'].toString(),
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      item['subTitle'].toString(),
-                      style: const TextStyle(fontSize: 11),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 5,
-                      children: [item['days'], '\u2022', item['time']]
-                          .map(
-                            (el) => Text(
-                              el,
-                              style: const TextStyle(fontSize: 11),
-                            ),
-                          )
-                          .toList(),
-                    )
-                  ],
+                      Text(
+                        item['subTitle'].toString(),
+                        style: const TextStyle(fontSize: 11),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 5,
+                        children: [item['days'], '\u2022', item['time']]
+                            .map(
+                              (el) => Text(
+                                el,
+                                style: const TextStyle(fontSize: 11),
+                              ),
+                            )
+                            .toList(),
+                      )
+                    ],
+                  ),
                 ),
               ),
             );

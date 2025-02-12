@@ -1,6 +1,9 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/common/enum/contact_enum.dart';
+import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutAsController extends GetxController {
   final List<Map<String, dynamic>> contacts = [
@@ -9,14 +12,16 @@ class AboutAsController extends GetxController {
       'title': 'Call us',
       'subTitle': 'Our team is on the line',
       'days': 'Mon-Fri',
-      'time': '09-17'
+      'time': '09-17',
+      'type': ContactEnum.call
     },
     {
       'icon': Icons.email,
       'title': 'Email us',
       'subTitle': 'Our team is online',
       'days': 'Mon-Fri',
-      'time': '09-17'
+      'time': '09-17',
+      'type': ContactEnum.email
     }
   ];
 
@@ -46,4 +51,34 @@ class AboutAsController extends GetxController {
       'other': '09-17'
     },
   ];
+
+  void openContacts(ContactEnum type) {
+    switch (type) {
+      case ContactEnum.call:
+        openDialer('+910000000000');
+        return;
+      case ContactEnum.email:
+        openEmailApp('gemstore@gmail.com');
+        return;
+    }
+  }
+
+  void openDialer(String phoneNumber) async {
+    final Uri phoneUri = Uri.parse('tel:$phoneNumber');
+    if (await canLaunchUrl(phoneUri)) {
+      await launchUrl(phoneUri);
+    } else {
+      CommonSnackbar.error("Could not open dialer");
+    }
+  }
+
+  void openEmailApp(String email) async {
+    final Uri emailUri = Uri.parse('mailto:$email');
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri, mode: LaunchMode.externalApplication);
+    } else {
+      print("Could not open email app");
+    }
+  }
 }
