@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ResponseInterceptor } from './interceptors/response/response.interceptor';
 
 class Application {
 	private readonly logger = new Logger(Application.name);
@@ -20,6 +21,8 @@ class Application {
 	}
 
 	private configureApp(app: INestApplication<AppModule>): number {
+		app.useGlobalInterceptors(new ResponseInterceptor());
+
 		const configService = app.get(ConfigService);
 
 		const prefix = configService.get<string>('PREFIX') ?? '';

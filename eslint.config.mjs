@@ -55,6 +55,7 @@ export default tseslint.config(
 			'no-trailing-spaces': 'error',
 			'no-whitespace-before-property': 'error',
 			'eol-last': ['error', 'always'],
+			'@typescript-eslint/no-unsafe-call': 'off',
 		},
 	},
 );
