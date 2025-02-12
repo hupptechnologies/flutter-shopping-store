@@ -12,6 +12,7 @@ abstract class AppColors {
   static const Color lightGreen = Color(0xFF508A7B);
   static const Color orangeAccent = Colors.orangeAccent;
   static const Color black = Colors.black;
+  static const Color white = Colors.white;
   
 
   static Color hexToColor(String hexCode) {

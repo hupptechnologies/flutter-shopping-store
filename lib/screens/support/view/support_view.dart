@@ -8,12 +8,9 @@ class SupportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CommonAppBar(
-          title: 'Support',
-          isNotication: false,
-        ),
+      appBar: CommonAppBar(
+        title: 'Support',
+        isNotication: false,
       ),
       drawer: CommonDrawerView(),
       drawerEnableOpenDragGesture: false,

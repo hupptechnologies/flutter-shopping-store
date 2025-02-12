@@ -13,12 +13,9 @@ class AppSettingView extends GetView<AppSettingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: CommonAppBar(
-          title: 'Settings',
-          isNotication: false,
-        ),
+      appBar: const CommonAppBar(
+        title: 'Settings',
+        isNotication: false,
       ),
       drawer: const CommonDrawerView(),
       drawerEnableOpenDragGesture: false,

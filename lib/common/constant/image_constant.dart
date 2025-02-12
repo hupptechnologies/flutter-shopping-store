@@ -54,6 +54,10 @@ abstract class ImageConstant {
   static const String chatSupportIcon = 'assets/svg/icons/chat_support.svg';
   static const String languageIcon = 'assets/svg/icons/language.svg';
   static const String termsOfUseIcon = 'assets/svg/icons/terms_of_use.svg';
+  static const String facebookIcon = 'assets/svg/icons/facebook.svg';
+  static const String instagramIcon = 'assets/svg/icons/instagram.svg';
+  static const String telegramIcon = 'assets/svg/icons/telegram.svg';
+  static const String whatsappIcon = 'assets/svg/icons/whatsapp.svg';
 
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';
