@@ -5,6 +5,9 @@ import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import { ResponseInterceptor } from './interceptors/response/response.interceptor';
 import { LoggingInterceptor } from './interceptors/logging/logging.interceptor';
+import { useContainer } from 'class-validator';
+import { DtoValidationPipe } from './pips/dto-validation/dto-validation.pipe';
+import { GlobalExceptionsFilter } from './exceptions/global.exceptions.filter';
 
 class Application {
 	private readonly logger = new Logger(Application.name);
@@ -25,6 +28,14 @@ class Application {
 
 	private configureApp(app: INestApplication<AppModule>): number {
 		app.use(cookieParser());
+
+		useContainer(app.select(AppModule), {
+			fallbackOnErrors: true,
+		});
+
+		app.useGlobalPipes(new DtoValidationPipe());
+
+		app.useGlobalFilters(new GlobalExceptionsFilter());
 
 		app.useGlobalInterceptors(new ResponseInterceptor(), new LoggingInterceptor());
 
