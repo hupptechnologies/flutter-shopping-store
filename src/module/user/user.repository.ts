@@ -17,4 +17,10 @@ export class UserRepository {
 		const user = this.repository.create(createUserDto);
 		return this.repository.save(user);
 	}
+
+	public async findOnByEmail(email: string): Promise<User | null> {
+		return this.repository.findOneBy({
+			email,
+		});
+	}
 }

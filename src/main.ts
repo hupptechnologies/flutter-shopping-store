@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import * as cookieParser from 'cookie-parser';
 import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { AppModule } from './app.module';
 import { ResponseInterceptor } from './interceptors/response/response.interceptor';
 import { LoggingInterceptor } from './interceptors/logging/logging.interceptor';
 
@@ -23,6 +24,8 @@ class Application {
 	}
 
 	private configureApp(app: INestApplication<AppModule>): number {
+		app.use(cookieParser());
+
 		app.useGlobalInterceptors(new ResponseInterceptor(), new LoggingInterceptor());
 
 		const configService = app.get(ConfigService);
