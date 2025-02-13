@@ -1,7 +1,6 @@
 import { Logger } from '@nestjs/common';
 
 export function Loggable(): ClassDecorator {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 	return function (target: Function) {
 		const logger = new Logger(target.name);
 

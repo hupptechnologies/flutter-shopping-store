@@ -18,6 +18,7 @@ class Application {
 			this.logger.log(`Application is running on: http://localhost:${port}`);
 		} catch (error) {
 			this.logger.error('Error during application bootstrap:', error);
+			process.exit(1);
 		}
 	}
 

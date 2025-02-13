@@ -56,6 +56,7 @@ export default tseslint.config(
 			'no-whitespace-before-property': 'error',
 			'eol-last': ['error', 'always'],
 			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-unsafe-function-type': 'off'
 		},
 	},
 );
