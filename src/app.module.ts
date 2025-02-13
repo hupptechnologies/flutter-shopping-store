@@ -5,7 +5,6 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfig } from './config/database.config';
 import { UserModule } from './module/user/user.module';
-import { BcryptService } from './services/bcrypt/bcrypt.service';
 import { AuthModule } from './module/auth/auth.module';
 
 @Module({
@@ -21,6 +20,6 @@ import { AuthModule } from './module/auth/auth.module';
 		UserModule,
 	],
 	controllers: [AppController],
-	providers: [AppService, BcryptService],
+	providers: [AppService],
 })
 export class AppModule {}

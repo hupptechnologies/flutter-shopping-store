@@ -27,7 +27,9 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
 
 		const { status, message, data } = this.getErrorResponse(exception, response);
 
-		this.logger.error(`Error occurred at ${request.url}: ${message}`);
+		this.logger.error(
+			`Error occurred at ${request.url}: ${message} ${data ? JSON.stringify(data) : ''}`,
+		);
 
 		response
 			.status(status)

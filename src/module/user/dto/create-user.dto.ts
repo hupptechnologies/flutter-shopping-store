@@ -24,4 +24,6 @@ export class CreateUserDto {
 	@IsOptional()
 	@IsMobilePhone()
 	public mobileNumber?: string;
+
+	public image?: string;
 }
