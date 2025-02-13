@@ -9,4 +9,5 @@ export class MessageConstant {
 	static readonly EMAIL_EXISTS = 'Email already exists';
 	static readonly USER_NOT_FOUND = 'User not found';
 	static readonly USER_UPDATE_SUCCESS = 'User updated successfully';
+	static readonly USER_FOUND_SUCCESS = 'User found successfully';
 }

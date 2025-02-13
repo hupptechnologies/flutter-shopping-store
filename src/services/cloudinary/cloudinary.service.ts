@@ -7,7 +7,7 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 @Loggable()
 @Injectable()
 export class CloudinaryService {
-	private readonly logger = new Logger(CloudinaryService.name);
+	private readonly logger: Logger;
 
 	constructor(private configService: ConfigService) {
 		cloudinary.config({

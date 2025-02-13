@@ -80,4 +80,18 @@ export class UserService {
 
 		return updateUser;
 	}
+
+	public async findById(id: number): Promise<User> {
+		const user = await this.userRepository.findOneById(id);
+
+		if (!user) {
+			throw new NotFoundException(MessageConstant.USER_NOT_FOUND);
+		}
+
+		if (user.image) {
+			user.image = this.cloudinaryService.getFileUrl(user.image);
+		}
+
+		return user;
+	}
 }
