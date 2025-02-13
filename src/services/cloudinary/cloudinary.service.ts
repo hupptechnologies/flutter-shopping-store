@@ -2,7 +2,9 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary, UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
 import { CloudinaryDeleteResponse } from 'src/common/interface/cloudinary.interface';
+import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 
+@Loggable()
 @Injectable()
 export class CloudinaryService {
 	private readonly logger = new Logger(CloudinaryService.name);
