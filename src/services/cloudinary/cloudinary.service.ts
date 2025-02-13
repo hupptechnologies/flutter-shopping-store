@@ -1,9 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary, UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
+import { CloudinaryDeleteResponse } from 'src/common/interface/cloudinary.interface';
 
 @Injectable()
 export class CloudinaryService {
+	private readonly logger = new Logger(CloudinaryService.name);
+
 	constructor(private configService: ConfigService) {
 		cloudinary.config({
 			cloud_name: this.configService.get('CLOUDINARY_CLOUD_NAME'),
@@ -37,5 +40,21 @@ export class CloudinaryService {
 	public getFileUrl(publicId: string): string {
 		const url = cloudinary.url(publicId);
 		return url;
+	}
+
+	public async delete(publicId: string): Promise<boolean> {
+		try {
+			const result = (await cloudinary.uploader.destroy(
+				publicId,
+			)) as CloudinaryDeleteResponse;
+
+			return result.result === 'ok';
+		} catch (error) {
+			this.logger.error(
+				'Cloudinary Deletion Error:',
+				(error as UploadApiErrorResponse).message,
+			);
+			return false;
+		}
 	}
 }
