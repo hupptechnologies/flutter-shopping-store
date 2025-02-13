@@ -23,4 +23,10 @@ export class UserRepository {
 			email,
 		});
 	}
+
+	public async findOneById(id: number): Promise<User | null> {
+		return this.repository.findOneBy({
+			id,
+		});
+	}
 }

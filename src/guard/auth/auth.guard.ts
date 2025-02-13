@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { JWTPayload } from 'src/common/interface/jwt.interface';
 import { PUBLIC_KEY } from 'src/decorator/public/public.decorator';
+import { UserRepository } from 'src/module/user/user.repository';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 	constructor(
 		private reflector: Reflector,
 		private jwtService: JwtService,
+		private userRepository: UserRepository,
 	) {}
 
 	canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
@@ -21,13 +23,13 @@ export class AuthGuard implements CanActivate {
 			return true;
 		}
 
-		const { response, accessToken, refreshToken } = this.getTokensFromContext(context);
+		const { request, response, accessToken, refreshToken } = this.getTokensFromContext(context);
 
 		if (!accessToken && refreshToken) {
-			return this.refreshAccessToken(refreshToken, response);
+			return this.refreshAccessToken(refreshToken, response, request);
 		}
 
-		return this.verifyAccessToken(accessToken, refreshToken, response);
+		return this.verifyAccessToken(accessToken, refreshToken, response, request);
 	}
 
 	private isPublicRoute(context: ExecutionContext): boolean {
@@ -54,13 +56,17 @@ export class AuthGuard implements CanActivate {
 		};
 	}
 
-	private refreshAccessToken(refreshToken: string, response: Response): boolean {
-		const { accessToken } = this.generateAccessTokenFromRefreshToken(refreshToken);
+	private refreshAccessToken(
+		refreshToken: string,
+		response: Response,
+		request: Request,
+	): Promise<boolean> {
+		const { accessToken, id } = this.generateAccessTokenFromRefreshToken(refreshToken);
 		response.cookie(KeyConstant.ACCESS_TOKEN, accessToken, {
 			httpOnly: true,
 			maxAge: KeyConstant.ACCESS_TOKEN_MAX_AGE,
 		});
-		return true;
+		return this.findByIdUser(id, request);
 	}
 
 	private generateAccessTokenFromRefreshToken(token: string): {
@@ -87,20 +93,32 @@ export class AuthGuard implements CanActivate {
 		accessToken: string,
 		refreshToken: string,
 		response: Response,
-	): boolean {
+		request: Request,
+	): Promise<boolean> {
 		if (!accessToken) {
 			throw new UnauthorizedException();
 		}
 
 		try {
 			const { id } = this.jwtService.verify<JWTPayload>(accessToken);
-			return id ? true : false;
+			return this.findByIdUser(id, request);
 		} catch (error) {
 			const err = error as Error;
 			if (err.name === 'TokenExpiredError' && refreshToken) {
-				return this.refreshAccessToken(refreshToken, response);
+				return this.refreshAccessToken(refreshToken, response, request);
 			}
 			throw new UnauthorizedException();
 		}
+	}
+
+	private async findByIdUser(id: number, request: Request): Promise<boolean> {
+		const user = await this.userRepository.findOneById(id);
+
+		if (!user) {
+			throw new UnauthorizedException();
+		}
+
+		request.user = user;
+		return true;
 	}
 }
