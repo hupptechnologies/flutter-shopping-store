@@ -1,4 +1,5 @@
 import { IsEmail, IsMobilePhone, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsUniqueEmail } from 'src/decorator/isUniqueEmail/is-unique-email.decorator';
 
 export class CreateUserDto {
 	@IsString()
@@ -9,12 +10,9 @@ export class CreateUserDto {
 	@IsNotEmpty()
 	public lastName: string;
 
-	@IsString()
-	@IsNotEmpty()
-	public userName: string;
-
 	@IsEmail()
 	@IsNotEmpty()
+	@IsUniqueEmail()
 	public email: string;
 
 	@IsString()

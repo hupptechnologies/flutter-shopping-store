@@ -30,14 +30,6 @@ export class User extends BaseEntity {
 		type: 'varchar',
 		length: 255,
 		unique: true,
-		default: null,
-	})
-	public userName: string;
-
-	@Column({
-		type: 'varchar',
-		length: 255,
-		unique: true,
 	})
 	public email: string;
 

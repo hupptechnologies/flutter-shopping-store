@@ -34,7 +34,6 @@ export class AuthService {
 
 		const playload: JWTPayload = {
 			id: existingUser.id,
-			userName: existingUser.userName,
 			email: existingUser.email,
 		};
 
