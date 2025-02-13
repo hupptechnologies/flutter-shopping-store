@@ -13,4 +13,6 @@ export class KeyConstant {
 	static readonly REFRESH_TOKEN_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
 
 	static readonly IS_UNIQUE_EMAIL = 'IsUniqueEmail';
+
+	static readonly ID = 'id';
 }

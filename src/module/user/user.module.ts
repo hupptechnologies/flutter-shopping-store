@@ -6,18 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { UserRepository } from './user.repository';
 import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
-import { IsUniqueEmailConstraint } from 'src/decorator/isUniqueEmail/is-unique-email.decorator';
 
 @Module({
 	imports: [TypeOrmModule.forFeature([User])],
 	controllers: [UserController],
-	providers: [
-		UserService,
-		BcryptService,
-		UserRepository,
-		CloudinaryService,
-		IsUniqueEmailConstraint,
-	],
+	providers: [UserService, BcryptService, UserRepository, CloudinaryService],
 	exports: [UserService, BcryptService, UserRepository],
 })
 export class UserModule {}

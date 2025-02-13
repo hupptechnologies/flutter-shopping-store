@@ -1,4 +1,13 @@
-import { Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Param,
+	ParseIntPipe,
+	Patch,
+	Post,
+	UploadedFile,
+	UseInterceptors,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { ApiResponse } from 'src/common/interface/api-reponse.interface';
@@ -7,6 +16,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { KeyConstant } from 'src/common/constant/key.constant';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller(URLConstant.USER)
 export class UserController {
@@ -22,6 +32,20 @@ export class UserController {
 		return {
 			data: createUser,
 			message: MessageConstant.USER_CREATED_SUCCESS,
+		};
+	}
+
+	@Patch(URLConstant.ROUTER_ID)
+	@UseInterceptors(FileInterceptor(KeyConstant.IMAGE))
+	async update(
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
+		@Body() updateUserDto: UpdateUserDto,
+		@UploadedFile() file: Express.Multer.File,
+	): Promise<ApiResponse<User>> {
+		const updateUser = await this.userService.update(id, updateUserDto, file);
+		return {
+			data: updateUser,
+			message: MessageConstant.USER_UPDATE_SUCCESS,
 		};
 	}
 }
