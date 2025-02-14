@@ -49,7 +49,4 @@ export class CreateAddressDto {
 	})
 	@IsOptional()
 	public receiverPhone?: string;
-
-	@IsOptional()
-	public isDefault?: boolean;
 }

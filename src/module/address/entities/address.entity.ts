@@ -69,7 +69,7 @@ export class Address extends BaseEntity {
 
 	@Column({
 		type: 'boolean',
-		default: false,
+		default: true,
 	})
 	public isDefault: boolean;
 
@@ -77,7 +77,7 @@ export class Address extends BaseEntity {
 	@ManyToOne(() => User, (user) => user.addresses, {
 		onDelete: 'CASCADE',
 	})
-	public user: User;
+	public user?: User;
 
 	@CreateDateColumn()
 	public createdAt: Date;
