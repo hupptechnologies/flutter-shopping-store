@@ -9,6 +9,7 @@ import { User } from '../user/entities/user.entity';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
+import { AuthUserId } from 'src/decorator/auth-user-id/auth-user-id.decorator';
 
 @Controller(URLConstant.ADDRESS)
 export class AddressController {
@@ -30,9 +31,9 @@ export class AddressController {
 	async update(
 		@Param(KeyConstant.ID, ParseIntPipe) id: number,
 		@Body() updataAddressDto: UpdateAddressDto,
-		@AuthUser() authUser: User,
+		@AuthUserId() userId: number,
 	): APIResponse<Address> {
-		const address = await this.addressService.update(id, updataAddressDto, authUser.id);
+		const address = await this.addressService.update(id, updataAddressDto, userId);
 		return {
 			data: address,
 			message: MessageConstant.ADDRESS_UPDATE_SUCCESS,
@@ -42,9 +43,9 @@ export class AddressController {
 	@Get(URLConstant.ROUTER_ID)
 	async findById(
 		@Param(KeyConstant.ID, ParseIntPipe) id: number,
-		@AuthUser() authUser: User,
+		@AuthUserId() userId: number,
 	): APIResponse<Address> {
-		const address = await this.addressService.findById(id, authUser.id);
+		const address = await this.addressService.findById(id, userId);
 		return {
 			data: address,
 			message: MessageConstant.ADDRESS_FOUND_SUCCESS,
@@ -52,8 +53,8 @@ export class AddressController {
 	}
 
 	@Get()
-	async findAll(@AuthUser() authUser: User): APIResponse<Array<Address>> {
-		const addresses = await this.addressService.findAll(authUser.id);
+	async findAll(@AuthUserId() userId: number): APIResponse<Array<Address>> {
+		const addresses = await this.addressService.findAll(userId);
 		return {
 			data: addresses,
 			message: MessageConstant.ADDRESSES_FETCHED_SUCCESS,
@@ -63,9 +64,9 @@ export class AddressController {
 	@Delete(URLConstant.ROUTER_ID)
 	async delete(
 		@Param(KeyConstant.ID, ParseIntPipe) id: number,
-		@AuthUser() authUser: User,
+		@AuthUserId() userId: number,
 	): APIResponse<boolean> {
-		const isDeleted = await this.addressService.delete(id, authUser.id);
+		const isDeleted = await this.addressService.delete(id, userId);
 		return {
 			data: isDeleted,
 			message: MessageConstant.ADDRESS_DELETED_SUCCESS,
