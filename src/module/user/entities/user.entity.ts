@@ -1,10 +1,12 @@
 import { Exclude } from 'class-transformer';
+import { Address } from 'src/module/address/entities/address.entity';
 import {
 	BaseEntity,
 	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
 	Entity,
+	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
@@ -53,6 +55,11 @@ export class User extends BaseEntity {
 		default: null,
 	})
 	public image?: string | null;
+
+	@OneToMany(() => Address, (address) => address.user, {
+		cascade: true,
+	})
+	public addresses: Address[];
 
 	@CreateDateColumn()
 	public createdAt: Date;

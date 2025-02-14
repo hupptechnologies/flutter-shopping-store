@@ -5,4 +5,6 @@ export class URLConstant {
 
 	static readonly AUTH = 'auth';
 	static readonly LOGIN = 'login';
+
+	static readonly ADDRESS = 'address';
 }
