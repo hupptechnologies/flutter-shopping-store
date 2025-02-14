@@ -27,7 +27,7 @@ export class AddressService {
 		updataAddressDto: UpdateAddressDto,
 		userId: number,
 	): Promise<Address> {
-		const address = await this.addressRepository.findById(id);
+		const address = await this.addressRepository.findById(id, userId);
 
 		if (!address) {
 			throw new NotFoundException(MessageConstant.ADDRESS_NOT_FOUND);
@@ -40,8 +40,8 @@ export class AddressService {
 		return this.addressRepository.update(address, updataAddressDto);
 	}
 
-	public async findById(id: number): Promise<Address> {
-		const address = await this.addressRepository.findById(id);
+	public async findById(id: number, userId: number): Promise<Address> {
+		const address = await this.addressRepository.findById(id, userId);
 
 		if (!address) {
 			throw new NotFoundException(MessageConstant.ADDRESS_NOT_FOUND);
@@ -50,8 +50,19 @@ export class AddressService {
 		return address;
 	}
 
-	public async findAll(): Promise<Array<Address>> {
-		const addresses = await this.addressRepository.findAll();
+	public async findAll(userId: number): Promise<Array<Address>> {
+		const addresses = await this.addressRepository.findAll(userId);
 		return addresses;
+	}
+
+	public async delete(id: number, userId: number): Promise<boolean> {
+		const address = await this.addressRepository.findById(id, userId);
+
+		if (!address) {
+			throw new NotFoundException(MessageConstant.ADDRESS_NOT_FOUND);
+		}
+
+		const isDeleted = await this.addressRepository.delete(address);
+		return isDeleted;
 	}
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { CreateAddressDto } from './dto/create-address.dto';
@@ -40,8 +40,11 @@ export class AddressController {
 	}
 
 	@Get(URLConstant.ROUTER_ID)
-	async findById(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<Address> {
-		const address = await this.addressService.findById(id);
+	async findById(
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
+		@AuthUser() authUser: User,
+	): APIResponse<Address> {
+		const address = await this.addressService.findById(id, authUser.id);
 		return {
 			data: address,
 			message: MessageConstant.ADDRESS_FOUND_SUCCESS,
@@ -49,11 +52,23 @@ export class AddressController {
 	}
 
 	@Get()
-	async findAll(): APIResponse<Array<Address>> {
-		const addresses = await this.addressService.findAll();
+	async findAll(@AuthUser() authUser: User): APIResponse<Array<Address>> {
+		const addresses = await this.addressService.findAll(authUser.id);
 		return {
 			data: addresses,
 			message: MessageConstant.ADDRESSES_FETCHED_SUCCESS,
+		};
+	}
+
+	@Delete(URLConstant.ROUTER_ID)
+	async delete(
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
+		@AuthUser() authUser: User,
+	): APIResponse<boolean> {
+		const isDeleted = await this.addressService.delete(id, authUser.id);
+		return {
+			data: isDeleted,
+			message: MessageConstant.ADDRESS_DELETED_SUCCESS,
 		};
 	}
 }

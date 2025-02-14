@@ -35,9 +35,14 @@ export class AddressRepository {
 		return !!affected;
 	}
 
-	async findById(id: number): Promise<Address | null> {
-		return this.repository.findOneBy({
-			id,
+	async findById(id: number, userId: number): Promise<Address | null> {
+		return this.repository.findOne({
+			where: {
+				id,
+				user: {
+					id: userId,
+				},
+			},
 		});
 	}
 
@@ -46,7 +51,23 @@ export class AddressRepository {
 		return this.repository.save(address);
 	}
 
-	async findAll(): Promise<Array<Address>> {
-		return this.repository.find();
+	async findAll(userId: number): Promise<Array<Address>> {
+		return this.repository.find({
+			where: {
+				user: {
+					id: userId,
+				},
+			},
+		});
+	}
+
+	async delete(address: Address, isSoftDetele = true): Promise<boolean> {
+		if (isSoftDetele) {
+			const deleted = await address.softRemove();
+			return !!deleted;
+		}
+
+		const deleted = await address.remove();
+		return !!deleted;
 	}
 }
