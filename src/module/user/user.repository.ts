@@ -51,10 +51,10 @@ export class UserRepository {
 
 	public async delete(user: User, isSoftDetele = true): Promise<boolean> {
 		if (isSoftDetele) {
-			const deleteUser = await this.repository.softRemove(user);
+			const deleteUser = await user.softRemove();
 			return !!deleteUser;
 		}
-		const deleteUser = await this.repository.remove(user);
+		const deleteUser = await user.remove();
 		return !!deleteUser;
 	}
 }
