@@ -44,7 +44,7 @@ export class UserService {
 			subject: MailSubjectConstant.REGISTRATION,
 			template: TemplateConstant.REGISTRATION,
 			context: {
-				name: user.firstName,
+				username: user.fullname,
 			},
 		});
 

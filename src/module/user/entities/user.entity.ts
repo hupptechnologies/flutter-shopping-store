@@ -69,4 +69,8 @@ export class User extends BaseEntity {
 
 	@DeleteDateColumn()
 	public deletedAt: Date | null;
+
+	public get fullname(): string {
+		return `${this.firstName} ${this.lastName}`;
+	}
 }
