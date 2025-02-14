@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>OTP Verification</title>
+	<style>
+		.container {
+			font-family: Arial, sans-serif;
+			max-width: 400px;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			text-align: center;
+		}
+
+		.otp {
+			font-size: 24px;
+			font-weight: bold;
+			color: #333;
+		}
+
+		.footer {
+			font-size: 12px;
+			color: #777;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h2>Your OTP Code</h2>
+		<p>Use the following One-Time Password (OTP) to complete your verification:</p>
+		<p class="otp">{{otp}}</p>
+		<p>This OTP will expire in 5 minutes.</p>
+		<div class="footer">If you didn't request this, please ignore this email.</div>
+	</div>
+</body>
+
+</html>

@@ -9,12 +9,17 @@ import { AuthGuard } from 'src/guard/auth/auth.guard';
 import { UserModule } from '../user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../user/entities/user.entity';
+import { Otp } from './entities/otp.entity';
+import { OtpRepository } from './otp.repository';
+import { OtpUtils } from 'src/common/utils/otp.utils';
+import { MailModule } from 'src/services/mail/mail.module';
 
 @Module({
 	imports: [
 		ConfigModule,
-		TypeOrmModule.forFeature([User]),
+		TypeOrmModule.forFeature([User, Otp]),
 		UserModule,
+		MailModule,
 		JwtModule.registerAsync({
 			imports: [ConfigModule],
 			useClass: JWTConfigService,
@@ -23,6 +28,8 @@ import { User } from '../user/entities/user.entity';
 	controllers: [AuthController],
 	providers: [
 		AuthService,
+		OtpRepository,
+		OtpUtils,
 		{
 			provide: APP_GUARD,
 			useClass: AuthGuard,

@@ -1,5 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { Address } from 'src/module/address/entities/address.entity';
+import { Otp } from 'src/module/auth/entities/otp.entity';
 import {
 	BaseEntity,
 	Column,
@@ -7,6 +8,7 @@ import {
 	DeleteDateColumn,
 	Entity,
 	OneToMany,
+	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
@@ -60,6 +62,11 @@ export class User extends BaseEntity {
 		cascade: true,
 	})
 	public addresses: Address[];
+
+	@OneToOne(() => Otp, (otp) => otp.user, {
+		cascade: true,
+	})
+	public otp: Otp;
 
 	@CreateDateColumn()
 	public createdAt: Date;

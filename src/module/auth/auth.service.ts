@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { Response } from 'express';
 import { User } from '../user/entities/user.entity';
@@ -7,6 +7,12 @@ import { BcryptService } from 'src/services/bcrypt/bcrypt.service';
 import { JWTPayload } from 'src/common/interface/jwt.interface';
 import { JwtService } from '@nestjs/jwt';
 import { KeyConstant } from 'src/common/constant/key.constant';
+import { OtpRepository } from './otp.repository';
+import { MessageConstant } from 'src/common/constant/message.constant';
+import { OtpUtils } from 'src/common/utils/otp.utils';
+import { MailService } from 'src/services/mail/mail.service';
+import { MailSubjectConstant } from 'src/common/constant/mail-subject.constant';
+import { TemplateConstant } from 'src/common/constant/template.constant';
 
 @Injectable()
 export class AuthService {
@@ -14,6 +20,9 @@ export class AuthService {
 		private readonly userRepository: UserRepository,
 		private readonly bcryptService: BcryptService,
 		private readonly jwtService: JwtService,
+		private readonly otpRepository: OtpRepository,
+		private readonly otpUtils: OtpUtils,
+		private readonly mailService: MailService,
 	) {}
 
 	public async login(loginAuthDto: LoginAuthDto, res: Response): Promise<User> {
@@ -52,5 +61,28 @@ export class AuthService {
 		});
 
 		return existingUser;
+	}
+
+	public async forgetPassword(email: string): Promise<string> {
+		const user = await this.userRepository.findOnByEmail(email);
+
+		if (!user) {
+			throw new NotFoundException(MessageConstant.USER_NOT_FOUND);
+		}
+
+		const otp = this.otpUtils.generateTimeBasedOTP();
+		const expiresAt = Date.now() + 5 * 60 * 1000;
+
+		await this.otpRepository.create(user, otp, expiresAt);
+
+		void this.mailService.send({
+			to: user.email,
+			subject: MailSubjectConstant.OTP,
+			template: TemplateConstant.OTP,
+			context: {
+				otp,
+			},
+		});
+		return email;
 	}
 }

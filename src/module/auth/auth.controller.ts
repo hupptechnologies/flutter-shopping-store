@@ -5,9 +5,10 @@ import { LoginAuthDto } from './dto/login-auth.dto';
 import { Public } from 'src/decorator/public/public.decorator';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { Response } from 'express';
-import { ApiResponse } from 'src/common/interface/api-reponse.interface';
 import { User } from '../user/entities/user.entity';
 import { CommonConstant } from 'src/common/constant/common.constant';
+import { ForgetPasswordDto } from './dto/forget-password.dto';
+import { APIResponse } from 'src/common/types/api-response.type';
 
 @Controller(URLConstant.AUTH)
 export class AuthController {
@@ -19,11 +20,21 @@ export class AuthController {
 	async login(
 		@Body() loginAuthDto: LoginAuthDto,
 		@Res(CommonConstant.responseDecoratorOptions) res: Response,
-	): Promise<ApiResponse<User>> {
+	): APIResponse<User> {
 		const existingUser = await this.authService.login(loginAuthDto, res);
 		return {
 			data: existingUser,
 			message: MessageConstant.LOGIN_SUCCESS,
+		};
+	}
+
+	@Public()
+	@Post(URLConstant.FORGET_PASSWORD)
+	async forgetPassword(@Body() forgetPasswordDto: ForgetPasswordDto): APIResponse<string> {
+		const email = await this.authService.forgetPassword(forgetPasswordDto.email);
+		return {
+			data: email,
+			message: MessageConstant.OTP_SUCCESS,
 		};
 	}
 }
