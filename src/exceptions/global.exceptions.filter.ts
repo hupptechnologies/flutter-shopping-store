@@ -11,10 +11,10 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { KeyConstant } from 'src/common/constant/key.constant';
-import { MessageConstant } from 'src/common/constant/message.constant';
 import { ExceptionType } from 'src/common/interface/exception.interface';
 import { QueryFailedError } from 'typeorm';
 import { ValidationException } from './validation.exception';
+import { ErrorMsgConstant } from 'src/common/constant/error-msg.constant';
 
 @Catch()
 export class GlobalExceptionsFilter implements ExceptionFilter {
@@ -57,7 +57,7 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
 				response.clearCookie(KeyConstant.REFRESH_TOKEN);
 				return {
 					status: HttpStatus.UNAUTHORIZED,
-					message: MessageConstant.UNAUTHORIZED,
+					message: ErrorMsgConstant.UNAUTHORIZED,
 				};
 			case exception instanceof NotFoundException:
 			case exception instanceof BadRequestException:
@@ -71,12 +71,12 @@ export class GlobalExceptionsFilter implements ExceptionFilter {
 			case exception instanceof HttpException:
 				return {
 					status: HttpStatus.BAD_REQUEST,
-					message: exception.message ?? MessageConstant.DATABASE_ERROR,
+					message: exception.message ?? ErrorMsgConstant.DATABASE_ERROR,
 				};
 			default:
 				return {
 					status: HttpStatus.INTERNAL_SERVER_ERROR,
-					message: MessageConstant.SOMETHING_WRONG,
+					message: ErrorMsgConstant.SOMETHING_WRONG,
 				};
 		}
 	}
