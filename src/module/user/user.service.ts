@@ -94,4 +94,20 @@ export class UserService {
 
 		return user;
 	}
+
+	public async delete(id: number): Promise<boolean> {
+		const user = await this.userRepository.findOneById(id);
+
+		if (!user) {
+			throw new NotFoundException(MessageConstant.USER_NOT_FOUND);
+		}
+
+		const isDeleted = await this.userRepository.delete(id);
+
+		if (isDeleted && user.image) {
+			void this.cloudinaryService.delete(user.image);
+		}
+
+		return isDeleted;
+	}
 }

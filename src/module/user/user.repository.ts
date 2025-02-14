@@ -44,4 +44,13 @@ export class UserRepository {
 		Object.assign(user, updateUserDto);
 		return this.repository.save(user);
 	}
+
+	public async delete(id: number, isSoftDetele = true): Promise<boolean> {
+		if (isSoftDetele) {
+			const { affected } = await this.repository.softDelete(id);
+			return !!affected;
+		}
+		const { affected } = await this.repository.delete(id);
+		return !!affected;
+	}
 }

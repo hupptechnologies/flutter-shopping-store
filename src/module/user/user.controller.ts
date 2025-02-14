@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Param,
 	ParseIntPipe,
@@ -58,6 +59,15 @@ export class UserController {
 		return {
 			data: user,
 			message: MessageConstant.USER_FOUND_SUCCESS,
+		};
+	}
+
+	@Delete(URLConstant.ROUTER_ID)
+	async delete(@Param(KeyConstant.ID, ParseIntPipe) id: number): Promise<ApiResponse<boolean>> {
+		const isDeleted = await this.userService.delete(id);
+		return {
+			data: isDeleted,
+			message: MessageConstant.USER_DELETED_SUCCESS,
 		};
 	}
 }
