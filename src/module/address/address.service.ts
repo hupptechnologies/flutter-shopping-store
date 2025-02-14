@@ -39,4 +39,14 @@ export class AddressService {
 
 		return this.addressRepository.update(address, updataAddressDto);
 	}
+
+	public async findById(id: number): Promise<Address> {
+		const address = await this.addressRepository.findById(id);
+
+		if (!address) {
+			throw new NotFoundException(MessageConstant.ADDRESS_NOT_FOUND);
+		}
+
+		return address;
+	}
 }

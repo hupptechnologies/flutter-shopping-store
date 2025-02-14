@@ -1,14 +1,14 @@
-import { Body, Controller, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { AddressService } from './address.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { Address } from './entities/address.entity';
 import { MessageConstant } from 'src/common/constant/message.constant';
-import { ApiResponse } from 'src/common/interface/api-reponse.interface';
 import { AuthUser } from 'src/decorator/auth-user/auth-user.decorator';
 import { User } from '../user/entities/user.entity';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { KeyConstant } from 'src/common/constant/key.constant';
+import { APIResponse } from 'src/common/types/api-response.type';
 
 @Controller(URLConstant.ADDRESS)
 export class AddressController {
@@ -18,7 +18,7 @@ export class AddressController {
 	async create(
 		@Body() createAddressDto: CreateAddressDto,
 		@AuthUser() authUser: User,
-	): Promise<ApiResponse<Address>> {
+	): APIResponse<Address> {
 		const address = await this.addressService.create(createAddressDto, authUser);
 		return {
 			data: address,
@@ -31,11 +31,20 @@ export class AddressController {
 		@Param(KeyConstant.ID, ParseIntPipe) id: number,
 		@Body() updataAddressDto: UpdateAddressDto,
 		@AuthUser() authUser: User,
-	): Promise<ApiResponse<Address>> {
+	): APIResponse<Address> {
 		const address = await this.addressService.update(id, updataAddressDto, authUser.id);
 		return {
 			data: address,
 			message: MessageConstant.ADDRESS_UPDATE_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.ROUTER_ID)
+	async findById(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<Address> {
+		const address = await this.addressService.findById(id);
+		return {
+			data: address,
+			message: MessageConstant.ADDRESS_FOUND_SUCCESS,
 		};
 	}
 }

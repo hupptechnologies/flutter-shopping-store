@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { URLConstant } from 'src/common/constant/url.constant';
-import { ApiResponse } from 'src/common/interface/api-reponse.interface';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { MessageConstant } from 'src/common/constant/message.constant';
@@ -20,6 +19,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from 'src/decorator/public/public.decorator';
+import { APIResponse } from 'src/common/types/api-response.type';
 
 @Controller(URLConstant.USER)
 export class UserController {
@@ -31,7 +31,7 @@ export class UserController {
 	async create(
 		@Body() createUserDto: CreateUserDto,
 		@UploadedFile() file: Express.Multer.File,
-	): Promise<ApiResponse<User>> {
+	): APIResponse<User> {
 		const createUser = await this.userService.create(createUserDto, file);
 		return {
 			data: createUser,
@@ -45,7 +45,7 @@ export class UserController {
 		@Param(KeyConstant.ID, ParseIntPipe) id: number,
 		@Body() updateUserDto: UpdateUserDto,
 		@UploadedFile() file: Express.Multer.File,
-	): Promise<ApiResponse<User>> {
+	): APIResponse<User> {
 		const updateUser = await this.userService.update(id, updateUserDto, file);
 		return {
 			data: updateUser,
@@ -54,7 +54,7 @@ export class UserController {
 	}
 
 	@Get(URLConstant.ROUTER_ID)
-	async findById(@Param(KeyConstant.ID, ParseIntPipe) id: number): Promise<ApiResponse<User>> {
+	async findById(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<User> {
 		const user = await this.userService.findById(id);
 		return {
 			data: user,
@@ -63,7 +63,7 @@ export class UserController {
 	}
 
 	@Delete(URLConstant.ROUTER_ID)
-	async delete(@Param(KeyConstant.ID, ParseIntPipe) id: number): Promise<ApiResponse<boolean>> {
+	async delete(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<boolean> {
 		const isDeleted = await this.userService.delete(id);
 		return {
 			data: isDeleted,

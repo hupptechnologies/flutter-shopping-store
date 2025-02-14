@@ -11,4 +11,5 @@ export class MessageConstant {
 	static readonly ADDRESS_CREATED_SUCCESS = 'Address created successfully';
 	static readonly ADDRESS_UPDATE_SUCCESS = 'Address updated successfully';
 	static readonly ADDRESS_NOT_FOUND = 'Address not found';
+	static readonly ADDRESS_FOUND_SUCCESS = 'Address found successfully';
 }
