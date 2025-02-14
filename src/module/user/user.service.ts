@@ -8,6 +8,9 @@ import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { ValidationException } from 'src/exceptions/validation.exception';
+import { MailService } from 'src/services/mail/mail.service';
+import { MailSubjectConstant } from 'src/common/constant/mail-subject.constant';
+import { TemplateConstant } from 'src/common/constant/template.constant';
 
 @Loggable()
 @Injectable()
@@ -16,6 +19,7 @@ export class UserService {
 		private readonly bcryptService: BcryptService,
 		private readonly userRepository: UserRepository,
 		private readonly cloudinaryService: CloudinaryService,
+		private readonly mailService: MailService,
 	) {}
 
 	public async create(createUserDto: CreateUserDto, file: Express.Multer.File): Promise<User> {
@@ -34,6 +38,15 @@ export class UserService {
 		createUserDto.image = uploadFile?.public_id;
 
 		const user = await this.userRepository.create(createUserDto);
+
+		await this.mailService.send({
+			to: user.email,
+			subject: MailSubjectConstant.REGISTRATION,
+			template: TemplateConstant.REGISTRATION,
+			context: {
+				name: user.firstName,
+			},
+		});
 
 		user.image = uploadFile?.url;
 		return user;
