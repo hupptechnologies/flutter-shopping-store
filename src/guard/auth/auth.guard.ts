@@ -1,19 +1,22 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Request, Response } from 'express';
 import { Observable } from 'rxjs';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { JWTPayload } from 'src/common/interface/jwt.interface';
 import { PUBLIC_KEY } from 'src/decorator/public/public.decorator';
-import { UserRepository } from 'src/module/user/user.repository';
+import { User } from 'src/module/user/entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 	constructor(
 		private reflector: Reflector,
 		private jwtService: JwtService,
-		private userRepository: UserRepository,
+		@InjectRepository(User)
+		private readonly repository: Repository<User>,
 	) {}
 
 	canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
@@ -111,7 +114,9 @@ export class AuthGuard implements CanActivate {
 	}
 
 	private async findByIdUser(id: number, request: Request): Promise<boolean> {
-		const user = await this.userRepository.findOneById(id);
+		const user = await this.repository.findOneBy({
+			id,
+		});
 
 		if (!user) {
 			throw new UnauthorizedException();
