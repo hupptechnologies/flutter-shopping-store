@@ -96,13 +96,13 @@ export class UserService {
 	}
 
 	public async delete(id: number): Promise<boolean> {
-		const user = await this.userRepository.findOneById(id);
+		const user = await this.userRepository.findOneById(id, ['addresses']);
 
 		if (!user) {
 			throw new NotFoundException(MessageConstant.USER_NOT_FOUND);
 		}
 
-		const isDeleted = await this.userRepository.delete(id);
+		const isDeleted = await this.userRepository.delete(user);
 
 		if (isDeleted && user.image) {
 			void this.cloudinaryService.delete(user.image);

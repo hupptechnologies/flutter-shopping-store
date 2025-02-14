@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { RelationKeys } from 'src/common/types/relations.type';
 
 @Loggable()
 @Injectable()
@@ -34,9 +35,12 @@ export class UserRepository {
 		});
 	}
 
-	public async findOneById(id: number): Promise<User | null> {
-		return this.repository.findOneBy({
-			id,
+	public async findOneById(id: number, relations?: RelationKeys<User>): Promise<User | null> {
+		return this.repository.findOne({
+			where: {
+				id,
+			},
+			relations,
 		});
 	}
 
@@ -45,12 +49,12 @@ export class UserRepository {
 		return this.repository.save(user);
 	}
 
-	public async delete(id: number, isSoftDetele = true): Promise<boolean> {
+	public async delete(user: User, isSoftDetele = true): Promise<boolean> {
 		if (isSoftDetele) {
-			const { affected } = await this.repository.softDelete(id);
-			return !!affected;
+			const deleteUser = await this.repository.softRemove(user);
+			return !!deleteUser;
 		}
-		const { affected } = await this.repository.delete(id);
-		return !!affected;
+		const deleteUser = await this.repository.remove(user);
+		return !!deleteUser;
 	}
 }
