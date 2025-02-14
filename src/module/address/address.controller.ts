@@ -47,4 +47,13 @@ export class AddressController {
 			message: MessageConstant.ADDRESS_FOUND_SUCCESS,
 		};
 	}
+
+	@Get()
+	async findAll(): APIResponse<Array<Address>> {
+		const addresses = await this.addressService.findAll();
+		return {
+			data: addresses,
+			message: MessageConstant.ADDRESSES_FETCHED_SUCCESS,
+		};
+	}
 }

@@ -45,4 +45,8 @@ export class AddressRepository {
 		Object.assign(address, updateAddressDto);
 		return this.repository.save(address);
 	}
+
+	async findAll(): Promise<Array<Address>> {
+		return this.repository.find();
+	}
 }

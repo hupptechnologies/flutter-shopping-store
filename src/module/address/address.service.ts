@@ -49,4 +49,9 @@ export class AddressService {
 
 		return address;
 	}
+
+	public async findAll(): Promise<Array<Address>> {
+		const addresses = await this.addressRepository.findAll();
+		return addresses;
+	}
 }
