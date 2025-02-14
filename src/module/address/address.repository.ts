@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { User } from '../user/entities/user.entity';
+import { UpdateAddressDto } from './dto/update-address.dto';
 
 @Loggable()
 @Injectable()
@@ -32,5 +33,16 @@ export class AddressRepository {
 			},
 		);
 		return !!affected;
+	}
+
+	async findById(id: number): Promise<Address | null> {
+		return this.repository.findOneBy({
+			id,
+		});
+	}
+
+	async update(address: Address, updateAddressDto: UpdateAddressDto): Promise<Address> {
+		Object.assign(address, updateAddressDto);
+		return this.repository.save(address);
 	}
 }

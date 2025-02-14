@@ -9,4 +9,6 @@ export class MessageConstant {
 	static readonly USER_DELETED_SUCCESS = 'User deleted successfully';
 
 	static readonly ADDRESS_CREATED_SUCCESS = 'Address created successfully';
+	static readonly ADDRESS_UPDATE_SUCCESS = 'Address updated successfully';
+	static readonly ADDRESS_NOT_FOUND = 'Address not found';
 }
