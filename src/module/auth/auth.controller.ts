@@ -12,11 +12,11 @@ import { APIResponse } from 'src/common/types/api-response.type';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 
+@Public()
 @Controller(URLConstant.AUTH)
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
-	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.LOGIN)
 	async login(
@@ -30,7 +30,6 @@ export class AuthController {
 		};
 	}
 
-	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.FORGET_PASSWORD)
 	async forgetPassword(@Body() forgetPasswordDto: ForgetPasswordDto): APIResponse<string> {
@@ -41,7 +40,6 @@ export class AuthController {
 		};
 	}
 
-	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.VERIFY_OTP)
 	async verifyOtp(@Body() verifyOtpDto: VerifyOtpDto): APIResponse<VerifyOtpDto> {
@@ -52,7 +50,6 @@ export class AuthController {
 		};
 	}
 
-	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.RESET_PASSWORD)
 	async restPassword(@Body() resetPasswordDto: ResetPasswordDto): APIResponse<boolean> {
