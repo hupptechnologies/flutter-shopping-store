@@ -163,4 +163,10 @@ export class AuthService {
 
 		return true;
 	}
+
+	public logout(res: Response): boolean {
+		res.clearCookie(KeyConstant.ACCESS_TOKEN);
+		res.clearCookie(KeyConstant.REFRESH_TOKEN);
+		return true;
+	}
 }

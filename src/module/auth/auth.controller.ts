@@ -11,12 +11,13 @@ import { ForgetPasswordDto } from './dto/forget-password.dto';
 import { APIResponse } from 'src/common/types/api-response.type';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { ApiResponse } from 'src/common/interface/api-reponse.interface';
 
-@Public()
 @Controller(URLConstant.AUTH)
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
+	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.LOGIN)
 	async login(
@@ -30,6 +31,7 @@ export class AuthController {
 		};
 	}
 
+	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.FORGET_PASSWORD)
 	async forgetPassword(@Body() forgetPasswordDto: ForgetPasswordDto): APIResponse<string> {
@@ -40,6 +42,7 @@ export class AuthController {
 		};
 	}
 
+	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.VERIFY_OTP)
 	async verifyOtp(@Body() verifyOtpDto: VerifyOtpDto): APIResponse<VerifyOtpDto> {
@@ -50,6 +53,7 @@ export class AuthController {
 		};
 	}
 
+	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.RESET_PASSWORD)
 	async restPassword(@Body() resetPasswordDto: ResetPasswordDto): APIResponse<boolean> {
@@ -57,6 +61,16 @@ export class AuthController {
 		return {
 			data: isResetPassword,
 			message: MessageConstant.PASSWORD_RESET_SUCCESS,
+		};
+	}
+
+	@HttpCode(HttpStatus.OK)
+	@Post(URLConstant.LOGOUT)
+	logout(@Res(CommonConstant.responseDecoratorOptions) res: Response): ApiResponse<boolean> {
+		const isLogOut = this.authService.logout(res);
+		return {
+			data: isLogOut,
+			message: MessageConstant.LOGOUT_SUCCESS,
 		};
 	}
 }

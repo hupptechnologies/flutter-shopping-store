@@ -8,6 +8,7 @@ export abstract class URLConstant {
 	static readonly FORGET_PASSWORD = 'forget-password';
 	static readonly VERIFY_OTP = 'verify-otp';
 	static readonly RESET_PASSWORD = 'reset-password';
+	static readonly LOGOUT = 'logout';
 
 	static readonly ADDRESS = 'address';
 }
