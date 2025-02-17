@@ -1,4 +1,4 @@
-export class KeyConstant {
+export abstract class KeyConstant {
 	static readonly IMAGE = 'image';
 
 	static readonly ACCESS_TOKEN = 'accessToken';

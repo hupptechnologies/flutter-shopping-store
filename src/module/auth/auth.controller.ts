@@ -9,6 +9,7 @@ import { User } from '../user/entities/user.entity';
 import { CommonConstant } from 'src/common/constant/common.constant';
 import { ForgetPasswordDto } from './dto/forget-password.dto';
 import { APIResponse } from 'src/common/types/api-response.type';
+import { VerifyOtpDto } from './dto/verify-otp.dto';
 
 @Controller(URLConstant.AUTH)
 export class AuthController {
@@ -29,12 +30,24 @@ export class AuthController {
 	}
 
 	@Public()
+	@HttpCode(HttpStatus.OK)
 	@Post(URLConstant.FORGET_PASSWORD)
 	async forgetPassword(@Body() forgetPasswordDto: ForgetPasswordDto): APIResponse<string> {
 		const email = await this.authService.forgetPassword(forgetPasswordDto.email);
 		return {
 			data: email,
 			message: MessageConstant.OTP_SUCCESS,
+		};
+	}
+
+	@Public()
+	@HttpCode(HttpStatus.OK)
+	@Post(URLConstant.VERIFY_OTP)
+	async verifyOtp(@Body() verifyOtpDto: VerifyOtpDto): APIResponse<VerifyOtpDto> {
+		const verifyOtpRes = await this.authService.verifyOtp(verifyOtpDto);
+		return {
+			data: verifyOtpRes,
+			message: MessageConstant.OTP_VERIFIED_SUCCESS,
 		};
 	}
 }

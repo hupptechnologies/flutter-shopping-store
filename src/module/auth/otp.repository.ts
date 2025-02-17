@@ -18,7 +18,23 @@ export class OtpRepository {
 			user,
 			otp,
 			expiresAt,
+			isVerify: false,
 		});
 		return this.repository.save(otpRecord);
+	}
+
+	async findOne(userId: number): Promise<Otp | null> {
+		return this.repository.findOneBy({
+			userId,
+		});
+	}
+
+	async update(otpRecord: Otp): Promise<Otp> {
+		return this.repository.save(otpRecord);
+	}
+
+	async delete(otpRecord: Otp): Promise<boolean> {
+		const deleteRecord = await this.repository.remove(otpRecord);
+		return !!deleteRecord;
 	}
 }

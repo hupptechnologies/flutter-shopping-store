@@ -13,4 +13,8 @@ export class OtpUtils {
 		).join('');
 		return Number(otp);
 	}
+
+	generateOtpExpireAt(): number {
+		return Date.now() + 5 * 60 * 1000;
+	}
 }

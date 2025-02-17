@@ -13,6 +13,8 @@ import { OtpUtils } from 'src/common/utils/otp.utils';
 import { MailService } from 'src/services/mail/mail.service';
 import { MailSubjectConstant } from 'src/common/constant/mail-subject.constant';
 import { TemplateConstant } from 'src/common/constant/template.constant';
+import { VerifyOtpDto } from './dto/verify-otp.dto';
+import { ErrorMsgConstant } from 'src/common/constant/error-msg.constant';
 
 @Injectable()
 export class AuthService {
@@ -71,7 +73,7 @@ export class AuthService {
 		}
 
 		const otp = this.otpUtils.generateTimeBasedOTP();
-		const expiresAt = Date.now() + 5 * 60 * 1000;
+		const expiresAt = this.otpUtils.generateOtpExpireAt();
 
 		await this.otpRepository.create(user, otp, expiresAt);
 
@@ -84,5 +86,35 @@ export class AuthService {
 			},
 		});
 		return email;
+	}
+
+	public async verifyOtp(verifyOtpDto: VerifyOtpDto): Promise<VerifyOtpDto> {
+		const user = await this.userRepository.findOnByEmail(verifyOtpDto.email);
+
+		if (!user) {
+			throw new NotFoundException(MessageConstant.USER_NOT_FOUND);
+		}
+
+		const otpRecord = await this.otpRepository.findOne(user.id);
+		try {
+			if (!otpRecord || otpRecord.otp !== verifyOtpDto.otp) {
+				throw new NotFoundException(ErrorMsgConstant.INVALID_OTP);
+			}
+
+			if (Date.now() > otpRecord.expiresAt) {
+				throw new NotFoundException(ErrorMsgConstant.OTP_EXPIRED);
+			}
+
+			otpRecord.isVerify = true;
+			otpRecord.expiresAt = this.otpUtils.generateOtpExpireAt();
+			await this.otpRepository.update(otpRecord);
+
+			return verifyOtpDto;
+		} catch (error) {
+			if (otpRecord) {
+				await this.otpRepository.delete(otpRecord);
+			}
+			throw error;
+		}
 	}
 }
