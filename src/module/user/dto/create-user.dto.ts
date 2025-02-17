@@ -1,24 +1,27 @@
-import { IsEmail, IsMobilePhone, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsMobilePhone, IsOptional } from 'class-validator';
+import { ValidationMsgConstant } from 'src/common/constant/validation-msg.constant';
+import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
 
 export class CreateUserDto {
-	@IsString()
 	@IsNotEmpty()
 	public firstName: string;
 
-	@IsString()
 	@IsNotEmpty()
 	public lastName: string;
 
-	@IsEmail()
+	@IsEmail(undefined, {
+		message: ValidationMsgConstant.IS_EMAIL,
+	})
 	@IsNotEmpty()
 	public email: string;
 
-	@IsString()
 	@IsNotEmpty()
 	public password: string;
 
 	@IsOptional()
-	@IsMobilePhone()
+	@IsMobilePhone(undefined, undefined, {
+		message: ValidationMsgConstant.PHONE_NUMBER,
+	})
 	public mobileNumber?: string;
 
 	public image?: string;

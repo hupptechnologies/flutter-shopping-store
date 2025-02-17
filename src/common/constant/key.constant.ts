@@ -15,4 +15,6 @@ export abstract class KeyConstant {
 	static readonly IS_UNIQUE_EMAIL = 'IsUniqueEmail';
 
 	static readonly ID = 'id';
+
+	static readonly IS_NOT_EMPTY = 'IsNotEmpty';
 }

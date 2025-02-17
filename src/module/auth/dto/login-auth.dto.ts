@@ -1,13 +1,17 @@
-import { IsEmail, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
+import { IsEmail, IsStrongPassword } from 'class-validator';
+import { ValidationMsgConstant } from 'src/common/constant/validation-msg.constant';
+import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
 
 export class LoginAuthDto {
-	@IsString()
 	@IsNotEmpty()
-	@IsEmail()
+	@IsEmail(undefined, {
+		message: ValidationMsgConstant.IS_EMAIL,
+	})
 	public email: string;
 
-	@IsString()
 	@IsNotEmpty()
-	@IsStrongPassword()
+	@IsStrongPassword(undefined, {
+		message: ValidationMsgConstant.IS_STRONG_PASSWORD,
+	})
 	public password: string;
 }
