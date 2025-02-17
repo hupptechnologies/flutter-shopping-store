@@ -5,4 +5,6 @@ export abstract class ErrorMsgConstant {
 	static readonly INVALID_PHONE_NUMBER = 'Invalid phone number';
 	static readonly INVALID_OTP = 'Invalid OTP';
 	static readonly OTP_EXPIRED = 'OTP expired';
+	static readonly OTP_NOT_VERIFIED: 'OTP has not been verified. Please verify your OTP first.';
+	static readonly SAME_PASSWORD_NOT_ALLOWED: 'You cannot use your previous password as your new password.';
 }

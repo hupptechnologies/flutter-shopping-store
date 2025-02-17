@@ -1,7 +1,8 @@
 export abstract class MessageConstant {
 	static readonly LOGIN_SUCCESS = 'Logged in successfully';
 	static readonly OTP_SUCCESS = 'Otp send successfully';
-	static readonly OTP_VERIFIED_SUCCESS = 'OTP verified successfully!';
+	static readonly OTP_VERIFIED_SUCCESS = 'OTP verified successfully';
+	static readonly PASSWORD_RESET_SUCCESS = 'Password reset successfully';
 
 	static readonly EMAIL_EXISTS = 'Email already exists';
 	static readonly USER_CREATED_SUCCESS = 'User created successfully';

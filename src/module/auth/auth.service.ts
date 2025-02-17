@@ -15,6 +15,7 @@ import { MailSubjectConstant } from 'src/common/constant/mail-subject.constant';
 import { TemplateConstant } from 'src/common/constant/template.constant';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { ErrorMsgConstant } from 'src/common/constant/error-msg.constant';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -98,15 +99,14 @@ export class AuthService {
 		const otpRecord = await this.otpRepository.findOne(user.id);
 		try {
 			if (!otpRecord || otpRecord.otp !== verifyOtpDto.otp) {
-				throw new NotFoundException(ErrorMsgConstant.INVALID_OTP);
+				throw new Error(ErrorMsgConstant.INVALID_OTP);
 			}
 
 			if (Date.now() > otpRecord.expiresAt) {
-				throw new NotFoundException(ErrorMsgConstant.OTP_EXPIRED);
+				throw new Error(ErrorMsgConstant.OTP_EXPIRED);
 			}
 
 			otpRecord.isVerify = true;
-			otpRecord.expiresAt = this.otpUtils.generateOtpExpireAt();
 			await this.otpRepository.update(otpRecord);
 
 			return verifyOtpDto;
@@ -116,5 +116,51 @@ export class AuthService {
 			}
 			throw error;
 		}
+	}
+
+	public async resetPassword(resetPasswordDto: ResetPasswordDto): Promise<boolean> {
+		const user = await this.userRepository.findOnByEmail(resetPasswordDto.email);
+
+		if (!user) {
+			throw new NotFoundException(MessageConstant.USER_NOT_FOUND);
+		}
+
+		const isSamePassword = await this.bcryptService.comparePassword(
+			resetPasswordDto.password,
+			user.password,
+		);
+
+		if (isSamePassword) {
+			throw new Error(ErrorMsgConstant.SAME_PASSWORD_NOT_ALLOWED);
+		}
+
+		const otpRecord = await this.otpRepository.findOne(user.id);
+
+		if (!otpRecord || Date.now() > otpRecord.expiresAt) {
+			throw new Error(ErrorMsgConstant.OTP_EXPIRED);
+		}
+
+		if (!otpRecord.isVerify) {
+			throw new Error(ErrorMsgConstant.OTP_NOT_VERIFIED);
+		}
+
+		const password = await this.bcryptService.hashPassword(resetPasswordDto.password);
+
+		await this.userRepository.update(user, {
+			password,
+		});
+
+		await this.otpRepository.delete(otpRecord);
+
+		void this.mailService.send({
+			to: user.email,
+			subject: MailSubjectConstant.RESET_PASSWORD_SUCCESS,
+			template: TemplateConstant.RESET_PASSWORD_SUCCESS,
+			context: {
+				name: user.fullname,
+			},
+		});
+
+		return true;
 	}
 }

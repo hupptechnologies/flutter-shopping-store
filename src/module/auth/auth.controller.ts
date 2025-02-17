@@ -10,6 +10,7 @@ import { CommonConstant } from 'src/common/constant/common.constant';
 import { ForgetPasswordDto } from './dto/forget-password.dto';
 import { APIResponse } from 'src/common/types/api-response.type';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 @Controller(URLConstant.AUTH)
 export class AuthController {
@@ -48,6 +49,17 @@ export class AuthController {
 		return {
 			data: verifyOtpRes,
 			message: MessageConstant.OTP_VERIFIED_SUCCESS,
+		};
+	}
+
+	@Public()
+	@HttpCode(HttpStatus.OK)
+	@Post(URLConstant.RESET_PASSWORD)
+	async restPassword(@Body() resetPasswordDto: ResetPasswordDto): APIResponse<boolean> {
+		const isResetPassword = await this.authService.resetPassword(resetPasswordDto);
+		return {
+			data: isResetPassword,
+			message: MessageConstant.PASSWORD_RESET_SUCCESS,
 		};
 	}
 }
