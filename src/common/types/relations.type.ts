@@ -2,7 +2,7 @@ import { BaseEntity } from 'typeorm';
 
 type ExcludeBaseEntity<T> = Omit<T, keyof BaseEntity>;
 
-export type RelationKey<T> = Extract<
+type RelationKey<T> = Extract<
 	keyof ExcludeBaseEntity<T>,
 	{
 		[K in keyof ExcludeBaseEntity<T>]: ExcludeBaseEntity<T>[K] extends Date

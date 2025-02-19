@@ -39,6 +39,17 @@ export class CloudinaryService {
 		});
 	}
 
+	public async uploadMultipleFiles(
+		files: Array<Express.Multer.File>,
+	): Promise<Array<UploadApiResponse>> {
+		if (!files || files.length === 0) {
+			return [];
+		}
+		const uploadPromises = files.map((file) => this.uploadFile(file));
+		const results = await Promise.all(uploadPromises);
+		return results.filter((result) => result !== null);
+	}
+
 	public getFileUrl(publicId: string): string {
 		const url = cloudinary.url(publicId);
 		return url;

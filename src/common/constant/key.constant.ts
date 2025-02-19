@@ -1,5 +1,7 @@
 export abstract class KeyConstant {
 	static readonly IMAGE = 'image';
+	static readonly IMAGES = 'images';
+	static readonly MAX_IMAGES_LENGTH = 5;
 
 	static readonly ACCESS_TOKEN = 'accessToken';
 	static readonly REFRESH_TOKEN = 'refreshToken';

@@ -1,9 +1,11 @@
+import { Image } from 'src/module/image/entities/image.entity';
 import {
 	BaseEntity,
 	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
 	Entity,
+	OneToMany,
 	PrimaryGeneratedColumn,
 	Tree,
 	TreeChildren,
@@ -29,10 +31,16 @@ export class Category extends BaseEntity {
 	public description: string;
 
 	@TreeParent()
-	public parent: Category;
+	public parent?: Category;
 
 	@TreeChildren()
 	public children: Category[];
+
+	@OneToMany(() => Image, (image) => image.category, {
+		eager: true,
+		onDelete: 'CASCADE',
+	})
+	public images: Image[];
 
 	@CreateDateColumn()
 	public createdAt: Date;

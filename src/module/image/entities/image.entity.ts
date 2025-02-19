@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Category } from 'src/module/category/entities/category.entity';
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -9,8 +10,12 @@ export class Image extends BaseEntity {
 	@Column()
 	public url: string;
 
+	@Exclude()
+	@Column()
+	public public_id: string;
+
+	@Exclude()
 	@ManyToOne(() => Category, (category) => category.id, {
-		eager: true,
 		onDelete: 'CASCADE',
 		nullable: true,
 	})

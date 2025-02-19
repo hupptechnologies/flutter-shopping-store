@@ -11,4 +11,6 @@ export abstract class URLConstant {
 	static readonly LOGOUT = 'logout';
 
 	static readonly ADDRESS = 'address';
+
+	static readonly CATEGORY = 'category';
 }
