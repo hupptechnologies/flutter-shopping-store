@@ -7,6 +7,7 @@ import { DatabaseConfig } from './config/database.config';
 import { UserModule } from './module/user/user.module';
 import { AuthModule } from './module/auth/auth.module';
 import { AddressModule } from './module/address/address.module';
+import { CategoryModule } from './module/category/category.module';
 
 @Module({
 	imports: [
@@ -20,6 +21,7 @@ import { AddressModule } from './module/address/address.module';
 		AuthModule,
 		UserModule,
 		AddressModule,
+		CategoryModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
