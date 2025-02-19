@@ -31,7 +31,7 @@ export class Category extends BaseEntity {
 	public description: string;
 
 	@TreeParent()
-	public parent?: Category;
+	public parent: Category;
 
 	@TreeChildren()
 	public children: Category[];

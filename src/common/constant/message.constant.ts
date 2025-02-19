@@ -20,5 +20,7 @@ export abstract class MessageConstant {
 	static readonly ADDRESS_DELETED_SUCCESS = 'Address deleted successfully';
 
 	static readonly CATEGORY_CREATED_SUCCESS = 'Category created successfully';
+	static readonly CATEGORY_UPDATED_SUCCESS = 'Category updated successfully';
 	static readonly PARENT_CATEGORY_NOT_FOUND = 'Parent Category not found';
+	static readonly CATEGORY_NOT_FOUND = 'Category not found';
 }

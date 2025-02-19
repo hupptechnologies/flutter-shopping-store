@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Loggable()
 @Injectable()
@@ -16,6 +17,11 @@ export class CategoryRepository {
 
 	async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
 		const category = this.repository.create(createCategoryDto);
+		return this.repository.save(category);
+	}
+
+	async update(category: Category, updateCategoryDto: UpdateCategoryDto): Promise<Category> {
+		Object.assign(category, updateCategoryDto);
 		return this.repository.save(category);
 	}
 
