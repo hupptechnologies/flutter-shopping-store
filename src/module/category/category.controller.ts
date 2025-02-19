@@ -1,7 +1,9 @@
 import {
 	Body,
 	Controller,
+	Get,
 	Param,
+	ParseIntPipe,
 	Patch,
 	Post,
 	UploadedFiles,
@@ -37,7 +39,7 @@ export class CategoryController {
 	@UseInterceptors(FilesInterceptor(KeyConstant.IMAGES, KeyConstant.MAX_IMAGES_LENGTH))
 	@Patch(URLConstant.ROUTER_ID)
 	async update(
-		@Param(KeyConstant.ID) id: number,
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
 		@Body() updateCategoryDto: UpdateCategoryDto,
 		@UploadedFiles() files: Array<Express.Multer.File>,
 	): APIResponse<Category> {
@@ -45,6 +47,15 @@ export class CategoryController {
 		return {
 			data: updateCategory,
 			message: MessageConstant.CATEGORY_UPDATED_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.ROUTER_ID)
+	async findById(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<Category> {
+		const category = await this.categoryService.findById(id);
+		return {
+			data: category,
+			message: MessageConstant.CATEGORY_FOUND_SUCCESS,
 		};
 	}
 }

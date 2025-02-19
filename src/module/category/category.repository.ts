@@ -33,4 +33,10 @@ export class CategoryRepository {
 			relations,
 		});
 	}
+
+	async findOneWithChildrenTree(category: Category): Promise<Category> {
+		return this.repository.manager.getTreeRepository(Category).findDescendantsTree(category, {
+			depth: 2,
+		});
+	}
 }

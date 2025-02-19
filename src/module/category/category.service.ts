@@ -72,4 +72,14 @@ export class CategoryService {
 		await this.uploadAndAttachImages(files, updateCategory);
 		return CommonUtils.removeKey(updateCategory, 'parent');
 	}
+
+	async findById(id: number): Promise<Category> {
+		const category = await this.categoryRepository.findOne(id);
+
+		if (!category) {
+			throw new NotFoundException(MessageConstant.CATEGORY_NOT_FOUND);
+		}
+
+		return this.categoryRepository.findOneWithChildrenTree(category);
+	}
 }
