@@ -24,4 +24,5 @@ export abstract class MessageConstant {
 	static readonly PARENT_CATEGORY_NOT_FOUND = 'Parent Category not found';
 	static readonly CATEGORY_NOT_FOUND = 'Category not found';
 	static readonly CATEGORY_FOUND_SUCCESS = 'Category found successfully';
+	static readonly CATEGORY_DELETED_SUCCESS = 'Category deleted successfully';
 }

@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Param,
 	ParseIntPipe,
@@ -56,6 +57,15 @@ export class CategoryController {
 		return {
 			data: category,
 			message: MessageConstant.CATEGORY_FOUND_SUCCESS,
+		};
+	}
+
+	@Delete(URLConstant.ROUTER_ID)
+	async delete(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<boolean> {
+		const isDeleted = await this.categoryService.delete(id);
+		return {
+			data: isDeleted,
+			message: MessageConstant.CATEGORY_DELETED_SUCCESS,
 		};
 	}
 }

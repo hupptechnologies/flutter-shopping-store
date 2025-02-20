@@ -70,4 +70,12 @@ export class CloudinaryService {
 			return false;
 		}
 	}
+
+	public static deleteItem(publicId: string): void {
+		try {
+			void cloudinary.uploader.destroy(publicId);
+		} catch (error) {
+			console.error('Cloudinary Deletion Error:', error);
+		}
+	}
 }

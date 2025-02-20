@@ -80,6 +80,25 @@ export class CategoryService {
 			throw new NotFoundException(MessageConstant.CATEGORY_NOT_FOUND);
 		}
 
-		return this.categoryRepository.findOneWithChildrenTree(category);
+		const childrenTree = await this.categoryRepository.findOneWithChildrenTree(category, {
+			depth: 2,
+			relations: ['images'],
+		});
+		return childrenTree;
+	}
+
+	async delete(id: number): Promise<boolean> {
+		const category = await this.categoryRepository.findOne(id);
+
+		if (!category) {
+			throw new NotFoundException(MessageConstant.CATEGORY_NOT_FOUND);
+		}
+
+		const childrenTree = await this.categoryRepository.findOneWithChildrenTree(category, {
+			relations: ['images'],
+		});
+		const isDeleted = await this.categoryRepository.delete(childrenTree);
+
+		return isDeleted;
 	}
 }

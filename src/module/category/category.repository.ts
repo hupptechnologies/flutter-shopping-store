@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { FindTreeOptions } from 'src/common/interface/typeorm.interface';
 
 @Loggable()
 @Injectable()
@@ -34,9 +35,21 @@ export class CategoryRepository {
 		});
 	}
 
-	async findOneWithChildrenTree(category: Category): Promise<Category> {
-		return this.repository.manager.getTreeRepository(Category).findDescendantsTree(category, {
-			depth: 2,
-		});
+	async findOneWithChildrenTree(
+		category: Category,
+		options?: FindTreeOptions<Category>,
+	): Promise<Category> {
+		return this.repository.manager
+			.getTreeRepository(Category)
+			.findDescendantsTree(category, options);
+	}
+
+	async delete(category: Category, isSoftDelete = true): Promise<boolean> {
+		if (isSoftDelete) {
+			const deleteRecord = await this.repository.softRemove(category);
+			return !!deleteRecord;
+		}
+		const deleteRecord = await this.repository.remove(category);
+		return !!deleteRecord;
 	}
 }

@@ -30,15 +30,19 @@ export class Category extends BaseEntity {
 	})
 	public description: string;
 
-	@TreeParent()
+	@TreeParent({
+		onDelete: 'CASCADE',
+	})
 	public parent: Category;
 
-	@TreeChildren()
+	@TreeChildren({
+		cascade: true,
+	})
 	public children: Category[];
 
 	@OneToMany(() => Image, (image) => image.category, {
 		eager: true,
-		onDelete: 'CASCADE',
+		cascade: true,
 	})
 	public images: Image[];
 
