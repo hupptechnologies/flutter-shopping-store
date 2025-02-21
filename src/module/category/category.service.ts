@@ -8,6 +8,8 @@ import { ImageRepository } from '../image/image.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CommonUtils } from 'src/common/utils/common.utils';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { PaginationRes } from 'src/common/interface/pagination-res.interface';
 
 @Loggable()
 @Injectable()
@@ -100,5 +102,14 @@ export class CategoryService {
 		const isDeleted = await this.categoryRepository.delete(childrenTree);
 
 		return isDeleted;
+	}
+
+	async findAll(queryOptionsDto: QueryOptionsDto): Promise<PaginationRes<Category>> {
+		const { items, total } = await this.categoryRepository.findAll(queryOptionsDto);
+		queryOptionsDto.setTotal(total);
+		return {
+			items,
+			meta: queryOptionsDto,
+		};
 	}
 }

@@ -6,11 +6,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { FindTreeOptions } from 'src/common/interface/typeorm.interface';
+import { FindAllRes, FindTreeOptions } from 'src/common/interface/typeorm.interface';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 
 @Loggable()
 @Injectable()
 export class CategoryRepository {
+	private readonly name: string = Category.name.toLowerCase();
+
 	constructor(
 		@InjectRepository(Category)
 		private readonly repository: Repository<Category>,
@@ -51,5 +54,21 @@ export class CategoryRepository {
 		}
 		const deleteRecord = await this.repository.remove(category);
 		return !!deleteRecord;
+	}
+
+	async findAll(queryOptionsDto: QueryOptionsDto): Promise<FindAllRes<Category>> {
+		const query = this.repository.createQueryBuilder(this.name);
+
+		query.andWhere(`${this.name}.parent IS NULL`);
+
+		if (queryOptionsDto.skip && queryOptionsDto.perPage) {
+			query.skip(queryOptionsDto.skip).take(queryOptionsDto.perPage);
+		}
+
+		const result = await query.getManyAndCount();
+		return {
+			items: result[0],
+			total: result[1],
+		};
 	}
 }

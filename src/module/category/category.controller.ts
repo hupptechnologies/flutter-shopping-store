@@ -7,6 +7,7 @@ import {
 	ParseIntPipe,
 	Patch,
 	Post,
+	Query,
 	UploadedFiles,
 	UseInterceptors,
 } from '@nestjs/common';
@@ -19,6 +20,8 @@ import { MessageConstant } from 'src/common/constant/message.constant';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { PaginationRes } from 'src/common/interface/pagination-res.interface';
 
 @Controller(URLConstant.CATEGORY)
 export class CategoryController {
@@ -66,6 +69,15 @@ export class CategoryController {
 		return {
 			data: isDeleted,
 			message: MessageConstant.CATEGORY_DELETED_SUCCESS,
+		};
+	}
+
+	@Get()
+	async findAll(@Query() queryOptionsDto: QueryOptionsDto): APIResponse<PaginationRes<Category>> {
+		const categories = await this.categoryService.findAll(queryOptionsDto);
+		return {
+			data: categories,
+			message: MessageConstant.CATEGORYS_FETCHED_SUCCESS,
 		};
 	}
 }
