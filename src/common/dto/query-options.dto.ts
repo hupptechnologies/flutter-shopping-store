@@ -1,6 +1,7 @@
 import { Exclude, Expose, Type } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ValidationMsgConstant } from '../constant/validation-msg.constant';
+import { OrderBy } from '../enum/sort-by.enum';
 
 export class QueryOptionsDto {
 	@Exclude({
@@ -31,6 +32,28 @@ export class QueryOptionsDto {
 		message: ValidationMsgConstant.SEARCH_NOT_EMPTY,
 	})
 	public search: string;
+
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@IsString()
+	public orderColumn?: string = 'id';
+
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@IsEnum(OrderBy)
+	public order?: OrderBy = OrderBy.ASC;
+
+	public get orderBy(): OrderBy {
+		return this.order ?? OrderBy.ASC;
+	}
+
+	public get column(): string {
+		return this.orderColumn ?? 'id';
+	}
 
 	@Expose()
 	public get currentPage(): number {

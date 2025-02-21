@@ -65,9 +65,9 @@ export class CategoryRepository {
 			query.likeQuery(['name', 'description'], queryOptionsDto.search);
 		}
 
-		if (queryOptionsDto.skip && queryOptionsDto.perPage) {
-			query.skip(queryOptionsDto.skip).take(queryOptionsDto.perPage);
-		}
+		query.orderBy(queryOptionsDto.column, queryOptionsDto.orderBy);
+		query.skip(queryOptionsDto.skip);
+		query.take(queryOptionsDto.perPage);
 
 		const result = await query.getManyAndCount();
 		return {
