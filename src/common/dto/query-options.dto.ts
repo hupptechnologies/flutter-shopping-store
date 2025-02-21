@@ -1,5 +1,5 @@
 import { Exclude, Expose, Type } from 'class-transformer';
-import { IsInt, IsOptional } from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 import { ValidationMsgConstant } from '../constant/validation-msg.constant';
 
 export class QueryOptionsDto {
@@ -22,6 +22,15 @@ export class QueryOptionsDto {
 		message: ValidationMsgConstant.LIMIT_INTEGET,
 	})
 	public limit?: number = 10;
+
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@IsNotEmpty({
+		message: ValidationMsgConstant.SEARCH_NOT_EMPTY,
+	})
+	public search: string;
 
 	@Expose()
 	public get currentPage(): number {
@@ -49,6 +58,6 @@ export class QueryOptionsDto {
 	}
 
 	public get skip(): number {
-		return this.currentPage * this.perPage;
+		return (this.currentPage - 1) * this.perPage;
 	}
 }

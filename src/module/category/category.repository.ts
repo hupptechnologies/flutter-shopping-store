@@ -61,6 +61,10 @@ export class CategoryRepository {
 
 		query.andWhere(`${this.name}.parent IS NULL`);
 
+		if (queryOptionsDto.search) {
+			query.likeQuery(['name', 'description'], queryOptionsDto.search);
+		}
+
 		if (queryOptionsDto.skip && queryOptionsDto.perPage) {
 			query.skip(queryOptionsDto.skip).take(queryOptionsDto.perPage);
 		}

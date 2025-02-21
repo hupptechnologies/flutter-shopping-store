@@ -5,4 +5,5 @@ export class ValidationMsgConstant {
 	static readonly INVALID_OTP_LENGTH = 'OTP must be a 6-digit number.';
 	static readonly PAGE_INTEGET = 'Page must be an integer';
 	static readonly LIMIT_INTEGET = 'Limit must be an integer';
+	static readonly SEARCH_NOT_EMPTY = 'Search field cannot be empty';
 }
