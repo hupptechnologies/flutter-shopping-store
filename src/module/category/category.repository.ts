@@ -56,7 +56,10 @@ export class CategoryRepository {
 		return !!deleteRecord;
 	}
 
-	async findAll(queryOptionsDto: QueryOptionsDto): Promise<FindAllRes<Category>> {
+	async findAll(
+		queryOptionsDto: QueryOptionsDto,
+		relations?: RelationKeys<Category>,
+	): Promise<FindAllRes<Category>> {
 		const query = this.repository.createQueryBuilder(this.name);
 
 		query.andWhere(`${this.name}.parent IS NULL`);
@@ -65,7 +68,9 @@ export class CategoryRepository {
 			query.likeQuery(['name', 'description'], queryOptionsDto.search);
 		}
 
-		query.orderBy(queryOptionsDto.column, queryOptionsDto.orderBy);
+		query.leftJoins(relations);
+
+		query.orderBy(`${query.alias}.${queryOptionsDto.column}`, queryOptionsDto.orderBy);
 		query.skip(queryOptionsDto.skip);
 		query.take(queryOptionsDto.perPage);
 

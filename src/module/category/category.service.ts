@@ -105,7 +105,7 @@ export class CategoryService {
 	}
 
 	async findAll(queryOptionsDto: QueryOptionsDto): Promise<PaginationRes<Category>> {
-		const { items, total } = await this.categoryRepository.findAll(queryOptionsDto);
+		const { items, total } = await this.categoryRepository.findAll(queryOptionsDto, ['images']);
 		queryOptionsDto.setTotal(total);
 		return {
 			items,
