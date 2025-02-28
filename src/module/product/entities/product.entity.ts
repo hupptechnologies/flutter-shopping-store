@@ -1,28 +1,22 @@
+import { Category } from 'src/module/category/entities/category.entity';
 import { Image } from 'src/module/image/entities/image.entity';
-import { Product } from 'src/module/product/entities/product.entity';
 import {
-	BaseEntity,
 	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
 	Entity,
+	ManyToOne,
 	OneToMany,
 	PrimaryGeneratedColumn,
-	Tree,
-	TreeChildren,
-	TreeParent,
 	UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-@Tree('materialized-path')
-export class Category extends BaseEntity {
+export class Product {
 	@PrimaryGeneratedColumn()
 	public id: number;
 
-	@Column({
-		type: 'varchar',
-	})
+	@Column()
 	public name: string;
 
 	@Column({
@@ -31,26 +25,16 @@ export class Category extends BaseEntity {
 	})
 	public description: string;
 
-	@TreeParent({
+	@ManyToOne(() => Category, (category) => category.products, {
 		onDelete: 'CASCADE',
 	})
-	public parent: Category;
-
-	@TreeChildren({
-		cascade: true,
-	})
-	public children: Category[];
+	public category: Category;
 
 	@OneToMany(() => Image, (image) => image.category, {
 		eager: true,
 		cascade: true,
 	})
 	public images: Image[];
-
-	@OneToMany(() => Product, (product) => product.category, {
-		cascade: true,
-	})
-	public products: Product[];
 
 	@CreateDateColumn()
 	public createdAt: Date;
