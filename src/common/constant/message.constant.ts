@@ -26,4 +26,6 @@ export abstract class MessageConstant {
 	static readonly CATEGORY_FOUND_SUCCESS = 'Category found successfully';
 	static readonly CATEGORY_DELETED_SUCCESS = 'Category deleted successfully';
 	static readonly CATEGORYS_FETCHED_SUCCESS = 'Categorys fetched successfully';
+
+	static readonly PRODCUT_CREATED_SUCCESS = 'Prodcut created successfully';
 }
