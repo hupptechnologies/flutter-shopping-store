@@ -2,36 +2,19 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { CreateProdctDto } from './dto/create-prodcut.dto';
 import { ProductRepository } from './product.repository';
-import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
 import { CategoryRepository } from '../category/category.repository';
 import { Product } from './entities/product.entity';
 import { MessageConstant } from 'src/common/constant/message.constant';
-import { ImageRepository } from '../image/image.repository';
+import { ImageService } from '../image/image.service';
 
 @Injectable()
 @Loggable()
 export class ProductService {
 	constructor(
 		private readonly productRepository: ProductRepository,
-		private readonly cloudinaryService: CloudinaryService,
 		private readonly categoryRepository: CategoryRepository,
-		private readonly imageRepository: ImageRepository,
+		private readonly imageService: ImageService,
 	) {}
-
-	private async uploadAndAttachImages(
-		files: Array<Express.Multer.File>,
-		product: Product,
-	): Promise<void> {
-		if (!files || files.length === 0) return;
-
-		const images = await this.cloudinaryService.uploadMultipleFiles(files);
-		const createBulkImage = await this.imageRepository.createBulk({
-			images,
-			product,
-		});
-		product.images ??= [];
-		product.images.push(...createBulkImage);
-	}
 
 	public async create(
 		createProdctDto: CreateProdctDto,
@@ -47,7 +30,7 @@ export class ProductService {
 
 		const product = await this.productRepository.create(createProdctDto);
 
-		await this.uploadAndAttachImages(files, product);
+		await this.imageService.uploadAndAttachImages(files, product);
 		return product;
 	}
 }

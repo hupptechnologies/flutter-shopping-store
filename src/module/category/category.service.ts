@@ -3,21 +3,19 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Category } from './entities/category.entity';
 import { CategoryRepository } from './category.repository';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
-import { ImageRepository } from '../image/image.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { CommonUtils } from 'src/common/utils/common.utils';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { PaginationRes } from 'src/common/interface/pagination-res.interface';
+import { ImageService } from '../image/image.service';
 
 @Loggable()
 @Injectable()
 export class CategoryService {
 	constructor(
 		private readonly categoryRepository: CategoryRepository,
-		private readonly cloudinaryService: CloudinaryService,
-		private readonly imageRepository: ImageRepository,
+		private readonly imageService: ImageService,
 	) {}
 
 	private async getParentCategory(parentId?: number): Promise<Category | undefined> {
@@ -30,21 +28,6 @@ export class CategoryService {
 		return parentCategory;
 	}
 
-	private async uploadAndAttachImages(
-		files: Array<Express.Multer.File>,
-		category: Category,
-	): Promise<void> {
-		if (!files || files.length === 0) return;
-
-		const images = await this.cloudinaryService.uploadMultipleFiles(files);
-		const createBulkImage = await this.imageRepository.createBulk({
-			images,
-			category,
-		});
-		category.images ??= [];
-		category.images.push(...createBulkImage);
-	}
-
 	async create(
 		createCategoryDto: CreateCategoryDto,
 		files: Array<Express.Multer.File>,
@@ -53,7 +36,7 @@ export class CategoryService {
 
 		const category = await this.categoryRepository.create(createCategoryDto);
 
-		await this.uploadAndAttachImages(files, category);
+		await this.imageService.uploadAndAttachImages(files, category);
 		return CommonUtils.removeKey(category, 'parent');
 	}
 
@@ -71,7 +54,7 @@ export class CategoryService {
 		updateCategoryDto.parent = await this.getParentCategory(updateCategoryDto.parentId);
 		const updateCategory = await this.categoryRepository.update(category, updateCategoryDto);
 
-		await this.uploadAndAttachImages(files, updateCategory);
+		await this.imageService.uploadAndAttachImages(files, updateCategory);
 		return CommonUtils.removeKey(updateCategory, 'parent');
 	}
 
