@@ -1,7 +1,6 @@
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
-import 'package:e_commerce/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +14,6 @@ class VerificationCodeController extends GetxController {
   final FocusNode focusNode2 = FocusNode();
   final FocusNode focusNode3 = FocusNode();
   final FocusNode focusNode4 = FocusNode();
-
-  final AuthService authService = AuthService();
 
   var allFieldsFilled = false.obs;
 
@@ -53,16 +50,9 @@ class VerificationCodeController extends GetxController {
     if (allFieldsFilled.value && id.isNotEmpty) {
       try {
         CommonGetX.unfocus();
-        // final otp = getVerificationCode();
-        // final response = await authService.otpVerifyed(otp: otp, id: id);
-        // if (!response.error) {
-        //   clear();
         CommonSnackbar.success('Verifyed OTP');
 
         createPasswordPage('data');
-        // } else {
-        //   CommonSnackbar.error(response.message);
-        // }
       } catch (e) {
         CommonSnackbar.error(e.toString());
       }

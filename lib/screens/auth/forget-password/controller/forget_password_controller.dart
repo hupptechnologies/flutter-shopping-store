@@ -1,7 +1,6 @@
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
-import 'package:e_commerce/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +8,6 @@ class ForgetPasswordController extends GetxController {
   late TextEditingController emailController;
 
   late RxBool isFormValid = false.obs;
-  final AuthService authService = AuthService();
 
   @override
   void onInit() {
@@ -41,15 +39,8 @@ class ForgetPasswordController extends GetxController {
   void forgetPassword() async {
     try {
       CommonGetX.unfocus();
-      // final response =
-      //     await authService.forgetPassword(userName: emailController.text);
-      // if (!response.error) {
-      //   clearState();
-        CommonSnackbar.success('Forgot Passowrd Successfully!');
-        verificationCodePage('1111');
-      // } else {
-      //   CommonSnackbar.error(response.message);
-      // }
+      CommonSnackbar.success('Forgot Passowrd Successfully!');
+      verificationCodePage('1111');
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }

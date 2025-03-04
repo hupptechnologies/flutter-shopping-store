@@ -1,7 +1,6 @@
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
-import 'package:e_commerce/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +9,6 @@ class SignUpController extends GetxController {
       emailController,
       passwordController,
       confirmPasswordController;
-
-  final AuthService authService = AuthService();
 
   late RxBool isFormValid = false.obs;
 
@@ -73,17 +70,8 @@ class SignUpController extends GetxController {
   void signUp() async {
     CommonGetX.unfocus();
     try {
-      // final response = await authService.signUp(
-      //   name: nameController.text,
-      //   email: emailController.text,
-      //   password: passwordController.text,
-      // );
-      // if (!response.error) {
       CommonSnackbar.success('Registration Successfully!');
       loginPage();
-      // } else {
-      //   CommonSnackbar.error(response.message);
-      // }
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }

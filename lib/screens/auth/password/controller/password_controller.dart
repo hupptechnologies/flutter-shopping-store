@@ -1,7 +1,6 @@
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
-import 'package:e_commerce/service/auth_service.dart';
 import 'package:e_commerce/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,8 +10,6 @@ class PasswordController extends GetxController {
   final storage = GetStorage();
   late TextEditingController passwordController, confirmPasswordController;
   late RxBool isFormValid = false.obs;
-
-  final AuthService authService = AuthService();
 
   @override
   void onInit() {
@@ -64,23 +61,8 @@ class PasswordController extends GetxController {
 
   void changePassword() async {
     CommonGetX.unfocus();
-    // final id = Get.arguments['id'];
     try {
-      // if (id.isEmpty) {
-      //   return;
-      // }
-      // final response = await authService.resetPassword(
-      //   id: id,
-      //   password: passwordController.text,
-      //   confirmPassword: confirmPasswordController.text,
-      // );
-
-      // if (!response.error) {
-      //   CommonGetX.unfocus();
       buildShowBottomSheet(loginPage);
-      // } else {
-      //   CommonSnackbar.error(response.message);
-      // }
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }
