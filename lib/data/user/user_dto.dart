@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:e_commerce/common/enum/gender_enum.dart';
-
 List<UserDto> userDtoFromJson(String str) =>
     List<UserDto>.from(json.decode(str).map((x) => UserDto.fromJson(x)));
 
@@ -12,30 +10,25 @@ class UserDto {
   String firstName;
   String lastName;
   String email;
-  Gender gender;
-  String phoneNo;
+  String? mobileNumber;
 
   UserDto({
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.gender,
-    required this.phoneNo,
+    this.mobileNumber,
   });
 
   factory UserDto.fromJson(Map<String, dynamic> json) => UserDto(
-        firstName: json["firstName"],
-        lastName: json["lastName"],
-        email: json["email"],
-        gender: json["gender"],
-        phoneNo: json["phoneNo"],
-      );
+      firstName: json["firstName"],
+      lastName: json["lastName"],
+      email: json["email"],
+      mobileNumber: json["mobileNumber"]);
 
   Map<String, dynamic> toJson() => {
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
-        "gender": gender,
-        "phoneNo": phoneNo,
+        "mobileNumber": mobileNumber
       };
 }

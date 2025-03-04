@@ -26,6 +26,7 @@ class ApiService {
   ) async {
     try {
       final response = await request();
+      print(response.data);
       return ApiResponse.fromJson(response.data, fromJsonT);
     } on DioException catch (e) {
       return _handleError<T>(e, fromJsonT);
