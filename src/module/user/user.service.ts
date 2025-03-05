@@ -22,7 +22,10 @@ export class UserService {
 		private readonly mailService: MailService,
 	) {}
 
-	public async create(createUserDto: CreateUserDto, file: Express.Multer.File): Promise<User> {
+	public async create(
+		createUserDto: CreateUserDto,
+		file: Express.Multer.File | null,
+	): Promise<User> {
 		const emailExits = await this.userRepository.findOnByEmail(createUserDto.email);
 
 		if (emailExits) {

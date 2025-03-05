@@ -16,6 +16,8 @@ import { TemplateConstant } from 'src/common/constant/template.constant';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { ErrorMsgConstant } from 'src/common/constant/error-msg.constant';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { CreateUserDto } from '../user/dto/create-user.dto';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +28,7 @@ export class AuthService {
 		private readonly otpRepository: OtpRepository,
 		private readonly otpUtils: OtpUtils,
 		private readonly mailService: MailService,
+		private readonly userService: UserService,
 	) {}
 
 	public async login(loginAuthDto: LoginAuthDto, res: Response): Promise<User> {
@@ -64,6 +67,10 @@ export class AuthService {
 		});
 
 		return existingUser;
+	}
+
+	public async signUp(createUserDto: CreateUserDto): Promise<User> {
+		return this.userService.create(createUserDto, null);
 	}
 
 	public async forgetPassword(email: string): Promise<string> {

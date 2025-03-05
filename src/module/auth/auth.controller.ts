@@ -12,6 +12,7 @@ import { APIResponse } from 'src/common/types/api-response.type';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { ApiResponse } from 'src/common/interface/api-reponse.interface';
+import { CreateUserDto } from '../user/dto/create-user.dto';
 
 @Controller(URLConstant.AUTH)
 export class AuthController {
@@ -39,6 +40,16 @@ export class AuthController {
 		return {
 			data: email,
 			message: MessageConstant.OTP_SUCCESS,
+		};
+	}
+
+	@Public()
+	@Post(URLConstant.SIGN_UP)
+	async signUp(@Body() createUserDto: CreateUserDto): APIResponse<User> {
+		const user = await this.authService.signUp(createUserDto);
+		return {
+			data: user,
+			message: MessageConstant.SIGN_UP_SUCCESS,
 		};
 	}
 

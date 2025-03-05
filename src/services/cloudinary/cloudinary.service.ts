@@ -17,7 +17,7 @@ export class CloudinaryService {
 		});
 	}
 
-	public async uploadFile(file: Express.Multer.File): Promise<UploadApiResponse | null> {
+	public async uploadFile(file: Express.Multer.File | null): Promise<UploadApiResponse | null> {
 		if (!file || !file.buffer) {
 			return null;
 		}

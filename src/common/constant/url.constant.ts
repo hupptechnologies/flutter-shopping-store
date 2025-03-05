@@ -5,6 +5,7 @@ export abstract class URLConstant {
 
 	static readonly AUTH = 'auth';
 	static readonly LOGIN = 'login';
+	static readonly SIGN_UP = 'sign-up';
 	static readonly FORGET_PASSWORD = 'forget-password';
 	static readonly VERIFY_OTP = 'verify-otp';
 	static readonly RESET_PASSWORD = 'reset-password';
