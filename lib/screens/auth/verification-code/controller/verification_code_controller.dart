@@ -1,10 +1,13 @@
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class VerificationCodeController extends GetxController {
+  final AuthService authService = AuthService();
+
   final TextEditingController controller1 = TextEditingController();
   final TextEditingController controller2 = TextEditingController();
   final TextEditingController controller3 = TextEditingController();
@@ -46,13 +49,22 @@ class VerificationCodeController extends GetxController {
   }
 
   void otpVerify() async {
-    final id = Get.arguments['id'];
-    if (allFieldsFilled.value && id.isNotEmpty) {
+    final email = Get.arguments['email'];
+    if (allFieldsFilled.value && email != null) {
       try {
         CommonGetX.unfocus();
-        CommonSnackbar.success('Verifyed OTP');
-
-        createPasswordPage('data');
+        int otp = int.parse(getVerificationCode());
+        final response = await authService.verifyOtp(email: email, otp: otp);
+        if (response.error) {
+          if (response.errors != null) {
+            CommonSnackbar.error(response.errors!['otp']![0]);
+          } else {
+            CommonSnackbar.error(response.message);
+          }
+          return;
+        }
+        CommonSnackbar.success(response.message);
+        createPasswordPage(response.data!['email']);
       } catch (e) {
         CommonSnackbar.error(e.toString());
       }
@@ -76,9 +88,9 @@ class VerificationCodeController extends GetxController {
         controller4.text.isNotEmpty;
   }
 
-  void createPasswordPage(String id) {
+  void createPasswordPage(String email) {
     Get.toNamed(AppRoutes.password, arguments: {
-      'id': id,
+      'email': email,
     });
   }
 }

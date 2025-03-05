@@ -50,4 +50,14 @@ class AuthService extends ApiService {
       data: data.toJson(),
     );
   }
+
+  Future<ApiResponse<Map<String, dynamic>>> verifyOtp({
+    required int otp,
+    required String email,
+  }) async {
+    return post(UrlConstant.verifyOtp, (json) => json, data: {
+      "email": email,
+      "otp": otp
+    });
+  }
 }

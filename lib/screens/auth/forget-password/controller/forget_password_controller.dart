@@ -34,7 +34,7 @@ class ForgetPasswordController extends GetxController {
 
   void verificationCodePage() {
     Get.toNamed(AppRoutes.verificationCode, arguments: {
-      'email': forgetPasswordReq.email,
+      'email': forgetPasswordReq.email.value,
     });
   }
 }

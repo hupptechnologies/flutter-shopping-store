@@ -2,6 +2,7 @@ import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/screens/auth/verification-code/controller/verification_code_controller.dart';
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/build_otp_field.dart';
+import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -83,28 +84,17 @@ class VerificationCodeView extends GetView<VerificationCodeController> {
                         ),
                         SizedBox(height: screenHeight * 0.08),
                         Center(
-                          child: Obx(() => ElevatedButton(
-                                onPressed: controller.allFieldsFilled.value
-                                    ? controller.otpVerify
-                                    : null,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.black,
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                    vertical: 13,
-                                  ),
-                                  child: Text(
-                                    'OTP Verify',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              )),
+                          child: FractionallySizedBox(
+                            widthFactor: 0.5,
+                            child: Obx(
+                              () => ButtonWidget(
+                                title: 'OTP Verify',
+                                isDisable: !controller.allFieldsFilled.value,
+                                onPressed: controller.otpVerify,
+                                isLoader: controller.authService.isLoader.value,
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     ),
