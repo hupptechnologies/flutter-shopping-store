@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
+import 'package:e_commerce/common/requset/auth/sign_up_req.dart';
 import 'package:e_commerce/data/user/user_dto.dart';
 import 'package:e_commerce/service/api_service.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,5 +32,13 @@ class AuthService extends ApiService {
       storage.remove('isLogin');
       clearCookies();
     }
+  }
+
+  Future<ApiResponse<UserDto>> sigUp(SignUpReq data) async {
+    return post(
+      UrlConstant.signup,
+      (json) => UserDto.fromJson(json),
+      data: data.toJson(),
+    );
   }
 }

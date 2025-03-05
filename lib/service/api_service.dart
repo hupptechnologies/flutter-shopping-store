@@ -51,7 +51,8 @@ class ApiService {
       if (statusCode == 401) {
         return ApiResponse.error("Session expired. Logging out...");
       }
-      return ApiResponse.fromJson(e.response?.data, fromJsonT);
+      final dynamic errorData = e.response?.data;
+      return ApiResponse.errorData(errorData);
     }
     return ApiResponse.error("An unexpected error occurred: ${e.message}");
   }

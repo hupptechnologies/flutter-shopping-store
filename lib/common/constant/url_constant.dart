@@ -5,4 +5,5 @@ abstract class UrlConstant {
   static const String auth = '/auth';
   static const String login = '/login';
   static const String logout = '/logout';
+  static const String signup = '/sign-up';
 }

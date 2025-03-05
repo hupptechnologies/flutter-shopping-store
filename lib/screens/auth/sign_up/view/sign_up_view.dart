@@ -1,6 +1,6 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/screens/auth/sign_up/controller/sign_up_controller.dart';
-import 'package:e_commerce/widgets/build_text_field.dart';
+import 'package:e_commerce/screens/auth/sign_up/view/widgets/sign_up_form.dart';
 import 'package:e_commerce/widgets/circular_icon_button.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -41,64 +41,10 @@ class SignUpView extends GetView<SignUpController> {
                       style: TextStyle(fontSize: 25),
                     ),
                     SizedBox(height: screenHeight * 0.05),
-                    BuildTextField(
-                      hintText: 'Enter your name',
-                      controller: controller.nameController,
-                      validator: (value) =>
-                          controller.validateField(value, fieldType: 'Name'),
-                    ),
-                    SizedBox(height: screenHeight * 0.03),
-                    BuildTextField(
-                      hintText: 'Email address',
-                      controller: controller.emailController,
-                      validator: (value) =>
-                          controller.validateField(value, fieldType: 'Email'),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    SizedBox(height: screenHeight * 0.03),
-                    BuildTextField(
-                      hintText: 'Password',
-                      controller: controller.passwordController,
-                      validator: (value) => controller.validateField(value,
-                          fieldType: 'Password'),
-                      isObscure: true,
-                    ),
-                    SizedBox(height: screenHeight * 0.03),
-                    BuildTextField(
-                      hintText: 'Confirm Password',
-                      controller: controller.confirmPasswordController,
-                      validator: (value) => controller.validateField(value,
-                          fieldType: 'Confirm Password'),
-                      isObscure: true,
-                    ),
-                    SizedBox(height: screenHeight * 0.05),
+                    const SignUpForm(),
                     Center(
                       child: Column(
                         children: [
-                          Obx(
-                            () => ElevatedButton(
-                              onPressed: controller.isFormValid.value
-                                  ? controller.signUp
-                                  : null,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 13,
-                                ),
-                                child: Text(
-                                  'SIGN UP',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
                           SizedBox(height: screenHeight * 0.05),
                           const Text('or sign up with'),
                           SizedBox(height: screenHeight * 0.02),
