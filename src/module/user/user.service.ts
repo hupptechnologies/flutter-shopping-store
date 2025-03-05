@@ -42,7 +42,7 @@ export class UserService {
 
 		const user = await this.userRepository.create(createUserDto);
 
-		await this.mailService.send({
+		void this.mailService.send({
 			to: user.email,
 			subject: MailSubjectConstant.REGISTRATION,
 			template: TemplateConstant.REGISTRATION,
