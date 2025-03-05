@@ -1,12 +1,14 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/enum/profile_menu_enum.dart';
+import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/data/profile/profile_menu.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/auth_service.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class ProfileController extends GetxController {
-  final storage = GetStorage();
+  final AuthService authService = AuthService();
+
   final List<ProfileMenu> menuList = [
     ProfileMenu(
         icon: ImageConstant.locationFillIcon,
@@ -52,9 +54,18 @@ class ProfileController extends GetxController {
         Get.toNamed(AppRoutes.feedback);
         return;
       case ProfileMenuEnum.logout:
-        storage.remove('isLogin');
-        Get.offAllNamed(AppRoutes.login);
+        logOut();
         return;
+    }
+  }
+
+  Future<void> logOut() async {
+    final respone = await authService.logout();
+    Get.offAllNamed(AppRoutes.login);
+    if (respone.error) {
+      CommonSnackbar.error(respone.message);
+    } else {
+      CommonSnackbar.success(respone.message);
     }
   }
 

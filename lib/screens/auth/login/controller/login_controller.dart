@@ -4,10 +4,8 @@ import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
-  final storage = GetStorage();
   final AuthService authService = AuthService();
   late TextEditingController emailController, passwordController;
 
@@ -70,11 +68,11 @@ class LoginController extends GetxController {
   void signIn() async {
     CommonGetX.unfocus();
     try {
-      final response = await authService.login(email: emailController.text, password: passwordController.text);
+      final response = await authService.login(
+          email: emailController.text, password: passwordController.text);
       if (!response.error) {
+        Get.offAllNamed(AppRoutes.home);
         CommonSnackbar.success(response.message);
-        storage.write('isLogin', true);
-        homePage();
         return;
       }
 
@@ -94,9 +92,5 @@ class LoginController extends GetxController {
   void forgetPasswordPage() {
     Get.toNamed(AppRoutes.forgetPassword);
     clearState();
-  }
-
-  void homePage() {
-    Get.offAllNamed(AppRoutes.home);
   }
 }
