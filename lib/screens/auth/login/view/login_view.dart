@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/screens/auth/login/controller/login_controller.dart';
 import 'package:e_commerce/widgets/build_text_field.dart';
+import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:e_commerce/widgets/circular_icon_button.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -70,33 +71,22 @@ class LoginView extends GetView<LoginController> {
                     ),
                     SizedBox(height: screenHeight * 0.06),
                     Center(
+                      child: FractionallySizedBox(
+                        widthFactor: 0.5,
+                        child: Obx(
+                          () => ButtonWidget(
+                            title: 'SIGN IN',
+                            isDisable: !controller.isFormValid.value,
+                            onPressed: controller.signIn,
+                            isLoader: controller.authService.isLoader.value,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: screenHeight * 0.05),
+                    Center(
                       child: Column(
                         children: [
-                          Obx(
-                            () => ElevatedButton(
-                              onPressed: controller.isFormValid.value
-                                  ? controller.signIn
-                                  : null,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 13,
-                                ),
-                                child: Text(
-                                  'SIGN IN',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: screenHeight * 0.05),
                           const Text('or login up with'),
                           SizedBox(height: screenHeight * 0.02),
                           Row(

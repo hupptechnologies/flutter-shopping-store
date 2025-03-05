@@ -16,4 +16,8 @@ class AuthService extends ApiService {
       data: {"email": email, "password": password},
     );
   }
+
+  Future<ApiResponse<Null>> logout() async {
+    return post(UrlConstant.logout, (data) => data);
+  }
 }
