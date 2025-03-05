@@ -4,7 +4,7 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 @Loggable()
 @Injectable()
 export class OtpUtils {
-	generateTimeBasedOTP(length = 6): number {
+	generateTimeBasedOTP(length = 4): number {
 		const otp = Array.from(
 			{
 				length,
