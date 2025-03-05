@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SignUpField extends StatelessWidget {
+class FormTextField extends StatelessWidget {
   final bool isObscure;
   final TextInputType keyboardType;
   final String hintText;
@@ -9,7 +9,7 @@ class SignUpField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final String? errorText;
 
-  const SignUpField({
+  const FormTextField({
     super.key,
     this.isObscure = false,
     this.keyboardType = TextInputType.text,

@@ -1,13 +1,12 @@
+import 'package:e_commerce/common/requset/common_validation_dto.dart';
 import 'package:get/get.dart';
 
-class SignUpReq {
+class SignUpReq extends CommonValidationDto {
   String? firstName;
   String? lastName;
   String? email;
   String? password;
   String? confirmPassword;
-  late RxBool isValid = false.obs;
-  late RxMap<String, String> errors = <String, String>{}.obs;
 
   SignUpReq({
     this.firstName,
@@ -18,12 +17,12 @@ class SignUpReq {
   });
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['email'] = email;
-    data['password'] = password;
-    return data;
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'password': password,
+    };
   }
 
   void updateField({
@@ -75,16 +74,5 @@ class SignUpReq {
       return 'Passwords do not match';
     }
     return null;
-  }
-
-  void setApiErrors(Map<String, dynamic> apiErrors) {
-    apiErrors.forEach((key, value) {
-      if (value is List) {
-        errors[key] = value.first;
-      } else {
-        errors[key] = value;
-      }
-    });
-    errors.refresh();
   }
 }

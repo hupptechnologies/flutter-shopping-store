@@ -1,7 +1,8 @@
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/screens/auth/forget-password/controller/forget_password_controller.dart';
+import 'package:e_commerce/screens/auth/widget/form_text_field.dart';
 import 'package:e_commerce/widgets/back_button.dart';
-import 'package:e_commerce/widgets/build_text_field.dart';
+import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,35 +47,29 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                           style: TextStyle(fontSize: 16),
                         ),
                         SizedBox(height: screenHeight * 0.1),
-                        BuildTextField(
-                          hintText: 'Email',
-                          validator: (value) => controller.validation(value),
-                          controller: controller.emailController,
-                          keyboardType: TextInputType.emailAddress,
+                        Obx(
+                          () => FormTextField(
+                            hintText: 'Email',
+                            validator: (value) => controller.forgetPasswordReq
+                                .validateField(value),
+                            onChanged: (value) => controller.forgetPasswordReq
+                                .updateField(email: value),
+                            keyboardType: TextInputType.emailAddress,
+                            errorText:
+                                controller.forgetPasswordReq.errors['email'],
+                          ),
                         ),
                         SizedBox(height: screenHeight * 0.08),
                         Center(
-                          child: Obx(
-                            () => ElevatedButton(
-                              onPressed: controller.isFormValid.value
-                                  ? controller.forgetPassword
-                                  : null,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black,
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 13,
-                                ),
-                                child: Text(
-                                  'Forget Password',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                          child: FractionallySizedBox(
+                            widthFactor: 0.7,
+                            child: Obx(
+                              () => ButtonWidget(
+                                title: 'Forget Password',
+                                isDisable:
+                                    !controller.forgetPasswordReq.isValid.value,
+                                onPressed: controller.forgetPassword,
+                                isLoader: controller.authService.isLoader.value,
                               ),
                             ),
                           ),

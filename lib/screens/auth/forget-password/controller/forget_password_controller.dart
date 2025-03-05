@@ -1,59 +1,40 @@
+import 'package:e_commerce/common/requset/auth/forget_password_req.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
-import 'package:flutter/material.dart';
+import 'package:e_commerce/service/auth_service.dart';
 import 'package:get/get.dart';
 
 class ForgetPasswordController extends GetxController {
-  late TextEditingController emailController;
+  final ForgetPasswordReq forgetPasswordReq = ForgetPasswordReq();
+  final AuthService authService = AuthService();
 
-  late RxBool isFormValid = false.obs;
-
-  @override
-  void onInit() {
-    emailController = TextEditingController();
-
-    emailController.addListener(validateForm);
-    super.onInit();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-    emailController.dispose();
-  }
-
-  void validateForm() {
-    isFormValid.value = validation(emailController.text) == null;
-  }
-
-  String? validation(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email cannot be empty';
-    } else if (!GetUtils.isEmail(value)) {
-      return 'Enter a valid email';
-    }
-    return null;
-  }
-
-  void forgetPassword() async {
+  Future<void> forgetPassword() async {
     try {
       CommonGetX.unfocus();
-      CommonSnackbar.success('Forgot Passowrd Successfully!');
-      verificationCodePage('1111');
+      final response = await authService.forgetPassword(forgetPasswordReq);
+      if (response.error) {
+        if (response.errors != null) {
+          forgetPasswordReq.setApiErrors(response.errors!);
+        } else {
+          CommonSnackbar.error(response.message);
+        }
+        return;
+      }
+      CommonSnackbar.success(response.message);
+      verificationCodePage();
     } catch (e) {
       CommonSnackbar.error(e.toString());
     }
   }
 
   void clearState() {
-    emailController.clear();
     CommonGetX.unfocus();
   }
 
-  void verificationCodePage(String id) {
+  void verificationCodePage() {
     Get.toNamed(AppRoutes.verificationCode, arguments: {
-      'id': id,
+      'email': forgetPasswordReq.email,
     });
   }
 }

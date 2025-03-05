@@ -1,5 +1,5 @@
 import 'package:e_commerce/screens/auth/sign_up/controller/sign_up_controller.dart';
-import 'package:e_commerce/screens/auth/sign_up/view/widgets/sign_up_field.dart';
+import 'package:e_commerce/screens/auth/widget/form_text_field.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class SignUpForm extends GetView<SignUpController> {
           children: [
             Expanded(
               child: Obx(
-                () => SignUpField(
+                () => FormTextField(
                   hintText: 'First Name',
                   validator: (value) => controller.signUpReq.value
                       .validateField(value, fieldType: 'First Name'),
@@ -31,7 +31,7 @@ class SignUpForm extends GetView<SignUpController> {
             ),
             Expanded(
               child: Obx(
-                () => SignUpField(
+                () => FormTextField(
                   hintText: 'Last Name',
                   validator: (value) => controller.signUpReq.value
                       .validateField(value, fieldType: 'Last Name'),
@@ -44,7 +44,7 @@ class SignUpForm extends GetView<SignUpController> {
           ],
         ),
         Obx(
-          () => SignUpField(
+          () => FormTextField(
             hintText: 'Email address',
             validator: (value) => controller.signUpReq.value
                 .validateField(value, fieldType: 'Email'),
@@ -55,7 +55,7 @@ class SignUpForm extends GetView<SignUpController> {
           ),
         ),
         Obx(
-          () => SignUpField(
+          () => FormTextField(
             hintText: 'Password',
             validator: (value) => controller.signUpReq.value
                 .validateField(value, fieldType: 'Password'),
@@ -65,7 +65,7 @@ class SignUpForm extends GetView<SignUpController> {
             errorText: controller.signUpReq.value.errors['password'],
           ),
         ),
-        SignUpField(
+        FormTextField(
           hintText: 'Confirm Password',
           validator: (value) => controller.signUpReq.value
               .validateField(value, fieldType: 'Confirm Password'),
