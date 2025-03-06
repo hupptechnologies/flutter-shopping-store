@@ -2,7 +2,7 @@ import 'package:e_commerce/common/requset/common_validation_dto.dart';
 import 'package:get/get.dart';
 
 class ForgetPasswordReq extends CommonValidationDto {
-  var email = Rx<String?>(null);
+  final email = Rx<String?>(null);
 
   ForgetPasswordReq({String? email}) {
     this.email.value = email;

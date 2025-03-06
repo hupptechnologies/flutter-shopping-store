@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
 import 'package:e_commerce/common/requset/auth/forget_password_req.dart';
+import 'package:e_commerce/common/requset/auth/password_req.dart';
 import 'package:e_commerce/common/requset/auth/sign_up_req.dart';
 import 'package:e_commerce/data/user/user_dto.dart';
 import 'package:e_commerce/service/api_service.dart';
@@ -55,9 +56,11 @@ class AuthService extends ApiService {
     required int otp,
     required String email,
   }) async {
-    return post(UrlConstant.verifyOtp, (json) => json, data: {
-      "email": email,
-      "otp": otp
-    });
+    return post(UrlConstant.verifyOtp, (json) => json,
+        data: {"email": email, "otp": otp});
+  }
+
+  Future<ApiResponse> resetPassword(PasswordReq data) async {
+    return post(UrlConstant.resetPassword, (json) => json, data: data.toJson());
   }
 }

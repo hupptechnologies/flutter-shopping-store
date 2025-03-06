@@ -22,12 +22,16 @@ class ApiResponse<T> {
     return ApiResponse(true, errorMessage, null, null);
   }
 
-  factory ApiResponse.errorData(Map<String, dynamic> json) {
-    return ApiResponse(
-      true,
-      json['message'],
-      null,
-      json['data'],
-    );
+  factory ApiResponse.errorData(dynamic json) {
+    if (json is Map<String, dynamic>) {
+      return ApiResponse(
+        true,
+        json['message'],
+        null,
+        json['data'],
+      );
+    } else {
+      return ApiResponse(true, json['message'], null, null);
+    }
   }
 }

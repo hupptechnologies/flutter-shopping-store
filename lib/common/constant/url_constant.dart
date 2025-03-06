@@ -8,4 +8,5 @@ abstract class UrlConstant {
   static const String signup = '/sign-up';
   static const String forgetPassword = '/forget-password';
   static const String verifyOtp = '/verify-otp';
+  static const String resetPassword = '/reset-password';
 }
