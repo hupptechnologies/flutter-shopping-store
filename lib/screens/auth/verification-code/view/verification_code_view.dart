@@ -1,3 +1,4 @@
+import 'package:e_commerce/common/constant/app_icons.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/screens/auth/verification-code/controller/verification_code_controller.dart';
 import 'package:e_commerce/widgets/back_button.dart';
@@ -82,7 +83,15 @@ class VerificationCodeView extends GetView<VerificationCodeController> {
                             ),
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.08),
+                        SizedBox(height: screenHeight * 0.05),
+                        Align(
+                          alignment: AlignmentDirectional.center,
+                          child: IconButton(
+                            icon: const Icon(AppIcons.refresh),
+                            onPressed: controller.resendOtp,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
                         Center(
                           child: FractionallySizedBox(
                             widthFactor: 0.5,

@@ -1,3 +1,4 @@
+import 'package:e_commerce/common/requset/auth/forget_password_req.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
@@ -86,6 +87,18 @@ class VerificationCodeController extends GetxController {
         controller2.text.isNotEmpty &&
         controller3.text.isNotEmpty &&
         controller4.text.isNotEmpty;
+  }
+
+  void resendOtp() async {
+    final response = await authService.forgetPassword(ForgetPasswordReq(
+      email: Get.arguments['email'],
+    ));
+    if (response.error) {
+      CommonSnackbar.error(response.message);
+      return;
+    }
+    CommonSnackbar.success(response.message);
+    clear();
   }
 
   void createPasswordPage(String email) {
