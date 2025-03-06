@@ -6,6 +6,7 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:path_provider/path_provider.dart';
@@ -19,7 +20,6 @@ class ApiService extends GetxService {
 
   /// **Constructor (Initializes `_dio`)**
   ApiService() {
-    print("APIService Initializing...");
     _dio = dio.Dio(dio.BaseOptions(
       baseUrl: UrlConstant.url + UrlConstant.prefix,
       connectTimeout: const Duration(seconds: 10),
@@ -34,8 +34,6 @@ class ApiService extends GetxService {
     _cookieJar = PersistCookieJar(storage: FileStorage(cookiePath));
 
     _dio.interceptors.add(CookieManager(_cookieJar));
-
-    print("Cookie jar initialized successfully.");
   }
 
   Future<ApiResponse<T>> _request<T>(
@@ -102,10 +100,14 @@ class ApiService extends GetxService {
       if (Directory(cookiePath).existsSync()) {
         await _cookieJar.deleteAll();
       } else {
-        print("Cookie directory does not exist, skipping deletion.");
+        if (kDebugMode) {
+          print("Cookie directory does not exist, skipping deletion.");
+        }
       }
     } catch (e) {
-      print("Error clearing cookies: $e");
+      if (kDebugMode) {
+        print("Error clearing cookies: $e");
+      }
     }
   }
 }
