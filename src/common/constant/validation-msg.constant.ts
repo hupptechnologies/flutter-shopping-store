@@ -6,4 +6,5 @@ export class ValidationMsgConstant {
 	static readonly PAGE_INTEGET = 'Page must be an integer';
 	static readonly LIMIT_INTEGET = 'Limit must be an integer';
 	static readonly SEARCH_NOT_EMPTY = 'Search field cannot be empty';
+	static readonly GENDER_ENUM = 'Gender must be either male, female, or other';
 }

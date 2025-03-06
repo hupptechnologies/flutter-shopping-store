@@ -1,4 +1,5 @@
 import { Exclude } from 'class-transformer';
+import { Gender } from 'src/common/enum/gender.enum';
 import { Address } from 'src/module/address/entities/address.entity';
 import { Otp } from 'src/module/auth/entities/otp.entity';
 import {
@@ -57,6 +58,14 @@ export class User extends BaseEntity {
 		default: null,
 	})
 	public image?: string | null;
+
+	@Column({
+		type: 'enum',
+		enum: Gender,
+		nullable: true,
+		default: null,
+	})
+	public gender?: Gender;
 
 	@OneToMany(() => Address, (address) => address.user, {
 		cascade: true,
