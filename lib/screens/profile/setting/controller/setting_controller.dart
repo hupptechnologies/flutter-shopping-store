@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:e_commerce/common/enum/gender_enum.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
-import 'package:e_commerce/data/user/user_dto.dart';
 import 'package:e_commerce/service/user_service.dart';
 import 'package:e_commerce/widgets/image_source_dialog.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,7 @@ class SettingController extends GetxController {
 
   late Rx<File?> imageFile = Rx<File?>(null);
   final ImagePicker imagePicker = ImagePicker();
-  late Rxn<UserDto> user = Rxn<UserDto>();
+  late Rxn<String> image = Rxn<String>();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController firstNameController = TextEditingController();
@@ -51,6 +50,8 @@ class SettingController extends GetxController {
     lastNameController.text = user.lastName;
     emailController.text = user.email;
     phoneController.text = user.mobileNumber!;
+    image.value = user.image;
+    selectedGender = Rxn<Gender>(user.gender);
   }
 
   void saveChange() {

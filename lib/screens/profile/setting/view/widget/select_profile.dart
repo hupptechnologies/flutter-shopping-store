@@ -1,5 +1,4 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/screens/profile/setting/controller/setting_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +20,14 @@ class SelectProfile extends GetView<SettingController> {
                 backgroundColor: AppColors.lightGray,
                 backgroundImage: controller.imageFile.value != null
                     ? FileImage(controller.imageFile.value!) as ImageProvider
-                    : const AssetImage(ImageConstant.category1),
+                    : controller.image.value != null
+                        ? NetworkImage(controller.image.value!)
+                        : null,
+                child: (controller.imageFile.value == null &&
+                        (controller.image.value == null ||
+                            controller.image.value!.isEmpty))
+                    ? const Icon(Icons.person, color: Colors.white, size: 50)
+                    : null,
               ),
             ),
             Positioned(

@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
     bool isIntroShown = storage.read('isIntro') ?? false;
 
     if (isLoggedIn) return AppRoutes.home;
-    if (isIntroShown) return AppRoutes.home;
+    if (isIntroShown) return AppRoutes.intro;
     return AppRoutes.index;
   }
 }
