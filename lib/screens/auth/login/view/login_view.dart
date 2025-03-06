@@ -1,6 +1,6 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/screens/auth/login/controller/login_controller.dart';
-import 'package:e_commerce/widgets/build_text_field.dart';
+import 'package:e_commerce/screens/auth/widget/form_text_field.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:e_commerce/widgets/circular_icon_button.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
@@ -41,18 +41,22 @@ class LoginView extends GetView<LoginController> {
                       style: TextStyle(fontSize: 25),
                     ),
                     SizedBox(height: screenHeight * 0.1),
-                    BuildTextField(
+                    FormTextField(
                       hintText: 'Email',
-                      controller: controller.emailController,
-                      validator: (value) => controller.validateEmail(value),
+                      validator: (value) => controller.loginReq
+                          .validateField(value, fieldType: 'Email'),
                       keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) =>
+                          controller.loginReq.updateField(email: value),
                     ),
                     SizedBox(height: screenHeight * 0.03),
-                    BuildTextField(
+                    FormTextField(
                       hintText: 'Password',
-                      controller: controller.passwordController,
-                      validator: (value) => controller.validatePassword(value),
+                      validator: (value) => controller.loginReq
+                          .validateField(value, fieldType: 'Password'),
                       isObscure: true,
+                      onChanged: (value) =>
+                          controller.loginReq.updateField(password: value),
                     ),
                     SizedBox(height: screenHeight * 0.03),
                     Row(
@@ -76,7 +80,7 @@ class LoginView extends GetView<LoginController> {
                         child: Obx(
                           () => ButtonWidget(
                             title: 'SIGN IN',
-                            isDisable: !controller.isFormValid.value,
+                            isDisable: !controller.loginReq.isValid.value,
                             onPressed: controller.signIn,
                             isLoader: controller.authService.isLoader.value,
                           ),

@@ -1,6 +1,7 @@
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
 import 'package:e_commerce/common/requset/auth/forget_password_req.dart';
+import 'package:e_commerce/common/requset/auth/login_req.dart';
 import 'package:e_commerce/common/requset/auth/password_req.dart';
 import 'package:e_commerce/common/requset/auth/sign_up_req.dart';
 import 'package:e_commerce/data/user/user_dto.dart';
@@ -11,14 +12,11 @@ class AuthService extends ApiService {
   AuthService() : super(UrlConstant.auth);
   final storage = GetStorage();
 
-  Future<ApiResponse<UserDto>> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<ApiResponse<UserDto>> login(LoginReq data) async {
     final response = await post(
       UrlConstant.login,
       (data) => UserDto.fromJson(data),
-      data: {"email": email, "password": password},
+      data: data.toJson(),
     );
     if (!response.error) {
       storage.write('isLogin', true);
