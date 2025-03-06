@@ -1,5 +1,6 @@
 import 'package:e_commerce/routers/app_pages.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/api_service.dart';
 import 'package:e_commerce/widgets/ignore_text_scale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +12,12 @@ void main() async {
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
   ));
+  WidgetsFlutterBinding.ensureInitialized();
+
   await GetStorage.init();
+
+  final apiService = Get.put(ApiService());
+  await apiService.init();
   runApp(IgnoreTextScale(child: MyApp()));
 }
 
@@ -40,7 +46,7 @@ class MyApp extends StatelessWidget {
     bool isIntroShown = storage.read('isIntro') ?? false;
 
     if (isLoggedIn) return AppRoutes.home;
-    if (isIntroShown) return AppRoutes.login;
+    if (isIntroShown) return AppRoutes.home;
     return AppRoutes.index;
   }
 }

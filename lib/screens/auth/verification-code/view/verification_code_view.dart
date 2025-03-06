@@ -100,7 +100,7 @@ class VerificationCodeView extends GetView<VerificationCodeController> {
                                 title: 'OTP Verify',
                                 isDisable: !controller.allFieldsFilled.value,
                                 onPressed: controller.otpVerify,
-                                isLoader: controller.authService.isLoader.value,
+                                isLoader: controller.authService.apiService.isLoader.value,
                               ),
                             ),
                           ),

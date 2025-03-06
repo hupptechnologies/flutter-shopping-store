@@ -1,4 +1,4 @@
-import 'package:e_commerce/common/requset/auth/sign_up_req.dart';
+import 'package:e_commerce/common/requset/sign_up_req.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';

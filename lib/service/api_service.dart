@@ -1,32 +1,41 @@
+import 'dart:io';
+
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:path_provider/path_provider.dart';
 
-class ApiService {
-  final dio.Dio _dio;
-  late final CookieJar _cookieJar;
-  late Rx<bool> isLoader = false.obs;
+class ApiService extends GetxService {
+  late final dio.Dio _dio;
+  late PersistCookieJar _cookieJar;
 
-  ApiService(String baseUrl)
-      : _dio = dio.Dio(
-          dio.BaseOptions(
-            baseUrl: UrlConstant.url + UrlConstant.prefix + baseUrl,
-            connectTimeout: const Duration(seconds: 10),
-            receiveTimeout: const Duration(seconds: 10),
-          ),
-        ) {
-    _initializeCookies();
+  late Rx<bool> isLoader = false.obs;
+  final storage = GetStorage();
+
+  /// **Constructor (Initializes `_dio`)**
+  ApiService() {
+    print("APIService Initializing...");
+    _dio = dio.Dio(dio.BaseOptions(
+      baseUrl: UrlConstant.url + UrlConstant.prefix,
+      connectTimeout: const Duration(seconds: 10),
+      receiveTimeout: const Duration(seconds: 10),
+    ));
   }
 
-  Future<void> _initializeCookies() async {
+  /// **Initialize Cookies & Interceptors**
+  Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
-    _cookieJar =
-        PersistCookieJar(storage: FileStorage("${dir.path}/.cookies/"));
+    final cookiePath = '${dir.path}/cookies';
+    _cookieJar = PersistCookieJar(storage: FileStorage(cookiePath));
+
     _dio.interceptors.add(CookieManager(_cookieJar));
+
+    print("Cookie jar initialized successfully.");
   }
 
   Future<ApiResponse<T>> _request<T>(
@@ -49,6 +58,9 @@ class ApiService {
     if (e.response != null) {
       int? statusCode = e.response?.statusCode;
       if (statusCode == 401) {
+        clearCookies();
+        storage.remove('isLogin');
+        Get.offAllNamed(AppRoutes.login);
         return ApiResponse.error("Session expired. Logging out...");
       }
       final dynamic errorData = e.response?.data;
@@ -83,6 +95,17 @@ class ApiService {
 
   /// **Clear Cookies (For Logout)**
   Future<void> clearCookies() async {
-    await _cookieJar.deleteAll();
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final cookiePath = '${dir.path}/cookies';
+
+      if (Directory(cookiePath).existsSync()) {
+        await _cookieJar.deleteAll();
+      } else {
+        print("Cookie directory does not exist, skipping deletion.");
+      }
+    } catch (e) {
+      print("Error clearing cookies: $e");
+    }
   }
 }

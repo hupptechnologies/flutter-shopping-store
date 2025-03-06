@@ -1,4 +1,4 @@
-import 'package:e_commerce/common/requset/auth/login_req.dart';
+import 'package:e_commerce/common/requset/login_req.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/routers/app_routers.dart';
@@ -23,6 +23,7 @@ class LoginController extends GetxController {
         CommonSnackbar.error("Invalid email or password");
       }
     } catch (e) {
+      print(e);
       CommonSnackbar.error(e.toString());
     }
   }
