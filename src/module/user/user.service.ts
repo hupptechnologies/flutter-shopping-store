@@ -97,8 +97,9 @@ export class UserService {
 		return updateUser;
 	}
 
-	public async findById(id: number): Promise<User> {
-		const user = await this.userRepository.findOneById(id);
+	public async findById(authId: number, id?: string): Promise<User> {
+		const userId = id ? parseInt(id, 10) || authId : authId;
+		const user = await this.userRepository.findOneById(userId);
 
 		if (!user) {
 			throw new NotFoundException(MessageConstant.USER_NOT_FOUND);

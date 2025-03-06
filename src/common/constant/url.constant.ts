@@ -2,6 +2,7 @@ export abstract class URLConstant {
 	static readonly ROUTER_ID = ':id';
 
 	static readonly USER = 'user';
+	static readonly GET_PROFILE = 'get-profile';
 
 	static readonly AUTH = 'auth';
 	static readonly LOGIN = 'login';
