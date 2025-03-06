@@ -1,7 +1,6 @@
-import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/screens/auth/sign_up/controller/sign_up_controller.dart';
 import 'package:e_commerce/screens/auth/sign_up/view/widgets/sign_up_form.dart';
-import 'package:e_commerce/widgets/circular_icon_button.dart';
+import 'package:e_commerce/screens/auth/widget/other_login_or_sign_up.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,52 +41,8 @@ class SignUpView extends GetView<SignUpController> {
                     ),
                     SizedBox(height: screenHeight * 0.05),
                     const SignUpForm(),
-                    Center(
-                      child: Column(
-                        children: [
-                          SizedBox(height: screenHeight * 0.05),
-                          const Text('or sign up with'),
-                          SizedBox(height: screenHeight * 0.02),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const BuildCircularIconButton(
-                                iconPath: ImageConstant.mac,
-                              ),
-                              SizedBox(width: screenWidth * 0.05),
-                              const BuildCircularIconButton(
-                                iconPath: ImageConstant.google,
-                              ),
-                              SizedBox(width: screenWidth * 0.05),
-                              const BuildCircularIconButton(
-                                iconPath: ImageConstant.facebook,
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: screenHeight * 0.05),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Already have an account? ',
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              InkWell(
-                                onTap: controller.loginPage,
-                                child: const Text(
-                                  'Log In',
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: screenHeight * 0.05)
-                        ],
-                      ),
-                    ),
+                    SizedBox(height: screenHeight * 0.05),
+                    OtherLoginOrSignUp(onTap: controller.loginPage),
                   ],
                 ),
               ),

@@ -1,8 +1,7 @@
-import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/screens/auth/login/controller/login_controller.dart';
 import 'package:e_commerce/screens/auth/widget/form_text_field.dart';
+import 'package:e_commerce/screens/auth/widget/other_login_or_sign_up.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
-import 'package:e_commerce/widgets/circular_icon_button.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -88,50 +87,7 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                     SizedBox(height: screenHeight * 0.05),
-                    Center(
-                      child: Column(
-                        children: [
-                          const Text('or login up with'),
-                          SizedBox(height: screenHeight * 0.02),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const BuildCircularIconButton(
-                                iconPath: ImageConstant.mac,
-                              ),
-                              SizedBox(width: screenWidth * 0.05),
-                              const BuildCircularIconButton(
-                                iconPath: ImageConstant.google,
-                              ),
-                              SizedBox(width: screenWidth * 0.05),
-                              const BuildCircularIconButton(
-                                iconPath: ImageConstant.facebook,
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: screenHeight * 0.10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Don't have an account? ",
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              InkWell(
-                                onTap: controller.signUpPage,
-                                child: const Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
+                    OtherLoginOrSignUp(isLogin: true, onTap: controller.signUpPage),
                   ],
                 ),
               ),
