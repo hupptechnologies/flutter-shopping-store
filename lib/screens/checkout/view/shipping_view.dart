@@ -132,7 +132,7 @@ class ShippingView extends GetView<ShippingController> {
     required bool required,
   }) {
     return TextFormField(
-      initialValue: controller.address.value.toMap()[key],
+      initialValue: controller.address.value.toJson()[key],
       keyboardType: isNumber ? TextInputType.number : TextInputType.text,
       inputFormatters: inputFormatters,
       decoration: InputDecoration(

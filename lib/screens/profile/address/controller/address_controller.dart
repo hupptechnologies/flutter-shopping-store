@@ -1,42 +1,32 @@
-import 'package:e_commerce/common/enum/address_enum.dart';
 import 'package:e_commerce/data/address/address_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/address_service.dart';
 import 'package:get/get.dart';
 
 class AddressController extends GetxController {
-  var selectedAddressId = 1.obs;
-  final List<AddressDto> list = [
-    AddressDto(
-      id: 1,
-      firstName: 'Sunie',
-      lastName: 'Pham',
-      city: 'city',
-      state: 'state',
-      country: 'country',
-      streetName: 'streetName',
-      phoneNumber: '+91 0000000000',
-      zipCode: '000000',
-      type: AddressEnum.home,
-      isSelected: true,
-    ),
-    AddressDto(
-      id: 2,
-      firstName: 'Sunie',
-      lastName: 'Pham',
-      city: 'city',
-      state: 'state',
-      country: 'country',
-      streetName: 'streetName',
-      phoneNumber: '+91 0000000000',
-      zipCode: '000000',
-      type: AddressEnum.office,
-    )
-  ].obs;
+  final AddressService addressService = AddressService();
+  var selectedAddressId = 0.obs;
+
+  final RxList<AddressDto> list = RxList<AddressDto>();
+
+  @override
+  void onInit() {
+    fetchAddressList();
+    super.onInit();
+  }
+
+  Future<void> fetchAddressList() async {
+    final response = await addressService.getAddresses();
+    if (!response.error) {
+      list.assignAll(response.data!);
+      selectedAddressId.value = list.first.id;
+    }
+  }
 
   void onChangeDefalutAddress(int id) {
     selectedAddressId.value = id;
     for (var address in list) {
-      address.isSelected = address.id == id;
+      address.isDefault = address.id == id;
     }
     update();
   }

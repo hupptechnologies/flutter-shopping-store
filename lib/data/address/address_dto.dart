@@ -1,65 +1,72 @@
 import 'package:e_commerce/common/enum/address_enum.dart';
+import 'package:e_commerce/common/utils/helper.dart';
+
+List<AddressDto> addressDtoFromJson(List<dynamic> jsonList) {
+  return jsonList.map((json) => AddressDto.fromJson(json)).toList();
+}
 
 class AddressDto {
   int id = 0;
-  String firstName = '';
-  String lastName = '';
-  String streetName = '';
+  String receiverName = '';
+  String street = '';
   String country = '';
   String city = '';
   String state = '';
   String zipCode = '';
-  String phoneNumber = '';
+  String receiverPhone = '';
   AddressEnum type;
-  bool isSelected = false;
+  bool isDefault = false;
 
   AddressDto({
     this.id = 0,
-    this.firstName = '',
-    this.lastName = '',
-    this.streetName = '',
+    this.receiverName = '',
+    this.street = '',
     this.country = '',
     this.city = '',
     this.state = '',
     this.zipCode = '',
-    this.phoneNumber = '',
+    this.receiverPhone = '',
     this.type = AddressEnum.home,
-    this.isSelected = false,
+    this.isDefault = false,
   });
 
+  factory AddressDto.fromJson(Map<String, dynamic> json) => AddressDto(
+        id: json["id"],
+        receiverName: json["receiverName"],
+        street: json["street"],
+        city: json["city"],
+        state: json["state"],
+        zipCode: json["zipCode"],
+        country: json["country"],
+        type: Helper.enumFromString(json["type"], AddressEnum.values),
+        receiverPhone: json["receiverPhone"],
+        isDefault: json["isDefault"],
+      );
+
   bool get isValid =>
-      firstName.isNotEmpty &&
-      lastName.isNotEmpty &&
-      streetName.isNotEmpty &&
+      street.isNotEmpty &&
       country.isNotEmpty &&
       city.isNotEmpty &&
       state.isNotEmpty &&
       zipCode.isNotEmpty &&
-      phoneNumber.isNotEmpty;
+      receiverPhone.isNotEmpty;
 
-  Map<String, String> toMap() {
+  Map<String, String> toJson() {
     return {
-      'firstName': firstName,
-      'lastName': lastName,
-      'streetName': streetName,
+      'receiverName': receiverName,
+      'street': street,
       'city': city,
       'country': country,
       'state': state,
       'zipCode': zipCode,
-      'phoneNumber': phoneNumber,
+      'receiverPhone': receiverPhone,
     };
   }
 
   void updateField(String key, String value) {
     switch (key) {
-      case 'firstName':
-        firstName = value;
-        break;
-      case 'lastName':
-        lastName = value;
-        break;
-      case 'streetName':
-        streetName = value;
+      case 'street':
+        street = value;
         break;
       case 'country':
         country = value;
@@ -73,13 +80,13 @@ class AddressDto {
       case 'zipCode':
         zipCode = value;
         break;
-      case 'phoneNumber':
-        phoneNumber = value;
+      case 'receiverPhone':
+        receiverPhone = value;
         break;
     }
   }
 
   String getAddressLine() {
-    return '$streetName, $city, $state - $zipCode, $country';
+    return '$street, $city, $state - $zipCode, $country';
   }
 }

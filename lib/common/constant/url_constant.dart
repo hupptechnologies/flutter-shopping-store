@@ -12,4 +12,6 @@ abstract class UrlConstant {
   
   static const String user = '/user';
   static const String getProfile = '$user/get-profile';
+
+  static const String address = '/address';
 }
