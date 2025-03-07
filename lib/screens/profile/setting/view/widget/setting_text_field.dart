@@ -1,28 +1,45 @@
 import 'package:flutter/material.dart';
 
 class SettingTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final bool isObscure;
+  final TextInputType keyboardType;
+  final String? value;
+  final TextEditingController? controller;
   final String label;
-  final TextInputType? keyboardType;
-  final String? Function(String?)? validator;
+  final Widget? prefixIcon;
+  final FormFieldValidator? validator;
+  final ValueChanged<String>? onChanged;
+  final String? errorText;
 
   const SettingTextField({
     super.key,
-    required this.controller,
+    this.isObscure = false,
+    this.keyboardType = TextInputType.text,
+    this.controller,
     required this.label,
-    this.keyboardType,
+    this.prefixIcon,
     this.validator,
+    this.onChanged,
+    this.errorText,
+    this.value,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      key: ValueKey(value),
       controller: controller,
-      decoration: InputDecoration(labelText: label),
+      validator: validator,
+      initialValue: value,
       keyboardType: keyboardType,
-      validator: validator ??
-          (value) =>
-              value == null || value.isEmpty ? "$label is required" : null,
+      obscureText: isObscure,
+      onChanged: onChanged,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: InputDecoration(
+        hintText: label,
+        prefixIcon: prefixIcon,
+        errorText: errorText,
+      ),
     );
   }
 }

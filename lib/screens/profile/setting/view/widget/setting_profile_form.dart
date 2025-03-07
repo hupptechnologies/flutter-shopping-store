@@ -15,50 +15,68 @@ class SettingProfileForm extends GetView<SettingController> {
         Row(
           children: [
             Expanded(
-              child: SettingTextField(
-                controller: controller.firstNameController,
-                label: "First Name",
+              child: Obx(
+                () => SettingTextField(
+                  label: "First Name",
+                  onChanged: (value) =>
+                      controller.userDto.value.update(firstName: value),
+                  value: controller.userDto.value.firstName,
+                ),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
-              child: SettingTextField(
-                controller: controller.lastNameController,
-                label: "Last Name",
+              child: Obx(
+                () => SettingTextField(
+                  label: "Last Name",
+                  onChanged: (value) =>
+                      controller.userDto.value.update(lastName: value),
+                  value: controller.userDto.value.lastName,
+                ),
               ),
             ),
           ],
         ),
         const SizedBox(height: 20),
-        SettingTextField(
-          controller: controller.emailController,
-          label: "Email",
-          keyboardType: TextInputType.emailAddress,
+        Obx(
+          () => SettingTextField(
+            label: "Email",
+            keyboardType: TextInputType.emailAddress,
+            onChanged: (value) => controller.userDto.value.update(email: value),
+            value: controller.userDto.value.email,
+          ),
         ),
         const SizedBox(height: 20),
         Row(
           children: [
-            Flexible(
-              flex: 3,
-              child: DropdownButtonFormField<Gender>(
-                value: controller.selectedGender.value,
-                items: Gender.values
-                    .map((gender) => DropdownMenuItem(
-                          value: gender,
-                          child: Text(gender.name.capitalizeFirst!),
-                        ))
-                    .toList(),
-                decoration: const InputDecoration(labelText: "Gender"),
-                onChanged: (value) => controller.selectedGender.value = value,
+            Obx(
+              () => Flexible(
+                flex: 3,
+                child: DropdownButtonFormField<Gender>(
+                  value: controller.userDto.value.gender,
+                  items: Gender.values
+                      .map((gender) => DropdownMenuItem(
+                            value: gender,
+                            child: Text(gender.name.capitalizeFirst!),
+                          ))
+                      .toList(),
+                  decoration: const InputDecoration(labelText: "Gender"),
+                  onChanged: (value) =>
+                      controller.userDto.value.update(gender: value),
+                ),
               ),
             ),
             const SizedBox(width: 10),
-            Flexible(
-              flex: 7,
-              child: SettingTextField(
-                controller: controller.phoneController,
-                label: "Phone Number",
-                keyboardType: TextInputType.phone,
+            Obx(
+              () => Flexible(
+                flex: 7,
+                child: SettingTextField(
+                  label: "Phone Number",
+                  keyboardType: TextInputType.phone,
+                  onChanged: (value) =>
+                      controller.userDto.value.update(mobileNumber: value),
+                  value: controller.userDto.value.mobileNumber,
+                ),
               ),
             ),
           ],
@@ -69,7 +87,7 @@ class SettingProfileForm extends GetView<SettingController> {
           child: ButtonWidget(
             title: 'Save change',
             isDisable: false,
-            onPressed: controller.saveChange,
+            onPressed: controller.updateProfile,
           ),
         ),
       ],

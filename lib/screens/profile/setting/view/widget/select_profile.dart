@@ -20,12 +20,12 @@ class SelectProfile extends GetView<SettingController> {
                 backgroundColor: AppColors.lightGray,
                 backgroundImage: controller.imageFile.value != null
                     ? FileImage(controller.imageFile.value!) as ImageProvider
-                    : controller.image.value != null
-                        ? NetworkImage(controller.image.value!)
+                    : controller.userDto.value.image != null
+                        ? NetworkImage(controller.userDto.value.image!)
                         : null,
                 child: (controller.imageFile.value == null &&
-                        (controller.image.value == null ||
-                            controller.image.value!.isEmpty))
+                        (controller.userDto.value.image == null ||
+                            controller.userDto.value.image!.isEmpty))
                     ? const Icon(Icons.person, color: Colors.white, size: 50)
                     : null,
               ),

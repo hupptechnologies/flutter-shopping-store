@@ -25,19 +25,16 @@ class SettingView extends GetView<SettingController> {
               horizontal: MarginPadding.homeHorPadding,
               vertical: MarginPadding.homeTopPadding,
             ),
-            child: SingleChildScrollView(
-              child: Form(
-                key: controller.formKey,
-                child: const Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 30),
-                      child: SelectProfile(),
-                    ),
-                    SizedBox(height: 60),
-                    SettingProfileForm(),
-                  ],
-                ),
+            child: const SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 30),
+                    child: SelectProfile(),
+                  ),
+                  SizedBox(height: 60),
+                  SettingProfileForm(),
+                ],
               ),
             ),
           ),

@@ -64,6 +64,7 @@ class ApiService extends GetxService {
       final dynamic errorData = e.response?.data;
       return ApiResponse.errorData(errorData);
     }
+    print('API CALLING ERROR: ${e}');
     return ApiResponse.error("An unexpected error occurred: ${e.message}");
   }
 

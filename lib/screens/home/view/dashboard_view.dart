@@ -117,6 +117,7 @@ class DashboardView extends GetView<DashboardController> {
       ),
       title: 'NEW COLLECTION',
       subTitle: 'HANG OUT & PARTY',
+      subTitleFontSize: 20,
       image: ImageConstant.newCollection,
     );
   }
