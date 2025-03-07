@@ -18,7 +18,7 @@ class AddressCard extends GetView<AddressController> {
   Widget build(BuildContext context) {
     final isOffice = address.type == AddressEnum.office;
     return GestureDetector(
-      onTap: () => controller.onChangeDefalutAddress(address.id),
+      onTap: () => controller.setDefaultAddress(address.id),
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
@@ -31,20 +31,18 @@ class AddressCard extends GetView<AddressController> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Obx(
-                () => Radio(
-                  value: address.id,
-                  groupValue: controller.selectedAddressId.value,
-                  activeColor: AppColors.darkGray,
-                  onChanged: (value) {
-                    if (value != null) {
-                      controller.onChangeDefalutAddress(value);
-                    }
-                  },
-                  visualDensity:
-                      const VisualDensity(horizontal: -4.0, vertical: 2.0),
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
+              Radio(
+                value: true,
+                groupValue: address.isDefault,
+                activeColor: AppColors.darkGray,
+                onChanged: (value) {
+                  if (value != null) {
+                    controller.setDefaultAddress(address.id);
+                  }
+                },
+                visualDensity:
+                    const VisualDensity(horizontal: -4.0, vertical: 2.0),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               Expanded(
                 child: Padding(
@@ -102,7 +100,7 @@ class AddressCard extends GetView<AddressController> {
                 ),
               ),
               IconButton(
-                onPressed: () => {print('Calling Delete Address')},
+                onPressed: () => controller.delete(address.id),
                 icon: const Icon(
                   Icons.delete_outlined,
                   size: 18,

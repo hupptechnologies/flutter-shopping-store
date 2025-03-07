@@ -30,35 +30,36 @@ class AddressView extends GetView<AddressController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Obx(
-                    () => controller.list.isEmpty
-                        ? SizedBox(
-                            width: double.infinity,
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: Get.height / 5),
-                              child: const Center(
-                                child: Text(
-                                  "No address found",
-                                  style: TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                  Obx(() {
+                    if (controller.list.isEmpty) {
+                      return SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: Get.height / 5),
+                          child: const Center(
+                            child: Text(
+                              "No address found",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
                             ),
-                          )
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.list.length,
-                            itemBuilder: (context, index) {
-                              final address = controller.list[index];
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: AddressCard(address: address),
-                              );
-                            },
                           ),
-                  ),
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.list.length,
+                      itemBuilder: (context, index) {
+                        final address = controller.list[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: AddressCard(address: address),
+                        );
+                      },
+                    );
+                  }),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: FractionallySizedBox(

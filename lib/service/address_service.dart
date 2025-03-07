@@ -8,6 +8,19 @@ class AddressService {
   final ApiService apiService = Get.find<ApiService>();
 
   Future<ApiResponse<List<AddressDto>>> getAddresses() async {
-    return apiService.get(UrlConstant.address, (data) => addressDtoFromJson(data));
+    return apiService.get(
+        UrlConstant.address, (data) => addressDtoFromJson(data));
+  }
+
+  Future<ApiResponse<bool>> delete(int id) async {
+    return apiService.delete('${UrlConstant.address}/$id', (data) => data);
+  }
+
+  Future<ApiResponse> setDefaultAddress(int id) async {
+    return apiService.patch(
+      '${UrlConstant.address}/$id',
+      (data) => data,
+      data: {'isDefault': true},
+    );
   }
 }
