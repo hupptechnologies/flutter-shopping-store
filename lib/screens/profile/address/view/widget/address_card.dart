@@ -89,14 +89,28 @@ class AddressCard extends GetView<AddressController> {
                   ),
                 ),
               ),
-              const InkWell(
-                child: Text(
-                  'Edit',
-                  style: TextStyle(
-                    color: AppColors.offRed,
-                    decoration: TextDecoration.underline,
-                    decorationColor: AppColors.offRed,
-                  ),
+              IconButton(
+                onPressed: () => {print('Calling Edit Address')},
+                icon: const Icon(
+                  Icons.edit_outlined,
+                  size: 18,
+                  color: AppColors.lightGreen,
+                ),
+                visualDensity: const VisualDensity(
+                  horizontal: -4.0,
+                  vertical: -1.0,
+                ),
+              ),
+              IconButton(
+                onPressed: () => {print('Calling Delete Address')},
+                icon: const Icon(
+                  Icons.delete_outlined,
+                  size: 18,
+                  color: AppColors.offRed,
+                ),
+                visualDensity: const VisualDensity(
+                  horizontal: -4.0,
+                  vertical: -1.0,
                 ),
               ),
             ],
