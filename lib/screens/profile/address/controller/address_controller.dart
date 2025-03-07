@@ -39,7 +39,9 @@ class AddressController extends GetxController {
     CommonSnackbar.error(response.message);
   }
 
-  void gotoAddAddress() {
-    Get.toNamed(AppRoutes.addAddress);
+  void editOrCreate(int? id) {
+    Get.toNamed(AppRoutes.addAddress, arguments: {
+      'id': id,
+    });
   }
 }

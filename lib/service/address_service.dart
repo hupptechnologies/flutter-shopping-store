@@ -23,4 +23,11 @@ class AddressService {
       data: {'isDefault': true},
     );
   }
+
+  Future<ApiResponse<AddressDto>> getById(int id) async {
+    return apiService.get(
+      '${UrlConstant.address}/$id',
+      (address) => AddressDto.fromJson(address),
+    );
+  }
 }

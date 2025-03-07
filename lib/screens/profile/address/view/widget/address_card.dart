@@ -88,7 +88,7 @@ class AddressCard extends GetView<AddressController> {
                 ),
               ),
               IconButton(
-                onPressed: () => {print('Calling Edit Address')},
+                onPressed: () => controller.editOrCreate(address.id),
                 icon: const Icon(
                   Icons.edit_outlined,
                   size: 18,

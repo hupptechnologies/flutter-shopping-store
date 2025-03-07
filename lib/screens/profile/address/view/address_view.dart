@@ -67,7 +67,7 @@ class AddressView extends GetView<AddressController> {
                       child: ButtonWidget(
                         title: 'Add new address',
                         isDisable: false,
-                        onPressed: controller.gotoAddAddress,
+                        onPressed: () => controller.editOrCreate(null),
                       ),
                     ),
                   )
