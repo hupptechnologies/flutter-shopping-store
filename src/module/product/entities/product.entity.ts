@@ -30,7 +30,7 @@ export class Product {
 	})
 	public category: Category;
 
-	@OneToMany(() => Image, (image) => image.category, {
+	@OneToMany(() => Image, (image) => image.product, {
 		eager: true,
 		cascade: true,
 	})

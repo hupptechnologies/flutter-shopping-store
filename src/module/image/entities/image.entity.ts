@@ -44,9 +44,11 @@ export class Image extends BaseEntity {
 	@CreateDateColumn()
 	public createdAt: Date;
 
+	@Exclude()
 	@UpdateDateColumn()
 	public updatedAt: Date;
 
+	@Exclude()
 	@DeleteDateColumn()
 	public deletedAt: Date | null;
 
