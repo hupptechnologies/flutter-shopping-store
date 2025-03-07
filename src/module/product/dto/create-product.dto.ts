@@ -11,6 +11,7 @@ export class CreateProductDto {
 	@IsString()
 	public description?: string;
 
+	@Exclude()
 	@IsNumber()
 	@Type(() => Number)
 	public categoryId: number;

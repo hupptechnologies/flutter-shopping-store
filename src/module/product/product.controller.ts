@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Get,
 	Param,
 	ParseIntPipe,
 	Patch,
@@ -17,6 +18,7 @@ import { Product } from './entities/product.entity';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { Public } from 'src/decorator/public/public.decorator';
 
 @Controller(URLConstant.PRODUCT)
 export class ProductController {
@@ -46,6 +48,16 @@ export class ProductController {
 		return {
 			data: product,
 			message: MessageConstant.PRODCUT_UPDATED_SUCCESS,
+		};
+	}
+
+	@Public()
+	@Get(URLConstant.ROUTER_ID)
+	async findOne(@Param(KeyConstant.ID, ParseIntPipe) id: number): Promise<APIResponse<Product>> {
+		const product = await this.productService.findOne(id);
+		return {
+			data: product,
+			message: MessageConstant.PRODCUT_FETCHED_SUCCESS,
 		};
 	}
 }

@@ -63,4 +63,14 @@ export class ProductService {
 		await this.imageService.uploadAndAttachImages(files, updateProduct);
 		return updateProduct;
 	}
+
+	public async findOne(id: number): Promise<Product> {
+		const product = await this.productRepository.findById(id, ['category']);
+
+		if (!product) {
+			throw new NotFoundException(MessageConstant.PRODCUT_NOT_FOUND);
+		}
+
+		return product;
+	}
 }
