@@ -60,7 +60,28 @@ class AddressDto {
       'state': state,
       'zipCode': zipCode,
       'receiverPhone': receiverPhone,
+      'type': type.name,
     };
+  }
+
+  void update({
+    String? receiverName,
+    String? street,
+    String? country,
+    String? city,
+    String? state,
+    String? zipCode,
+    String? receiverPhone,
+    AddressEnum? type,
+  }) {
+    if (receiverName != null) this.receiverName = receiverName;
+    if (street != null) this.street = street;
+    if (country != null) this.country = country;
+    if (city != null) this.city = city;
+    if (state != null) this.state = state;
+    if (zipCode != null) this.zipCode = zipCode;
+    if (receiverPhone != null) this.receiverPhone = receiverPhone;
+    if (type != null) this.type = type;
   }
 
   void updateField(String key, String value) {

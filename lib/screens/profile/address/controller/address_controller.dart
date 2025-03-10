@@ -39,9 +39,13 @@ class AddressController extends GetxController {
     CommonSnackbar.error(response.message);
   }
 
-  void editOrCreate(int? id) {
-    Get.toNamed(AppRoutes.addAddress, arguments: {
+  void editOrCreate(int? id) async {
+    final bool result = await Get.toNamed(AppRoutes.addAddress, arguments: {
       'id': id,
     });
+
+    if (result == true) {
+      fetchAddressList();
+    }
   }
 }

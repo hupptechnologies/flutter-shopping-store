@@ -24,10 +24,26 @@ class AddressService {
     );
   }
 
-  Future<ApiResponse<AddressDto>> getById(int id) async {
+  Future<ApiResponse<AddressDto>> getById(String id) async {
     return apiService.get(
       '${UrlConstant.address}/$id',
       (address) => AddressDto.fromJson(address),
+    );
+  }
+
+  Future<ApiResponse> createOrUpdate(AddressDto addressDto) async {
+    final int id = addressDto.id;
+    if (id == 0) {
+      return apiService.post(
+        UrlConstant.address,
+        (data) => data,
+        data: addressDto.toJson(),
+      );
+    }
+    return apiService.patch(
+      '${UrlConstant.address}/${addressDto.id}',
+      (data) => data,
+      data: addressDto.toJson(),
     );
   }
 }

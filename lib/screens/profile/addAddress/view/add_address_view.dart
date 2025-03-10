@@ -1,7 +1,7 @@
-import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/common/enum/address_enum.dart';
 import 'package:e_commerce/screens/profile/addAddress/controller/add_address_controller.dart';
+import 'package:e_commerce/screens/profile/addAddress/view/widget/add_address_form_fields.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';
 import 'package:e_commerce/widgets/button_widget.dart';
 import 'package:e_commerce/widgets/pop_scope_wrapper.dart';
@@ -14,9 +14,10 @@ class AddAddressView extends GetView<AddAddressController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<AddAddressController>(
+      isLoader: controller.addressService.apiService.isLoader,
       child: Scaffold(
-        appBar: const BackButtonAppbarTitle(
-          title: 'Add Address',
+        appBar: BackButtonAppbarTitle(
+          title: controller.isEditMode.value ? "Edit Address" : "Add Address",
           centerTitle: true,
         ),
         body: SafeArea(
@@ -32,37 +33,7 @@ class AddAddressView extends GetView<AddAddressController> {
                 child: Column(
                   spacing: 10,
                   children: [
-                    ...controller.fields.entries.map((field) {
-                      return TextFormField(
-                        controller: field.value.controller,
-                        decoration: InputDecoration(
-                          label: RichText(
-                            text: TextSpan(
-                              text: field.value.labelText,
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 16),
-                              children: field.value.isRequired
-                                  ? [
-                                      const TextSpan(
-                                        text: " *",
-                                        style:
-                                            TextStyle(color: AppColors.offRed),
-                                      ),
-                                    ]
-                                  : [],
-                            ),
-                          ),
-                        ),
-                        keyboardType: field.value.keyboardType,
-                        validator: (value) {
-                          if (field.value.isRequired &&
-                              (value == null || value.trim().isEmpty)) {
-                            return "${field.value.labelText} is required";
-                          }
-                          return null;
-                        },
-                      );
-                    }),
+                    const AddAddressFormFields(),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -73,31 +44,39 @@ class AddAddressView extends GetView<AddAddressController> {
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
-                        Obx(() => Row(
-                              children: AddressEnum.values
-                                  .map((address) => GestureDetector(
-                                        onTap: () =>
-                                            controller.setAddress(address),
-                                        child: Row(
-                                          children: [
-                                            Radio<AddressEnum>(
-                                              visualDensity:
-                                                  const VisualDensity(
-                                                vertical: -4,
-                                              ),
-                                              value: address,
-                                              groupValue:
-                                                  controller.addressEnum.value,
-                                              onChanged: (value) =>
-                                                  controller.setAddress(value!),
-                                            ),
-                                            Text(address.name.capitalizeFirst ??
-                                                ''),
-                                          ],
-                                        ),
-                                      ))
-                                  .toList(),
-                            ))
+                        Obx(
+                          () => Row(
+                            children: AddressEnum.values
+                                .map((address) => GestureDetector(
+                                      onTap: () {
+                                        controller.addressDto.value
+                                            .update(type: address);
+                                        controller.addressDto.refresh();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Radio<AddressEnum>(
+                                            visualDensity: const VisualDensity(
+                                                vertical: -4),
+                                            value: address,
+                                            groupValue: controller
+                                                .addressDto.value.type,
+                                            onChanged: (value) {
+                                              if (value != null) {
+                                                controller.addressDto.value
+                                                    .update(type: value);
+                                                controller.addressDto.refresh();
+                                              }
+                                            },
+                                          ),
+                                          Text(address.name.capitalizeFirst ??
+                                              ''),
+                                        ],
+                                      ),
+                                    ))
+                                .toList(),
+                          ),
+                        )
                       ],
                     ),
                     const SizedBox(height: 20),
@@ -106,9 +85,11 @@ class AddAddressView extends GetView<AddAddressController> {
                       child: FractionallySizedBox(
                         widthFactor: 0.7,
                         child: ButtonWidget(
-                          title: 'Add address',
+                          title: controller.isEditMode.value
+                              ? "Edit Address"
+                              : "Add Address",
                           isDisable: false,
-                          onPressed: controller.addAddress,
+                          onPressed: controller.saveAddress,
                         ),
                       ),
                     )
