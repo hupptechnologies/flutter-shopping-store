@@ -33,4 +33,14 @@ export class VoucherService {
 		const updateVoucher = await this.repository.update(voucher, dto);
 		return updateVoucher;
 	}
+
+	public async findById(id: number): Promise<Voucher> {
+		const voucher = await this.repository.findById(id);
+
+		if (!voucher) {
+			throw new BadRequestException(MessageConstant.VOUCHER_NOT_FOUND);
+		}
+
+		return voucher;
+	}
 }

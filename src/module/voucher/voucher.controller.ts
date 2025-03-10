@@ -1,4 +1,4 @@
-import { Body, Controller, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { VoucherService } from './voucher.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
@@ -29,6 +29,15 @@ export class VoucherController {
 		return {
 			data: voucher,
 			message: MessageConstant.VOUCHER_UPDATED_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.ROUTER_ID)
+	public async findById(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<Voucher> {
+		const voucher = await this.voucherService.findById(id);
+		return {
+			data: voucher,
+			message: MessageConstant.VOUCHER_FOUND_SUCCESS,
 		};
 	}
 }

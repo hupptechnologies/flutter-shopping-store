@@ -37,4 +37,5 @@ export abstract class MessageConstant {
 	static readonly VOUCHER_UPDATED_SUCCESS = 'Voucher updated successfully';
 	static readonly CODE_ALREADY_EXISTS = 'Voucher code already exists';
 	static readonly VOUCHER_NOT_FOUND = 'Voucher not found';
+	static readonly VOUCHER_FOUND_SUCCESS = 'Voucher found successfully';
 }
