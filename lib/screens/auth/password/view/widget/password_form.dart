@@ -39,7 +39,7 @@ class PasswordForm extends GetView<PasswordController> {
                 title: 'Confirm',
                 isDisable: !controller.passwordReq.isValid.value,
                 onPressed: controller.changePassword,
-                isLoader: controller.authService.apiService.isLoader.value,
+                isLoader: controller.authService.api.isLoader.value,
               ),
             ),
           ),

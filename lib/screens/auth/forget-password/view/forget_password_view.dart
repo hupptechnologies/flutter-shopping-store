@@ -69,7 +69,7 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                                 isDisable:
                                     !controller.forgetPasswordReq.isValid.value,
                                 onPressed: controller.forgetPassword,
-                                isLoader: controller.authService.apiService.isLoader.value,
+                                isLoader: controller.authService.api.isLoader.value,
                               ),
                             ),
                           ),

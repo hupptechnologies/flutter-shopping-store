@@ -13,7 +13,7 @@ class SettingView extends GetView<SettingController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<SettingController>(
-      isLoader: controller.userService.apiService.isLoader,
+      isLoader: controller.userService.api.isLoader,
       child: Scaffold(
         appBar: const BackButtonAppbarTitle(
           centerTitle: true,

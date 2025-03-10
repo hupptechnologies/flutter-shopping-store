@@ -82,7 +82,7 @@ class SignUpForm extends GetView<SignUpController> {
                 title: 'SIGN UP',
                 isDisable: !controller.signUpReq.value.isValid.value,
                 onPressed: controller.signUp,
-                isLoader: controller.authService.apiService.isLoader.value,
+                isLoader: controller.authService.api.isLoader.value,
               ),
             ),
           ),

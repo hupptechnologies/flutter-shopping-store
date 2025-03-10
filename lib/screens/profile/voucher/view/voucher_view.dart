@@ -12,6 +12,7 @@ class VoucherView extends GetView<VoucherController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<VoucherController>(
+      isLoader: controller.voucherService.api.isLoader,
       child: Scaffold(
         appBar: const BackButtonAppbarTitle(
           centerTitle: true,
@@ -23,22 +24,27 @@ class VoucherView extends GetView<VoucherController> {
               horizontal: MarginPadding.homeHorPadding,
               vertical: MarginPadding.homeTopPadding,
             ),
-            child: ListView.builder(
-              itemCount: controller.vouchers.length,
-              itemBuilder: (context, index) {
-                final item = controller.vouchers[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: VoucherTickerCardWidget(
-                    discount: item['discount'],
-                    title: item['title'],
-                    subTitle: item['subTitle'],
-                    code: item['code'],
-                    expDate: item['expDate'],
+            child: Obx(() {
+              if (controller.vouchers.isEmpty) {
+                return const Center(
+                  child: Text(
+                    "No voucher found",
+                    style: TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 );
-              },
-            ),
+              }
+              return ListView.builder(
+                itemCount: controller.vouchers.length,
+                itemBuilder: (context, index) {
+                  final item = controller.vouchers[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: VoucherTickerCardWidget(voucherDto: item),
+                  );
+                },
+              );
+            }),
           ),
         ),
       ),

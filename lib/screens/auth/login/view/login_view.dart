@@ -81,7 +81,7 @@ class LoginView extends GetView<LoginController> {
                             title: 'SIGN IN',
                             isDisable: !controller.loginReq.isValid.value,
                             onPressed: controller.signIn,
-                            isLoader: controller.authService.apiService.isLoader.value,
+                            isLoader: controller.authService.api.isLoader.value,
                           ),
                         ),
                       ),

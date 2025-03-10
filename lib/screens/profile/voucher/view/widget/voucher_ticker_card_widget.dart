@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/data/voucher/voucher_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/profile/voucher/controller/voucher_controller.dart';
 import 'package:e_commerce/screens/profile/voucher/view/widget/voucher_ticket_clipper_widget.dart';
@@ -7,24 +8,15 @@ import 'package:flutter_dash/flutter_dash.dart';
 import 'package:get/get.dart';
 
 class VoucherTickerCardWidget extends GetView<VoucherController> {
-  final double discount;
-  final String title;
-  final String subTitle;
-  final String code;
-  final String expDate;
+  final VoucherDto voucherDto;
 
   const VoucherTickerCardWidget({
     super.key,
-    required this.discount,
-    required this.title,
-    required this.subTitle,
-    required this.code,
-    required this.expDate,
+    required this.voucherDto,
   });
 
   @override
   Widget build(BuildContext context) {
-    final dayOrMonth = controller.getDayOrMonth(expDate);
     return ClipPath(
       clipper: LeftTicketClipper(),
       child: Container(
@@ -43,12 +35,12 @@ class VoucherTickerCardWidget extends GetView<VoucherController> {
               width: 70,
               height: 70,
               decoration: BoxDecoration(
-                color: AppColors.black.withOpacityValue(discount / 100),
+                color: AppColors.black.withOpacityValue(double.parse(voucherDto.discountValue) / 100),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
                 child: Text(
-                  "${discount.toInt()}%",
+                  "${voucherDto.dValue}%",
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -64,15 +56,15 @@ class VoucherTickerCardWidget extends GetView<VoucherController> {
                 spacing: 4,
                 children: [
                   Text(
-                    title,
+                    voucherDto.name,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(subTitle),
+                  Text(voucherDto.firstOrder ? '${voucherDto.dValue}% off your first order' : 'Sale off ${voucherDto.dValue}%'),
                   Text(
-                    "Code: $code",
+                    "Code: ${voucherDto.code}",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -89,13 +81,13 @@ class VoucherTickerCardWidget extends GetView<VoucherController> {
                 const Text("Exp.", style: TextStyle(color: Colors.grey)),
                 const SizedBox(height: 6),
                 Text(
-                  dayOrMonth['day'],
+                  voucherDto.day,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(dayOrMonth['month'], style: const TextStyle(fontSize: 12)),
+                Text(voucherDto.month, style: const TextStyle(fontSize: 12)),
               ],
             ),
           ],

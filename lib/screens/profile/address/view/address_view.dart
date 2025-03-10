@@ -13,7 +13,7 @@ class AddressView extends GetView<AddressController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<AddressController>(
-      isLoader: controller.addressService.apiService.isLoader,
+      isLoader: controller.addressService.api.isLoader,
       child: Scaffold(
         appBar: const BackButtonAppbarTitle(
           title: 'Delivery address',

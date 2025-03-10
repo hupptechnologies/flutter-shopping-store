@@ -8,10 +8,10 @@ class Pagination<T> {
 
   factory Pagination.fromJson(
     Map<String, dynamic> json,
-    List<T> Function(dynamic) fromJsonT,
+    T Function(dynamic) fromJsonT,
   ) {
     return Pagination(
-      items: fromJsonT(json['items']),
+      items: (json['items'] as List).map((item) => fromJsonT(item)).toList() ,
       meta: Meta.fromJson(json['meta']),
     );
   }

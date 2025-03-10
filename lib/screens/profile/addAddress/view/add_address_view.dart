@@ -14,7 +14,7 @@ class AddAddressView extends GetView<AddAddressController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<AddAddressController>(
-      isLoader: controller.addressService.apiService.isLoader,
+      isLoader: controller.addressService.api.isLoader,
       child: Scaffold(
         appBar: BackButtonAppbarTitle(
           title: controller.isEditMode.value ? "Edit Address" : "Add Address",
