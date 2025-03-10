@@ -9,7 +9,6 @@ import { UpdateVoucherDto } from './dto/update-voucher.dto';
 @Loggable()
 @Injectable()
 export class VoucherRepository {
-	findOne: any;
 	constructor(
 		@InjectRepository(Voucher)
 		private readonly repository: Repository<Voucher>,
@@ -39,5 +38,14 @@ export class VoucherRepository {
 				id,
 			},
 		});
+	}
+
+	public async delete(voucher: Voucher, isSoftDetele = true): Promise<boolean> {
+		if (isSoftDetele) {
+			const deleteVoucher = await voucher.softRemove();
+			return !!deleteVoucher;
+		}
+		const deleteVoucher = await voucher.remove();
+		return !!deleteVoucher;
 	}
 }

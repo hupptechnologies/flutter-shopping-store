@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Voucher } from './entities/voucher.entity';
 import { CreateVoucherDto } from './dto/create-voucher.dto';
@@ -26,7 +26,7 @@ export class VoucherService {
 		const voucher = await this.repository.findById(id);
 
 		if (!voucher) {
-			throw new BadRequestException(MessageConstant.VOUCHER_NOT_FOUND);
+			throw new NotFoundException(MessageConstant.VOUCHER_NOT_FOUND);
 		}
 
 		delete dto.code;
@@ -38,9 +38,20 @@ export class VoucherService {
 		const voucher = await this.repository.findById(id);
 
 		if (!voucher) {
-			throw new BadRequestException(MessageConstant.VOUCHER_NOT_FOUND);
+			throw new NotFoundException(MessageConstant.VOUCHER_NOT_FOUND);
 		}
 
 		return voucher;
+	}
+
+	public async delete(id: number): Promise<boolean> {
+		const voucher = await this.repository.findById(id);
+
+		if (!voucher) {
+			throw new NotFoundException(MessageConstant.VOUCHER_NOT_FOUND);
+		}
+
+		const isDeleted = await this.repository.delete(voucher);
+		return isDeleted;
 	}
 }

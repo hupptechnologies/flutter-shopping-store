@@ -15,6 +15,15 @@ export class Voucher extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	public id: number;
 
+	@Column()
+	public name: string;
+
+	@Column({
+		type: 'boolean',
+		default: false,
+	})
+	public firstOrder: boolean;
+
 	@Index('code')
 	@Column({
 		unique: true,

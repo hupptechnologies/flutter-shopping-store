@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { VoucherService } from './voucher.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
@@ -6,6 +6,7 @@ import { Voucher } from './entities/voucher.entity';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { CreateVoucherDto } from './dto/create-voucher.dto';
 import { KeyConstant } from 'src/common/constant/key.constant';
+import { UpdateVoucherDto } from './dto/update-voucher.dto';
 
 @Controller(URLConstant.VOUCHER)
 export class VoucherController {
@@ -23,7 +24,7 @@ export class VoucherController {
 	@Patch(URLConstant.ROUTER_ID)
 	public async update(
 		@Param(KeyConstant.ID, ParseIntPipe) id: number,
-		@Body() dto: CreateVoucherDto,
+		@Body() dto: UpdateVoucherDto,
 	): APIResponse<Voucher> {
 		const voucher = await this.voucherService.update(id, dto);
 		return {
@@ -38,6 +39,15 @@ export class VoucherController {
 		return {
 			data: voucher,
 			message: MessageConstant.VOUCHER_FOUND_SUCCESS,
+		};
+	}
+
+	@Delete(URLConstant.ROUTER_ID)
+	public async delete(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<boolean> {
+		const isDeleted = await this.voucherService.delete(id);
+		return {
+			data: isDeleted,
+			message: MessageConstant.VOUCHER_DELETED_SUCCESS,
 		};
 	}
 }
