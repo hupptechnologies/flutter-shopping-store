@@ -5,6 +5,7 @@ import {
 	CreateDateColumn,
 	DeleteDateColumn,
 	Entity,
+	Index,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
@@ -14,6 +15,7 @@ export class Voucher extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	public id: number;
 
+	@Index('code')
 	@Column({
 		unique: true,
 	})
@@ -48,12 +50,12 @@ export class Voucher extends BaseEntity {
 	@Column({
 		type: 'timestamp',
 		nullable: true,
+		default: () => 'CURRENT_TIMESTAMP',
 	})
 	public validFrom: Date;
 
 	@Column({
 		type: 'timestamp',
-		nullable: true,
 	})
 	public validTo: Date;
 

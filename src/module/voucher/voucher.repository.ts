@@ -3,6 +3,7 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Voucher } from './entities/voucher.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateVoucherDto } from './dto/create-voucher.dto';
 
 @Loggable()
 @Injectable()
@@ -11,4 +12,17 @@ export class VoucherRepository {
 		@InjectRepository(Voucher)
 		private readonly repository: Repository<Voucher>,
 	) {}
+
+	public async findByCode(code: string): Promise<Voucher | null> {
+		return await this.repository.findOne({
+			where: {
+				code,
+			},
+		});
+	}
+
+	public async create(dto: CreateVoucherDto): Promise<Voucher> {
+		const voucher = this.repository.create(dto);
+		return await this.repository.save(voucher);
+	}
 }

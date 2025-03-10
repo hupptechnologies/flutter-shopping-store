@@ -1,4 +1,5 @@
-import { IsEnum, IsNumber, IsOptional, Min } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsDate, IsEnum, IsNumber, IsOptional, Min } from 'class-validator';
 import { DiscountEnum } from 'src/common/enum/discount.enum';
 import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
 
@@ -24,10 +25,13 @@ export class CreateVoucherDto {
 	public maxDiscount?: number;
 
 	@IsOptional()
+	@Type(() => Date)
+	@IsDate()
 	public validFrom?: Date;
 
-	@IsOptional()
-	public validTo?: Date;
+	@IsDate()
+	@Type(() => Date)
+	public validTo: Date;
 
 	@IsNumber()
 	@Min(1)
