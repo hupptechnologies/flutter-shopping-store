@@ -34,5 +34,7 @@ export abstract class MessageConstant {
 	static readonly PRODCUT_FETCHED_SUCCESS = 'Prodcut fetched successfully';
 
 	static readonly VOUCHER_CREATED_SUCCESS = 'Voucher created successfully';
+	static readonly VOUCHER_UPDATED_SUCCESS = 'Voucher updated successfully';
 	static readonly CODE_ALREADY_EXISTS = 'Voucher code already exists';
+	static readonly VOUCHER_NOT_FOUND = 'Voucher not found';
 }

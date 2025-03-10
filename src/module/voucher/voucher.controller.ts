@@ -1,10 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { VoucherService } from './voucher.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
 import { Voucher } from './entities/voucher.entity';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { CreateVoucherDto } from './dto/create-voucher.dto';
+import { KeyConstant } from 'src/common/constant/key.constant';
 
 @Controller(URLConstant.VOUCHER)
 export class VoucherController {
@@ -16,6 +17,18 @@ export class VoucherController {
 		return {
 			data: voucher,
 			message: MessageConstant.VOUCHER_CREATED_SUCCESS,
+		};
+	}
+
+	@Patch(URLConstant.ROUTER_ID)
+	public async update(
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
+		@Body() dto: CreateVoucherDto,
+	): APIResponse<Voucher> {
+		const voucher = await this.voucherService.update(id, dto);
+		return {
+			data: voucher,
+			message: MessageConstant.VOUCHER_UPDATED_SUCCESS,
 		};
 	}
 }
