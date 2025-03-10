@@ -34,6 +34,7 @@ class CreditCardWidget extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Align(
             alignment: Alignment.topRight,
@@ -49,12 +50,10 @@ class CreditCardWidget extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 35),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: cardNumberWidget(cardNumber.toString()),
           ),
-          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
