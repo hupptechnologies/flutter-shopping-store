@@ -5,10 +5,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateVoucherDto } from './dto/create-voucher.dto';
 import { UpdateVoucherDto } from './dto/update-voucher.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { FindAllRes } from 'src/common/interface/typeorm.interface';
 
 @Loggable()
 @Injectable()
 export class VoucherRepository {
+	private readonly name: string = Voucher.name.toLowerCase();
+
 	constructor(
 		@InjectRepository(Voucher)
 		private readonly repository: Repository<Voucher>,
@@ -29,6 +33,7 @@ export class VoucherRepository {
 
 	public async update(voucher: Voucher, dto: UpdateVoucherDto): Promise<Voucher> {
 		Object.assign(voucher, dto);
+		void this.repository.update(voucher.id, dto);
 		return await this.repository.save(voucher);
 	}
 
@@ -47,5 +52,23 @@ export class VoucherRepository {
 		}
 		const deleteVoucher = await voucher.remove();
 		return !!deleteVoucher;
+	}
+
+	public async findAll(queryOptionsDto: QueryOptionsDto): Promise<FindAllRes<Voucher>> {
+		const query = this.repository.createQueryBuilder(this.name);
+
+		if (queryOptionsDto.search) {
+			query.likeQuery(['name', 'code'], queryOptionsDto.search);
+		}
+
+		query.orderBy(`${query.alias}.${queryOptionsDto.column}`, queryOptionsDto.orderBy);
+		query.skip(queryOptionsDto.skip);
+		query.take(queryOptionsDto.perPage);
+
+		const result = await query.getManyAndCount();
+		return {
+			items: result[0],
+			total: result[1],
+		};
 	}
 }

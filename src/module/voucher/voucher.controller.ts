@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	ParseIntPipe,
+	Patch,
+	Post,
+	Query,
+} from '@nestjs/common';
 import { VoucherService } from './voucher.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
@@ -7,6 +17,8 @@ import { MessageConstant } from 'src/common/constant/message.constant';
 import { CreateVoucherDto } from './dto/create-voucher.dto';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { UpdateVoucherDto } from './dto/update-voucher.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { PaginationRes } from 'src/common/interface/pagination-res.interface';
 
 @Controller(URLConstant.VOUCHER)
 export class VoucherController {
@@ -48,6 +60,15 @@ export class VoucherController {
 		return {
 			data: isDeleted,
 			message: MessageConstant.VOUCHER_DELETED_SUCCESS,
+		};
+	}
+
+	@Get()
+	public async findAll(@Query() query: QueryOptionsDto): APIResponse<PaginationRes<Voucher>> {
+		const vouchers = await this.voucherService.findAll(query);
+		return {
+			data: vouchers,
+			message: MessageConstant.VOUCHERS_FETCHED_SUCCESS,
 		};
 	}
 }

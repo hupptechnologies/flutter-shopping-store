@@ -5,6 +5,8 @@ import { CreateVoucherDto } from './dto/create-voucher.dto';
 import { VoucherRepository } from './voucher.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { UpdateVoucherDto } from './dto/update-voucher.dto';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { PaginationRes } from 'src/common/interface/pagination-res.interface';
 
 @Injectable()
 @Loggable()
@@ -53,5 +55,14 @@ export class VoucherService {
 
 		const isDeleted = await this.repository.delete(voucher);
 		return isDeleted;
+	}
+
+	public async findAll(queryOptionsDto: QueryOptionsDto): Promise<PaginationRes<Voucher>> {
+		const { items, total } = await this.repository.findAll(queryOptionsDto);
+		queryOptionsDto.setTotal(total);
+		return {
+			items,
+			meta: queryOptionsDto,
+		};
 	}
 }
