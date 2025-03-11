@@ -75,21 +75,13 @@ export class Cards extends BaseEntity {
 	@BeforeInsert()
 	@BeforeUpdate()
 	encryptCardDetails(): void {
-		if (this.number) {
-			this.encryptedNumber = CryptoService.encrypt(this.number);
-		}
-		if (this.cvv) {
-			this.encryptedCvv = CryptoService.encrypt(this.cvv);
-		}
+		this.encryptedNumber = CryptoService.encrypt(this.number);
+		this.encryptedCvv = CryptoService.encrypt(this.cvv);
 	}
 
 	@AfterLoad()
 	decryptCardDetails(): void {
-		if (this.encryptedNumber) {
-			this.number = CryptoService.decrypt(this.encryptedNumber);
-		}
-		if (this.encryptedCvv) {
-			this.cvv = CryptoService.decrypt(this.encryptedCvv);
-		}
+		this.number = CryptoService.decrypt(this.encryptedNumber);
+		this.cvv = CryptoService.decrypt(this.encryptedCvv);
 	}
 }
