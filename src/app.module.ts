@@ -11,6 +11,7 @@ import { CategoryModule } from './module/category/category.module';
 import { ProductModule } from './module/product/product.module';
 import { VoucherModule } from './module/voucher/voucher.module';
 import { CardsModule } from './module/cards/cards.module';
+import { CryptoService } from './services/crypto/crypto.service';
 
 @Module({
 	imports: [
@@ -30,6 +31,6 @@ import { CardsModule } from './module/cards/cards.module';
 		CardsModule,
 	],
 	controllers: [AppController],
-	providers: [AppService],
+	providers: [AppService, CryptoService],
 })
 export class AppModule {}
