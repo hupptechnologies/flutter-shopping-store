@@ -32,6 +32,7 @@ export abstract class MessageConstant {
 	static readonly PRODCUT_NOT_FOUND = 'Prodcut not found';
 	static readonly PRODCUT_UPDATED_SUCCESS = 'Prodcut updated successfully';
 	static readonly PRODCUT_FETCHED_SUCCESS = 'Prodcut fetched successfully';
+	static readonly PRODCUT_DELETED_SUCCESS = 'Prodcut deleted successfully';
 
 	static readonly VOUCHER_CREATED_SUCCESS = 'Voucher created successfully';
 	static readonly VOUCHER_UPDATED_SUCCESS = 'Voucher updated successfully';

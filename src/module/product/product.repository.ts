@@ -33,4 +33,13 @@ export class ProductRepository {
 			relations,
 		});
 	}
+
+	async delete(product: Product, isSoftDetele = true): Promise<boolean> {
+		if (isSoftDetele) {
+			const deleteProduct = await product.softRemove();
+			return !!deleteProduct;
+		}
+		const deleteProduct = await product.remove();
+		return !!deleteProduct;
+	}
 }

@@ -73,4 +73,15 @@ export class ProductService {
 
 		return product;
 	}
+
+	public async delete(id: number): Promise<boolean> {
+		const product = await this.productRepository.findById(id);
+
+		if (!product) {
+			throw new NotFoundException(MessageConstant.PRODCUT_NOT_FOUND);
+		}
+
+		const isDelete = await this.productRepository.delete(product);
+		return isDelete;
+	}
 }

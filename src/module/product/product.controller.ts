@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Param,
 	ParseIntPipe,
@@ -58,6 +59,15 @@ export class ProductController {
 		return {
 			data: product,
 			message: MessageConstant.PRODCUT_FETCHED_SUCCESS,
+		};
+	}
+
+	@Delete(URLConstant.ROUTER_ID)
+	async delete(@Param(KeyConstant.ID, ParseIntPipe) id: number): Promise<APIResponse<boolean>> {
+		const isDelete = await this.productService.delete(id);
+		return {
+			data: isDelete,
+			message: MessageConstant.PRODCUT_DELETED_SUCCESS,
 		};
 	}
 }

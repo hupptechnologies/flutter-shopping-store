@@ -1,6 +1,7 @@
 import { Category } from 'src/module/category/entities/category.entity';
 import { Image } from 'src/module/image/entities/image.entity';
 import {
+	BaseEntity,
 	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
@@ -12,7 +13,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Product {
+export class Product extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	public id: number;
 
