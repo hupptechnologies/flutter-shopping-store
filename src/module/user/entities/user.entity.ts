@@ -2,6 +2,7 @@ import { Exclude } from 'class-transformer';
 import { Gender } from 'src/common/enum/gender.enum';
 import { Address } from 'src/module/address/entities/address.entity';
 import { Otp } from 'src/module/auth/entities/otp.entity';
+import { Cards } from 'src/module/cards/entities/cards.entity';
 import {
 	BaseEntity,
 	Column,
@@ -76,6 +77,11 @@ export class User extends BaseEntity {
 		cascade: true,
 	})
 	public otp: Otp;
+
+	@OneToMany(() => Cards, (cards) => cards.user, {
+		cascade: true,
+	})
+	public cards: Cards[];
 
 	@CreateDateColumn()
 	public createdAt: Date;

@@ -10,6 +10,7 @@ import { AddressModule } from './module/address/address.module';
 import { CategoryModule } from './module/category/category.module';
 import { ProductModule } from './module/product/product.module';
 import { VoucherModule } from './module/voucher/voucher.module';
+import { CardsModule } from './module/cards/cards.module';
 
 @Module({
 	imports: [
@@ -26,6 +27,7 @@ import { VoucherModule } from './module/voucher/voucher.module';
 		CategoryModule,
 		ProductModule,
 		VoucherModule,
+		CardsModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
