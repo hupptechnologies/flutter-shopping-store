@@ -1,3 +1,4 @@
+import { CardTypeEnum } from 'src/common/enum/card-type.enum';
 import { User } from 'src/module/user/entities/user.entity';
 import {
 	BaseEntity,
@@ -16,6 +17,11 @@ export class Cards extends BaseEntity {
 	public id: number;
 
 	@Column({
+		type: 'varchar',
+	})
+	public name: string;
+
+	@Column({
 		type: 'int',
 	})
 	public number: number;
@@ -24,11 +30,6 @@ export class Cards extends BaseEntity {
 		type: 'int',
 	})
 	public cvv: number;
-
-	@Column({
-		type: 'varchar',
-	})
-	public name: string;
 
 	@Column({
 		type: 'varchar',
@@ -41,6 +42,12 @@ export class Cards extends BaseEntity {
 		length: 4,
 	})
 	public year: string;
+
+	@Column({
+		type: 'enum',
+		enum: CardTypeEnum,
+	})
+	public type: CardTypeEnum;
 
 	@ManyToOne(() => User, (user) => user.cards, {
 		onDelete: 'CASCADE',
