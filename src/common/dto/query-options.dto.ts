@@ -47,6 +47,14 @@ export class QueryOptionsDto {
 	@IsEnum(OrderBy)
 	public order?: OrderBy = OrderBy.ASC;
 
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@Type(() => Number)
+	public categoryId?: number;
+
+	// Pagination
 	public get orderBy(): OrderBy {
 		return this.order ?? OrderBy.ASC;
 	}

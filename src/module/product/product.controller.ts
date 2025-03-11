@@ -7,6 +7,7 @@ import {
 	ParseIntPipe,
 	Patch,
 	Post,
+	Query,
 	UploadedFiles,
 	UseInterceptors,
 } from '@nestjs/common';
@@ -20,6 +21,8 @@ import { MessageConstant } from 'src/common/constant/message.constant';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Public } from 'src/decorator/public/public.decorator';
+import { PaginationRes } from 'src/common/interface/pagination-res.interface';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 
 @Controller(URLConstant.PRODUCT)
 export class ProductController {
@@ -68,6 +71,15 @@ export class ProductController {
 		return {
 			data: isDelete,
 			message: MessageConstant.PRODCUT_DELETED_SUCCESS,
+		};
+	}
+
+	@Get()
+	async findAll(@Query() queryOptionsDto: QueryOptionsDto): APIResponse<PaginationRes<Product>> {
+		const products = await this.productService.findAll(queryOptionsDto);
+		return {
+			data: products,
+			message: MessageConstant.PRODCUT_FETCHED_SUCCESS,
 		};
 	}
 }

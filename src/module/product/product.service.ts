@@ -9,6 +9,8 @@ import { ImageService } from '../image/image.service';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { CommonUtils } from 'src/common/utils/common.utils';
 import { Category } from '../category/entities/category.entity';
+import { PaginationRes } from 'src/common/interface/pagination-res.interface';
+import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 
 @Injectable()
 @Loggable()
@@ -83,5 +85,14 @@ export class ProductService {
 
 		const isDelete = await this.productRepository.delete(product);
 		return isDelete;
+	}
+
+	public async findAll(query: QueryOptionsDto): Promise<PaginationRes<Product>> {
+		const { items, total } = await this.productRepository.findAll(query, ['images']);
+		query.setTotal(total);
+		return {
+			items,
+			meta: query,
+		};
 	}
 }
