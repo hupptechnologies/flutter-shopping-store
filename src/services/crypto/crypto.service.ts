@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
+import { AppConfigService } from 'src/config/app/app-config.service';
 
 @Injectable()
 export class CryptoService {
@@ -9,11 +9,8 @@ export class CryptoService {
 	private static readonly mode = 'aes-256-cbc';
 	private static key: Buffer;
 
-	constructor(private configService: ConfigService) {
-		const cryptoKey = this.configService.get<string>('CRYPTO_KEY');
-		if (!cryptoKey) {
-			throw new Error('CRYPTO_KEY is not defined in the environment variables.');
-		}
+	constructor(private appConfigService: AppConfigService) {
+		const cryptoKey = this.appConfigService.cryptoKey;
 		CryptoService.key = Buffer.from(cryptoKey, 'utf-8');
 	}
 

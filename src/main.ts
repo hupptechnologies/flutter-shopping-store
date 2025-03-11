@@ -2,13 +2,13 @@ import 'src/common/extension/index';
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import { INestApplication, Logger, RequestMethod } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
 import { ResponseInterceptor } from './interceptors/response/response.interceptor';
 import { LoggingInterceptor } from './interceptors/logging/logging.interceptor';
 import { useContainer } from 'class-validator';
 import { DtoValidationPipe } from './pips/dto-validation/dto-validation.pipe';
 import { GlobalExceptionsFilter } from './exceptions/global.exceptions.filter';
+import { AppConfigService } from './config/app/app-config.service';
 
 class Application {
 	private readonly logger = new Logger(Application.name);
@@ -40,11 +40,9 @@ class Application {
 
 		app.useGlobalInterceptors(new ResponseInterceptor(), new LoggingInterceptor());
 
-		const configService = app.get(ConfigService);
+		const appConfigService = app.get(AppConfigService);
 
-		const prefix = configService.get<string>('PREFIX') ?? '';
-
-		app.setGlobalPrefix(prefix, {
+		app.setGlobalPrefix(appConfigService.prefix, {
 			exclude: [
 				{
 					path: '/',
@@ -52,7 +50,7 @@ class Application {
 				},
 			],
 		});
-		const port = configService.get<number>('PORT') ?? 3000;
+		const port = parseInt(appConfigService.port ?? 3000);
 
 		return port;
 	}

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary, UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
 import { CloudinaryDeleteResponse } from 'src/common/interface/cloudinary.interface';
+import { AppConfigService } from 'src/config/app/app-config.service';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 
 @Loggable()
@@ -9,11 +9,11 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 export class CloudinaryService {
 	private readonly logger: Logger;
 
-	constructor(private configService: ConfigService) {
+	constructor(private readonly appConfigService: AppConfigService) {
 		cloudinary.config({
-			cloud_name: this.configService.get('CLOUDINARY_CLOUD_NAME'),
-			api_key: this.configService.get('CLOUDINARY_API_KEY'),
-			api_secret: this.configService.get('CLOUDINARY_API_SECRET'),
+			cloud_name: this.appConfigService.cloudName,
+			api_key: this.appConfigService.cloudApiKey,
+			api_secret: this.appConfigService.cloudApiSecret,
 		});
 	}
 

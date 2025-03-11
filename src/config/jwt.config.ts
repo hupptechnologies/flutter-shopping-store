@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtModuleOptions } from '@nestjs/jwt';
 import { KeyConstant } from 'src/common/constant/key.constant';
+import { AppConfigService } from './app/app-config.service';
 
 @Injectable()
 export class JWTConfigService {
-	constructor(private readonly configSerivce: ConfigService) {}
+	constructor(private readonly appConfigService: AppConfigService) {}
 
 	createJwtOptions(): JwtModuleOptions {
 		return {
 			global: true,
-			secret: this.configSerivce.get(KeyConstant.ENV_JWT_SECRET_KEY),
+			secret: this.appConfigService.jwtSecret,
 			signOptions: {
 				expiresIn: KeyConstant.ACCESS_TOKEN_EXPIRES,
 			},

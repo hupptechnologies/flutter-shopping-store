@@ -1,25 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { MailerOptions, MailerOptionsFactory } from '@nestjs-modules/mailer';
 import { join } from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { AppConfigService } from './app/app-config.service';
 
 @Injectable()
 export class MailConfigService implements MailerOptionsFactory {
-	constructor(private configService: ConfigService) {}
+	constructor(private appConfigService: AppConfigService) {}
 
 	createMailerOptions(): MailerOptions {
 		return {
 			transport: {
-				host: this.configService.get('SMTP_HOST'),
-				port: this.configService.get<number>('SMTP_PORT'),
+				host: this.appConfigService.smtpHost,
+				port: +this.appConfigService.smtpPort,
 				auth: {
-					user: this.configService.get('SMTP_USER'),
-					pass: this.configService.get('SMTP_PASS'),
+					user: this.appConfigService.smtpUser,
+					pass: this.appConfigService.smtpPass,
 				},
 			},
 			defaults: {
-				from: this.configService.get('SMTP_FROM_EMAIL'),
+				from: this.appConfigService.smtpFromEmail,
 			},
 			template: {
 				dir: join(__dirname, '..', '..', 'src', 'templates'),

@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,14 +11,13 @@ import { ProductModule } from './module/product/product.module';
 import { VoucherModule } from './module/voucher/voucher.module';
 import { CardsModule } from './module/cards/cards.module';
 import { CryptoService } from './services/crypto/crypto.service';
+import { AppConfigModule } from './config/app/app-config.module';
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({
-			isGlobal: true,
-		}),
+		AppConfigModule,
 		TypeOrmModule.forRootAsync({
-			imports: [ConfigModule],
+			imports: [AppConfigModule],
 			useClass: DatabaseConfig,
 		}),
 		AuthModule,
