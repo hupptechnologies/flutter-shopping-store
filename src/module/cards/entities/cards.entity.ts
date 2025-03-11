@@ -1,7 +1,11 @@
 import { CardTypeEnum } from 'src/common/enum/card-type.enum';
 import { User } from 'src/module/user/entities/user.entity';
+import { CryptoService } from 'src/services/crypto/crypto.service';
 import {
+	AfterLoad,
 	BaseEntity,
+	BeforeInsert,
+	BeforeUpdate,
 	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
@@ -22,14 +26,16 @@ export class Cards extends BaseEntity {
 	public name: string;
 
 	@Column({
-		type: 'int',
+		type: 'varchar',
+		length: 255,
 	})
-	public number: number;
+	private encryptedNumber: string;
 
 	@Column({
-		type: 'int',
+		type: 'varchar',
+		length: 255,
 	})
-	public cvv: number;
+	private encryptedCvv: string;
 
 	@Column({
 		type: 'varchar',
@@ -62,4 +68,28 @@ export class Cards extends BaseEntity {
 
 	@DeleteDateColumn()
 	public deletedAt: Date | null;
+
+	public number: string;
+	public cvv: string;
+
+	@BeforeInsert()
+	@BeforeUpdate()
+	encryptCardDetails(): void {
+		if (this.number) {
+			this.encryptedNumber = CryptoService.encrypt(this.number);
+		}
+		if (this.cvv) {
+			this.encryptedCvv = CryptoService.encrypt(this.cvv);
+		}
+	}
+
+	@AfterLoad()
+	decryptCardDetails(): void {
+		if (this.encryptedNumber) {
+			this.number = CryptoService.decrypt(this.encryptedNumber);
+		}
+		if (this.encryptedCvv) {
+			this.cvv = CryptoService.decrypt(this.encryptedCvv);
+		}
+	}
 }
