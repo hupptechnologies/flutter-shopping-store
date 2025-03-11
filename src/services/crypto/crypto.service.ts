@@ -1,11 +1,11 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto';
 import { AppConfigService } from 'src/config/app/app-config.service';
+import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 
 @Injectable()
+@Loggable()
 export class CryptoService {
-	private readonly logger: Logger;
-	private static readonly sha = 'sha256';
 	private static readonly mode = 'aes-256-cbc';
 	private static key: Buffer;
 

@@ -8,6 +8,7 @@ export function Loggable(): ClassDecorator {
 			prototype.logger = new Logger(target.name);
 		}
 		const logger = prototype.logger as Logger;
+		logger.log(`${target.name} dependencies initialized`);
 
 		const methodNames = Object.getOwnPropertyNames(prototype).filter(
 			(method) => method !== 'constructor' && typeof prototype[method] === 'function',
