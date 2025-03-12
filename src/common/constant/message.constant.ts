@@ -41,4 +41,7 @@ export abstract class MessageConstant {
 	static readonly VOUCHER_FOUND_SUCCESS = 'Voucher found successfully';
 	static readonly VOUCHER_DELETED_SUCCESS = 'Voucher deleted successfully';
 	static readonly VOUCHERS_FETCHED_SUCCESS = 'Vouchers fetched successfully';
+
+	static readonly CARD_NUMBER_EXISTS = 'Card number already exists';
+	static readonly CARD_CREATED_SUCCESS = 'Card created successfully';
 }

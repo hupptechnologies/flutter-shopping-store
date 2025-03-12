@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { CardTypeEnum } from 'src/common/enum/card-type.enum';
 import { User } from 'src/module/user/entities/user.entity';
 import { CryptoService } from 'src/services/crypto/crypto.service';
@@ -25,17 +26,24 @@ export class Cards extends BaseEntity {
 	})
 	public cardholderName: string;
 
+	@Exclude({
+		toPlainOnly: true,
+	})
 	@Column({
 		type: 'varchar',
 		length: 255,
+		unique: true,
 	})
-	private encryptedNumber: string;
+	public encryptedNumber: string;
 
+	@Exclude({
+		toPlainOnly: true,
+	})
 	@Column({
 		type: 'varchar',
 		length: 255,
 	})
-	private encryptedCvv: string;
+	public encryptedCvv: string;
 
 	@Column({
 		type: 'varchar',
