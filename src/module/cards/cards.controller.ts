@@ -49,4 +49,13 @@ export class CardsController {
 			message: MessageConstant.CARD_DELETED_SUCCESS,
 		};
 	}
+
+	@Get()
+	async findAll(@AuthUserId() userId: number): APIResponse<Array<Cards>> {
+		const cards = await this.cardsService.findAll(userId);
+		return {
+			data: cards,
+			message: MessageConstant.CARDS_FETCHED_SUCCESS,
+		};
+	}
 }

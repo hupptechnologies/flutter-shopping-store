@@ -48,4 +48,9 @@ export class CardsService {
 		const isDelete = await this.repository.delete(card);
 		return isDelete;
 	}
+
+	public async findAll(userId: number): Promise<Array<Cards>> {
+		const cards = await this.repository.findUserIdToCards(userId);
+		return cards;
+	}
 }
