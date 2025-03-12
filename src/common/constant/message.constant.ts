@@ -50,4 +50,6 @@ export abstract class MessageConstant {
 	static readonly CARDS_FETCHED_SUCCESS = 'Cards fetched successfully';
 
 	static readonly REVIEW_ADDED_SUCCESS = 'Review Added successfully';
+	static readonly REVIEW_NOT_FOUND = 'Review not found';
+	static readonly REVIEW_DELETED_SUCCESS = 'Review deleted successfully';
 }

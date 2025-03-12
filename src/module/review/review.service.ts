@@ -38,4 +38,15 @@ export class ReviewService {
 
 		return CommonUtils.removeKey(review, ['user', 'product']);
 	}
+
+	public async delete(id: number, userId: number): Promise<boolean> {
+		const review = await this.repository.findByIdAndUserId(id, userId);
+
+		if (!review) {
+			throw new NotFoundException(MessageConstant.REVIEW_NOT_FOUND);
+		}
+
+		const isDelete = await this.repository.delete(review);
+		return isDelete;
+	}
 }

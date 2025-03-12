@@ -19,4 +19,24 @@ export class ReviewRepository {
 		create.user = user;
 		return this.repository.save(create);
 	}
+
+	public async findByIdAndUserId(id: number, userId: number): Promise<Review | null> {
+		return this.repository.findOne({
+			where: {
+				id,
+				user: {
+					id: userId,
+				},
+			},
+		});
+	}
+
+	public async delete(review: Review, isSoftDetele = true): Promise<boolean> {
+		if (isSoftDetele) {
+			const reviewDelete = await review.softRemove();
+			return !!reviewDelete;
+		}
+		const reviewDelete = await review.remove();
+		return !!reviewDelete;
+	}
 }
