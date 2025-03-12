@@ -11,10 +11,10 @@ export class DtoValidationPipe implements PipeTransform {
 		}
 
 		const object = plainToInstance(metatype as ClassConstructor<T>, value);
-		const errors: ValidationError[] = await validate(object);
+		const errors: Array<ValidationError> = await validate(object);
 
 		if (errors.length > 0) {
-			const formatErrors: Map<string, string[]> = new Map();
+			const formatErrors: Map<string, Array<string>> = new Map();
 			errors.forEach((err) => {
 				formatErrors.set(err.property, Object.values(err.constraints ?? []));
 			});

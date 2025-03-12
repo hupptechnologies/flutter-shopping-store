@@ -1,56 +1,51 @@
 import { Image } from 'src/module/image/entities/image.entity';
 import { Product } from 'src/module/product/entities/product.entity';
+import { User } from 'src/module/user/entities/user.entity';
 import {
 	BaseEntity,
 	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
 	Entity,
+	ManyToOne,
 	OneToMany,
 	PrimaryGeneratedColumn,
-	Tree,
-	TreeChildren,
-	TreeParent,
 	UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-@Tree('materialized-path')
-export class Category extends BaseEntity {
-	@PrimaryGeneratedColumn()
+export class Review extends BaseEntity {
+	@PrimaryGeneratedColumn('rowid')
 	public id: number;
 
 	@Column({
-		type: 'varchar',
+		type: 'text',
 	})
-	public name: string;
+	public comment: string;
 
 	@Column({
-		type: 'text',
-		nullable: true,
+		type: 'decimal',
+		precision: 2,
+		scale: 1,
+		default: 0,
 	})
-	public description: string;
+	public rating: number;
 
-	@TreeParent({
-		onDelete: 'CASCADE',
-	})
-	public parent: Category;
-
-	@TreeChildren({
-		cascade: true,
-	})
-	public children: Array<Category>;
-
-	@OneToMany(() => Image, (image) => image.category, {
+	@OneToMany(() => Image, (image) => image.review, {
 		eager: true,
 		cascade: true,
 	})
 	public images: Array<Image>;
 
-	@OneToMany(() => Product, (product) => product.category, {
-		cascade: true,
+	@ManyToOne(() => Product, (product) => product.reviews, {
+		onDelete: 'CASCADE',
 	})
-	public products: Array<Product>;
+	public product: Product;
+
+	@ManyToOne(() => User, (user) => user.reviews, {
+		onDelete: 'CASCADE',
+	})
+	public user: User;
 
 	@CreateDateColumn()
 	public createdAt: Date;

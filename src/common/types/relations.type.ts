@@ -15,4 +15,4 @@ type RelationKey<T> = Extract<
 	}[keyof ExcludeBaseEntity<T>]
 >;
 
-export type RelationKeys<T> = RelationKey<T>[];
+export type RelationKeys<T> = Array<RelationKey<T>>;

@@ -3,6 +3,7 @@ import { Gender } from 'src/common/enum/gender.enum';
 import { Address } from 'src/module/address/entities/address.entity';
 import { Otp } from 'src/module/auth/entities/otp.entity';
 import { Cards } from 'src/module/cards/entities/cards.entity';
+import { Review } from 'src/module/review/entities/review.entity';
 import {
 	BaseEntity,
 	Column,
@@ -71,7 +72,7 @@ export class User extends BaseEntity {
 	@OneToMany(() => Address, (address) => address.user, {
 		cascade: true,
 	})
-	public addresses: Address[];
+	public addresses: Array<Address>;
 
 	@OneToOne(() => Otp, (otp) => otp.user, {
 		cascade: true,
@@ -81,7 +82,12 @@ export class User extends BaseEntity {
 	@OneToMany(() => Cards, (cards) => cards.user, {
 		cascade: true,
 	})
-	public cards: Cards[];
+	public cards: Array<Cards>;
+
+	@OneToMany(() => Review, (review) => review.user, {
+		cascade: true,
+	})
+	public reviews: Array<Review>;
 
 	@CreateDateColumn()
 	public createdAt: Date;

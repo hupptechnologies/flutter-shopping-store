@@ -94,6 +94,7 @@
 		"testEnvironment": "node"
 	},
 	"pre-commit": [
+		"format",
 		"lint"
 	]
 }

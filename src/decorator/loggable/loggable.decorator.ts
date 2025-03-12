@@ -18,19 +18,19 @@ export function Loggable(): ClassDecorator {
 			const descriptor = Object.getOwnPropertyDescriptor(prototype, methodName);
 			if (!descriptor) continue;
 
-			const originalMethod = descriptor.value as (...args: unknown[]) => unknown;
+			const originalMethod = descriptor.value as (...args: Array<unknown>) => unknown;
 
 			const isAsync = originalMethod.constructor.name === 'AsyncFunction';
 
 			if (isAsync) {
-				prototype[methodName] = async function (...args: unknown[]): Promise<unknown> {
+				prototype[methodName] = async function (...args: Array<unknown>): Promise<unknown> {
 					logger.debug(`${target.name} --> ${methodName} method start`);
 					const result: unknown = await originalMethod.apply(this, args);
 					logger.debug(`${target.name} --> ${methodName} method end`);
 					return result;
 				};
 			} else {
-				prototype[methodName] = function (...args: unknown[]): unknown {
+				prototype[methodName] = function (...args: Array<unknown>): unknown {
 					logger.debug(`${target.name} --> ${methodName} method start`);
 					const result: unknown = originalMethod.apply(this, args);
 					logger.debug(`${target.name} --> ${methodName} method end`);

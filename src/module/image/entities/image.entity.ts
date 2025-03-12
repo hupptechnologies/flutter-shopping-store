@@ -1,6 +1,7 @@
 import { Exclude } from 'class-transformer';
 import { Category } from 'src/module/category/entities/category.entity';
 import { Product } from 'src/module/product/entities/product.entity';
+import { Review } from 'src/module/review/entities/review.entity';
 import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
 import {
 	AfterRemove,
@@ -28,18 +29,25 @@ export class Image extends BaseEntity {
 	public public_id: string;
 
 	@Exclude()
-	@ManyToOne(() => Category, (category) => category.id, {
+	@ManyToOne(() => Category, (category) => category.images, {
 		onDelete: 'CASCADE',
 		nullable: true,
 	})
 	public category: Category;
 
 	@Exclude()
-	@ManyToOne(() => Product, (product) => product.id, {
+	@ManyToOne(() => Product, (product) => product.images, {
 		onDelete: 'CASCADE',
 		nullable: true,
 	})
 	public product: Product;
+
+	@Exclude()
+	@ManyToOne(() => Review, (review) => review.images, {
+		onDelete: 'CASCADE',
+		nullable: true,
+	})
+	public review: Review;
 
 	@CreateDateColumn()
 	public createdAt: Date;

@@ -12,6 +12,7 @@ import { VoucherModule } from './module/voucher/voucher.module';
 import { CardsModule } from './module/cards/cards.module';
 import { CryptoService } from './services/crypto/crypto.service';
 import { AppConfigModule } from './config/app/app-config.module';
+import { ReviewModule } from './module/review/review.module';
 
 @Module({
 	imports: [
@@ -27,6 +28,7 @@ import { AppConfigModule } from './config/app/app-config.module';
 		ProductModule,
 		VoucherModule,
 		CardsModule,
+		ReviewModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, CryptoService],

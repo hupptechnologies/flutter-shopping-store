@@ -1,5 +1,6 @@
 import { Category } from 'src/module/category/entities/category.entity';
 import { Image } from 'src/module/image/entities/image.entity';
+import { Review } from 'src/module/review/entities/review.entity';
 import {
 	BaseEntity,
 	Column,
@@ -35,7 +36,12 @@ export class Product extends BaseEntity {
 		eager: true,
 		cascade: true,
 	})
-	public images: Image[];
+	public images: Array<Image>;
+
+	@OneToMany(() => Review, (review) => review.product, {
+		cascade: true,
+	})
+	public reviews: Array<Review>;
 
 	@CreateDateColumn()
 	public createdAt: Date;
