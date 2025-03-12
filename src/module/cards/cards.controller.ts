@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
@@ -7,6 +7,8 @@ import { MessageConstant } from 'src/common/constant/message.constant';
 import { CreateCardsDto } from './dto/craete-cards.dto';
 import { AuthUser } from 'src/decorator/auth-user/auth-user.decorator';
 import { User } from '../user/entities/user.entity';
+import { KeyConstant } from 'src/common/constant/key.constant';
+import { AuthUserId } from 'src/decorator/auth-user-id/auth-user-id.decorator';
 
 @Controller(URLConstant.CARDS)
 export class CardsController {
@@ -21,6 +23,18 @@ export class CardsController {
 		return {
 			data: card,
 			message: MessageConstant.CARD_CREATED_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.ROUTER_ID)
+	async findById(
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
+		@AuthUserId() userId: number,
+	): APIResponse<Cards> {
+		const card = await this.cardsService.findById(id, userId);
+		return {
+			data: card,
+			message: MessageConstant.Card_FOUND_SUCCESS,
 		};
 	}
 }

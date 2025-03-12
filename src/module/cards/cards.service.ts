@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { CardsRepository } from './cards.repository';
 import { CreateCardsDto } from './dto/craete-cards.dto';
@@ -26,5 +26,15 @@ export class CardsService {
 		}
 
 		return this.repository.create(createCardsDto, user);
+	}
+
+	public async findById(id: number, userId: number): Promise<Cards> {
+		const card = await this.repository.findByIdOrUserId(id, userId);
+
+		if (!card) {
+			throw new NotFoundException(MessageConstant.CARD_NOT_FOUND);
+		}
+
+		return card;
 	}
 }

@@ -31,4 +31,15 @@ export class CardsRepository {
 			},
 		});
 	}
+
+	public async findByIdOrUserId(id: number, userId: number): Promise<Cards | null> {
+		return this.repository.findOne({
+			where: {
+				id,
+				user: {
+					id: userId,
+				},
+			},
+		});
+	}
 }
