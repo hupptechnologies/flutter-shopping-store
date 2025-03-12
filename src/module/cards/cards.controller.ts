@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
@@ -35,6 +35,18 @@ export class CardsController {
 		return {
 			data: card,
 			message: MessageConstant.Card_FOUND_SUCCESS,
+		};
+	}
+
+	@Delete(URLConstant.ROUTER_ID)
+	async delete(
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
+		@AuthUserId() userId: number,
+	): APIResponse<boolean> {
+		const isDelete = await this.cardsService.delete(id, userId);
+		return {
+			data: isDelete,
+			message: MessageConstant.CARD_DELETED_SUCCESS,
 		};
 	}
 }

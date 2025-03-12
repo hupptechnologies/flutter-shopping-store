@@ -37,4 +37,15 @@ export class CardsService {
 
 		return card;
 	}
+
+	public async delete(id: number, userId: number): Promise<boolean> {
+		const card = await this.repository.findByIdOrUserId(id, userId);
+
+		if (!card) {
+			throw new NotFoundException(MessageConstant.CARD_NOT_FOUND);
+		}
+
+		const isDelete = await this.repository.delete(card);
+		return isDelete;
+	}
 }

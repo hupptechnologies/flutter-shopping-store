@@ -46,4 +46,5 @@ export abstract class MessageConstant {
 	static readonly CARD_CREATED_SUCCESS = 'Card created successfully';
 	static readonly CARD_NOT_FOUND = 'Card not found';
 	static readonly Card_FOUND_SUCCESS = 'Card found successfully';
+	static readonly CARD_DELETED_SUCCESS = 'Card deleted successfully';
 }

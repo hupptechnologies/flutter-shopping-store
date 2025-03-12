@@ -42,4 +42,13 @@ export class CardsRepository {
 			},
 		});
 	}
+
+	public async delete(card: Cards, isSoftDetele = true): Promise<boolean> {
+		if (isSoftDetele) {
+			const deleteCard = await card.softRemove();
+			return !!deleteCard;
+		}
+		const deleteCard = await card.remove();
+		return !!deleteCard;
+	}
 }

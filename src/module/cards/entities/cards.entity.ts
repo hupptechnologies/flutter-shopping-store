@@ -32,7 +32,6 @@ export class Cards extends BaseEntity {
 	@Column({
 		type: 'varchar',
 		length: 255,
-		unique: true,
 	})
 	public encryptedNumber: string;
 
