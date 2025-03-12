@@ -15,7 +15,7 @@ import {
 
 @Entity()
 export class Review extends BaseEntity {
-	@PrimaryGeneratedColumn('rowid')
+	@PrimaryGeneratedColumn()
 	public id: number;
 
 	@Column({

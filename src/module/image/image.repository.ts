@@ -14,13 +14,14 @@ export class ImageRepository {
 	) {}
 
 	async createBulk(createBulkImage: CreateBulkImage): Promise<Array<Image>> {
-		const { images, category, product } = createBulkImage;
+		const { images, category, product, review } = createBulkImage;
 		const createImages = images.map((image) => {
 			return {
 				url: image.url,
 				public_id: image.public_id,
 				category,
 				product,
+				review,
 			};
 		});
 		const image = this.repository.create(createImages);

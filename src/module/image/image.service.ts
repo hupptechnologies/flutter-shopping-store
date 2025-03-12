@@ -4,6 +4,7 @@ import { ImageRepository } from './image.repository';
 import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
 import { Product } from '../product/entities/product.entity';
 import { Category } from '../category/entities/category.entity';
+import { Review } from '../review/entities/review.entity';
 
 @Injectable()
 @Loggable()
@@ -13,15 +14,16 @@ export class ImageService {
 		private readonly cloudinaryService: CloudinaryService,
 	) {}
 
-	public async uploadAndAttachImages<T extends Product | Category>(
+	public async uploadAndAttachImages<T extends Product | Category | Review>(
 		files: Array<Express.Multer.File>,
 		entity: T,
 	): Promise<void> {
 		if (!files?.length) return;
 		const images = await this.cloudinaryService.uploadMultipleFiles(files);
+		const keyEntity = entity.constructor.name.toLowerCase();
 		const createdImages = await this.imageRespository.createBulk({
 			images,
-			[entity instanceof Product ? 'product' : 'category']: entity,
+			[keyEntity]: entity,
 		});
 
 		entity.images ??= [];

@@ -12,5 +12,6 @@ import { ImageModule } from '../image/image.module';
 	imports: [TypeOrmModule.forFeature([Product, Category]), ImageModule],
 	controllers: [ProductController],
 	providers: [ProductService, ProductRepository, CategoryRepository],
+	exports: [ProductRepository],
 })
 export class ProductModule {}
