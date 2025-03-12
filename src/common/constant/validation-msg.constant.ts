@@ -7,4 +7,5 @@ export class ValidationMsgConstant {
 	static readonly LIMIT_INTEGET = 'Limit must be an integer';
 	static readonly SEARCH_NOT_EMPTY = 'Search field cannot be empty';
 	static readonly GENDER_ENUM = 'Gender must be either male, female, or other';
+	static readonly CARD_EXPIRATION_DATE = 'Expiration date must be in MM/YY or MM/YYYY format';
 }

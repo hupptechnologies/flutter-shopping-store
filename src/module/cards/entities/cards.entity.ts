@@ -23,7 +23,7 @@ export class Cards extends BaseEntity {
 	@Column({
 		type: 'varchar',
 	})
-	public name: string;
+	public cardholderName: string;
 
 	@Column({
 		type: 'varchar',
@@ -39,15 +39,9 @@ export class Cards extends BaseEntity {
 
 	@Column({
 		type: 'varchar',
-		length: 2,
+		length: 7,
 	})
-	public month: string;
-
-	@Column({
-		type: 'varchar',
-		length: 4,
-	})
-	public year: string;
+	public expirationDate: string;
 
 	@Column({
 		type: 'enum',
@@ -69,19 +63,19 @@ export class Cards extends BaseEntity {
 	@DeleteDateColumn()
 	public deletedAt: Date | null;
 
-	public number: string;
+	public cardNumber: string;
 	public cvv: string;
 
 	@BeforeInsert()
 	@BeforeUpdate()
 	encryptCardDetails(): void {
-		this.encryptedNumber = CryptoService.encrypt(this.number);
+		this.encryptedNumber = CryptoService.encrypt(this.cardNumber);
 		this.encryptedCvv = CryptoService.encrypt(this.cvv);
 	}
 
 	@AfterLoad()
 	decryptCardDetails(): void {
-		this.number = CryptoService.decrypt(this.encryptedNumber);
+		this.cardNumber = CryptoService.decrypt(this.encryptedNumber);
 		this.cvv = CryptoService.decrypt(this.encryptedCvv);
 	}
 }
