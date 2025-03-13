@@ -4,26 +4,26 @@ import 'package:e_commerce/dto/address_dto.dart';
 import 'package:e_commerce/service/base_service.dart';
 
 class AddressService extends BaseService {
-
   Future<ApiResponse<List<AddressDto>>> getAddresses() async {
     return api.get(
-        UrlConstant.address, fromJsonT: (data) => addressDtoFromJson(data));
+        url: UrlConstant.address,
+        fromJsonT: (data) => addressDtoFromJson(data));
   }
 
   Future<ApiResponse<bool>> delete(int id) async {
-    return api.delete('${UrlConstant.address}/$id');
+    return api.delete(url: [UrlConstant.address, id.toString()]);
   }
 
   Future<ApiResponse> setDefaultAddress(int id) async {
     return api.patch(
-      '${UrlConstant.address}/$id',
+      url: [UrlConstant.address, id.toString()],
       data: {'isDefault': true},
     );
   }
 
   Future<ApiResponse<AddressDto>> getById(String id) async {
     return api.get(
-      '${UrlConstant.address}/$id',
+      url: [UrlConstant.address, id.toString()],
       fromJsonT: (address) => AddressDto.fromJson(address),
     );
   }
@@ -32,12 +32,12 @@ class AddressService extends BaseService {
     final int id = addressDto.id;
     if (id == 0) {
       return api.post(
-        UrlConstant.address,
+        url: UrlConstant.address,
         data: addressDto.toJson(),
       );
     }
     return api.patch(
-      '${UrlConstant.address}/${addressDto.id}',
+      url: [UrlConstant.address, addressDto.id.toString()],
       data: addressDto.toJson(),
     );
   }

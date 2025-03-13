@@ -64,32 +64,55 @@ class ApiService extends GetxService {
       final dynamic errorData = e.response?.data;
       return ApiResponse.errorData(errorData);
     }
-    print('API CALLING ERROR: ${e}');
+    if (kDebugMode) {
+      print('API CALLING ERROR: $e');
+    }
     return ApiResponse.error("An unexpected error occurred: ${e.message}");
   }
 
   /// **GET Request**
-  Future<ApiResponse<T>> get<T>(String path,
-      {Map<String, dynamic>? queryParameters, T Function(dynamic)? fromJsonT}) {
+  Future<ApiResponse<T>> get<T>({
+    required dynamic url,
+    Map<String, dynamic>? queryParameters,
+    T Function(dynamic)? fromJsonT,
+  }) {
+    String finalUrl = (url is List<String>) ? url.join('/') : url.toString();
+
     return _request(
-        () => _dio.get(path, queryParameters: queryParameters), fromJsonT);
+        () => _dio.get(finalUrl, queryParameters: queryParameters),
+        fromJsonT);
   }
 
   /// **POST Request**
-  Future<ApiResponse<T>> post<T>(String path,
-      {dynamic data, T Function(dynamic)? fromJsonT}) {
-    return _request(() => _dio.post(path, data: data), fromJsonT);
+  Future<ApiResponse<T>> post<T>({
+    required dynamic url,
+    dynamic data,
+    T Function(dynamic)? fromJsonT,
+  }) {
+    String finalUrl = (url is List<String>) ? url.join('/') : url.toString();
+
+    return _request(() => _dio.post(finalUrl, data: data), fromJsonT);
   }
 
   /// **PATCH Request**
-  Future<ApiResponse<T>> patch<T>(String path,
-      {dynamic data, T Function(dynamic)? fromJsonT}) {
-    return _request(() => _dio.patch(path, data: data), fromJsonT);
+  Future<ApiResponse<T>> patch<T>({
+    required dynamic url,
+    dynamic data,
+    T Function(dynamic)? fromJsonT,
+  }) {
+    String finalUrl = (url is List<String>) ? url.join('/') : url.toString();
+
+    return _request(() => _dio.patch(finalUrl, data: data), fromJsonT);
   }
 
   /// **DELETE Request**
-  Future<ApiResponse<T>> delete<T>(String path, {T Function(dynamic)? fromJsonT}) {
-    return _request(() => _dio.delete(path), fromJsonT);
+  Future<ApiResponse<T>> delete<T>({
+    required dynamic url,
+    T Function(dynamic)? fromJsonT,
+  }) {
+    String finalUrl = (url is List<String>) ? url.join('/') : url.toString();
+
+    return _request(() => _dio.delete(finalUrl), fromJsonT);
   }
 
   /// **Clear Cookies (For Logout)**

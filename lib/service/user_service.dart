@@ -7,10 +7,9 @@ import 'package:e_commerce/service/base_service.dart';
 import 'package:dio/dio.dart' as dio;
 
 class UserService extends BaseService {
-
   Future<ApiResponse<UserDto>> getProfile() async {
     return await api.get(
-      UrlConstant.getProfile,
+      url: UrlConstant.getProfile,
       fromJsonT: (data) => UserDto.fromJson(data),
     );
   }
@@ -30,7 +29,7 @@ class UserService extends BaseService {
     }
 
     return await api.patch(
-      '${UrlConstant.user}/${userDto.id}',
+      url: [UrlConstant.user, userDto.id.toString()],
       data: formData,
     );
   }
