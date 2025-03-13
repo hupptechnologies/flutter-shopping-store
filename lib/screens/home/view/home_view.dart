@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/home/controller/home_controller.dart';
 import 'package:e_commerce/widgets/appbar/view/common_app_bar.dart';
 import 'package:e_commerce/widgets/drawer/view/drawer_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +16,32 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime? lastPressed;
+
     return PopScope(
       canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+
+        if (controller.selectedIndex.value != 0) {
+          controller.selectedIndex.value = 0;
+          return;
+        }
+
+        DateTime now = DateTime.now();
+        if (lastPressed == null ||
+            now.difference(lastPressed!) > const Duration(seconds: 2)) {
+          lastPressed = now;
+          CommonSnackbar.success("Press back again to exit", title: "Exit");
+          return;
+        }
+
+        if (Platform.isAndroid) {
+          SystemNavigator.pop();
+        } else if (Platform.isIOS) {
+          exit(0);
+        }
+      },
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),

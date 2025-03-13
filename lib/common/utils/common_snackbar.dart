@@ -42,10 +42,10 @@ abstract class CommonSnackbar {
   /// ```dart
   /// CommonSnackbar.success('Operation successful');
   /// ```
-  static void success(String message, {SnackPosition? position}) {
+  static void success(String message, {SnackPosition? position, String title = 'Success'}) {
     if (message.isNotEmpty) {
       Get.snackbar(
-        'Success',
+        title,
         message,
         snackPosition: position ?? commonPosition,
         // backgroundColor: const Color.fromARGB(226, 95, 141, 64),
