@@ -15,6 +15,7 @@ class FeedbackView extends GetView<FeedbackController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<FeedbackController>(
+      isLoader: controller.reviewService.api.isLoader,
       child: Scaffold(
         appBar: const BackButtonAppbarTitle(
           centerTitle: true,
@@ -35,11 +36,13 @@ class FeedbackView extends GetView<FeedbackController> {
                   const SizedBox(height: 50),
                   const FeedbackReviewDescriptionWidget(),
                   const FeedbackImagePickerWidget(),
-                  ButtonWidget(
-                    title: 'Send feedback',
-                    isDisable: false,
-                    onPressed: controller.submitReview,
-                  )
+                  Obx(
+                    () => ButtonWidget(
+                      title: 'Send feedback',
+                      isDisable: !controller.isValid.value,
+                      onPressed: controller.submitReview,
+                    ),
+                  ),
                 ],
               ),
             ),
