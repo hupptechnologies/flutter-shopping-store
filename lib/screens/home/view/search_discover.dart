@@ -1,7 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
-import 'package:e_commerce/data/search/search_box.dart';
+import 'package:e_commerce/data/search_box_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/home/controller/search_discover_controller.dart';
 import 'package:flutter/material.dart';

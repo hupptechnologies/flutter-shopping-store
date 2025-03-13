@@ -1,7 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/enum/address_enum.dart';
-import 'package:e_commerce/data/address/address_dto.dart';
+import 'package:e_commerce/data/address_dto.dart';
 import 'package:e_commerce/screens/profile/address/controller/address_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

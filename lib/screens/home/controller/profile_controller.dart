@@ -1,7 +1,7 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/enum/profile_menu_enum.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
-import 'package:e_commerce/data/profile/profile_menu.dart';
+import 'package:e_commerce/data/profile_menu_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/auth_service.dart';
 import 'package:get/get.dart';
@@ -9,28 +9,28 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController {
   final AuthService authService = AuthService();
 
-  final List<ProfileMenu> menuList = [
-    ProfileMenu(
+  final List<ProfileMenuDto> menuList = [
+    ProfileMenuDto(
         icon: ImageConstant.locationFillIcon,
         label: 'Address',
         type: ProfileMenuEnum.address),
-    ProfileMenu(
+    ProfileMenuDto(
         icon: ImageConstant.walletIcon,
         label: 'Payment method',
         type: ProfileMenuEnum.payment),
-    ProfileMenu(
+    ProfileMenuDto(
         icon: ImageConstant.tickeIcon,
         label: 'Voucher',
         type: ProfileMenuEnum.voucher),
-    ProfileMenu(
+    ProfileMenuDto(
         icon: ImageConstant.favoriteFillIcon,
         label: 'My Wishlist',
         type: ProfileMenuEnum.wishlist),
-    ProfileMenu(
+    ProfileMenuDto(
         icon: ImageConstant.starFillIcon,
         label: 'Rate this app',
         type: ProfileMenuEnum.rate),
-    ProfileMenu(
+    ProfileMenuDto(
         icon: ImageConstant.logoutIcon,
         label: 'Log out',
         type: ProfileMenuEnum.logout),

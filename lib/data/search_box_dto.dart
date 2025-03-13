@@ -1,10 +1,10 @@
-class SearchBox {
+class SearchBoxDto {
   final String name;
   final String image;
   final String color;
   final List<SearchCategory>? category;
 
-  SearchBox({
+  SearchBoxDto({
     required this.name,
     required this.image,
     required this.color,

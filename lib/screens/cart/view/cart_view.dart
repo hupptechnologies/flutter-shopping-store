@@ -1,6 +1,6 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
-import 'package:e_commerce/data/product/product.dart';
+import 'package:e_commerce/data/product_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/cart/controller/cart_controller.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
-import 'package:e_commerce/data/user/user_dto.dart';
+import 'package:e_commerce/data/user_dto.dart';
 import 'package:e_commerce/service/base_service.dart';
 import 'package:dio/dio.dart' as dio;
 

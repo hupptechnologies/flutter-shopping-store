@@ -1,5 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/data/product/product.dart';
+import 'package:e_commerce/data/product_dto.dart';
 import 'package:e_commerce/screens/profile/wishlist/controller/wishlist_controller.dart';
 import 'package:e_commerce/widgets/discount_price_widget.dart';
 import 'package:e_commerce/widgets/favorite_widget.dart';

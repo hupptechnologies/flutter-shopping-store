@@ -1,7 +1,7 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
-import 'package:e_commerce/data/order/order_track_dto.dart';
+import 'package:e_commerce/data/order_track_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/orders/controller/order_track_controller.dart';
 import 'package:e_commerce/widgets/back_button_appbar_title.dart';

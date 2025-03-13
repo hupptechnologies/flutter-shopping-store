@@ -1,5 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/data/voucher/voucher_dto.dart';
+import 'package:e_commerce/data/voucher_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/profile/voucher/controller/voucher_controller.dart';
 import 'package:e_commerce/screens/profile/voucher/view/widget/voucher_ticket_clipper_widget.dart';

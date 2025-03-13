@@ -1,4 +1,4 @@
-import 'package:e_commerce/data/product/product.dart';
+import 'package:e_commerce/data/product_dto.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/extension/string_extensions.dart';
 import 'package:e_commerce/routers/app_routers.dart';

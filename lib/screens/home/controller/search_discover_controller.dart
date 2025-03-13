@@ -1,11 +1,11 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
-import 'package:e_commerce/data/search/search_box.dart';
+import 'package:e_commerce/data/search_box_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
 
 class SearchDiscoverController extends GetxController {
   late RxInt expandedIndex;
-  late RxList<SearchBox> list;
+  late RxList<SearchBoxDto> list;
 
   final List<SearchCategory> searchCategory = [
     SearchCategory(name: 'Jacket', item: 180),
@@ -24,26 +24,26 @@ class SearchDiscoverController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    list = <SearchBox>[].obs;
+    list = <SearchBoxDto>[].obs;
     list.addAll([
-      SearchBox(
+      SearchBoxDto(
         name: 'CLOTHING',
         image: ImageConstant.search1,
         color: 'A3A798',
         category: searchCategory,
       ),
-      SearchBox(
+      SearchBoxDto(
         name: 'ACCESSORIES',
         image: ImageConstant.search2,
         color: '898280',
       ),
-      SearchBox(
+      SearchBoxDto(
         name: 'SHOES',
         image: ImageConstant.search3,
         color: '44565C',
         category: searchCategory,
       ),
-      SearchBox(
+      SearchBoxDto(
         name: 'COLLECTION',
         image: ImageConstant.search4,
         color: 'B9AEB2',

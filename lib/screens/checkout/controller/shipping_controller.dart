@@ -1,4 +1,4 @@
-import 'package:e_commerce/data/address/address_dto.dart';
+import 'package:e_commerce/data/address_dto.dart';
 import 'package:get/get.dart';
 
 class ShippingController extends GetxController {
