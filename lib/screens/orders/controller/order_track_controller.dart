@@ -1,4 +1,4 @@
-import 'package:e_commerce/data/order_track_dto.dart';
+import 'package:e_commerce/dto/order_track_dto.dart';
 import 'package:get/get.dart';
 
 class OrderTrackController extends GetxController {

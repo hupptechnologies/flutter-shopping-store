@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:e_commerce/common/utils/common_snackbar.dart';
-import 'package:e_commerce/data/user_dto.dart';
+import 'package:e_commerce/dto/user_dto.dart';
 import 'package:e_commerce/service/user_service.dart';
 import 'package:e_commerce/widgets/image_source_dialog.dart';
 import 'package:get/get.dart';

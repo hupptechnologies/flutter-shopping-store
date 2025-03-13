@@ -1,5 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/data/product_dto.dart';
+import 'package:e_commerce/dto/product_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 

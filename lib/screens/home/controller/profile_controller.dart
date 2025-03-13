@@ -1,7 +1,7 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/enum/profile_menu_enum.dart';
 import 'package:e_commerce/common/utils/common_snackbar.dart';
-import 'package:e_commerce/data/profile_menu_dto.dart';
+import 'package:e_commerce/dto/profile_menu_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/auth_service.dart';
 import 'package:get/get.dart';

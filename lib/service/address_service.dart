@@ -1,6 +1,6 @@
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
-import 'package:e_commerce/data/address_dto.dart';
+import 'package:e_commerce/dto/address_dto.dart';
 import 'package:e_commerce/service/base_service.dart';
 
 class AddressService extends BaseService {

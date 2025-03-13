@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
-import 'package:e_commerce/data/product_dto.dart';
+import 'package:e_commerce/dto/product_dto.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:flutter/material.dart';

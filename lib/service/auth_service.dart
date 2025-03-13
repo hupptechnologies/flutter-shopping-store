@@ -4,7 +4,7 @@ import 'package:e_commerce/common/requset/forget_password_req.dart';
 import 'package:e_commerce/common/requset/login_req.dart';
 import 'package:e_commerce/common/requset/password_req.dart';
 import 'package:e_commerce/common/requset/sign_up_req.dart';
-import 'package:e_commerce/data/user_dto.dart';
+import 'package:e_commerce/dto/user_dto.dart';
 import 'package:e_commerce/service/base_service.dart';
 
 class AuthService extends BaseService {

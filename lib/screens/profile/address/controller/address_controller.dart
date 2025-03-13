@@ -1,5 +1,5 @@
 import 'package:e_commerce/common/utils/common_snackbar.dart';
-import 'package:e_commerce/data/address_dto.dart';
+import 'package:e_commerce/dto/address_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/address_service.dart';
 import 'package:get/get.dart';
