@@ -11,7 +11,7 @@ class UserService extends BaseService {
   Future<ApiResponse<UserDto>> getProfile() async {
     return await api.get(
       UrlConstant.getProfile,
-      (data) => UserDto.fromJson(data),
+      fromJsonT: (data) => UserDto.fromJson(data),
     );
   }
 
@@ -31,7 +31,6 @@ class UserService extends BaseService {
 
     return await api.patch(
       '${UrlConstant.user}/${userDto.id}',
-      (data) => data,
       data: formData,
     );
   }

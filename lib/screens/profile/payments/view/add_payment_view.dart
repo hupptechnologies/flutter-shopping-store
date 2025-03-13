@@ -25,17 +25,17 @@ class AddPaymentView extends GetView<AddPaymentController> {
               horizontal: MarginPadding.homeHorPadding,
               vertical: MarginPadding.homeTopPadding,
             ),
-            child: const SingleChildScrollView(
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CreditCardWidget(
+                  Obx(() => CreditCardWidget(
                     icon: ImageConstant.mastercardIcon,
-                    cardNumber: '4364134589328378',
-                    holderName: 'Sunie Pham',
-                    validDate: '02/2026',
-                  ),
-                  AddPaymentFormWidget(),
+                    cardNumber: controller.cardNumberDisplay.value,
+                    holderName: controller.cardholderDisplay.value,
+                    validDate: controller.expiryDateDisplay.value,
+                  ),),
+                  const AddPaymentFormWidget(),
                 ],
               ),
             ),

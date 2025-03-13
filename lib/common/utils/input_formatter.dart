@@ -1,3 +1,4 @@
+import 'package:e_commerce/common/constant/reg_exp_constant.dart';
 import 'package:flutter/services.dart';
 
 class CardNumberInputFormatter extends TextInputFormatter {
@@ -5,7 +6,7 @@ class CardNumberInputFormatter extends TextInputFormatter {
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
     String newText = newValue.text;
-    newText = newText.replaceAll(RegExp(r'\D'), '');
+    newText = newText.replaceAll(RegExpConstant.nonDigit, '');
 
     if (newText.length > 16) {
       newText = newText.substring(0, 16);
@@ -32,7 +33,7 @@ class ExpiryDateInputFormatter extends TextInputFormatter {
       TextEditingValue oldValue, TextEditingValue newValue) {
     String newText = newValue.text;
 
-    newText = newText.replaceAll(RegExp(r'\D'), '');
+    newText = newText.replaceAll(RegExpConstant.nonDigit, '');
 
     if (newText.length >= 2) {
       newText =

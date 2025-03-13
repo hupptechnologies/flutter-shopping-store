@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/common/constant/reg_exp_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -67,7 +68,7 @@ class CreditCardWidget extends StatelessWidget {
   }
 
   List<Widget> cardNumberWidget(String cardNumber) {
-    final chunks = RegExp(r".{1,4}")
+    final chunks = RegExpConstant.maxFourChars
         .allMatches(cardNumber)
         .map((match) => match.group(0)!)
         .toList();

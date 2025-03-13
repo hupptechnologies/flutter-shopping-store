@@ -18,6 +18,9 @@ class AddPaymentFormWidget extends GetView<AddPaymentController> {
           controller: controller.cardholderName,
           label: 'Cardholder Name',
           hintText: 'XXXXX XXXXX',
+          inputFormatters: [
+            UpperCaseTextFormatter()
+          ],
         ),
         AddPaymentField(
           controller: controller.cardNumber,

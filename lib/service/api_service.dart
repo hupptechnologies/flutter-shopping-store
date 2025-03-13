@@ -38,14 +38,14 @@ class ApiService extends GetxService {
 
   Future<ApiResponse<T>> _request<T>(
     Future<dio.Response> Function() request,
-    T Function(dynamic) fromJsonT,
+    T Function(dynamic)? fromJsonT,
   ) async {
     isLoader.value = true;
     try {
       final response = await request();
-      return ApiResponse.fromJson(response.data, fromJsonT);
+      return ApiResponse.fromJson(response.data, fromJsonT ?? (data) => data);
     } on dio.DioException catch (e) {
-      return _handleError<T>(e, fromJsonT);
+      return _handleError<T>(e, fromJsonT ?? (data) => data);
     } finally {
       isLoader.value = false;
     }
@@ -69,26 +69,26 @@ class ApiService extends GetxService {
   }
 
   /// **GET Request**
-  Future<ApiResponse<T>> get<T>(String path, T Function(dynamic) fromJsonT,
-      {Map<String, dynamic>? queryParameters}) {
+  Future<ApiResponse<T>> get<T>(String path,
+      {Map<String, dynamic>? queryParameters, T Function(dynamic)? fromJsonT}) {
     return _request(
         () => _dio.get(path, queryParameters: queryParameters), fromJsonT);
   }
 
   /// **POST Request**
-  Future<ApiResponse<T>> post<T>(String path, T Function(dynamic) fromJsonT,
-      {dynamic data}) {
+  Future<ApiResponse<T>> post<T>(String path,
+      {dynamic data, T Function(dynamic)? fromJsonT}) {
     return _request(() => _dio.post(path, data: data), fromJsonT);
   }
 
   /// **PATCH Request**
-  Future<ApiResponse<T>> patch<T>(String path, T Function(dynamic) fromJsonT,
-      {dynamic data}) {
+  Future<ApiResponse<T>> patch<T>(String path,
+      {dynamic data, T Function(dynamic)? fromJsonT}) {
     return _request(() => _dio.patch(path, data: data), fromJsonT);
   }
 
   /// **DELETE Request**
-  Future<ApiResponse<T>> delete<T>(String path, T Function(dynamic) fromJsonT) {
+  Future<ApiResponse<T>> delete<T>(String path, {T Function(dynamic)? fromJsonT}) {
     return _request(() => _dio.delete(path), fromJsonT);
   }
 

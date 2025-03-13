@@ -8,11 +8,10 @@ import 'package:e_commerce/dto/user_dto.dart';
 import 'package:e_commerce/service/base_service.dart';
 
 class AuthService extends BaseService {
-
   Future<ApiResponse<UserDto>> login(LoginReq data) async {
     final response = await api.post(
       UrlConstant.login,
-      (data) => UserDto.fromJson(data),
+      fromJsonT: (data) => UserDto.fromJson(data),
       data: data.toJson(),
     );
     if (!response.error) {
@@ -23,7 +22,7 @@ class AuthService extends BaseService {
 
   Future<ApiResponse> logout() async {
     try {
-      final response = await api.post(UrlConstant.logout, (data) => data);
+      final response = await api.post(UrlConstant.logout);
       return response;
     } finally {
       api.storage.remove('isLogin');
@@ -34,7 +33,7 @@ class AuthService extends BaseService {
   Future<ApiResponse<UserDto>> sigUp(SignUpReq data) async {
     return api.post(
       UrlConstant.signup,
-      (json) => UserDto.fromJson(json),
+      fromJsonT: (json) => UserDto.fromJson(json),
       data: data.toJson(),
     );
   }
@@ -42,7 +41,6 @@ class AuthService extends BaseService {
   Future<ApiResponse<String>> forgetPassword(ForgetPasswordReq data) async {
     return api.post(
       UrlConstant.forgetPassword,
-      (json) => json,
       data: data.toJson(),
     );
   }
@@ -51,11 +49,10 @@ class AuthService extends BaseService {
     required int otp,
     required String email,
   }) async {
-    return api.post(UrlConstant.verifyOtp, (json) => json,
-        data: {"email": email, "otp": otp});
+    return api.post(UrlConstant.verifyOtp, data: {"email": email, "otp": otp});
   }
 
   Future<ApiResponse> resetPassword(PasswordReq data) async {
-    return api.post(UrlConstant.resetPassword, (json) => json, data: data.toJson());
+    return api.post(UrlConstant.resetPassword, data: data.toJson());
   }
 }

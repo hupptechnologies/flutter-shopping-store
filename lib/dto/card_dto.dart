@@ -28,10 +28,10 @@ class CardDto {
       );
 
   Map<String, dynamic> toJson() => {
-        "cardholderName": cardholderName,
+        "cardholderName": cardholderName!.toUpperCase(),
         "expirationDate": expirationDate,
-        "type": type,
-        "cardNumber": cardNumber,
+        "type": type ?? 'Visa',
+        "cardNumber": cardNumber!.replaceAll(RegExp(r'\s+'), ''),
         "cvv": cvv,
       };
 }

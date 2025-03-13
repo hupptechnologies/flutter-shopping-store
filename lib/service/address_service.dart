@@ -7,17 +7,16 @@ class AddressService extends BaseService {
 
   Future<ApiResponse<List<AddressDto>>> getAddresses() async {
     return api.get(
-        UrlConstant.address, (data) => addressDtoFromJson(data));
+        UrlConstant.address, fromJsonT: (data) => addressDtoFromJson(data));
   }
 
   Future<ApiResponse<bool>> delete(int id) async {
-    return api.delete('${UrlConstant.address}/$id', (data) => data);
+    return api.delete('${UrlConstant.address}/$id');
   }
 
   Future<ApiResponse> setDefaultAddress(int id) async {
     return api.patch(
       '${UrlConstant.address}/$id',
-      (data) => data,
       data: {'isDefault': true},
     );
   }
@@ -25,7 +24,7 @@ class AddressService extends BaseService {
   Future<ApiResponse<AddressDto>> getById(String id) async {
     return api.get(
       '${UrlConstant.address}/$id',
-      (address) => AddressDto.fromJson(address),
+      fromJsonT: (address) => AddressDto.fromJson(address),
     );
   }
 
@@ -34,13 +33,11 @@ class AddressService extends BaseService {
     if (id == 0) {
       return api.post(
         UrlConstant.address,
-        (data) => data,
         data: addressDto.toJson(),
       );
     }
     return api.patch(
       '${UrlConstant.address}/${addressDto.id}',
-      (data) => data,
       data: addressDto.toJson(),
     );
   }

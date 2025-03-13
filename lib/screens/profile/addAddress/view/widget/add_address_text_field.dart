@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/common/constant/reg_exp_constant.dart';
 import 'package:flutter/material.dart';
 
 class AddAddressTextField extends StatelessWidget {
@@ -48,12 +49,12 @@ class AddAddressTextField extends StatelessWidget {
         if (isRequired && (value == null || value.trim().isEmpty)) {
           return "$label is required";
         }
-        if (isZipCode && !RegExp(r"^\d{5,10}$").hasMatch(value ?? "")) {
+        if (isZipCode && !RegExpConstant.fiveToTenDigits.hasMatch(value ?? "")) {
           return "Enter a valid Zip-code (5-10 digits)";
         }
 
         if (isNumber &&
-            !RegExp(r"^\+?[0-9]{1,3}?[0-9]{10}$").hasMatch(value ?? "")) {
+            !RegExpConstant.phoneNumber.hasMatch(value ?? "")) {
           return "Enter a valid phone number (10 digits, optional +country code)";
         }
         return null;
