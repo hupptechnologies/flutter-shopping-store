@@ -11,6 +11,7 @@ class AddPaymentController extends GetxController {
   final TextEditingController cardNumber = TextEditingController();
   final TextEditingController expiresDate = TextEditingController();
   final TextEditingController cvv = TextEditingController();
+  final RxBool isValid = false.obs;
 
   late RxString cardNumberDisplay = 'xxxxxxxxxxxxxxxx'.obs;
   late RxString cardholderDisplay = 'xxxxx xxxxx'.obs;
@@ -40,17 +41,20 @@ class AddPaymentController extends GetxController {
     cardholderName.addListener(_updateCardholderDisplay);
     cardNumber.addListener(_updateCardNumberDisplay);
     expiresDate.addListener(_updateExpiryDateDisplay);
+    cvv.addListener(_validate);
   }
 
   void removeListeners() {
     cardholderName.removeListener(_updateCardholderDisplay);
     cardNumber.removeListener(_updateCardNumberDisplay);
     expiresDate.removeListener(_updateExpiryDateDisplay);
+    cvv.removeListener(_validate);
   }
 
   void _updateCardholderDisplay() {
     cardholderDisplay.value =
         cardholderName.text.isEmpty ? 'xxxxx xxxxx' : cardholderName.text;
+    _validate();
   }
 
   void _updateCardNumberDisplay() {
@@ -63,6 +67,7 @@ class AddPaymentController extends GetxController {
       String hiddenPart = 'x' * (16 - inputLength);
       cardNumberDisplay.value = input + hiddenPart;
     }
+    _validate();
   }
 
   void _updateExpiryDateDisplay() {
@@ -70,6 +75,16 @@ class AddPaymentController extends GetxController {
     expiryDateDisplay.value = input.isEmpty
         ? 'MM/YY'
         : '${input.padRight(2, 'M').substring(0, 2)}/${input.padRight(4, 'Y').substring(2, 4)}';
+    _validate();
+  }
+
+  void _validate() {
+    final isCName = cardholderName.text.isNotEmpty;
+    final isCNumber =
+        cardNumber.text.isNotEmpty && cardNumber.text.replaceAll(RegExpConstant.space, '').length == 16;
+    final isEDate = expiresDate.text.isNotEmpty && expiresDate.text.replaceAll(RegExpConstant.onlyDigits, '').length == 4;
+    final isCvv = cvv.text.isNotEmpty && cvv.text.length == 3;
+    isValid.value = isCName && isCNumber && isEDate && isCvv;
   }
 
   Future<void> deleteCard() async {

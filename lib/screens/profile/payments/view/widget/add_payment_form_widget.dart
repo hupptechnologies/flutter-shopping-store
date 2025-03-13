@@ -92,7 +92,7 @@ class AddPaymentFormWidget extends GetView<AddPaymentController> {
             alignment: Alignment.center,
             child: ButtonWidget(
               title: 'Add card',
-              isDisable: false,
+              isDisable: !controller.isValid.value,
               onPressed: controller.addCard,
             ),
           );
