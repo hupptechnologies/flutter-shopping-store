@@ -9,13 +9,15 @@ abstract class UrlConstant {
   static const String forgetPassword = '$auth/forget-password';
   static const String verifyOtp = '$auth/verify-otp';
   static const String resetPassword = '$auth/reset-password';
-  
+
   static const String user = '/user';
   static const String getProfile = '$user/get-profile';
 
   static const String address = '/address';
-  
+
   static const String voucher = '/voucher';
- 
+
   static const String cards = '/cards';
+
+  static const String review = '/review';
 }
