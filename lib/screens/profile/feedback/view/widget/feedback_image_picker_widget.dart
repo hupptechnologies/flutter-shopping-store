@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
@@ -62,22 +63,22 @@ class FeedbackImagePickerWidget extends GetView<FeedbackController> {
             }),
             GestureDetector(
               onTap: controller.pickImages,
-              child: Container(
-                width: 80,
-                height: 80,
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    style: BorderStyle.solid,
-                    width: 2,
-                    color: AppColors.lightGray,
+              child: DottedBorder(
+                color: AppColors.lightGray,
+                strokeWidth: 2,
+                borderType: BorderType.RRect,
+                radius: const Radius.circular(10),
+                dashPattern: const [6, 8],
+                padding: EdgeInsets.zero,
+                child: Container(
+                  width: 80,
+                  height: 80,
+                  padding: const EdgeInsets.all(10),
+                  child: SvgPicture.asset(
+                    ImageConstant.cameraIcon,
+                    fit: BoxFit.cover,
+                    color: AppColors.dartGratWithOpaity5.withOpacityValue(0.2),
                   ),
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                ),
-                child: SvgPicture.asset(
-                  ImageConstant.cameraIcon,
-                  fit: BoxFit.cover,
-                  color: AppColors.dartGratWithOpaity5.withOpacityValue(0.2),
                 ),
               ),
             )
