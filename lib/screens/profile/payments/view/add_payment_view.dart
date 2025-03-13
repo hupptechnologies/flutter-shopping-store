@@ -31,7 +31,7 @@ class AddPaymentView extends GetView<AddPaymentController> {
                 children: [
                   CreditCardWidget(
                     icon: ImageConstant.mastercardIcon,
-                    cardNumber: 4364134589328378,
+                    cardNumber: '4364134589328378',
                     holderName: 'Sunie Pham',
                     validDate: '02/2026',
                   ),

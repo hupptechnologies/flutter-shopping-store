@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CreditCardWidget extends StatelessWidget {
   final String icon;
-  final int cardNumber;
+  final String cardNumber;
   final String holderName;
   final String validDate;
 
@@ -52,7 +52,7 @@ class CreditCardWidget extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: cardNumberWidget(cardNumber.toString()),
+            children: cardNumberWidget(cardNumber),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

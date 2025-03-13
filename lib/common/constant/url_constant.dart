@@ -16,4 +16,6 @@ abstract class UrlConstant {
   static const String address = '/address';
   
   static const String voucher = '/voucher';
+ 
+  static const String cards = '/cards';
 }

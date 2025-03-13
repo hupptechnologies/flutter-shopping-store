@@ -220,7 +220,7 @@ class PaymentView extends GetView<PaymentController> {
       items: List.generate(3, (index) {
         return const CreditCardWidget(
           icon: ImageConstant.visaIcon,
-          cardNumber: 4364134589328378,
+          cardNumber: '4364134589328378',
           holderName: 'Sunie Pham',
           validDate: '02/2026',
         );

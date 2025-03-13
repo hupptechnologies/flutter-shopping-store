@@ -10,21 +10,32 @@ class PaymentsCardWidget extends GetView<PaymentsController> {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: List.generate(3, (index) {
-        return const CreditCardWidget(
-          icon: ImageConstant.visaIcon,
-          cardNumber: 4364134589328378,
-          holderName: 'Sunie Pham',
-          validDate: '02/2026',
-        );
-      }).toList(),
-      options: CarouselOptions(
-        autoPlay: false,
-        enlargeCenterPage: true,
-        enlargeFactor: 0.2,
-        viewportFraction: 0.9,
-        enableInfiniteScroll: false,
+    return Obx(
+      () => CarouselSlider(
+        items: controller.cardList.isEmpty
+            ? [
+                const CreditCardWidget(
+                  icon: ImageConstant.visaIcon,
+                  cardNumber: 'xxxxxxxxxxxxxxxx',
+                  holderName: 'xxxxx xxxxx',
+                  validDate: 'MM/YY',
+                )
+              ]
+            : controller.cardList.map((card) {
+                return CreditCardWidget(
+                  icon: ImageConstant.visaIcon,
+                  cardNumber: card.cardNumber!,
+                  holderName: card.cardholderName!,
+                  validDate: card.expirationDate!,
+                );
+              }).toList(),
+        options: CarouselOptions(
+          autoPlay: false,
+          enlargeCenterPage: true,
+          enlargeFactor: 0.2,
+          viewportFraction: 0.9,
+          enableInfiniteScroll: false,
+        ),
       ),
     );
   }

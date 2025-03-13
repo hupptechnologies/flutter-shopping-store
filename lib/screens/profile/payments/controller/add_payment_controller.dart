@@ -8,6 +8,6 @@ class AddPaymentController extends GetxController {
   final TextEditingController cvv = TextEditingController();
 
   void addCard() {
-    Get.back();
+    Get.back(result: true);
   }
 }
