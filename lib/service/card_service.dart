@@ -21,4 +21,8 @@ class CardService extends BaseService {
       fromJsonT: (data) => CardDto.fromJson(data),
     );
   }
+
+  Future<ApiResponse<bool>> delete(String id) async {
+    return api.delete(url: [UrlConstant.cards, id.toString()]);
+  }
 }

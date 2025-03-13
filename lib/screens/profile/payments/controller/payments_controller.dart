@@ -17,8 +17,10 @@ class PaymentsController extends GetxController {
     ImageConstant.amexIcon,
   ];
 
-  void gotoAddCard () async {
-    final bool result = await Get.toNamed(AppRoutes.addPayment);
+  void gotoCard ({int? id}) async {
+    final bool result = await Get.toNamed(AppRoutes.addPayment, arguments: {
+      'id': id,
+    });
 
     if (result) {
       fetchCards();

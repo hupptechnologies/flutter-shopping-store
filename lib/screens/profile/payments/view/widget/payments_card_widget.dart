@@ -22,11 +22,14 @@ class PaymentsCardWidget extends GetView<PaymentsController> {
                 )
               ]
             : controller.cardList.map((card) {
-                return CreditCardWidget(
-                  icon: ImageConstant.visaIcon,
-                  cardNumber: card.cardNumber!,
-                  holderName: card.cardholderName!,
-                  validDate: card.expirationDate!,
+                return GestureDetector(
+                  onTap: () => controller.gotoCard(id: card.id),
+                  child: CreditCardWidget(
+                    icon: ImageConstant.visaIcon,
+                    cardNumber: card.cardNumber!,
+                    holderName: card.cardholderName!,
+                    validDate: card.expirationDate!,
+                  ),
                 );
               }).toList(),
         options: CarouselOptions(

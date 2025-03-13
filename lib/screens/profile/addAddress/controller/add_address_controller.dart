@@ -36,8 +36,6 @@ class AddAddressController extends GetxController {
   }
 
   Future<void> getAddressDetails(dynamic id) async {
-    final id = Get.arguments['id'];
-
     final response = await addressService.getById(id.toString());
     if (!response.error) {
       addressDto.value = response.data!;

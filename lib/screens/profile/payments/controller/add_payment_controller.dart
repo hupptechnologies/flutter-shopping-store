@@ -15,10 +15,18 @@ class AddPaymentController extends GetxController {
   late RxString cardNumberDisplay = 'xxxxxxxxxxxxxxxx'.obs;
   late RxString cardholderDisplay = 'xxxxx xxxxx'.obs;
   late RxString expiryDateDisplay = 'MM/YY'.obs;
+  late RxBool readOnly = false.obs;
 
   @override
   void onInit() {
     super.onInit();
+    final id = Get.arguments['id'];
+    if (id != null) {
+      readOnly.value = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        getCard(id);
+      });
+    }
     addListeners();
   }
 
@@ -64,6 +72,20 @@ class AddPaymentController extends GetxController {
         : '${input.padRight(2, 'M').substring(0, 2)}/${input.padRight(4, 'Y').substring(2, 4)}';
   }
 
+  Future<void> deleteCard() async {
+    final id = Get.arguments['id'];
+    if (id == null) {
+      return;
+    }
+    final response = await cardService.delete(id.toString());
+    if (response.error) {
+      CommonSnackbar.error(response.message);
+      return;
+    }
+    Get.back(result: response.data!);
+    CommonSnackbar.success(response.message);
+  }
+
   Future<void> addCard() async {
     final CardDto cardDto = CardDto(
       cardholderName: cardholderName.text,
@@ -78,5 +100,24 @@ class AddPaymentController extends GetxController {
       return;
     }
     Get.back(result: true);
+  }
+
+  Future<void> getCard(dynamic id) async {
+    final response = await cardService.getById(id.toString());
+    if (!response.error) {
+      updateTextField(response.data!);
+      return;
+    }
+    CommonSnackbar.error(response.message);
+  }
+
+  void updateTextField(CardDto cardDto) {
+    cardholderName.text = cardDto.cardholderName!;
+    cardNumber.text = cardDto.cardNumber!;
+    expiresDate.text = cardDto.expirationDate!;
+    cvv.text = cardDto.cvv!;
+    _updateCardholderDisplay();
+    _updateCardNumberDisplay();
+    _updateExpiryDateDisplay();
   }
 }

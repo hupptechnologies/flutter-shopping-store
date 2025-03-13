@@ -25,7 +25,7 @@ class PaymentsAddTitleWidget extends GetView<PaymentsController> {
             ),
           ),
           InkWell(
-            onTap: controller.gotoAddCard,
+            onTap: controller.gotoCard,
             child: const Row(
               children: [
                 Text(

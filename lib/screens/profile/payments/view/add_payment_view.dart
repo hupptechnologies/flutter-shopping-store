@@ -14,6 +14,7 @@ class AddPaymentView extends GetView<AddPaymentController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<AddPaymentController>(
+      isLoader: controller.cardService.api.isLoader,
       child: Scaffold(
         appBar: const BackButtonAppbarTitle(
           centerTitle: true,

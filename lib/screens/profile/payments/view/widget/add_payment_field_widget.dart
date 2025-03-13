@@ -7,6 +7,7 @@ class AddPaymentField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final String hintText;
+  final bool readOnly;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
@@ -19,6 +20,7 @@ class AddPaymentField extends StatelessWidget {
     this.keyboardType,
     this.validator,
     this.inputFormatters,
+    this.readOnly = false,
   });
 
   @override
@@ -38,6 +40,7 @@ class AddPaymentField extends StatelessWidget {
           const SizedBox(height: 10),
           TextFormField(
             controller: controller,
+            readOnly: readOnly,
             validator: validator ??
                 (value) => value == null || value.isEmpty
                     ? "$label is required"
