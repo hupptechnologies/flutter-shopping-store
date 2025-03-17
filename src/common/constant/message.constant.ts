@@ -54,4 +54,6 @@ export abstract class MessageConstant {
 	static readonly REVIEW_DELETED_SUCCESS = 'Review deleted successfully';
 
 	static readonly VARIANT_CREATED_SUCCESS = 'Variant created successfully';
+	static readonly VARIANT_NOT_FOUND = 'Variant not found';
+	static readonly VARIANT_FOUND_SUCCESS = 'Variant found successfully';
 }

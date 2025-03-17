@@ -1,4 +1,13 @@
-import { Body, Controller, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Get,
+	Param,
+	ParseIntPipe,
+	Post,
+	UploadedFiles,
+	UseInterceptors,
+} from '@nestjs/common';
 import { VariantService } from './variant.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
@@ -20,8 +29,17 @@ export class VariantController {
 	): APIResponse<Variant> {
 		const createVariant = await this.variantService.create(createVariantDto, files);
 		return {
-			message: MessageConstant.VARIANT_CREATED_SUCCESS,
 			data: createVariant,
+			message: MessageConstant.VARIANT_CREATED_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.ROUTER_ID)
+	public async findOne(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<Variant> {
+		const variant = await this.variantService.findOne(id);
+		return {
+			data: variant,
+			message: MessageConstant.VARIANT_FOUND_SUCCESS,
 		};
 	}
 }

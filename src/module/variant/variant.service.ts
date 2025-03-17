@@ -4,6 +4,7 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { VariantRepository } from './variant.repository';
 import { Variant } from './entities/variant.entity';
 import { CreateVariantDto } from './dto/create-variant.dto';
+import { MessageConstant } from 'src/common/constant/message.constant';
 
 @Injectable()
 @Loggable()
@@ -20,5 +21,13 @@ export class VariantService {
 		const create = await this.repository.craete(createVariantDto);
 		await this.imageService.uploadAndAttachImages(files, create);
 		return create;
+	}
+
+	public async findOne(id: number): Promise<Variant> {
+		const variant = await this.repository.findOne(id);
+		if (!variant) {
+			throw new Error(MessageConstant.VARIANT_NOT_FOUND);
+		}
+		return variant;
 	}
 }

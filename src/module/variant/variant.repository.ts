@@ -17,4 +17,12 @@ export class VariantRepository {
 		const response = this.repository.create(createVariantDto);
 		return this.repository.save(response);
 	}
+
+	async findOne(id: number): Promise<Variant | null> {
+		return this.repository.findOne({
+			where: {
+				id,
+			},
+		});
+	}
 }
