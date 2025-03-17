@@ -23,4 +23,6 @@ export abstract class URLConstant {
 	static readonly CARDS = 'cards';
 
 	static readonly REVIEW = 'review';
+
+	static readonly VARIANT = 'variant';
 }
