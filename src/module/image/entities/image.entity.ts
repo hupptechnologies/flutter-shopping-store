@@ -2,6 +2,7 @@ import { Exclude } from 'class-transformer';
 import { Category } from 'src/module/category/entities/category.entity';
 import { Product } from 'src/module/product/entities/product.entity';
 import { Review } from 'src/module/review/entities/review.entity';
+import { Variant } from 'src/module/variant/entities/variant.entity';
 import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
 import {
 	AfterRemove,
@@ -48,6 +49,13 @@ export class Image extends BaseEntity {
 		nullable: true,
 	})
 	public review: Review;
+
+	@Exclude()
+	@ManyToOne(() => Variant, (variant) => variant.images, {
+		onDelete: 'CASCADE',
+		nullable: true,
+	})
+	public variant: Variant;
 
 	@CreateDateColumn()
 	public createdAt: Date;

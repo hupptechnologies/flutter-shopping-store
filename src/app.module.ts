@@ -13,6 +13,7 @@ import { CardsModule } from './module/cards/cards.module';
 import { CryptoService } from './services/crypto/crypto.service';
 import { AppConfigModule } from './config/app/app-config.module';
 import { ReviewModule } from './module/review/review.module';
+import { VariantModule } from './module/variant/variant.module';
 
 @Module({
 	imports: [
@@ -29,6 +30,7 @@ import { ReviewModule } from './module/review/review.module';
 		VoucherModule,
 		CardsModule,
 		ReviewModule,
+		VariantModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, CryptoService],
