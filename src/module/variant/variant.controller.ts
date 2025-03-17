@@ -4,6 +4,7 @@ import {
 	Get,
 	Param,
 	ParseIntPipe,
+	Patch,
 	Post,
 	UploadedFiles,
 	UseInterceptors,
@@ -16,6 +17,7 @@ import { CreateVariantDto } from './dto/create-variant.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { MessageConstant } from 'src/common/constant/message.constant';
+import { UpdateVariantDto } from './dto/update-variant.dto';
 
 @Controller(URLConstant.VARIANT)
 export class VariantController {
@@ -40,6 +42,18 @@ export class VariantController {
 		return {
 			data: variant,
 			message: MessageConstant.VARIANT_FOUND_SUCCESS,
+		};
+	}
+
+	@Patch(URLConstant.ROUTER_ID)
+	public async update(
+		@Param(KeyConstant.ID, ParseIntPipe) id: number,
+		@Body() updateVariantDto: UpdateVariantDto,
+	): APIResponse<Variant> {
+		const variant = await this.variantService.update(id, updateVariantDto);
+		return {
+			data: variant,
+			message: MessageConstant.VARIANT_UPDATED_SUCCESS,
 		};
 	}
 }

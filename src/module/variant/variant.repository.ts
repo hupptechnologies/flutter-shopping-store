@@ -4,6 +4,7 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Variant } from './entities/variant.entity';
 import { Repository } from 'typeorm';
 import { CreateVariantDto } from './dto/create-variant.dto';
+import { UpdateVariantDto } from './dto/update-variant.dto';
 
 @Injectable()
 @Loggable()
@@ -24,5 +25,10 @@ export class VariantRepository {
 				id,
 			},
 		});
+	}
+
+	async update(variant: Variant, dto: UpdateVariantDto): Promise<Variant> {
+		Object.assign(variant, dto);
+		return this.repository.save(variant);
 	}
 }

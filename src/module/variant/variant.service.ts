@@ -5,6 +5,7 @@ import { VariantRepository } from './variant.repository';
 import { Variant } from './entities/variant.entity';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { MessageConstant } from 'src/common/constant/message.constant';
+import { UpdateVariantDto } from './dto/update-variant.dto';
 
 @Injectable()
 @Loggable()
@@ -29,5 +30,16 @@ export class VariantService {
 			throw new Error(MessageConstant.VARIANT_NOT_FOUND);
 		}
 		return variant;
+	}
+
+	public async update(id: number, updateVariantDto: UpdateVariantDto): Promise<Variant> {
+		const variant = await this.repository.findOne(id);
+
+		if (!variant) {
+			throw new Error(MessageConstant.VARIANT_NOT_FOUND);
+		}
+
+		const updateVariant = await this.repository.update(variant, updateVariantDto);
+		return updateVariant;
 	}
 }
