@@ -3,7 +3,7 @@ import { VariantService } from './variant.service';
 import { VariantController } from './variant.controller';
 
 @Module({
-  controllers: [VariantController],
-  providers: [VariantService],
+	controllers: [VariantController],
+	providers: [VariantService],
 })
 export class VariantModule {}

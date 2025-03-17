@@ -14,7 +14,7 @@ export class ImageRepository {
 	) {}
 
 	async createBulk(createBulkImage: CreateBulkImage): Promise<Array<Image>> {
-		const { images, category, product, review } = createBulkImage;
+		const { images, category, product, review, variant } = createBulkImage;
 		const createImages = images.map((image) => {
 			return {
 				url: image.url,
@@ -22,6 +22,7 @@ export class ImageRepository {
 				category,
 				product,
 				review,
+				variant,
 			};
 		});
 		const image = this.repository.create(createImages);

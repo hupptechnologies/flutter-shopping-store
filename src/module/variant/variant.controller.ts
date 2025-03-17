@@ -3,5 +3,5 @@ import { VariantService } from './variant.service';
 
 @Controller('variant')
 export class VariantController {
-  constructor(private readonly variantService: VariantService) {}
+	constructor(private readonly variantService: VariantService) {}
 }

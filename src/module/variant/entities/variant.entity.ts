@@ -35,7 +35,6 @@ export class Variant extends BaseEntity {
 	public stock: number;
 
 	@ManyToOne(() => Product, (product) => product.variants, {
-		cascade: true,
 		onDelete: 'CASCADE',
 	})
 	public product: Product;
