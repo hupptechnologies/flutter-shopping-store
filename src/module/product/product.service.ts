@@ -52,7 +52,7 @@ export class ProductService {
 		const product = await this.productRepository.findById(id);
 
 		if (!product) {
-			throw new NotFoundException(MessageConstant.PRODCUT_NOT_FOUND);
+			throw new NotFoundException(MessageConstant.PRODUCT_NOT_FOUND);
 		}
 
 		if (updateProductDto.categoryId) {
@@ -70,7 +70,7 @@ export class ProductService {
 		const product = await this.productRepository.findById(id, ['category', 'reviews']);
 
 		if (!product) {
-			throw new NotFoundException(MessageConstant.PRODCUT_NOT_FOUND);
+			throw new NotFoundException(MessageConstant.PRODUCT_NOT_FOUND);
 		}
 
 		return product;
@@ -80,7 +80,7 @@ export class ProductService {
 		const product = await this.productRepository.findById(id);
 
 		if (!product) {
-			throw new NotFoundException(MessageConstant.PRODCUT_NOT_FOUND);
+			throw new NotFoundException(MessageConstant.PRODUCT_NOT_FOUND);
 		}
 
 		const isDelete = await this.productRepository.delete(product);

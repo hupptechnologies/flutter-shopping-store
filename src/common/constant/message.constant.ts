@@ -28,11 +28,11 @@ export abstract class MessageConstant {
 	static readonly CATEGORY_DELETED_SUCCESS = 'Category deleted successfully';
 	static readonly CATEGORYS_FETCHED_SUCCESS = 'Categorys fetched successfully';
 
-	static readonly PRODCUT_CREATED_SUCCESS = 'Prodcut created successfully';
-	static readonly PRODCUT_NOT_FOUND = 'Prodcut not found';
-	static readonly PRODCUT_UPDATED_SUCCESS = 'Prodcut updated successfully';
-	static readonly PRODCUT_FETCHED_SUCCESS = 'Prodcut fetched successfully';
-	static readonly PRODCUT_DELETED_SUCCESS = 'Prodcut deleted successfully';
+	static readonly PRODUCT_CREATED_SUCCESS = 'product created successfully';
+	static readonly PRODUCT_NOT_FOUND = 'product not found';
+	static readonly PRODUCT_UPDATED_SUCCESS = 'product updated successfully';
+	static readonly PRODUCT_FETCHED_SUCCESS = 'product fetched successfully';
+	static readonly PRODUCT_DELETED_SUCCESS = 'product deleted successfully';
 
 	static readonly VOUCHER_CREATED_SUCCESS = 'Voucher created successfully';
 	static readonly VOUCHER_UPDATED_SUCCESS = 'Voucher updated successfully';
@@ -58,4 +58,5 @@ export abstract class MessageConstant {
 	static readonly VARIANT_FOUND_SUCCESS = 'Variant found successfully';
 	static readonly VARIANT_UPDATED_SUCCESS = 'Variant updated successfully';
 	static readonly VARIANT_DELETED_SUCCESS = 'Variant deleted successfully';
+	static readonly VARIANT_FETCHED_SUCCESS = 'Variant fetched successfully';
 }

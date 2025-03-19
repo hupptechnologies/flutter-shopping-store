@@ -37,7 +37,7 @@ export class ProductController {
 		const product = await this.productService.create(createProductDto, files);
 		return {
 			data: product,
-			message: MessageConstant.PRODCUT_CREATED_SUCCESS,
+			message: MessageConstant.PRODUCT_CREATED_SUCCESS,
 		};
 	}
 
@@ -51,7 +51,7 @@ export class ProductController {
 		const product = await this.productService.update(id, updateProductDto, files);
 		return {
 			data: product,
-			message: MessageConstant.PRODCUT_UPDATED_SUCCESS,
+			message: MessageConstant.PRODUCT_UPDATED_SUCCESS,
 		};
 	}
 
@@ -61,7 +61,7 @@ export class ProductController {
 		const product = await this.productService.findOne(id);
 		return {
 			data: product,
-			message: MessageConstant.PRODCUT_FETCHED_SUCCESS,
+			message: MessageConstant.PRODUCT_FETCHED_SUCCESS,
 		};
 	}
 
@@ -70,7 +70,7 @@ export class ProductController {
 		const isDelete = await this.productService.delete(id);
 		return {
 			data: isDelete,
-			message: MessageConstant.PRODCUT_DELETED_SUCCESS,
+			message: MessageConstant.PRODUCT_DELETED_SUCCESS,
 		};
 	}
 
@@ -79,7 +79,7 @@ export class ProductController {
 		const products = await this.productService.findAll(queryOptionsDto);
 		return {
 			data: products,
-			message: MessageConstant.PRODCUT_FETCHED_SUCCESS,
+			message: MessageConstant.PRODUCT_FETCHED_SUCCESS,
 		};
 	}
 }

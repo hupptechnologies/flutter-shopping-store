@@ -40,4 +40,13 @@ export class VariantRepository {
 		const deleteVariant = await variant.remove();
 		return !!deleteVariant;
 	}
+
+	async findAll(productId: number): Promise<Array<Variant>> {
+		const products = await this.repository.findBy({
+			product: {
+				id: productId,
+			},
+		});
+		return products;
+	}
 }

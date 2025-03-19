@@ -27,7 +27,7 @@ export class ReviewService {
 			const product = await this.productRepository.findById(dto.productId);
 
 			if (!product) {
-				throw new NotFoundException(MessageConstant.PRODCUT_NOT_FOUND);
+				throw new NotFoundException(MessageConstant.PRODUCT_NOT_FOUND);
 			}
 
 			dto.product = product;

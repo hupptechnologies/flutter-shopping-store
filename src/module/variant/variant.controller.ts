@@ -7,6 +7,7 @@ import {
 	ParseIntPipe,
 	Patch,
 	Post,
+	Query,
 	UploadedFiles,
 	UseInterceptors,
 } from '@nestjs/common';
@@ -19,6 +20,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { KeyConstant } from 'src/common/constant/key.constant';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { UpdateVariantDto } from './dto/update-variant.dto';
+import { QueryVariantDto } from './dto/query-variant.dto';
 
 @Controller(URLConstant.VARIANT)
 export class VariantController {
@@ -34,6 +36,15 @@ export class VariantController {
 		return {
 			data: createVariant,
 			message: MessageConstant.VARIANT_CREATED_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.ALL)
+	public async findAll(@Query() queryVariantDto: QueryVariantDto): APIResponse<Array<Variant>> {
+		const variants = await this.variantService.findAll(queryVariantDto);
+		return {
+			data: variants,
+			message: MessageConstant.VARIANT_FETCHED_SUCCESS,
 		};
 	}
 
