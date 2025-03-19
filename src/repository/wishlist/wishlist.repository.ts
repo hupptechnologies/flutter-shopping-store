@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
 import { Product } from 'src/module/product/entities/product.entity';
 import { User } from 'src/module/user/entities/user.entity';
+import { RelationKeys } from 'src/common/types/relations.type';
 
 @Loggable()
 @Injectable()
@@ -47,5 +48,19 @@ export class WishListRepository {
 		}
 		const deleteWishlist = await wishlist.remove();
 		return !!deleteWishlist;
+	}
+
+	public async findAllByUserId(
+		userId: number,
+		relations?: RelationKeys<Wishlist>,
+	): Promise<Array<Wishlist>> {
+		return this.repository.find({
+			where: {
+				user: {
+					id: userId,
+				},
+			},
+			relations,
+		});
 	}
 }

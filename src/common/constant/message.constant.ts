@@ -62,4 +62,5 @@ export abstract class MessageConstant {
 
 	static readonly WISHLIST_CREATED_SUCCESS = 'Item successfully added to the wishlist';
 	static readonly WISHLIST_DELETED_SUCCESS = 'Item successfully removed from the wishlist';
+	static readonly WISHLIST_FETCHED_SUCCESS = 'Wishlist fetched successfully';
 }
