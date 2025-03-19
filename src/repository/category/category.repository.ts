@@ -68,6 +68,12 @@ export class CategoryRepository {
 			query.likeQuery(['name', 'description'], queryOptionsDto.search);
 		}
 
+		if (queryOptionsDto.gender) {
+			query.andWhere(`${this.name}.gender = :gender`, {
+				gender: queryOptionsDto.gender,
+			});
+		}
+
 		query.leftJoins(relations);
 
 		query.orderBy(`${query.alias}.${queryOptionsDto.column}`, queryOptionsDto.orderBy);

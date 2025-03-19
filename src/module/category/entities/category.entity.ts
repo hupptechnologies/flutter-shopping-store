@@ -1,3 +1,4 @@
+import { Gender } from 'src/common/enum/gender.enum';
 import { Image } from 'src/module/image/entities/image.entity';
 import { Product } from 'src/module/product/entities/product.entity';
 import {
@@ -30,6 +31,14 @@ export class Category extends BaseEntity {
 		nullable: true,
 	})
 	public description: string;
+
+	@Column({
+		type: 'enum',
+		enum: Gender,
+		default: null,
+		nullable: true,
+	})
+	public gender: Gender;
 
 	@TreeParent({
 		onDelete: 'CASCADE',

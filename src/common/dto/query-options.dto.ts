@@ -2,6 +2,7 @@ import { Exclude, Expose, Type } from 'class-transformer';
 import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ValidationMsgConstant } from '../constant/validation-msg.constant';
 import { OrderBy } from '../enum/sort-by.enum';
+import { Gender } from '../enum/gender.enum';
 
 export class QueryOptionsDto {
 	@Exclude({
@@ -91,4 +92,11 @@ export class QueryOptionsDto {
 	public get skip(): number {
 		return (this.currentPage - 1) * this.perPage;
 	}
+
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@IsEnum(Gender)
+	public gender?: Gender;
 }
