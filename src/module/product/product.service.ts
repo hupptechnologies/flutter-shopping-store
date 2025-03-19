@@ -81,7 +81,7 @@ export class ProductService {
 	}
 
 	public async delete(id: number): Promise<boolean> {
-		const product = await this.productRepository.findById(id);
+		const product = await this.productRepository.findById(id, ['variants', 'reviews']);
 
 		if (!product) {
 			throw new NotFoundException(MessageConstant.PRODUCT_NOT_FOUND);
