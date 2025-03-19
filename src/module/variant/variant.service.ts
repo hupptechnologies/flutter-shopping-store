@@ -42,4 +42,15 @@ export class VariantService {
 		const updateVariant = await this.repository.update(variant, updateVariantDto);
 		return updateVariant;
 	}
+
+	public async delete(id: number): Promise<boolean> {
+		const variant = await this.repository.findOne(id);
+
+		if (!variant) {
+			throw new Error(MessageConstant.VARIANT_NOT_FOUND);
+		}
+
+		const isSoftDetele = await this.repository.delete(variant);
+		return isSoftDetele;
+	}
 }

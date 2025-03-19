@@ -57,4 +57,5 @@ export abstract class MessageConstant {
 	static readonly VARIANT_NOT_FOUND = 'Variant not found';
 	static readonly VARIANT_FOUND_SUCCESS = 'Variant found successfully';
 	static readonly VARIANT_UPDATED_SUCCESS = 'Variant updated successfully';
+	static readonly VARIANT_DELETED_SUCCESS = 'Variant deleted successfully';
 }

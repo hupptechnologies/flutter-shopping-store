@@ -1,6 +1,7 @@
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	Param,
 	ParseIntPipe,
@@ -54,6 +55,15 @@ export class VariantController {
 		return {
 			data: variant,
 			message: MessageConstant.VARIANT_UPDATED_SUCCESS,
+		};
+	}
+
+	@Delete(URLConstant.ROUTER_ID)
+	public async delete(@Param(KeyConstant.ID, ParseIntPipe) id: number): APIResponse<boolean> {
+		const isSoftDetele = await this.variantService.delete(id);
+		return {
+			data: isSoftDetele,
+			message: MessageConstant.VARIANT_DELETED_SUCCESS,
 		};
 	}
 }

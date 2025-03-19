@@ -31,4 +31,13 @@ export class VariantRepository {
 		Object.assign(variant, dto);
 		return this.repository.save(variant);
 	}
+
+	async delete(variant: Variant, isSoftDetele = true): Promise<boolean> {
+		if (isSoftDetele) {
+			const deleteVariant = await variant.softRemove();
+			return !!deleteVariant;
+		}
+		const deleteVariant = await variant.remove();
+		return !!deleteVariant;
+	}
 }
