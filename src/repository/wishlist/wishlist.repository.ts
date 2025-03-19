@@ -66,18 +66,28 @@ export class WishListRepository {
 	}
 
 	public async findWishlistGroupedByCategory(userId: number): Promise<Array<BrandsWishlist>> {
+		const selectData = this.getWishlistSelection();
 		return this.repository
 			.createQueryBuilder('wishlist')
 			.innerJoin('wishlist.product', 'product')
 			.innerJoin('product.category', 'category')
 			.leftJoin('product.images', 'image')
-			.select([
-				`JSON_OBJECT(
+			.select(selectData)
+			.where('wishlist.userId = :userId', {
+				userId,
+			})
+			.groupBy('category.id')
+			.getRawMany<BrandsWishlist>();
+	}
+
+	private getWishlistSelection(): Array<string> {
+		return [
+			`JSON_OBJECT(
                 	"id", category.id,
                 	"name", category.name
             	) AS category`,
 
-				`JSON_ARRAYAGG(
+			`JSON_ARRAYAGG(
                 	JSON_OBJECT(
                 	    "id", product.id,
                 	    "name", product.name,
@@ -93,11 +103,6 @@ export class WishListRepository {
                 	    )
                 	)
             	) AS products`,
-			])
-			.where('wishlist.userId = :userId', {
-				userId,
-			})
-			.groupBy('category.id')
-			.getRawMany<BrandsWishlist>();
+		];
 	}
 }
