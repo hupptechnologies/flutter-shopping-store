@@ -28,6 +28,11 @@ export class Product extends BaseEntity {
 	})
 	public description: string;
 
+	@Column({
+		type: 'double',
+	})
+	public price: number;
+
 	@ManyToOne(() => Category, (category) => category.products, {
 		onDelete: 'CASCADE',
 	})

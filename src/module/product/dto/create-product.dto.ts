@@ -1,5 +1,5 @@
 import { Exclude, Type } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
 import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
 import { Category } from 'src/module/category/entities/category.entity';
 
@@ -10,6 +10,10 @@ export class CreateProductDto {
 	@IsOptional()
 	@IsString()
 	public description?: string;
+
+	@IsNumber()
+	@IsPositive()
+	public price: number;
 
 	@Exclude()
 	@IsNumber()
