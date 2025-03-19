@@ -13,9 +13,12 @@ export class CreateProductDto {
 
 	@IsNumber()
 	@IsPositive()
+	@Type(() => Number)
 	public price: number;
 
-	@Exclude()
+	@Exclude({
+		toPlainOnly: true,
+	})
 	@IsNumber()
 	@Type(() => Number)
 	public categoryId: number;

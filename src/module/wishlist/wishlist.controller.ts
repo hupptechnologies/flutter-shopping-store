@@ -8,6 +8,7 @@ import { APIResponse } from 'src/common/types/api-response.type';
 import { AuthUserId } from 'src/decorator/auth-user-id/auth-user-id.decorator';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { Wishlist } from './entities/wishlist.entity';
+import { BrandsWishlist } from 'src/common/interface/wishlist.interface';
 
 @Controller(URLConstant.WISHLIST)
 export class WishlistController {
@@ -30,6 +31,15 @@ export class WishlistController {
 		const wishlist = await this.wishlistService.findAll(userId);
 		return {
 			data: wishlist,
+			message: MessageConstant.WISHLIST_FETCHED_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.BRANDS)
+	async findAllWithBrands(@AuthUserId() userId: number): APIResponse<Array<BrandsWishlist>> {
+		const brands = await this.wishlistService.findAllWithBrands(userId);
+		return {
+			data: brands,
 			message: MessageConstant.WISHLIST_FETCHED_SUCCESS,
 		};
 	}

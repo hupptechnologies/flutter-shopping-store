@@ -5,6 +5,7 @@ import { WishListRepository } from 'src/repository/wishlist/wishlist.repository'
 import { ProductRepository } from 'src/repository/product/product.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { Wishlist } from './entities/wishlist.entity';
+import { BrandsWishlist } from 'src/common/interface/wishlist.interface';
 
 @Injectable()
 @Loggable()
@@ -38,5 +39,9 @@ export class WishlistService {
 
 	public async findAll(userId: number): Promise<Array<Wishlist>> {
 		return this.repository.findAllByUserId(userId, ['product']);
+	}
+
+	public async findAllWithBrands(userId: number): Promise<Array<BrandsWishlist>> {
+		return this.repository.findWishlistGroupedByCategory(userId);
 	}
 }
