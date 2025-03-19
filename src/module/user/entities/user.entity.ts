@@ -4,6 +4,7 @@ import { Address } from 'src/module/address/entities/address.entity';
 import { Otp } from 'src/module/auth/entities/otp.entity';
 import { Cards } from 'src/module/cards/entities/cards.entity';
 import { Review } from 'src/module/review/entities/review.entity';
+import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
 import {
 	BaseEntity,
 	Column,
@@ -88,6 +89,11 @@ export class User extends BaseEntity {
 		cascade: true,
 	})
 	public reviews: Array<Review>;
+
+	@OneToMany(() => Wishlist, (wishlist) => wishlist.user, {
+		cascade: true,
+	})
+	public wishlist: Array<Wishlist>;
 
 	@CreateDateColumn()
 	public createdAt: Date;

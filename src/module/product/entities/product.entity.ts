@@ -2,6 +2,7 @@ import { Category } from 'src/module/category/entities/category.entity';
 import { Image } from 'src/module/image/entities/image.entity';
 import { Review } from 'src/module/review/entities/review.entity';
 import { Variant } from 'src/module/variant/entities/variant.entity';
+import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
 import {
 	BaseEntity,
 	Column,
@@ -53,6 +54,11 @@ export class Product extends BaseEntity {
 		cascade: true,
 	})
 	public variants: Array<Variant>;
+
+	@OneToMany(() => Wishlist, (wishlist) => wishlist.product, {
+		cascade: true,
+	})
+	public wishlist: Array<Wishlist>;
 
 	@CreateDateColumn()
 	public createdAt: Date;

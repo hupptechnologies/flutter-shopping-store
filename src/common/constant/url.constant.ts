@@ -26,4 +26,6 @@ export abstract class URLConstant {
 
 	static readonly VARIANT = 'variant';
 	static readonly ALL = 'all';
+
+	static readonly WISHLIST = 'wishlist';
 }

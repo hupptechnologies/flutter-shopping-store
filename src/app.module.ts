@@ -14,6 +14,7 @@ import { CryptoService } from './services/crypto/crypto.service';
 import { AppConfigModule } from './config/app/app-config.module';
 import { ReviewModule } from './module/review/review.module';
 import { VariantModule } from './module/variant/variant.module';
+import { WishlistModule } from './module/wishlist/wishlist.module';
 
 @Module({
 	imports: [
@@ -31,6 +32,7 @@ import { VariantModule } from './module/variant/variant.module';
 		CardsModule,
 		ReviewModule,
 		VariantModule,
+		WishlistModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, CryptoService],
