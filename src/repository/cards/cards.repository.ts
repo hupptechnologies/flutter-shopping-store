@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Repository } from 'typeorm';
-import { Cards } from './entities/cards.entity';
+import { Cards } from '../../module/cards/entities/cards.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateCardsDto } from './dto/craete-cards.dto';
-import { User } from '../user/entities/user.entity';
+import { CreateCardsDto } from '../../module/cards/dto/craete-cards.dto';
+import { User } from '../../module/user/entities/user.entity';
 
 @Loggable()
 @Injectable()

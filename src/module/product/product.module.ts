@@ -1,17 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
-import { ProductRepository } from './product.repository';
-import { Product } from './entities/product.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Category } from '../category/entities/category.entity';
-import { CategoryRepository } from '../category/category.repository';
 import { ImageModule } from '../image/image.module';
+import { CategoryRepoModule } from 'src/repository/category/category-repo.module';
+import { ProductRepoModule } from 'src/repository/product/product-repo.module';
 
 @Module({
-	imports: [TypeOrmModule.forFeature([Product, Category]), ImageModule],
+	imports: [CategoryRepoModule, ProductRepoModule, ImageModule],
 	controllers: [ProductController],
-	providers: [ProductService, ProductRepository, CategoryRepository],
-	exports: [ProductRepository],
+	providers: [ProductService],
 })
 export class ProductModule {}

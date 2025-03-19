@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { Otp } from './entities/otp.entity';
+import { Otp } from '../../module/auth/entities/otp.entity';
 import { Repository } from 'typeorm';
-import { User } from '../user/entities/user.entity';
+import { User } from '../../module/user/entities/user.entity';
 
 @Loggable()
 @Injectable()

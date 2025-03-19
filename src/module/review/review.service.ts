@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { ReviewRepository } from './review.repository';
+import { ReviewRepository } from '../../repository/review/review.repository';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { User } from '../user/entities/user.entity';
 import { Review } from './entities/review.entity';
-import { ProductRepository } from '../product/product.repository';
+import { ProductRepository } from '../../repository/product/product.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { ImageService } from '../image/image.service';
 import { CommonUtils } from 'src/common/utils/common.utils';

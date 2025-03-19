@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { BcryptService } from 'src/services/bcrypt/bcrypt.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UserRepository } from './user.repository';
+import { UserRepository } from '../../repository/user/user.repository';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
 import { UpdateUserDto } from './dto/update-user.dto';

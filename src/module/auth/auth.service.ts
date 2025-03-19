@@ -2,12 +2,12 @@ import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/co
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { Response } from 'express';
 import { User } from '../user/entities/user.entity';
-import { UserRepository } from '../user/user.repository';
+import { UserRepository } from '../../repository/user/user.repository';
 import { BcryptService } from 'src/services/bcrypt/bcrypt.service';
 import { JWTPayload } from 'src/common/interface/jwt.interface';
 import { JwtService } from '@nestjs/jwt';
 import { KeyConstant } from 'src/common/constant/key.constant';
-import { OtpRepository } from './otp.repository';
+import { OtpRepository } from '../../repository/otp/otp.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { OtpUtils } from 'src/common/utils/otp.utils';
 import { MailService } from 'src/services/mail/mail.service';

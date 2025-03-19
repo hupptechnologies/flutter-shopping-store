@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ImageRepository } from './image.repository';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Image } from './entities/image.entity';
 import { ImageService } from './image.service';
 import { CloudinaryModule } from 'src/services/cloudinary/cloudinary.module';
+import { ImageRepoModule } from 'src/repository/image/image-repo.module';
 
 @Module({
-	imports: [CloudinaryModule, TypeOrmModule.forFeature([Image])],
-	providers: [ImageRepository, ImageService],
+	imports: [CloudinaryModule, ImageRepoModule],
+	providers: [ImageService],
 	exports: [ImageService],
 })
 export class ImageModule {}

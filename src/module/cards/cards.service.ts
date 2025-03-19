@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { CardsRepository } from './cards.repository';
+import { CardsRepository } from '../../repository/cards/cards.repository';
 import { CreateCardsDto } from './dto/craete-cards.dto';
 import { User } from '../user/entities/user.entity';
 import { Cards } from './entities/cards.entity';

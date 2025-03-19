@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Category } from './entities/category.entity';
-import { CategoryRepository } from './category.repository';
+import { CategoryRepository } from '../../repository/category/category.repository';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { UpdateCategoryDto } from './dto/update-category.dto';

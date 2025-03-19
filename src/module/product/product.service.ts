@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { CreateProductDto } from './dto/create-product.dto';
-import { ProductRepository } from './product.repository';
-import { CategoryRepository } from '../category/category.repository';
+import { ProductRepository } from '../../repository/product/product.repository';
+import { CategoryRepository } from '../../repository/category/category.repository';
 import { Product } from './entities/product.entity';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { ImageService } from '../image/image.service';

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { Review } from './entities/review.entity';
+import { Review } from '../../module/review/entities/review.entity';
 import { Repository } from 'typeorm';
-import { CreateReviewDto } from './dto/create-review.dto';
-import { User } from '../user/entities/user.entity';
+import { CreateReviewDto } from '../../module/review/dto/create-review.dto';
+import { User } from '../../module/user/entities/user.entity';
 
 @Injectable()
 @Loggable()

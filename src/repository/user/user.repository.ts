@@ -1,10 +1,10 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Not, Repository } from 'typeorm';
-import { User } from './entities/user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
+import { User } from '../../module/user/entities/user.entity';
+import { CreateUserDto } from '../../module/user/dto/create-user.dto';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Injectable } from '@nestjs/common';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from '../../module/user/dto/update-user.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
 
 @Loggable()

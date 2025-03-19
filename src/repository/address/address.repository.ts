@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { Address } from './entities/address.entity';
+import { Address } from '../../module/address/entities/address.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateAddressDto } from './dto/create-address.dto';
-import { User } from '../user/entities/user.entity';
-import { UpdateAddressDto } from './dto/update-address.dto';
+import { CreateAddressDto } from '../../module/address/dto/create-address.dto';
+import { User } from '../../module/user/entities/user.entity';
+import { UpdateAddressDto } from '../../module/address/dto/update-address.dto';
 
 @Loggable()
 @Injectable()

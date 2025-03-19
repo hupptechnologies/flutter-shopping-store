@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Voucher } from './entities/voucher.entity';
 import { CreateVoucherDto } from './dto/create-voucher.dto';
-import { VoucherRepository } from './voucher.repository';
+import { VoucherRepository } from '../../repository/voucher/voucher.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { UpdateVoucherDto } from './dto/update-voucher.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';

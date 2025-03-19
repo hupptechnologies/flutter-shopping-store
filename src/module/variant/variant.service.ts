@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ImageService } from 'src/module/image/image.service';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { VariantRepository } from './variant.repository';
+import { VariantRepository } from '../../repository/variant/variant.repository';
 import { Variant } from './entities/variant.entity';
 import { CreateVariantDto } from './dto/create-variant.dto';
 import { MessageConstant } from 'src/common/constant/message.constant';

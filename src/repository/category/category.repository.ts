@@ -1,11 +1,11 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { Category } from './entities/category.entity';
+import { Category } from '../../module/category/entities/category.entity';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { CreateCategoryDto } from './dto/create-category.dto';
+import { CreateCategoryDto } from '../../module/category/dto/create-category.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { UpdateCategoryDto } from '../../module/category/dto/update-category.dto';
 import { FindAllRes, FindTreeOptions } from 'src/common/interface/typeorm.interface';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 

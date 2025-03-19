@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { Product } from './entities/product.entity';
+import { Product } from '../../module/product/entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { CreateProductDto } from '../../module/product/dto/create-product.dto';
+import { UpdateProductDto } from '../../module/product/dto/update-product.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
 import { FindAllRes } from 'src/common/interface/typeorm.interface';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';

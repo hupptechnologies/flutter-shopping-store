@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { ImageRepository } from './image.repository';
+import { ImageRepository } from '../../repository/image/image.repository';
 import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
 import { Product } from '../product/entities/product.entity';
 import { Category } from '../category/entities/category.entity';

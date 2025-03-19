@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { Voucher } from './entities/voucher.entity';
+import { Voucher } from '../../module/voucher/entities/voucher.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateVoucherDto } from './dto/create-voucher.dto';
-import { UpdateVoucherDto } from './dto/update-voucher.dto';
+import { CreateVoucherDto } from '../../module/voucher/dto/create-voucher.dto';
+import { UpdateVoucherDto } from '../../module/voucher/dto/update-voucher.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { FindAllRes } from 'src/common/interface/typeorm.interface';
 

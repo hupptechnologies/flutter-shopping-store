@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { ReviewController } from './review.controller';
-import { ReviewRepository } from './review.repository';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Review } from './entities/review.entity';
-import { ProductModule } from '../product/product.module';
 import { ImageModule } from '../image/image.module';
+import { ProductRepoModule } from 'src/repository/product/product-repo.module';
+import { ReviewRepoModule } from 'src/repository/review/review-repo.module';
 
 @Module({
-	imports: [TypeOrmModule.forFeature([Review]), ProductModule, ImageModule],
+	imports: [ReviewRepoModule, ProductRepoModule, ImageModule],
 	controllers: [ReviewController],
-	providers: [ReviewService, ReviewRepository],
+	providers: [ReviewService],
 })
 export class ReviewModule {}
