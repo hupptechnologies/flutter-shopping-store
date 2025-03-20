@@ -40,6 +40,12 @@ export class Category extends BaseEntity {
 	})
 	public gender: Gender;
 
+	@Column({
+		type: 'varchar',
+		nullable: true,
+	})
+	public color: string;
+
 	@TreeParent({
 		onDelete: 'CASCADE',
 	})
