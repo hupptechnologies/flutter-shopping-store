@@ -1,5 +1,5 @@
 import { Exclude, Expose, Type } from 'class-transformer';
-import { IsEnum, IsInt, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ValidationMsgConstant } from '../constant/validation-msg.constant';
 import { OrderBy } from '../enum/sort-by.enum';
 import { Gender } from '../enum/gender.enum';
@@ -99,4 +99,13 @@ export class QueryOptionsDto {
 	@IsOptional()
 	@IsEnum(Gender)
 	public gender?: Gender;
+
+	// category
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@IsNumber()
+	@Type(() => Number)
+	public depth?: number;
 }

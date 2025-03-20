@@ -62,6 +62,15 @@ export class CategoryRepository {
 	): Promise<FindAllRes<Category>> {
 		const query = this.repository.createQueryBuilder(this.name);
 
+		if (queryOptionsDto.depth) {
+			let parentAlias = this.name;
+			for (let i = 1; i <= queryOptionsDto.depth; i++) {
+				const childAlias = `child${i}`;
+				query.leftJoinAndSelect(`${parentAlias}.children`, childAlias);
+				parentAlias = childAlias;
+			}
+		}
+
 		query.andWhere(`${this.name}.parent IS NULL`);
 
 		if (queryOptionsDto.search) {
