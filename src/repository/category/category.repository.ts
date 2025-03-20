@@ -68,7 +68,18 @@ export class CategoryRepository {
 				const childAlias = `child${i}`;
 				query.leftJoinAndSelect(`${parentAlias}.children`, childAlias);
 				parentAlias = childAlias;
+
+				if (queryOptionsDto.isProductCount) {
+					const productAlias = `product${i}`;
+					query.leftJoin(`${childAlias}.products`, productAlias);
+					query.addSelect([`${productAlias}.id`, `${productAlias}.name`]);
+				}
 			}
+		}
+
+		if (queryOptionsDto.isProductCount) {
+			query.leftJoin(`${this.name}.products`, 'product0');
+			query.addSelect(['product0.id', 'product0.name']);
 		}
 
 		query.andWhere(`${this.name}.parent IS NULL`);

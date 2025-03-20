@@ -108,4 +108,11 @@ export class QueryOptionsDto {
 	@IsNumber()
 	@Type(() => Number)
 	public depth?: number;
+
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@Type(() => Boolean)
+	public isProductCount?: boolean;
 }

@@ -69,4 +69,6 @@ export class Category extends BaseEntity {
 
 	@DeleteDateColumn()
 	public deletedAt: Date | null;
+
+	public product_count: number;
 }
