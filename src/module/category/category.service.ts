@@ -59,16 +59,13 @@ export class CategoryService {
 	}
 
 	async findById(id: number): Promise<Category> {
-		const category = await this.categoryRepository.findOne(id);
+		const category = await this.categoryRepository.findOne(id, ['products']);
 
 		if (!category) {
 			throw new NotFoundException(MessageConstant.CATEGORY_NOT_FOUND);
 		}
 
-		const childrenTree = await this.categoryRepository.findOneWithChildrenTree(category, {
-			depth: 2,
-			relations: ['images'],
-		});
+		const childrenTree = await this.categoryRepository.findOneWithChildrenTree(category);
 		return childrenTree;
 	}
 
