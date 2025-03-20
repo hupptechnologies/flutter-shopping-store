@@ -1,5 +1,8 @@
 import 'package:intl/intl.dart';
 
+List<VoucherDto> voucherDtoFromJson(List<dynamic> jsonList) {
+  return jsonList.map((json) => VoucherDto.fromJson(json)).toList();
+}
 class VoucherDto {
   int id;
   String name;

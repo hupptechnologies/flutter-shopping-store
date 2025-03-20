@@ -1,11 +1,19 @@
-import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/common/dto/category_query_dto.dart';
+import 'package:e_commerce/common/dto/meta.dart';
+import 'package:e_commerce/common/utils/common_snackbar.dart';
+import 'package:e_commerce/dto/category_dto.dart';
 import 'package:e_commerce/dto/search_box_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/category_service.dart';
 import 'package:get/get.dart';
 
 class SearchDiscoverController extends GetxController {
-  late RxInt expandedIndex;
-  late RxList<SearchBoxDto> list;
+  final CategoryService categoryService = CategoryService();
+  final CategoryQueryDto queryDto = CategoryQueryDto(depth: 2, isProductCount: true);
+
+  late Meta meta;
+  late RxList<CategoryDto> categoryList = RxList();
+  late RxInt expandedCategory;
 
   final List<SearchCategory> searchCategory = [
     SearchCategory(name: 'Jacket', item: 180),
@@ -24,40 +32,26 @@ class SearchDiscoverController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    list = <SearchBoxDto>[].obs;
-    list.addAll([
-      SearchBoxDto(
-        name: 'CLOTHING',
-        image: ImageConstant.search1,
-        color: 'A3A798',
-        category: searchCategory,
-      ),
-      SearchBoxDto(
-        name: 'ACCESSORIES',
-        image: ImageConstant.search2,
-        color: '898280',
-      ),
-      SearchBoxDto(
-        name: 'SHOES',
-        image: ImageConstant.search3,
-        color: '44565C',
-        category: searchCategory,
-      ),
-      SearchBoxDto(
-        name: 'COLLECTION',
-        image: ImageConstant.search4,
-        color: 'B9AEB2',
-      )
-    ]);
-    expandedIndex = RxInt(-1);
+    expandedCategory = RxInt(-1);
+    getCategories();
   }
 
-  void toggleCard(int index) {
-    if (expandedIndex.value == index) {
-      expandedIndex.value = -1;
-    } else {
-      expandedIndex.value = index;
+  Future<void> getCategories() async {
+    final response = await categoryService.list(queryDto);
+    if (!response.error) {
+      categoryList.assignAll(response.data!.items);
+      meta = response.data!.meta;
+      return;
     }
+    CommonSnackbar.error(response.message);
+  } 
+
+  void toggleCategory(int id) {
+    if (expandedCategory.value == id) {
+      expandedCategory.value = -1;
+      return;
+    }
+    expandedCategory.value = id;
   }
 
   void searchPage() {

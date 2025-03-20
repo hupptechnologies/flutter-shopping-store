@@ -13,12 +13,15 @@ abstract class AppColors {
   static const Color orangeAccent = Colors.orangeAccent;
   static const Color black = Colors.black;
   static const Color white = Colors.white;
-  
 
-  static Color hexToColor(String hexCode) {
-    if (hexCode.length == 6) {
-      hexCode = 'FF$hexCode';
+  static Color hexToColor(String? hex) {
+    if (hex == null) {
+      return Colors.transparent;
     }
-    return Color(int.parse('0x$hexCode'));
+    hex = hex.replaceAll("#", "");
+    if (hex.length == 6) {
+      hex = "FF$hex";
+    }
+    return Color(int.parse("0x$hex"));
   }
 }

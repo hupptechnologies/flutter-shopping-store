@@ -10,7 +10,7 @@ class VoucherService extends BaseService {
       url: UrlConstant.voucher,
       fromJsonT: (data) => Pagination.fromJson(
         data,
-        (item) => VoucherDto.fromJson(item),
+        (json) => voucherDtoFromJson(json),
       ),
     );
   }

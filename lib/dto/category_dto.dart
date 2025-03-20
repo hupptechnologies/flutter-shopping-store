@@ -1,4 +1,6 @@
+import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/dto/image_dto.dart';
+import 'package:flutter/material.dart';
 
 List<CategoryDto> categoryDtoFromJson(List<dynamic> jsonList) {
   return jsonList.map((json) => CategoryDto.fromJson(json)).toList();
@@ -9,6 +11,7 @@ class CategoryDto {
   String? name;
   String? description;
   String? gender;
+  String? color;
   List<CategoryDto>? children;
   List<ImageDto>? images;
   int? productCount;
@@ -17,6 +20,7 @@ class CategoryDto {
     this.id,
     this.name,
     this.description,
+    this.color,
     this.gender,
     this.children,
     this.images,
@@ -27,6 +31,7 @@ class CategoryDto {
         id: json['id'],
         name: json['name'],
         description: json['description'],
+        color: json['color'],
         gender: json['gender'],
         children: json['children'] != null
             ? categoryDtoFromJson(json['children'])
@@ -35,4 +40,7 @@ class CategoryDto {
             json['images'] != null ? imageDtoFromJson(json['images']) : null,
         productCount: json['products']?.length,
       );
+
+  Color get getColor => AppColors.hexToColor(color);
+  String? get getImages => images!.isNotEmpty ? images!.first.url : null;
 }
