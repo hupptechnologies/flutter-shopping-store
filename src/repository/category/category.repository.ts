@@ -82,16 +82,16 @@ export class CategoryRepository {
 			query.addSelect(['product0.id', 'product0.name']);
 		}
 
-		query.andWhere(`${this.name}.parent IS NULL`);
-
-		if (queryOptionsDto.search) {
-			query.likeQuery(['name', 'description'], queryOptionsDto.search);
-		}
-
 		if (queryOptionsDto.gender) {
 			query.andWhere(`${this.name}.gender = :gender`, {
 				gender: queryOptionsDto.gender,
 			});
+		} else {
+			query.andWhere(`${this.name}.parent IS NULL`);
+		}
+
+		if (queryOptionsDto.search) {
+			query.likeQuery(['name', 'description'], queryOptionsDto.search);
 		}
 
 		query.leftJoins(relations);
