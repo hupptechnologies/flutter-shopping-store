@@ -14,9 +14,9 @@ abstract class AppColors {
   static const Color black = Colors.black;
   static const Color white = Colors.white;
 
-  static Color hexToColor(String? hex) {
+  static Color? hexToColor(String? hex) {
     if (hex == null) {
-      return Colors.transparent;
+      return null;
     }
     hex = hex.replaceAll("#", "");
     if (hex.length == 6) {
