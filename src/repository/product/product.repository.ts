@@ -95,4 +95,29 @@ export class ProductRepository {
 			total: result[1],
 		};
 	}
+
+	async recommendedProducts(
+		dto: QueryOptionsDto,
+		relations?: RelationKeys<Product>,
+	): Promise<FindAllRes<Product>> {
+		const query = this.repository.createQueryBuilder(this.name);
+		if (dto.type) {
+			query.andWhere(`${query.alias}.type = :type`, {
+				type: dto.type,
+			});
+		}
+
+		query.leftJoins(relations);
+
+		query.skip(dto.skip);
+		query.take(dto.perPage);
+		query.orderBy('RANDOM()');
+
+		const result = await query.getManyAndCount();
+
+		return {
+			items: result[0],
+			total: result[1],
+		};
+	}
 }
