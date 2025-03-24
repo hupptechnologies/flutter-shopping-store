@@ -3,6 +3,7 @@ import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class
 import { ValidationMsgConstant } from '../constant/validation-msg.constant';
 import { OrderBy } from '../enum/sort-by.enum';
 import { Gender } from '../enum/gender.enum';
+import { ProductTypeEnum } from '../enum/product-type.enum';
 
 export class QueryOptionsDto {
 	@Exclude({
@@ -115,4 +116,11 @@ export class QueryOptionsDto {
 	@IsOptional()
 	@Type(() => Boolean)
 	public isProductCount?: boolean;
+
+	@Exclude({
+		toPlainOnly: true,
+	})
+	@IsOptional()
+	@IsEnum(ProductTypeEnum)
+	public type?: ProductTypeEnum;
 }
