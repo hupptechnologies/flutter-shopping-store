@@ -1,4 +1,4 @@
-import { Gender } from 'src/common/enum/gender.enum';
+import { ProductTypeEnum } from 'src/common/enum/product-type.enum';
 import { Category } from 'src/module/category/entities/category.entity';
 import { Image } from 'src/module/image/entities/image.entity';
 import { Review } from 'src/module/review/entities/review.entity';
@@ -37,11 +37,11 @@ export class Product extends BaseEntity {
 
 	@Column({
 		type: 'enum',
-		enum: Gender,
+		enum: ProductTypeEnum,
 		default: null,
 		nullable: true,
 	})
-	public gender: Gender;
+	public type: ProductTypeEnum;
 
 	@ManyToOne(() => Category, (category) => category.products, {
 		onDelete: 'CASCADE',

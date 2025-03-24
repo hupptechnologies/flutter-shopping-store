@@ -1,6 +1,6 @@
 import { Exclude, Type } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
-import { Gender } from 'src/common/enum/gender.enum';
+import { ProductTypeEnum } from 'src/common/enum/product-type.enum';
 import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
 import { Category } from 'src/module/category/entities/category.entity';
 
@@ -18,8 +18,8 @@ export class CreateProductDto {
 	public price: number;
 
 	@IsOptional()
-	@IsEnum(Gender)
-	public gender?: Gender;
+	@IsEnum(ProductTypeEnum)
+	public type?: ProductTypeEnum;
 
 	@Exclude({
 		toPlainOnly: true,
