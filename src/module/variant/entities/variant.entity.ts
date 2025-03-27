@@ -25,6 +25,7 @@ export class Variant extends BaseEntity {
 
 	@Column({
 		type: 'double',
+		nullable: true,
 	})
 	public price: number;
 

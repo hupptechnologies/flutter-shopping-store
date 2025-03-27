@@ -11,6 +11,7 @@ export class CreateVariantDto {
 	@MinLength(1)
 	public size: string;
 
+	@IsOptional()
 	@IsNumber()
 	@IsPositive()
 	public price: number;
