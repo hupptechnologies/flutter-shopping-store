@@ -32,7 +32,6 @@ export class VoucherRepository extends BaseRepository {
 
 	public async update(voucher: Voucher, dto: UpdateVoucherDto): Promise<Voucher> {
 		Object.assign(voucher, dto);
-		void this.repository.update(voucher.id, dto);
 		return await this.repository.save(voucher);
 	}
 
