@@ -15,6 +15,7 @@ import { AppConfigModule } from './config/app/app-config.module';
 import { ReviewModule } from './module/review/review.module';
 import { VariantModule } from './module/variant/variant.module';
 import { WishlistModule } from './module/wishlist/wishlist.module';
+import { CartModule } from './module/cart/cart.module';
 
 @Module({
 	imports: [
@@ -33,6 +34,7 @@ import { WishlistModule } from './module/wishlist/wishlist.module';
 		ReviewModule,
 		VariantModule,
 		WishlistModule,
+		CartModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, CryptoService],
