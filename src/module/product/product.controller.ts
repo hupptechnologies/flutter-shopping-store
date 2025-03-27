@@ -23,6 +23,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Public } from 'src/decorator/public/public.decorator';
 import { PaginationRes } from 'src/common/interface/pagination-res.interface';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { DashboardList } from 'src/common/interface/dashboard-list.interface';
 
 @Controller(URLConstant.PRODUCT)
 export class ProductController {
@@ -80,6 +81,17 @@ export class ProductController {
 		return {
 			data: products,
 			message: MessageConstant.PRODUCT_FETCHED_SUCCESS,
+		};
+	}
+
+	@Get(URLConstant.ALL)
+	async fetchDashboardData(
+		@Query() queryOptionsDto: QueryOptionsDto,
+	): Promise<APIResponse<DashboardList>> {
+		const products = await this.productService.fetchDashboardData(queryOptionsDto);
+		return {
+			data: products,
+			message: MessageConstant.DASHBAORD_FETCHED_SUCCESS,
 		};
 	}
 }

@@ -32,6 +32,7 @@ export abstract class MessageConstant {
 	static readonly PRODUCT_NOT_FOUND = 'product not found';
 	static readonly PRODUCT_UPDATED_SUCCESS = 'product updated successfully';
 	static readonly PRODUCT_FETCHED_SUCCESS = 'product fetched successfully';
+	static readonly DASHBAORD_FETCHED_SUCCESS = 'Dashbaord fetched successfully';
 	static readonly PRODUCT_DELETED_SUCCESS = 'product deleted successfully';
 
 	static readonly VOUCHER_CREATED_SUCCESS = 'Voucher created successfully';

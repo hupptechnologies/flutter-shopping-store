@@ -11,6 +11,8 @@ import { CommonUtils } from 'src/common/utils/common.utils';
 import { Category } from '../category/entities/category.entity';
 import { PaginationRes } from 'src/common/interface/pagination-res.interface';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { DashboardList } from 'src/common/interface/dashboard-list.interface';
+import { RelationKeys } from 'src/common/types/relations.type';
 
 @Injectable()
 @Loggable()
@@ -97,6 +99,21 @@ export class ProductService {
 		return {
 			items,
 			meta: query,
+		};
+	}
+
+	public async fetchDashboardData(query: QueryOptionsDto): Promise<DashboardList> {
+		const relations: RelationKeys<Product> = ['images'];
+		const featuredProducts = await this.productRepository.featuredProducts(query, relations);
+		const recommendedProducts = await this.productRepository.recommendedProducts(
+			query,
+			relations,
+		);
+		const topCollections = await this.productRepository.topCollections(query, relations);
+		return {
+			featuredProducts: featuredProducts.items,
+			recommendedProducts: recommendedProducts.items,
+			topCollections: topCollections.items,
 		};
 	}
 }
