@@ -76,6 +76,7 @@ export class Address extends BaseEntity {
 	@Index('user_table_id')
 	@ManyToOne(() => User, (user) => user.addresses, {
 		onDelete: 'CASCADE',
+		nullable: false,
 	})
 	public user?: User;
 

@@ -1,3 +1,4 @@
+import { Cart } from 'src/module/cart/entities/cart.entity';
 import { Image } from 'src/module/image/entities/image.entity';
 import { Product } from 'src/module/product/entities/product.entity';
 import { Entity } from 'typeorm';
@@ -37,6 +38,7 @@ export class Variant extends BaseEntity {
 
 	@ManyToOne(() => Product, (product) => product.variants, {
 		onDelete: 'CASCADE',
+		nullable: false,
 	})
 	public product: Product;
 
@@ -45,6 +47,11 @@ export class Variant extends BaseEntity {
 		cascade: true,
 	})
 	public images: Array<Image>;
+
+	@OneToMany(() => Cart, (cart) => cart.user, {
+		cascade: true,
+	})
+	public carts: Array<Cart>;
 
 	@CreateDateColumn()
 	public createdAt: Date;

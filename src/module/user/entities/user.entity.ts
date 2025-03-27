@@ -3,6 +3,7 @@ import { Gender } from 'src/common/enum/gender.enum';
 import { Address } from 'src/module/address/entities/address.entity';
 import { Otp } from 'src/module/auth/entities/otp.entity';
 import { Cards } from 'src/module/cards/entities/cards.entity';
+import { Cart } from 'src/module/cart/entities/cart.entity';
 import { Review } from 'src/module/review/entities/review.entity';
 import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
 import {
@@ -94,6 +95,11 @@ export class User extends BaseEntity {
 		cascade: true,
 	})
 	public wishlist: Array<Wishlist>;
+
+	@OneToMany(() => Cart, (cart) => cart.user, {
+		cascade: true,
+	})
+	public carts: Array<Cart>;
 
 	@CreateDateColumn()
 	public createdAt: Date;

@@ -1,4 +1,5 @@
 import { ProductTypeEnum } from 'src/common/enum/product-type.enum';
+import { Cart } from 'src/module/cart/entities/cart.entity';
 import { Category } from 'src/module/category/entities/category.entity';
 import { Image } from 'src/module/image/entities/image.entity';
 import { Review } from 'src/module/review/entities/review.entity';
@@ -45,6 +46,7 @@ export class Product extends BaseEntity {
 
 	@ManyToOne(() => Category, (category) => category.products, {
 		onDelete: 'CASCADE',
+		nullable: false,
 	})
 	public category: Category;
 
@@ -68,6 +70,11 @@ export class Product extends BaseEntity {
 		cascade: true,
 	})
 	public wishlist: Array<Wishlist>;
+
+	@OneToMany(() => Cart, (cart) => cart.user, {
+		cascade: true,
+	})
+	public carts: Array<Cart>;
 
 	@CreateDateColumn()
 	public createdAt: Date;

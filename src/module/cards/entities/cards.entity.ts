@@ -58,6 +58,7 @@ export class Cards extends BaseEntity {
 
 	@ManyToOne(() => User, (user) => user.cards, {
 		onDelete: 'CASCADE',
+		nullable: false,
 	})
 	public user: User;
 

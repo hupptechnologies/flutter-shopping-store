@@ -1,33 +1,56 @@
 import { Product } from 'src/module/product/entities/product.entity';
 import { User } from 'src/module/user/entities/user.entity';
+import { Variant } from 'src/module/variant/entities/variant.entity';
 import {
 	BaseEntity,
+	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
 	Entity,
 	ManyToOne,
 	PrimaryGeneratedColumn,
-	Unique,
 	UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-@Unique(['user', 'product'])
-export class Wishlist extends BaseEntity {
+export class Cart extends BaseEntity {
 	@PrimaryGeneratedColumn()
 	public id: number;
 
-	@ManyToOne(() => User, (user) => user.wishlist, {
+	@ManyToOne(() => User, (user) => user.carts, {
 		onDelete: 'CASCADE',
 		nullable: false,
 	})
 	public user: User;
 
-	@ManyToOne(() => Product, (product) => product.wishlist, {
+	@ManyToOne(() => Product, (product) => product.carts, {
 		onDelete: 'CASCADE',
 		nullable: false,
 	})
 	public product: Product;
+
+	@ManyToOne(() => Variant, (variant) => variant.carts, {
+		onDelete: 'SET NULL',
+		nullable: true,
+	})
+	public Variant: Variant;
+
+	@Column({
+		type: 'int',
+		default: 1,
+	})
+	public quantity: number;
+
+	@Column({
+		type: 'double',
+	})
+	public price: number;
+
+	@Column({
+		type: 'boolean',
+		default: false,
+	})
+	public isSelected: boolean;
 
 	@CreateDateColumn()
 	public createdAt: Date;

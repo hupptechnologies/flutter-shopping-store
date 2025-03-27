@@ -8,6 +8,8 @@ import {
 	AfterRemove,
 	AfterSoftRemove,
 	BaseEntity,
+	BeforeInsert,
+	BeforeUpdate,
 	Column,
 	CreateDateColumn,
 	DeleteDateColumn,
@@ -67,6 +69,16 @@ export class Image extends BaseEntity {
 	@Exclude()
 	@DeleteDateColumn()
 	public deletedAt: Date | null;
+
+	@BeforeInsert()
+	@BeforeUpdate()
+	validateAssociation(): void {
+		if (!this.category && !this.product && !this.review && !this.variant) {
+			throw new Error(
+				'An image must be associated with at least one entity: category, product, review, or variant.',
+			);
+		}
+	}
 
 	@AfterRemove()
 	@AfterSoftRemove()
