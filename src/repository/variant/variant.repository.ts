@@ -5,14 +5,13 @@ import { Variant } from '../../module/variant/entities/variant.entity';
 import { Repository } from 'typeorm';
 import { CreateVariantDto } from '../../module/variant/dto/create-variant.dto';
 import { UpdateVariantDto } from '../../module/variant/dto/update-variant.dto';
+import { BaseRepository } from '../base.respository';
 
 @Injectable()
 @Loggable()
-export class VariantRepository {
-	constructor(
-		@InjectRepository(Variant)
-		private readonly repository: Repository<Variant>,
-	) {}
+export class VariantRepository extends BaseRepository {
+	@InjectRepository(Variant)
+	private readonly repository: Repository<Variant>;
 
 	async craete(createVariantDto: CreateVariantDto): Promise<Variant> {
 		const response = this.repository.create(createVariantDto);
@@ -30,15 +29,6 @@ export class VariantRepository {
 	async update(variant: Variant, dto: UpdateVariantDto): Promise<Variant> {
 		Object.assign(variant, dto);
 		return this.repository.save(variant);
-	}
-
-	async delete(variant: Variant, isSoftDetele = true): Promise<boolean> {
-		if (isSoftDetele) {
-			const deleteVariant = await variant.softRemove();
-			return !!deleteVariant;
-		}
-		const deleteVariant = await variant.remove();
-		return !!deleteVariant;
 	}
 
 	async findAll(productId: number): Promise<Array<Variant>> {

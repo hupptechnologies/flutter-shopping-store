@@ -119,7 +119,7 @@ export class AuthService {
 			return verifyOtpDto;
 		} catch (error) {
 			if (otpRecord) {
-				await this.otpRepository.delete(otpRecord);
+				await this.otpRepository.delete(otpRecord, false);
 			}
 			throw error;
 		}
@@ -157,7 +157,7 @@ export class AuthService {
 			password,
 		});
 
-		await this.otpRepository.delete(otpRecord);
+		await this.otpRepository.delete(otpRecord, false);
 
 		void this.mailService.send({
 			to: user.email,

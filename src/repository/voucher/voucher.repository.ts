@@ -7,16 +7,15 @@ import { CreateVoucherDto } from '../../module/voucher/dto/create-voucher.dto';
 import { UpdateVoucherDto } from '../../module/voucher/dto/update-voucher.dto';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { FindAllRes } from 'src/common/interface/typeorm.interface';
+import { BaseRepository } from '../base.respository';
 
 @Loggable()
 @Injectable()
-export class VoucherRepository {
+export class VoucherRepository extends BaseRepository {
 	private readonly name: string = Voucher.name.toLowerCase();
 
-	constructor(
-		@InjectRepository(Voucher)
-		private readonly repository: Repository<Voucher>,
-	) {}
+	@InjectRepository(Voucher)
+	private readonly repository: Repository<Voucher>;
 
 	public async findByCode(code: string): Promise<Voucher | null> {
 		return await this.repository.findOne({
@@ -43,15 +42,6 @@ export class VoucherRepository {
 				id,
 			},
 		});
-	}
-
-	public async delete(voucher: Voucher, isSoftDetele = true): Promise<boolean> {
-		if (isSoftDetele) {
-			const deleteVoucher = await voucher.softRemove();
-			return !!deleteVoucher;
-		}
-		const deleteVoucher = await voucher.remove();
-		return !!deleteVoucher;
 	}
 
 	public async findAll(queryOptionsDto: QueryOptionsDto): Promise<FindAllRes<Voucher>> {

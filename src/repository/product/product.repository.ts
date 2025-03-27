@@ -8,16 +8,15 @@ import { UpdateProductDto } from '../../module/product/dto/update-product.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
 import { FindAllRes } from 'src/common/interface/typeorm.interface';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { BaseRepository } from '../base.respository';
 
 @Injectable()
 @Loggable()
-export class ProductRepository {
+export class ProductRepository extends BaseRepository {
 	private readonly name: string = Product.name.toLowerCase();
 
-	constructor(
-		@InjectRepository(Product)
-		private readonly repository: Repository<Product>,
-	) {}
+	@InjectRepository(Product)
+	private readonly repository: Repository<Product>;
 
 	async create(createProductDto: CreateProductDto): Promise<Product> {
 		const category = this.repository.create(createProductDto);
@@ -36,15 +35,6 @@ export class ProductRepository {
 			},
 			relations,
 		});
-	}
-
-	async delete(product: Product, isSoftDetele = true): Promise<boolean> {
-		if (isSoftDetele) {
-			const deleteProduct = await product.softRemove();
-			return !!deleteProduct;
-		}
-		const deleteProduct = await product.remove();
-		return !!deleteProduct;
 	}
 
 	async findAll(

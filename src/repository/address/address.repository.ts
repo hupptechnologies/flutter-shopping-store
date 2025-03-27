@@ -6,14 +6,13 @@ import { Repository } from 'typeorm';
 import { CreateAddressDto } from '../../module/address/dto/create-address.dto';
 import { User } from '../../module/user/entities/user.entity';
 import { UpdateAddressDto } from '../../module/address/dto/update-address.dto';
+import { BaseRepository } from '../base.respository';
 
 @Loggable()
 @Injectable()
-export class AddressRepository {
-	constructor(
-		@InjectRepository(Address)
-		private readonly repository: Repository<Address>,
-	) {}
+export class AddressRepository extends BaseRepository {
+	@InjectRepository(Address)
+	private readonly repository: Repository<Address>;
 
 	async create(createAddressDto: CreateAddressDto, user: User): Promise<Address> {
 		const create = this.repository.create(createAddressDto);
@@ -59,15 +58,5 @@ export class AddressRepository {
 				},
 			},
 		});
-	}
-
-	async delete(address: Address, isSoftDetele = true): Promise<boolean> {
-		if (isSoftDetele) {
-			const deleted = await address.softRemove();
-			return !!deleted;
-		}
-
-		const deleted = await address.remove();
-		return !!deleted;
 	}
 }

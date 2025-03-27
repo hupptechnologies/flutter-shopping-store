@@ -6,14 +6,13 @@ import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Injectable } from '@nestjs/common';
 import { UpdateUserDto } from '../../module/user/dto/update-user.dto';
 import { RelationKeys } from 'src/common/types/relations.type';
+import { BaseRepository } from '../base.respository';
 
 @Loggable()
 @Injectable()
-export class UserRepository {
-	constructor(
-		@InjectRepository(User)
-		private readonly repository: Repository<User>,
-	) {}
+export class UserRepository extends BaseRepository {
+	@InjectRepository(User)
+	private readonly repository: Repository<User>;
 
 	public async create(createUserDto: CreateUserDto): Promise<User> {
 		const user = this.repository.create(createUserDto);
@@ -47,14 +46,5 @@ export class UserRepository {
 	public async update(user: User, updateUserDto: UpdateUserDto): Promise<User> {
 		Object.assign(user, updateUserDto);
 		return this.repository.save(user);
-	}
-
-	public async delete(user: User, isSoftDetele = true): Promise<boolean> {
-		if (isSoftDetele) {
-			const deleteUser = await user.softRemove();
-			return !!deleteUser;
-		}
-		const deleteUser = await user.remove();
-		return !!deleteUser;
 	}
 }

@@ -8,16 +8,15 @@ import { RelationKeys } from 'src/common/types/relations.type';
 import { UpdateCategoryDto } from '../../module/category/dto/update-category.dto';
 import { FindAllRes, FindTreeOptions } from 'src/common/interface/typeorm.interface';
 import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
+import { BaseRepository } from '../base.respository';
 
 @Loggable()
 @Injectable()
-export class CategoryRepository {
+export class CategoryRepository extends BaseRepository {
 	private readonly name: string = Category.name.toLowerCase();
 
-	constructor(
-		@InjectRepository(Category)
-		private readonly repository: Repository<Category>,
-	) {}
+	@InjectRepository(Category)
+	private readonly repository: Repository<Category>;
 
 	async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
 		const category = this.repository.create(createCategoryDto);
@@ -45,15 +44,6 @@ export class CategoryRepository {
 		return this.repository.manager
 			.getTreeRepository(Category)
 			.findDescendantsTree(category, options);
-	}
-
-	async delete(category: Category, isSoftDelete = true): Promise<boolean> {
-		if (isSoftDelete) {
-			const deleteRecord = await this.repository.softRemove(category);
-			return !!deleteRecord;
-		}
-		const deleteRecord = await this.repository.remove(category);
-		return !!deleteRecord;
 	}
 
 	async findAll(

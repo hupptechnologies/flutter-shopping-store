@@ -5,14 +5,13 @@ import { Cards } from '../../module/cards/entities/cards.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCardsDto } from '../../module/cards/dto/craete-cards.dto';
 import { User } from '../../module/user/entities/user.entity';
+import { BaseRepository } from '../base.respository';
 
 @Loggable()
 @Injectable()
-export class CardsRepository {
-	constructor(
-		@InjectRepository(Cards)
-		private readonly repository: Repository<Cards>,
-	) {}
+export class CardsRepository extends BaseRepository {
+	@InjectRepository(Cards)
+	private readonly repository: Repository<Cards>;
 
 	public async create(createCardsDto: CreateCardsDto, user: User): Promise<Cards> {
 		const category = this.repository.create(createCardsDto);
@@ -41,14 +40,5 @@ export class CardsRepository {
 				},
 			},
 		});
-	}
-
-	public async delete(card: Cards, isSoftDetele = true): Promise<boolean> {
-		if (isSoftDetele) {
-			const deleteCard = await card.softRemove();
-			return !!deleteCard;
-		}
-		const deleteCard = await card.remove();
-		return !!deleteCard;
 	}
 }

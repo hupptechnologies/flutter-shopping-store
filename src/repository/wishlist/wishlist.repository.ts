@@ -7,14 +7,13 @@ import { Product } from 'src/module/product/entities/product.entity';
 import { User } from 'src/module/user/entities/user.entity';
 import { RelationKeys } from 'src/common/types/relations.type';
 import { BrandsWishlist } from 'src/common/interface/wishlist.interface';
+import { BaseRepository } from '../base.respository';
 
 @Loggable()
 @Injectable()
-export class WishListRepository {
-	constructor(
-		@InjectRepository(Wishlist)
-		private readonly repository: Repository<Wishlist>,
-	) {}
+export class WishListRepository extends BaseRepository {
+	@InjectRepository(Wishlist)
+	private readonly repository: Repository<Wishlist>;
 
 	public async findById(
 		productId: number,
@@ -40,15 +39,6 @@ export class WishListRepository {
 			user,
 		});
 		return this.repository.save(wishlist);
-	}
-
-	public async delete(wishlist: Wishlist, isSoftDetele = true): Promise<boolean> {
-		if (isSoftDetele) {
-			const deleteWishlist = await wishlist.softRemove();
-			return !!deleteWishlist;
-		}
-		const deleteWishlist = await wishlist.remove();
-		return !!deleteWishlist;
 	}
 
 	public async findAllByUserId(
