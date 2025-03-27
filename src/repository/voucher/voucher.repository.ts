@@ -14,8 +14,12 @@ import { BaseRepository } from '../base.respository';
 export class VoucherRepository extends BaseRepository {
 	private readonly name: string = Voucher.name.toLowerCase();
 
-	@InjectRepository(Voucher)
-	private readonly repository: Repository<Voucher>;
+	constructor(
+		@InjectRepository(Voucher)
+		private readonly repository: Repository<Voucher>,
+	) {
+		super();
+	}
 
 	public async findByCode(code: string): Promise<Voucher | null> {
 		return await this.repository.findOne({

@@ -10,8 +10,12 @@ import { BaseRepository } from '../base.respository';
 @Injectable()
 @Loggable()
 export class ReviewRepository extends BaseRepository {
-	@InjectRepository(Review)
-	private readonly repository: Repository<Review>;
+	constructor(
+		@InjectRepository(Review)
+		private readonly repository: Repository<Review>,
+	) {
+		super();
+	}
 
 	public async create(dto: CreateReviewDto, user: User): Promise<Review> {
 		const create = this.repository.create(dto);

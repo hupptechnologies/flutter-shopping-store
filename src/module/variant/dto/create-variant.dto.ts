@@ -18,7 +18,7 @@ export class CreateVariantDto {
 
 	@IsInt()
 	@IsOptional()
-	public stock?: number;
+	public quantity?: number;
 
 	@IsInt()
 	public productId: number;

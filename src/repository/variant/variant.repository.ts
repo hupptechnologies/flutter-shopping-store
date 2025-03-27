@@ -10,8 +10,12 @@ import { BaseRepository } from '../base.respository';
 @Injectable()
 @Loggable()
 export class VariantRepository extends BaseRepository {
-	@InjectRepository(Variant)
-	private readonly repository: Repository<Variant>;
+	constructor(
+		@InjectRepository(Variant)
+		private readonly repository: Repository<Variant>,
+	) {
+		super();
+	}
 
 	async craete(createVariantDto: CreateVariantDto): Promise<Variant> {
 		const response = this.repository.create(createVariantDto);

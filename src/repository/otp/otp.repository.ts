@@ -9,8 +9,12 @@ import { BaseRepository } from '../base.respository';
 @Loggable()
 @Injectable()
 export class OtpRepository extends BaseRepository {
-	@InjectRepository(Otp)
-	private readonly repository: Repository<Otp>;
+	constructor(
+		@InjectRepository(Otp)
+		private readonly repository: Repository<Otp>,
+	) {
+		super();
+	}
 
 	async create(user: User, otp: number, expiresAt: number): Promise<Otp> {
 		const otpRecord = this.repository.create({

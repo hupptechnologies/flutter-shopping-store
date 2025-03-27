@@ -34,7 +34,7 @@ export class Variant extends BaseEntity {
 		type: 'int',
 		default: 0,
 	})
-	public stock: number;
+	public quantity: number;
 
 	@ManyToOne(() => Product, (product) => product.variants, {
 		onDelete: 'CASCADE',

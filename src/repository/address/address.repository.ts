@@ -11,8 +11,12 @@ import { BaseRepository } from '../base.respository';
 @Loggable()
 @Injectable()
 export class AddressRepository extends BaseRepository {
-	@InjectRepository(Address)
-	private readonly repository: Repository<Address>;
+	constructor(
+		@InjectRepository(Address)
+		private readonly repository: Repository<Address>,
+	) {
+		super();
+	}
 
 	async create(createAddressDto: CreateAddressDto, user: User): Promise<Address> {
 		const create = this.repository.create(createAddressDto);

@@ -33,7 +33,7 @@ export class Cart extends BaseEntity {
 		onDelete: 'SET NULL',
 		nullable: true,
 	})
-	public Variant: Variant;
+	public variant: Variant;
 
 	@Column({
 		type: 'int',

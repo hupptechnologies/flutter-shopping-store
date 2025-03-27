@@ -10,8 +10,12 @@ import { BaseRepository } from '../base.respository';
 @Loggable()
 @Injectable()
 export class CardsRepository extends BaseRepository {
-	@InjectRepository(Cards)
-	private readonly repository: Repository<Cards>;
+	constructor(
+		@InjectRepository(Cards)
+		private readonly repository: Repository<Cards>,
+	) {
+		super();
+	}
 
 	public async create(createCardsDto: CreateCardsDto, user: User): Promise<Cards> {
 		const category = this.repository.create(createCardsDto);

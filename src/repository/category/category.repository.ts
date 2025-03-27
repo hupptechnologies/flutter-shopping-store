@@ -15,8 +15,12 @@ import { BaseRepository } from '../base.respository';
 export class CategoryRepository extends BaseRepository {
 	private readonly name: string = Category.name.toLowerCase();
 
-	@InjectRepository(Category)
-	private readonly repository: Repository<Category>;
+	constructor(
+		@InjectRepository(Category)
+		private readonly repository: Repository<Category>,
+	) {
+		super();
+	}
 
 	async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
 		const category = this.repository.create(createCategoryDto);

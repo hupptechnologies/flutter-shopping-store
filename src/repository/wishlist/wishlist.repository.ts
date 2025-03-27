@@ -12,8 +12,12 @@ import { BaseRepository } from '../base.respository';
 @Loggable()
 @Injectable()
 export class WishListRepository extends BaseRepository {
-	@InjectRepository(Wishlist)
-	private readonly repository: Repository<Wishlist>;
+	constructor(
+		@InjectRepository(Wishlist)
+		private readonly repository: Repository<Wishlist>,
+	) {
+		super();
+	}
 
 	public async findById(
 		productId: number,

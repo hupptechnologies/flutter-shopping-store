@@ -64,4 +64,7 @@ export abstract class MessageConstant {
 	static readonly WISHLIST_CREATED_SUCCESS = 'Item successfully added to the wishlist';
 	static readonly WISHLIST_DELETED_SUCCESS = 'Item successfully removed from the wishlist';
 	static readonly WISHLIST_FETCHED_SUCCESS = 'Wishlist fetched successfully';
+
+	static readonly INSUFFICIENT_STOCK = 'Insufficient stock for this variant';
+	static readonly ITEM_ADDED_TO_CART_SUCCESS = 'Item added to cart successfully';
 }
