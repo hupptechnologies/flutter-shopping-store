@@ -8,6 +8,7 @@ import { VariantRepository } from 'src/repository/variant/variant.repository';
 import { MessageConstant } from 'src/common/constant/message.constant';
 import { QuantityUtils } from 'src/common/utils/quantity.utils';
 import { Cart } from './entities/cart.entity';
+import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Loggable()
 @Injectable()
@@ -52,5 +53,25 @@ export class CartService {
 		createCartDto.product = product;
 		createCartDto.variant = variant;
 		return this.repository.create(createCartDto, user);
+	}
+
+	public async update(
+		id: number,
+		updateCartDto: UpdateCartDto,
+		userId: number,
+	): Promise<Array<Cart>> {
+		const cart = await this.repository.findByIdAndUserId(id, userId, ['variant']);
+
+		if (!cart) {
+			throw new NotFoundException(MessageConstant.CART_FOUND_SUCCESS);
+		}
+
+		const newQuantity = QuantityUtils.calculateNewQuantity(
+			cart.quantity,
+			updateCartDto.quantity,
+			cart.variant.quantity,
+		);
+		await this.repository.updateQuantity(cart, newQuantity);
+		return this.repository.fetchAllByUserId(userId);
 	}
 }
