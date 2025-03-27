@@ -94,7 +94,11 @@ export class ProductService {
 	}
 
 	public async findAll(query: QueryOptionsDto): Promise<PaginationRes<Product>> {
-		const { items, total } = await this.productRepository.findAll(query, ['images']);
+		const { items, total } = await this.productRepository.findAll(query, [
+			'images',
+			'reviews',
+			'variants',
+		]);
 		query.setTotal(total);
 		return {
 			items,
