@@ -98,10 +98,9 @@ export class ProductRepository extends BaseRepository {
 		}
 
 		query.leftJoins(relations);
-
 		query.skip(dto.skip);
 		query.take(dto.perPage);
-		query.orderBy('RANDOM()');
+		query.orderBy('RAND()');
 
 		const result = await query.getManyAndCount();
 
@@ -122,13 +121,7 @@ export class ProductRepository extends BaseRepository {
 			});
 		}
 
-		if (relations?.isEmpty || !relations?.includes('reviews')) {
-			relations.push('reviews');
-		}
 		query.leftJoins(relations);
-
-		query.groupBy(`${this.name}.id`);
-		query.orderBy('COUNT(reviews.id)', 'DESC');
 
 		query.skip(dto.skip);
 		query.take(dto.perPage);

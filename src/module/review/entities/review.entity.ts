@@ -44,6 +44,7 @@ export class Review extends BaseEntity {
 
 	@ManyToOne(() => User, (user) => user.reviews, {
 		onDelete: 'CASCADE',
+		eager: true,
 	})
 	public user: User;
 

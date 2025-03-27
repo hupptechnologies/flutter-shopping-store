@@ -57,6 +57,18 @@ export class ProductController {
 	}
 
 	@Public()
+	@Get(URLConstant.ALL)
+	async fetchDashboardData(
+		@Query() queryOptionsDto: QueryOptionsDto,
+	): Promise<APIResponse<DashboardList>> {
+		const products = await this.productService.fetchDashboardData(queryOptionsDto);
+		return {
+			data: products,
+			message: MessageConstant.DASHBAORD_FETCHED_SUCCESS,
+		};
+	}
+
+	@Public()
 	@Get(URLConstant.ROUTER_ID)
 	async findOne(@Param(KeyConstant.ID, ParseIntPipe) id: number): Promise<APIResponse<Product>> {
 		const product = await this.productService.findOne(id);
@@ -81,17 +93,6 @@ export class ProductController {
 		return {
 			data: products,
 			message: MessageConstant.PRODUCT_FETCHED_SUCCESS,
-		};
-	}
-
-	@Get(URLConstant.ALL)
-	async fetchDashboardData(
-		@Query() queryOptionsDto: QueryOptionsDto,
-	): Promise<APIResponse<DashboardList>> {
-		const products = await this.productService.fetchDashboardData(queryOptionsDto);
-		return {
-			data: products,
-			message: MessageConstant.DASHBAORD_FETCHED_SUCCESS,
 		};
 	}
 }
