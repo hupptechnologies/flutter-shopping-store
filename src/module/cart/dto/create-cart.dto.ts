@@ -1,8 +1,8 @@
 import { Exclude, Type } from 'class-transformer';
 import { IsNumber, IsPositive, Min } from 'class-validator';
-import { ValidationMsgConstant } from 'src/common/constant/validation-msg.constant';
-import { Product } from 'src/module/product/entities/product.entity';
-import { Variant } from 'src/module/variant/entities/variant.entity';
+import { ValidationMsgConstant } from '../../../common/constant/validation-msg.constant';
+import { Product } from '../../product/entities/product.entity';
+import { Variant } from '../../variant/entities/variant.entity';
 
 export class CreateCartDto {
 	@IsNumber()

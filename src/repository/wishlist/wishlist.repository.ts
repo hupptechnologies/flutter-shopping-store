@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
-import { Product } from 'src/module/product/entities/product.entity';
-import { User } from 'src/module/user/entities/user.entity';
-import { RelationKeys } from 'src/common/types/relations.type';
-import { BrandsWishlist } from 'src/common/interface/wishlist.interface';
 import { BaseRepository } from '../base.respository';
+import { BrandsWishlist } from '../../common/interface/wishlist.interface';
+import { RelationKeys } from '../../common/types/relations.type';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
+import { Product } from '../../module/product/entities/product.entity';
+import { User } from '../../module/user/entities/user.entity';
+import { Wishlist } from '../../module/wishlist/entities/wishlist.entity';
 
 @Loggable()
 @Injectable()

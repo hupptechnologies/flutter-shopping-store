@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { v2 as cloudinary, UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
-import { CloudinaryDeleteResponse } from 'src/common/interface/cloudinary.interface';
-import { AppConfigService } from 'src/config/app/app-config.service';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
+import { CloudinaryDeleteResponse } from '../../common/interface/cloudinary.interface';
+import { AppConfigService } from '../../config/app/app-config.service';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Loggable()
 @Injectable()

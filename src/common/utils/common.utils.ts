@@ -1,4 +1,4 @@
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Loggable()
 export class CommonUtils {

@@ -11,16 +11,16 @@ import {
 	UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { URLConstant } from 'src/common/constant/url.constant';
-import { User } from './entities/user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
-import { MessageConstant } from 'src/common/constant/message.constant';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { KeyConstant } from 'src/common/constant/key.constant';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { APIResponse } from '../../common/types/api-response.type';
+import { AuthUserId } from '../../decorator/auth-user-id/auth-user-id.decorator';
+import { Public } from '../../decorator/public/public.decorator';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Public } from 'src/decorator/public/public.decorator';
-import { APIResponse } from 'src/common/types/api-response.type';
-import { AuthUserId } from 'src/decorator/auth-user-id/auth-user-id.decorator';
+import { User } from './entities/user.entity';
 
 @Controller(URLConstant.USER)
 export class UserController {

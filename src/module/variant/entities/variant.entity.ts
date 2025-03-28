@@ -1,6 +1,3 @@
-import { Cart } from 'src/module/cart/entities/cart.entity';
-import { Image } from 'src/module/image/entities/image.entity';
-import { Product } from 'src/module/product/entities/product.entity';
 import { Entity } from 'typeorm';
 import {
 	BaseEntity,
@@ -12,6 +9,9 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
+import { Cart } from '../../cart/entities/cart.entity';
+import { Product } from '../../product/entities/product.entity';
+import { Image } from '../../image/entities/image.entity';
 
 @Entity()
 export class Variant extends BaseEntity {

@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsBoolean, IsDate, IsEnum, IsNumber, IsOptional, Min } from 'class-validator';
-import { DiscountEnum } from 'src/common/enum/discount.enum';
-import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
+import { IsNotEmpty } from '../../../decorator/validation/is-not-empty.decorator';
+import { DiscountEnum } from '../../../common/enum/discount.enum';
 
 export class CreateVoucherDto {
 	@IsNotEmpty()

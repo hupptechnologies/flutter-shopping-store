@@ -1,7 +1,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable, Logger } from '@nestjs/common';
-import { SendMailPaylaod } from 'src/common/interface/send-email.interface';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
+import { SendMailPaylaod } from '../../common/interface/send-email.interface';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Loggable()
 @Injectable()

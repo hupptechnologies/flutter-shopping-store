@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 import { ImageRepository } from '../../repository/image/image.repository';
-import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
-import { Product } from '../product/entities/product.entity';
+import { CloudinaryService } from '../../services/cloudinary/cloudinary.service';
 import { Category } from '../category/entities/category.entity';
+import { Product } from '../product/entities/product.entity';
 import { Review } from '../review/entities/review.entity';
 import { Variant } from '../variant/entities/variant.entity';
 

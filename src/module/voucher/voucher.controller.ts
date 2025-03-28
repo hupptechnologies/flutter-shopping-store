@@ -10,15 +10,15 @@ import {
 	Query,
 } from '@nestjs/common';
 import { VoucherService } from './voucher.service';
-import { URLConstant } from 'src/common/constant/url.constant';
-import { APIResponse } from 'src/common/types/api-response.type';
-import { Voucher } from './entities/voucher.entity';
-import { MessageConstant } from 'src/common/constant/message.constant';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { QueryOptionsDto } from '../../common/dto/query-options.dto';
+import { PaginationRes } from '../../common/interface/pagination-res.interface';
+import { APIResponse } from '../../common/types/api-response.type';
 import { CreateVoucherDto } from './dto/create-voucher.dto';
-import { KeyConstant } from 'src/common/constant/key.constant';
 import { UpdateVoucherDto } from './dto/update-voucher.dto';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import { PaginationRes } from 'src/common/interface/pagination-res.interface';
+import { Voucher } from './entities/voucher.entity';
 
 @Controller(URLConstant.VOUCHER)
 export class VoucherController {

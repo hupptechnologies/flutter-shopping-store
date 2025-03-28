@@ -1,4 +1,3 @@
-import { DiscountEnum } from 'src/common/enum/discount.enum';
 import {
 	BaseEntity,
 	Column,
@@ -9,6 +8,7 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
+import { DiscountEnum } from '../../../common/enum/discount.enum';
 
 @Entity()
 export class Voucher extends BaseEntity {

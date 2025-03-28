@@ -1,6 +1,6 @@
-import { AddressType } from 'src/common/enum/address-type.enum';
-import { Order } from 'src/module/order/entities/order.entity';
-import { User } from 'src/module/user/entities/user.entity';
+import { AddressType } from '../../../common/enum/address-type.enum';
+import { Order } from '../../order/entities/order.entity';
+import { User } from '../../user/entities/user.entity';
 import {
 	BaseEntity,
 	Column,

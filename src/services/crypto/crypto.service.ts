@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as crypto from 'crypto';
-import { AppConfigService } from 'src/config/app/app-config.service';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
+import { AppConfigService } from '../../config/app/app-config.service';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Injectable()
 @Loggable()

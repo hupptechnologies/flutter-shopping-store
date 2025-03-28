@@ -1,9 +1,9 @@
-import { OrderType } from 'src/common/enum/order-type.enum';
-import { Address } from 'src/module/address/entities/address.entity';
-import { Cart } from 'src/module/cart/entities/cart.entity';
-import { ShippingMothod } from 'src/module/shipping-mothod/entities/shpping-method.entity';
-import { User } from 'src/module/user/entities/user.entity';
-import { Voucher } from 'src/module/voucher/entities/voucher.entity';
+import { OrderType } from '../../../common/enum/order-type.enum';
+import { Address } from '../../address/entities/address.entity';
+import { Cart } from '../../cart/entities/cart.entity';
+import { ShippingMothod } from '../../shipping-mothod/entities/shpping-method.entity';
+import { User } from '../../user/entities/user.entity';
+import { Voucher } from '../../voucher/entities/voucher.entity';
 import {
 	BaseEntity,
 	Column,

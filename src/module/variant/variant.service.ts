@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { ImageService } from 'src/module/image/image.service';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
+import { ProductRepository } from '../../repository/product/product.repository';
 import { VariantRepository } from '../../repository/variant/variant.repository';
-import { Variant } from './entities/variant.entity';
+import { ImageService } from '../image/image.service';
 import { CreateVariantDto } from './dto/create-variant.dto';
-import { MessageConstant } from 'src/common/constant/message.constant';
-import { UpdateVariantDto } from './dto/update-variant.dto';
 import { QueryVariantDto } from './dto/query-variant.dto';
-import { ProductRepository } from 'src/repository/product/product.repository';
+import { UpdateVariantDto } from './dto/update-variant.dto';
+import { Variant } from './entities/variant.entity';
 
 @Injectable()
 @Loggable()

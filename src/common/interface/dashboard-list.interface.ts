@@ -1,4 +1,4 @@
-import { Product } from 'src/module/product/entities/product.entity';
+import { Product } from '../../module/product/entities/product.entity';
 
 export interface DashboardList {
 	featuredProducts: Array<Product>;

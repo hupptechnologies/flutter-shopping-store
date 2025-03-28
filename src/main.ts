@@ -1,4 +1,4 @@
-import 'src/common/extension/index';
+import './common/extension/index';
 import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import { INestApplication, Logger, RequestMethod } from '@nestjs/common';

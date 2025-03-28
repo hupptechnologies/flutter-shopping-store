@@ -1,6 +1,6 @@
-import { Image } from 'src/module/image/entities/image.entity';
-import { Product } from 'src/module/product/entities/product.entity';
-import { User } from 'src/module/user/entities/user.entity';
+import { Image } from '../../image/entities/image.entity';
+import { Product } from '../../product/entities/product.entity';
+import { User } from '../../user/entities/user.entity';
 import {
 	BaseEntity,
 	Column,

@@ -9,16 +9,16 @@ import {
 	UseInterceptors,
 } from '@nestjs/common';
 import { ReviewService } from './review.service';
-import { URLConstant } from 'src/common/constant/url.constant';
-import { CreateReviewDto } from './dto/create-review.dto';
-import { AuthUser } from 'src/decorator/auth-user/auth-user.decorator';
-import { APIResponse } from 'src/common/types/api-response.type';
-import { Review } from './entities/review.entity';
-import { User } from '../user/entities/user.entity';
-import { MessageConstant } from 'src/common/constant/message.constant';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { KeyConstant } from 'src/common/constant/key.constant';
-import { AuthUserId } from 'src/decorator/auth-user-id/auth-user-id.decorator';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { APIResponse } from '../../common/types/api-response.type';
+import { AuthUserId } from '../../decorator/auth-user-id/auth-user-id.decorator';
+import { AuthUser } from '../../decorator/auth-user/auth-user.decorator';
+import { User } from '../user/entities/user.entity';
+import { CreateReviewDto } from './dto/create-review.dto';
+import { Review } from './entities/review.entity';
 
 @Controller(URLConstant.REVIEW)
 export class ReviewController {

@@ -18,6 +18,7 @@ import { WishlistModule } from './module/wishlist/wishlist.module';
 import { CartModule } from './module/cart/cart.module';
 import { OrderModule } from './module/order/order.module';
 import { ShippingMothodModule } from './module/shipping-mothod/shipping-mothod.module';
+import { SeederModule } from './seeder/seeder.module';
 
 @Module({
 	imports: [
@@ -39,6 +40,7 @@ import { ShippingMothodModule } from './module/shipping-mothod/shipping-mothod.m
 		CartModule,
 		OrderModule,
 		ShippingMothodModule,
+		SeederModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, CryptoService],

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Otp } from '../../module/auth/entities/otp.entity';
 import { Repository } from 'typeorm';
 import { User } from '../../module/user/entities/user.entity';
 import { BaseRepository } from '../base.respository';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Loggable()
 @Injectable()

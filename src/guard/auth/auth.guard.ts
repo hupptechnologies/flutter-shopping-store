@@ -3,10 +3,10 @@ import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
 import { Observable } from 'rxjs';
-import { KeyConstant } from 'src/common/constant/key.constant';
-import { JWTPayload } from 'src/common/interface/jwt.interface';
-import { PUBLIC_KEY } from 'src/decorator/public/public.decorator';
-import { UserRepository } from 'src/repository/user/user.repository';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { JWTPayload } from '../../common/interface/jwt.interface';
+import { PUBLIC_KEY } from '../../decorator/public/public.decorator';
+import { UserRepository } from '../../repository/user/user.repository';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

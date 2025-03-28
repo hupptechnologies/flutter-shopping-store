@@ -1,6 +1,6 @@
 import { IsEmail, IsStrongPassword } from 'class-validator';
-import { ValidationMsgConstant } from 'src/common/constant/validation-msg.constant';
-import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
+import { IsNotEmpty } from '../../../decorator/validation/is-not-empty.decorator';
+import { ValidationMsgConstant } from '../../../common/constant/validation-msg.constant';
 
 export class LoginAuthDto {
 	@IsNotEmpty()

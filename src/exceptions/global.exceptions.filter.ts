@@ -10,11 +10,11 @@ import {
 	UnauthorizedException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { KeyConstant } from 'src/common/constant/key.constant';
-import { ExceptionType } from 'src/common/interface/exception.interface';
 import { QueryFailedError } from 'typeorm';
 import { ValidationException } from './validation.exception';
-import { ErrorMsgConstant } from 'src/common/constant/error-msg.constant';
+import { ErrorMsgConstant } from '../common/constant/error-msg.constant';
+import { KeyConstant } from '../common/constant/key.constant';
+import { ExceptionType } from '../common/interface/exception.interface';
 
 @Catch()
 export class GlobalExceptionsFilter implements ExceptionFilter {

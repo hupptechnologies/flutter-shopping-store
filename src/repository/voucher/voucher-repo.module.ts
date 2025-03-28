@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Voucher } from 'src/module/voucher/entities/voucher.entity';
-import { VoucherRepository } from 'src/repository/voucher/voucher.repository';
+import { Voucher } from '../../module/voucher/entities/voucher.entity';
+import { VoucherRepository } from './voucher.repository';
 
 @Module({
 	imports: [TypeOrmModule.forFeature([Voucher])],

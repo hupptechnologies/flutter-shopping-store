@@ -1,4 +1,4 @@
-import { Order } from 'src/module/order/entities/order.entity';
+import { Order } from '../../order/entities/order.entity';
 import {
 	BaseEntity,
 	Column,
@@ -18,6 +18,7 @@ export class ShippingMothod extends BaseEntity {
 	@Column({
 		type: 'varchar',
 		length: 100,
+		unique: true,
 		nullable: false,
 	})
 	public name: string;

@@ -12,15 +12,15 @@ import {
 	UseInterceptors,
 } from '@nestjs/common';
 import { VariantService } from './variant.service';
-import { URLConstant } from 'src/common/constant/url.constant';
-import { APIResponse } from 'src/common/types/api-response.type';
-import { Variant } from './entities/variant.entity';
-import { CreateVariantDto } from './dto/create-variant.dto';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { KeyConstant } from 'src/common/constant/key.constant';
-import { MessageConstant } from 'src/common/constant/message.constant';
-import { UpdateVariantDto } from './dto/update-variant.dto';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { APIResponse } from '../../common/types/api-response.type';
+import { CreateVariantDto } from './dto/create-variant.dto';
 import { QueryVariantDto } from './dto/query-variant.dto';
+import { UpdateVariantDto } from './dto/update-variant.dto';
+import { Variant } from './entities/variant.entity';
 
 @Controller(URLConstant.VARIANT)
 export class VariantController {

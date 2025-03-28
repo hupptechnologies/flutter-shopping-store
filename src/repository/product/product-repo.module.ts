@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from 'src/module/product/entities/product.entity';
-import { ProductRepository } from 'src/repository/product/product.repository';
+import { Product } from '../../module/product/entities/product.entity';
+import { ProductRepository } from './product.repository';
 
 @Module({
 	imports: [TypeOrmModule.forFeature([Product])],

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Review } from 'src/module/review/entities/review.entity';
-import { ReviewRepository } from 'src/repository/review/review.repository';
+import { Review } from '../../module/review/entities/review.entity';
+import { ReviewRepository } from './review.repository';
 
 @Module({
 	imports: [TypeOrmModule.forFeature([Review])],

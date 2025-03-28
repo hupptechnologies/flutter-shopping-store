@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { CardsController } from './cards.controller';
-import { CardsRepoModule } from 'src/repository/cards/cards-repo.module';
+import { CardsRepoModule } from '../../repository/cards/cards-repo.module';
 
 @Module({
 	imports: [CardsRepoModule],

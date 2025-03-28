@@ -1,7 +1,7 @@
 import { Exclude } from 'class-transformer';
-import { CardTypeEnum } from 'src/common/enum/card-type.enum';
-import { User } from 'src/module/user/entities/user.entity';
-import { CryptoService } from 'src/services/crypto/crypto.service';
+import { CardTypeEnum } from '../../../common/enum/card-type.enum';
+import { User } from '../../user/entities/user.entity';
+import { CryptoService } from '../../../services/crypto/crypto.service';
 import {
 	AfterLoad,
 	BaseEntity,

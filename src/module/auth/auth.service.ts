@@ -3,21 +3,21 @@ import { LoginAuthDto } from './dto/login-auth.dto';
 import { Response } from 'express';
 import { User } from '../user/entities/user.entity';
 import { UserRepository } from '../../repository/user/user.repository';
-import { BcryptService } from 'src/services/bcrypt/bcrypt.service';
-import { JWTPayload } from 'src/common/interface/jwt.interface';
 import { JwtService } from '@nestjs/jwt';
-import { KeyConstant } from 'src/common/constant/key.constant';
 import { OtpRepository } from '../../repository/otp/otp.repository';
-import { MessageConstant } from 'src/common/constant/message.constant';
-import { OtpUtils } from 'src/common/utils/otp.utils';
-import { MailService } from 'src/services/mail/mail.service';
-import { MailSubjectConstant } from 'src/common/constant/mail-subject.constant';
-import { TemplateConstant } from 'src/common/constant/template.constant';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
-import { ErrorMsgConstant } from 'src/common/constant/error-msg.constant';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UserService } from '../user/user.service';
+import { ErrorMsgConstant } from '../../common/constant/error-msg.constant';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MailSubjectConstant } from '../../common/constant/mail-subject.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { TemplateConstant } from '../../common/constant/template.constant';
+import { JWTPayload } from '../../common/interface/jwt.interface';
+import { OtpUtils } from '../../common/utils/otp.utils';
+import { BcryptService } from '../../services/bcrypt/bcrypt.service';
+import { MailService } from '../../services/mail/mail.service';
 
 @Injectable()
 export class AuthService {

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Variant } from 'src/module/variant/entities/variant.entity';
-import { VariantRepository } from 'src/repository/variant/variant.repository';
+import { Variant } from '../../module/variant/entities/variant.entity';
+import { VariantRepository } from './variant.repository';
 
 @Module({
 	imports: [TypeOrmModule.forFeature([Variant])],

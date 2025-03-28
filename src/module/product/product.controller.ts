@@ -12,18 +12,18 @@ import {
 	UseInterceptors,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { URLConstant } from 'src/common/constant/url.constant';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { KeyConstant } from 'src/common/constant/key.constant';
-import { APIResponse } from 'src/common/types/api-response.type';
-import { Product } from './entities/product.entity';
-import { MessageConstant } from 'src/common/constant/message.constant';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { QueryOptionsDto } from '../../common/dto/query-options.dto';
+import { DashboardList } from '../../common/interface/dashboard-list.interface';
+import { PaginationRes } from '../../common/interface/pagination-res.interface';
+import { APIResponse } from '../../common/types/api-response.type';
+import { Public } from '../../decorator/public/public.decorator';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Public } from 'src/decorator/public/public.decorator';
-import { PaginationRes } from 'src/common/interface/pagination-res.interface';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import { DashboardList } from 'src/common/interface/dashboard-list.interface';
+import { Product } from './entities/product.entity';
 
 @Controller(URLConstant.PRODUCT)
 export class ProductController {

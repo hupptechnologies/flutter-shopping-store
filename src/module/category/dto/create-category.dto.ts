@@ -1,7 +1,7 @@
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
 import { Category } from '../entities/category.entity';
-import { Gender } from 'src/common/enum/gender.enum';
+import { IsNotEmpty } from '../../../decorator/validation/is-not-empty.decorator';
+import { Gender } from '../../../common/enum/gender.enum';
 
 export class CreateCategoryDto {
 	@IsNotEmpty()

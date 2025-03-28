@@ -1,18 +1,18 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { URLConstant } from 'src/common/constant/url.constant';
 import { LoginAuthDto } from './dto/login-auth.dto';
-import { Public } from 'src/decorator/public/public.decorator';
-import { MessageConstant } from 'src/common/constant/message.constant';
 import { Response } from 'express';
 import { User } from '../user/entities/user.entity';
-import { CommonConstant } from 'src/common/constant/common.constant';
 import { ForgetPasswordDto } from './dto/forget-password.dto';
-import { APIResponse } from 'src/common/types/api-response.type';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-import { ApiResponse } from 'src/common/interface/api-reponse.interface';
 import { CreateUserDto } from '../user/dto/create-user.dto';
+import { CommonConstant } from '../../common/constant/common.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { ApiResponse } from '../../common/interface/api-reponse.interface';
+import { APIResponse } from '../../common/types/api-response.type';
+import { Public } from '../../decorator/public/public.decorator';
 
 @Controller(URLConstant.AUTH)
 export class AuthController {

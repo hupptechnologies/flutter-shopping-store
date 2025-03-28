@@ -1,16 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
-import { BcryptService } from 'src/services/bcrypt/bcrypt.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { MailSubjectConstant } from '../../common/constant/mail-subject.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { TemplateConstant } from '../../common/constant/template.constant';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
+import { ValidationException } from '../../exceptions/validation.exception';
 import { UserRepository } from '../../repository/user/user.repository';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
-import { CloudinaryService } from 'src/services/cloudinary/cloudinary.service';
+import { BcryptService } from '../../services/bcrypt/bcrypt.service';
+import { CloudinaryService } from '../../services/cloudinary/cloudinary.service';
+import { MailService } from '../../services/mail/mail.service';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { MessageConstant } from 'src/common/constant/message.constant';
-import { ValidationException } from 'src/exceptions/validation.exception';
-import { MailService } from 'src/services/mail/mail.service';
-import { MailSubjectConstant } from 'src/common/constant/mail-subject.constant';
-import { TemplateConstant } from 'src/common/constant/template.constant';
 
 @Loggable()
 @Injectable()

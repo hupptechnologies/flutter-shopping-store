@@ -1,14 +1,14 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CardsService } from './cards.service';
-import { URLConstant } from 'src/common/constant/url.constant';
-import { APIResponse } from 'src/common/types/api-response.type';
-import { Cards } from './entities/cards.entity';
-import { MessageConstant } from 'src/common/constant/message.constant';
-import { CreateCardsDto } from './dto/craete-cards.dto';
-import { AuthUser } from 'src/decorator/auth-user/auth-user.decorator';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { APIResponse } from '../../common/types/api-response.type';
+import { AuthUserId } from '../../decorator/auth-user-id/auth-user-id.decorator';
+import { AuthUser } from '../../decorator/auth-user/auth-user.decorator';
 import { User } from '../user/entities/user.entity';
-import { KeyConstant } from 'src/common/constant/key.constant';
-import { AuthUserId } from 'src/decorator/auth-user-id/auth-user-id.decorator';
+import { CreateCardsDto } from './dto/craete-cards.dto';
+import { Cards } from './entities/cards.entity';
 
 @Controller(URLConstant.CARDS)
 export class CardsController {

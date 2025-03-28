@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import { Injectable } from '@nestjs/common';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Loggable()
 @Injectable()

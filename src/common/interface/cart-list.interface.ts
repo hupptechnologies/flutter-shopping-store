@@ -1,4 +1,4 @@
-import { Cart } from 'src/module/cart/entities/cart.entity';
+import { Cart } from '../../module/cart/entities/cart.entity';
 
 export interface CartList {
 	carts: Array<Cart>;

@@ -1,6 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { IsInt, IsNumber, IsOptional, IsPositive, IsString, MinLength } from 'class-validator';
-import { Product } from 'src/module/product/entities/product.entity';
+import { Product } from '../../product/entities/product.entity';
 
 export class CreateVariantDto {
 	@IsString()

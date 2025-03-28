@@ -12,16 +12,16 @@ import {
 	UseInterceptors,
 } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { URLConstant } from 'src/common/constant/url.constant';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { APIResponse } from 'src/common/types/api-response.type';
-import { Category } from './entities/category.entity';
-import { MessageConstant } from 'src/common/constant/message.constant';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { KeyConstant } from 'src/common/constant/key.constant';
+import { KeyConstant } from '../../common/constant/key.constant';
+import { MessageConstant } from '../../common/constant/message.constant';
+import { URLConstant } from '../../common/constant/url.constant';
+import { QueryOptionsDto } from '../../common/dto/query-options.dto';
+import { PaginationRes } from '../../common/interface/pagination-res.interface';
+import { APIResponse } from '../../common/types/api-response.type';
+import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
-import { PaginationRes } from 'src/common/interface/pagination-res.interface';
+import { Category } from './entities/category.entity';
 
 @Controller(URLConstant.CATEGORY)
 export class CategoryController {

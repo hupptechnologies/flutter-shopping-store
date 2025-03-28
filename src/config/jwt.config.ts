@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtModuleOptions } from '@nestjs/jwt';
-import { KeyConstant } from 'src/common/constant/key.constant';
 import { AppConfigService } from './app/app-config.service';
+import { KeyConstant } from '../common/constant/key.constant';
 
 @Injectable()
 export class JWTConfigService {

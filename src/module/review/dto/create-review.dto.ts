@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, Max, Min } from 'class-validator';
-import { IsNotEmpty as IsNotEmptyDecorator } from 'src/decorator/validation/is-not-empty.decorator';
-import { Product } from 'src/module/product/entities/product.entity';
+import { IsNotEmpty as IsNotEmptyDecorator } from '../../../decorator/validation/is-not-empty.decorator';
+import { Product } from '../../product/entities/product.entity';
 
 export class CreateReviewDto {
 	@IsNotEmptyDecorator()

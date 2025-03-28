@@ -1,8 +1,8 @@
 import { Exclude, Type } from 'class-transformer';
 import { IsEnum, IsNumber, IsOptional, IsPositive, IsString } from 'class-validator';
-import { ProductTypeEnum } from 'src/common/enum/product-type.enum';
-import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
-import { Category } from 'src/module/category/entities/category.entity';
+import { IsNotEmpty } from '../../../decorator/validation/is-not-empty.decorator';
+import { ProductTypeEnum } from '../../../common/enum/product-type.enum';
+import { Category } from '../../category/entities/category.entity';
 
 export class CreateProductDto {
 	@IsNotEmpty()

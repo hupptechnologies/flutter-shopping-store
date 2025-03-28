@@ -1,7 +1,7 @@
-import { Order } from 'src/module/order/entities/order.entity';
-import { Product } from 'src/module/product/entities/product.entity';
-import { User } from 'src/module/user/entities/user.entity';
-import { Variant } from 'src/module/variant/entities/variant.entity';
+import { Order } from '../../order/entities/order.entity';
+import { Product } from '../../product/entities/product.entity';
+import { User } from '../../user/entities/user.entity';
+import { Variant } from '../../variant/entities/variant.entity';
 import {
 	BaseEntity,
 	Column,

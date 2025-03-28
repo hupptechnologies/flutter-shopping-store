@@ -1,9 +1,9 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { Image } from '../../module/image/entities/image.entity';
-import { CreateBulkImage } from 'src/common/interface/image.interface';
+import { CreateBulkImage } from '../../common/interface/image.interface';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Loggable()
 @Injectable()

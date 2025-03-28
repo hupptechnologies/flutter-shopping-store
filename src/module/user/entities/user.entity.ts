@@ -1,12 +1,12 @@
 import { Exclude } from 'class-transformer';
-import { Gender } from 'src/common/enum/gender.enum';
-import { Address } from 'src/module/address/entities/address.entity';
-import { Otp } from 'src/module/auth/entities/otp.entity';
-import { Cards } from 'src/module/cards/entities/cards.entity';
-import { Cart } from 'src/module/cart/entities/cart.entity';
-import { Order } from 'src/module/order/entities/order.entity';
-import { Review } from 'src/module/review/entities/review.entity';
-import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
+import { Gender } from '../../../common/enum/gender.enum';
+import { Address } from '../../address/entities/address.entity';
+import { Otp } from '../../auth/entities/otp.entity';
+import { Cards } from '../../cards/entities/cards.entity';
+import { Cart } from '../../cart/entities/cart.entity';
+import { Order } from '../../order/entities/order.entity';
+import { Review } from '../../review/entities/review.entity';
+import { Wishlist } from '../../wishlist/entities/wishlist.entity';
 import {
 	BaseEntity,
 	Column,

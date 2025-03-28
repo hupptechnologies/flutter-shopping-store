@@ -1,7 +1,7 @@
 import { IsEmail, IsEnum, IsMobilePhone, IsOptional } from 'class-validator';
-import { ValidationMsgConstant } from 'src/common/constant/validation-msg.constant';
-import { Gender } from 'src/common/enum/gender.enum';
-import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
+import { IsNotEmpty } from '../../../decorator/validation/is-not-empty.decorator';
+import { ValidationMsgConstant } from '../../../common/constant/validation-msg.constant';
+import { Gender } from '../../../common/enum/gender.enum';
 
 export class CreateUserDto {
 	@IsNotEmpty()

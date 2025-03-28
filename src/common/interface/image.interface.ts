@@ -1,8 +1,8 @@
 import { UploadApiResponse } from 'cloudinary';
-import { Category } from 'src/module/category/entities/category.entity';
-import { Product } from 'src/module/product/entities/product.entity';
-import { Review } from 'src/module/review/entities/review.entity';
-import { Variant } from 'src/module/variant/entities/variant.entity';
+import { Category } from '../../module/category/entities/category.entity';
+import { Product } from '../../module/product/entities/product.entity';
+import { Review } from '../../module/review/entities/review.entity';
+import { Variant } from '../../module/variant/entities/variant.entity';
 
 export interface CreateBulkImage {
 	images: Array<UploadApiResponse>;

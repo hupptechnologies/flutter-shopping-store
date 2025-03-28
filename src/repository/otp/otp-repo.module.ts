@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Otp } from 'src/module/auth/entities/otp.entity';
 import { OtpRepository } from './otp.repository';
+import { Otp } from '../../module/auth/entities/otp.entity';
 
 @Module({
 	imports: [TypeOrmModule.forFeature([Otp])],

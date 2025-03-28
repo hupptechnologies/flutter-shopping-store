@@ -1,5 +1,3 @@
-import { Product } from 'src/module/product/entities/product.entity';
-import { User } from 'src/module/user/entities/user.entity';
 import {
 	BaseEntity,
 	CreateDateColumn,
@@ -10,6 +8,8 @@ import {
 	Unique,
 	UpdateDateColumn,
 } from 'typeorm';
+import { Product } from '../../product/entities/product.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity()
 @Unique(['user', 'product'])

@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { Loggable } from 'src/decorator/loggable/loggable.decorator';
 import { Product } from '../../module/product/entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateProductDto } from '../../module/product/dto/create-product.dto';
 import { UpdateProductDto } from '../../module/product/dto/update-product.dto';
-import { RelationKeys } from 'src/common/types/relations.type';
-import { FindAllRes } from 'src/common/interface/typeorm.interface';
-import { QueryOptionsDto } from 'src/common/dto/query-options.dto';
 import { BaseRepository } from '../base.respository';
+import { QueryOptionsDto } from '../../common/dto/query-options.dto';
+import { FindAllRes } from '../../common/interface/typeorm.interface';
+import { RelationKeys } from '../../common/types/relations.type';
+import { Loggable } from '../../decorator/loggable/loggable.decorator';
 
 @Injectable()
 @Loggable()

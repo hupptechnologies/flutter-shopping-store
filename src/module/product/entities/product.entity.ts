@@ -1,10 +1,10 @@
-import { ProductTypeEnum } from 'src/common/enum/product-type.enum';
-import { Cart } from 'src/module/cart/entities/cart.entity';
-import { Category } from 'src/module/category/entities/category.entity';
-import { Image } from 'src/module/image/entities/image.entity';
-import { Review } from 'src/module/review/entities/review.entity';
-import { Variant } from 'src/module/variant/entities/variant.entity';
-import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
+import { ProductTypeEnum } from '../../../common/enum/product-type.enum';
+import { Cart } from '../../cart/entities/cart.entity';
+import { Category } from '../../category/entities/category.entity';
+import { Image } from '../../image/entities/image.entity';
+import { Review } from '../../review/entities/review.entity';
+import { Variant } from '../../variant/entities/variant.entity';
+import { Wishlist } from '../../wishlist/entities/wishlist.entity';
 import {
 	BaseEntity,
 	Column,

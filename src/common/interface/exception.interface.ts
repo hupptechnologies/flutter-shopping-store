@@ -5,8 +5,8 @@ import {
 	NotFoundException,
 	UnauthorizedException,
 } from '@nestjs/common';
-import { ValidationException } from 'src/exceptions/validation.exception';
 import { QueryFailedError } from 'typeorm';
+import { ValidationException } from '../../exceptions/validation.exception';
 
 export type ExceptionType =
 	| HttpException

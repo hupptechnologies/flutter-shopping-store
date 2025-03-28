@@ -1,8 +1,8 @@
 import { IsEnum, IsNumberString, Length, Matches } from 'class-validator';
-import { RegexConstant } from 'src/common/constant/regex.constant';
-import { ValidationMsgConstant } from 'src/common/constant/validation-msg.constant';
-import { CardTypeEnum } from 'src/common/enum/card-type.enum';
-import { IsNotEmpty } from 'src/decorator/validation/is-not-empty.decorator';
+import { RegexConstant } from '../../../common/constant/regex.constant';
+import { ValidationMsgConstant } from '../../../common/constant/validation-msg.constant';
+import { CardTypeEnum } from '../../../common/enum/card-type.enum';
+import { IsNotEmpty } from '../../../decorator/validation/is-not-empty.decorator';
 
 export class CreateCardsDto {
 	@IsNotEmpty()

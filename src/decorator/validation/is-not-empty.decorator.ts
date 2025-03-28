@@ -6,7 +6,7 @@ import {
 	ValidatorConstraintInterface,
 } from 'class-validator';
 import { registerDecorator } from 'class-validator';
-import { KeyConstant } from 'src/common/constant/key.constant';
+import { KeyConstant } from '../../common/constant/key.constant';
 
 @ValidatorConstraint({
 	name: KeyConstant.IS_NOT_EMPTY,
