@@ -1,4 +1,5 @@
 import { AddressType } from 'src/common/enum/address-type.enum';
+import { Order } from 'src/module/order/entities/order.entity';
 import { User } from 'src/module/user/entities/user.entity';
 import {
 	BaseEntity,
@@ -8,6 +9,7 @@ import {
 	Entity,
 	Index,
 	ManyToOne,
+	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
@@ -79,6 +81,11 @@ export class Address extends BaseEntity {
 		nullable: false,
 	})
 	public user?: User;
+
+	@OneToMany(() => Order, (order) => order.shippingAddress, {
+		cascade: true,
+	})
+	public orders: Order[];
 
 	@CreateDateColumn()
 	public createdAt: Date;

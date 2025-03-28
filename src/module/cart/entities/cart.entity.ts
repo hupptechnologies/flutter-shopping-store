@@ -1,3 +1,4 @@
+import { Order } from 'src/module/order/entities/order.entity';
 import { Product } from 'src/module/product/entities/product.entity';
 import { User } from 'src/module/user/entities/user.entity';
 import { Variant } from 'src/module/variant/entities/variant.entity';
@@ -30,10 +31,16 @@ export class Cart extends BaseEntity {
 	public product: Product;
 
 	@ManyToOne(() => Variant, (variant) => variant.carts, {
+		onDelete: 'CASCADE',
+		nullable: false,
+	})
+	public variant: Variant;
+
+	@ManyToOne(() => Order, (order) => order.carts, {
 		onDelete: 'SET NULL',
 		nullable: true,
 	})
-	public variant: Variant;
+	public order: Order | null;
 
 	@Column({
 		type: 'int',

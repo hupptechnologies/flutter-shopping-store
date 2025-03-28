@@ -4,6 +4,7 @@ import { Address } from 'src/module/address/entities/address.entity';
 import { Otp } from 'src/module/auth/entities/otp.entity';
 import { Cards } from 'src/module/cards/entities/cards.entity';
 import { Cart } from 'src/module/cart/entities/cart.entity';
+import { Order } from 'src/module/order/entities/order.entity';
 import { Review } from 'src/module/review/entities/review.entity';
 import { Wishlist } from 'src/module/wishlist/entities/wishlist.entity';
 import {
@@ -100,6 +101,11 @@ export class User extends BaseEntity {
 		cascade: true,
 	})
 	public carts: Array<Cart>;
+
+	@OneToMany(() => Order, (order) => order.user, {
+		cascade: true,
+	})
+	public orders: Array<Order>;
 
 	@CreateDateColumn()
 	public createdAt: Date;
