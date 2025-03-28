@@ -9,6 +9,7 @@ import { MessageConstant } from 'src/common/constant/message.constant';
 import { QuantityUtils } from 'src/common/utils/quantity.utils';
 import { Cart } from './entities/cart.entity';
 import { UpdateCartDto } from './dto/update-cart.dto';
+import { CartList } from 'src/common/interface/cart-list.interface';
 
 @Loggable()
 @Injectable()
@@ -59,19 +60,55 @@ export class CartService {
 		id: number,
 		updateCartDto: UpdateCartDto,
 		userId: number,
-	): Promise<Array<Cart>> {
+	): Promise<CartList> {
 		const cart = await this.repository.findByIdAndUserId(id, userId, ['variant']);
 
 		if (!cart) {
 			throw new NotFoundException(MessageConstant.CART_FOUND_SUCCESS);
 		}
 
-		const newQuantity = QuantityUtils.calculateNewQuantity(
-			cart.quantity,
-			updateCartDto.quantity,
-			cart.variant.quantity,
-		);
-		await this.repository.updateQuantity(cart, newQuantity);
-		return this.repository.fetchAllByUserId(userId);
+		cart.isSelected = updateCartDto.isSelected ?? cart.isSelected;
+
+		if (updateCartDto.quantity != null) {
+			const newQuantity = QuantityUtils.calculateNewQuantity(
+				cart.quantity,
+				updateCartDto.quantity,
+				cart.variant.quantity,
+			);
+			await this.repository.updateQuantity(cart, newQuantity);
+		} else {
+			await this.repository.update(cart);
+		}
+
+		return this.findAll(userId);
+	}
+
+	private calculateCart(carts: Array<Cart>): CartList {
+		let productPrice = 0;
+
+		const updatedCarts = carts.map((cart) => {
+			if (cart.isSelected) {
+				productPrice += cart.price * cart.quantity;
+			}
+			return cart;
+		});
+
+		const freeShippingThreshold = 300;
+		const shipping = productPrice >= freeShippingThreshold ? 0 : 10;
+		const total = productPrice + shipping;
+
+		return {
+			carts: updatedCarts,
+			calculate: {
+				productPrice,
+				shipping,
+				total,
+			},
+		};
+	}
+
+	public async findAll(userId: number): Promise<CartList> {
+		const carts = await this.repository.fetchAllByUserId(userId);
+		return this.calculateCart(carts);
 	}
 }

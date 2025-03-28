@@ -54,8 +54,10 @@ export class CartRepository extends BaseRepository {
 		});
 	}
 
-	public async update(cart: Cart, newQuantity: number): Promise<Cart> {
-		cart.quantity = newQuantity;
+	public async update(cart: Cart, newQuantity?: number): Promise<Cart> {
+		if (newQuantity) {
+			cart.quantity = newQuantity;
+		}
 		return this.repository.save(cart);
 	}
 

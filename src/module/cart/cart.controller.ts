@@ -1,4 +1,4 @@
-import { Body, Controller, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { URLConstant } from 'src/common/constant/url.constant';
 import { APIResponse } from 'src/common/types/api-response.type';
@@ -10,6 +10,7 @@ import { MessageConstant } from 'src/common/constant/message.constant';
 import { AuthUserId } from 'src/decorator/auth-user-id/auth-user-id.decorator';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { KeyConstant } from 'src/common/constant/key.constant';
+import { CartList } from 'src/common/interface/cart-list.interface';
 
 @Controller(URLConstant.CART)
 export class CartController {
@@ -29,11 +30,20 @@ export class CartController {
 		@Param(KeyConstant.ID, ParseIntPipe) id: number,
 		@Body() updateCartDto: UpdateCartDto,
 		@AuthUserId() userId: number,
-	): APIResponse<Array<Cart>> {
+	): APIResponse<CartList> {
 		const carts = await this.cartService.update(id, updateCartDto, userId);
 		return {
 			data: carts,
 			message: MessageConstant.CART_UPDATED_SUCCESS,
+		};
+	}
+
+	@Get()
+	async findAll(@AuthUserId() userId: number): APIResponse<CartList> {
+		const carts = await this.cartService.findAll(userId);
+		return {
+			data: carts,
+			message: MessageConstant.CART_CALCULATED_SUCCESS,
 		};
 	}
 }

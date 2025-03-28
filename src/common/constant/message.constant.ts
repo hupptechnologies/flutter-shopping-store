@@ -69,4 +69,5 @@ export abstract class MessageConstant {
 	static readonly ITEM_ADDED_TO_CART_SUCCESS = 'Item added to cart successfully';
 	static readonly CART_FOUND_SUCCESS = 'Cart found successfully';
 	static readonly CART_UPDATED_SUCCESS = 'Cart updated successfully';
+	static readonly CART_CALCULATED_SUCCESS = 'Cart calculated successfully';
 }
