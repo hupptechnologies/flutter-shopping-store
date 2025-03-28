@@ -1,6 +1,7 @@
 import { OrderType } from 'src/common/enum/order-type.enum';
 import { Address } from 'src/module/address/entities/address.entity';
 import { Cart } from 'src/module/cart/entities/cart.entity';
+import { ShippingMothod } from 'src/module/shipping-mothod/entities/shpping-method.entity';
 import { User } from 'src/module/user/entities/user.entity';
 import { Voucher } from 'src/module/voucher/entities/voucher.entity';
 import {
@@ -42,6 +43,12 @@ export class Order extends BaseEntity {
 		nullable: true,
 	})
 	public voucher: Voucher | null;
+
+	@ManyToOne(() => ShippingMothod, (shippingMethod) => shippingMethod.orders, {
+		onDelete: 'SET NULL',
+		nullable: true,
+	})
+	public shippingMethod: ShippingMothod | null;
 
 	@Column({
 		type: 'double',

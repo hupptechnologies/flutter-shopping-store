@@ -17,6 +17,7 @@ import { VariantModule } from './module/variant/variant.module';
 import { WishlistModule } from './module/wishlist/wishlist.module';
 import { CartModule } from './module/cart/cart.module';
 import { OrderModule } from './module/order/order.module';
+import { ShippingMothodModule } from './module/shipping-mothod/shipping-mothod.module';
 
 @Module({
 	imports: [
@@ -37,6 +38,7 @@ import { OrderModule } from './module/order/order.module';
 		WishlistModule,
 		CartModule,
 		OrderModule,
+		ShippingMothodModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, CryptoService],
