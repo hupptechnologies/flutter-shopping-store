@@ -13,7 +13,6 @@ export class SeederService {
 			this.logger.log('✅ Seeding process completed successfully.');
 		} catch (error) {
 			this.logger.error('❌ Seeding process failed:', error);
-			throw error;
 		}
 	}
 }

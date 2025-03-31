@@ -43,7 +43,6 @@ export class ShippinMethodSeed {
 			this.logger.log('✅ Shipping methods seeded successfully');
 		} catch (error) {
 			this.logger.error('❌ Shipping methods seeding failed', error);
-			throw error;
 		}
 	}
 }
