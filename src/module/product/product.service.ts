@@ -93,12 +93,8 @@ export class ProductService {
 		return isDelete;
 	}
 
-	public async findAll(query: QueryOptionsDto): Promise<PaginationRes<Product>> {
-		const { items, total } = await this.productRepository.findAll(query, [
-			'images',
-			'reviews',
-			'variants',
-		]);
+	public async findAll(query: QueryOptionsDto, userId: number): Promise<PaginationRes<Product>> {
+		const { items, total } = await this.productRepository.findAll(query, userId, ['images']);
 		query.setTotal(total);
 		return {
 			items,

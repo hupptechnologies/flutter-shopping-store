@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import { ProductTypeEnum } from '../../../common/enum/product-type.enum';
 import { Cart } from '../../cart/entities/cart.entity';
 import { Category } from '../../category/entities/category.entity';
@@ -84,4 +85,9 @@ export class Product extends BaseEntity {
 
 	@DeleteDateColumn()
 	public deletedAt: Date | null;
+
+	@Expose()
+	public get isFavorite(): boolean {
+		return this.wishlist?.length > 0;
+	}
 }

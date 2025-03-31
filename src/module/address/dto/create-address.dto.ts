@@ -1,5 +1,4 @@
-import { IsEnum, IsOptional, IsPhoneNumber, MaxLength } from 'class-validator';
-import { ValidationMsgConstant } from '../../../common/constant/validation-msg.constant';
+import { IsEnum, IsOptional, MaxLength } from 'class-validator';
 import { AddressType } from '../../../common/enum/address-type.enum';
 import { IsNotEmpty } from '../../../decorator/validation/is-not-empty.decorator';
 
@@ -32,9 +31,6 @@ export class CreateAddressDto {
 	@IsOptional()
 	public type?: AddressType;
 
-	@IsPhoneNumber(undefined, {
-		message: ValidationMsgConstant.PHONE_NUMBER,
-	})
 	@IsOptional()
 	public receiverPhone?: string;
 }

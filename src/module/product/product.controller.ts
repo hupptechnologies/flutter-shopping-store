@@ -24,6 +24,7 @@ import { Public } from '../../decorator/public/public.decorator';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
+import { AuthUserId } from '../../decorator/auth-user-id/auth-user-id.decorator';
 
 @Controller(URLConstant.PRODUCT)
 export class ProductController {
@@ -87,9 +88,13 @@ export class ProductController {
 		};
 	}
 
+	// @Public()
 	@Get()
-	async findAll(@Query() queryOptionsDto: QueryOptionsDto): APIResponse<PaginationRes<Product>> {
-		const products = await this.productService.findAll(queryOptionsDto);
+	async findAll(
+		@Query() queryOptionsDto: QueryOptionsDto,
+		@AuthUserId() userId: number,
+	): APIResponse<PaginationRes<Product>> {
+		const products = await this.productService.findAll(queryOptionsDto, userId);
 		return {
 			data: products,
 			message: MessageConstant.PRODUCT_FETCHED_SUCCESS,

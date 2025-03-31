@@ -1,4 +1,4 @@
-import { Exclude, Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ValidationMsgConstant } from '../constant/validation-msg.constant';
 import { OrderBy } from '../enum/sort-by.enum';
@@ -114,7 +114,7 @@ export class QueryOptionsDto {
 		toPlainOnly: true,
 	})
 	@IsOptional()
-	@Type(() => Boolean)
+	@Transform(({ value }) => value === 'true' || value === true)
 	public isProductCount?: boolean;
 
 	@Exclude({

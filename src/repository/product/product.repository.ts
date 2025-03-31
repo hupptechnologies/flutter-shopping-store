@@ -43,6 +43,7 @@ export class ProductRepository extends BaseRepository {
 
 	async findAll(
 		dto: QueryOptionsDto,
+		userId: number,
 		relations?: RelationKeys<Product>,
 	): Promise<FindAllRes<Product>> {
 		const query = this.repository.createQueryBuilder(this.name);
@@ -54,11 +55,18 @@ export class ProductRepository extends BaseRepository {
 		query.likeQuery(['name', 'description'], dto.search);
 		query.leftJoins(relations);
 
+		if (userId) {
+			query.leftJoinAndSelect('product.wishlist', 'wishlist', 'wishlist.userId = :userId', {
+				userId,
+			});
+		}
+
 		query.orderBy(`${query.alias}.${dto.column}`, dto.orderBy);
 		query.skip(dto.skip);
 		query.take(dto.perPage);
 
 		const result = await query.getManyAndCount();
+
 		return {
 			items: result[0],
 			total: result[1],
