@@ -1,4 +1,5 @@
 import { ConfigService } from '@nestjs/config';
+import { AppConfigException } from '../../exceptions/app-config.exception';
 
 export const EnvVar = (key: string): PropertyDecorator => {
 	return (target: any, propertyKey: string | symbol) => {
@@ -6,12 +7,14 @@ export const EnvVar = (key: string): PropertyDecorator => {
 			get() {
 				const configService = this.configService as ConfigService;
 				if (!configService) {
-					throw new Error(`❌ ConfigService is not available for ${String(propertyKey)}`);
+					throw new AppConfigException(
+						`❌ ConfigService is not available for ${String(propertyKey)}`,
+					);
 				}
 
 				const value = configService.get<string>(key);
 				if (!value) {
-					throw new Error(`❌ Missing environment variable: ${key}`);
+					throw new AppConfigException(`❌ Missing environment variable: ${key}`);
 				}
 
 				return value;

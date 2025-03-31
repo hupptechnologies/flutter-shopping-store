@@ -3,6 +3,7 @@ import { Loggable } from '../../decorator/loggable/loggable.decorator';
 import { UserService } from '../../module/user/user.service';
 import { CreateUserDto } from '../../module/user/dto/create-user.dto';
 import { AppConfigService } from '../../config/app/app-config.service';
+import { AppConfigException } from '../../exceptions/app-config.exception';
 
 @Loggable()
 @Injectable()
@@ -29,6 +30,9 @@ export class UserSeed {
 			this.logger.log('✅ User seeded successfully');
 		} catch (error) {
 			this.logger.error('❌ User seeding failed', error);
+			if (error instanceof AppConfigException) {
+				process.exit(1);
+			}
 		}
 	}
 }
