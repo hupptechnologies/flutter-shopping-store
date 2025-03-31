@@ -62,4 +62,17 @@ export class AppConfigService {
 
 	@EnvVar('SMTP_FROM_EMAIL')
 	public smtpFromEmail: string;
+
+	// 🔹 Admin User Config
+	@EnvVar('ADMIN_USER_FIRST_NAME')
+	public adminUserFirstName: string;
+
+	@EnvVar('ADMIN_USER_LAST_NAME')
+	public adminUserLastName: string;
+
+	@EnvVar('ADMIN_USER_EMAIL')
+	public adminUserEmail: string;
+
+	@EnvVar('ADMIN_USER_PASSWORD')
+	public adminUserPassword: string;
 }
