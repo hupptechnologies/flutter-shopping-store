@@ -60,6 +60,7 @@ export abstract class MessageConstant {
 	static readonly VARIANT_UPDATED_SUCCESS = 'Variant updated successfully';
 	static readonly VARIANT_DELETED_SUCCESS = 'Variant deleted successfully';
 	static readonly VARIANT_FETCHED_SUCCESS = 'Variant fetched successfully';
+	static readonly VARIANT_EXISTS = 'A variant with this color and size already exists.';
 
 	static readonly WISHLIST_CREATED_SUCCESS = 'Item successfully added to the wishlist';
 	static readonly WISHLIST_DELETED_SUCCESS = 'Item successfully removed from the wishlist';

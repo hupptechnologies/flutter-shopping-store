@@ -29,6 +29,13 @@ export class VariantService {
 		}
 
 		createVariantDto.product = product;
+
+		await this.repository.existingVariant({
+			productId: product.id,
+			color: createVariantDto.color,
+			size: createVariantDto.size,
+		});
+
 		const create = await this.repository.craete(createVariantDto);
 		await this.imageService.uploadAndAttachImages(files, create);
 		return create;
@@ -43,11 +50,18 @@ export class VariantService {
 	}
 
 	public async update(id: number, updateVariantDto: UpdateVariantDto): Promise<Variant> {
-		const variant = await this.repository.findOne(id);
+		const variant = await this.repository.findOne(id, ['product']);
 
 		if (!variant) {
 			throw new Error(MessageConstant.VARIANT_NOT_FOUND);
 		}
+
+		await this.repository.existingVariant({
+			productId: variant.product.id,
+			color: updateVariantDto?.color ?? variant.color,
+			size: updateVariantDto.size ?? variant.size,
+			id: variant.id,
+		});
 
 		const updateVariant = await this.repository.update(variant, updateVariantDto);
 		return updateVariant;
