@@ -1,6 +1,6 @@
 import 'package:e_commerce/dto/image_dto.dart';
 
-List<ProductDto> categoryDtoFromJson(List<dynamic> jsonList) {
+List<ProductDto> productDtoFromJson(List<dynamic> jsonList) {
   return jsonList.map((json) => ProductDto.fromJson(json)).toList();
 }
 
@@ -11,6 +11,7 @@ class ProductDto {
   int price;
   String? type;
   List<ImageDto>? images;
+  bool isFavorite = false;
 
   ProductDto({
     required this.id,
@@ -19,6 +20,7 @@ class ProductDto {
     required this.price,
     this.type,
     this.images,
+    isFavorite
   });
 
   factory ProductDto.fromJson(Map<String, dynamic> json) => ProductDto(
@@ -29,5 +31,8 @@ class ProductDto {
         type: json["type"],
         images:
             json['images'] != null ? imageDtoFromJson(json['images']) : null,
+        isFavorite: json['isFavorite'] ?? false,
     );
+
+  String? get getImages => images!.isNotEmpty ? images!.first.url : null;
 }

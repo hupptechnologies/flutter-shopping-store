@@ -2,7 +2,8 @@ import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
-import 'package:e_commerce/dto/product.dart';
+import 'package:e_commerce/common/utils/helper.dart';
+import 'package:e_commerce/dto/product_dto.dart';
 import 'package:e_commerce/screens/product/controller/product_list_controller.dart';
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/discount_price_widget.dart';
@@ -18,25 +19,28 @@ class ProductListView extends GetView<ProductListController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: const FilterDrawerView(),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: MarginPadding.homeHorPadding,
-            vertical: MarginPadding.homeTopPadding,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              backButtonOrTitleWidget(),
-              textWithFilterWidget(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: productListWidget(),
+    return RefreshIndicator(
+      onRefresh: controller.fetchProductList,
+      child: Scaffold(
+        endDrawer: const FilterDrawerView(),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: MarginPadding.homeHorPadding,
+              vertical: MarginPadding.homeTopPadding,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                backButtonOrTitleWidget(),
+                textWithFilterWidget(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: productListWidget(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -73,7 +77,7 @@ class ProductListView extends GetView<ProductListController> {
         children: [
           Obx(
             () => Text(
-              'Found ${controller.productList.length.toString()} Results',
+              'Found ${controller.products.length.toString()} Results',
               softWrap: true,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
@@ -94,26 +98,37 @@ class ProductListView extends GetView<ProductListController> {
   Widget productListWidget() {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: Obx(
-        () => GridView.builder(
-          itemCount: controller.productList.length,
+      child: Obx(() {
+        if (controller.products.isEmpty) {
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: Get.height / 3),
+            child: const Center(
+              child: Text(
+                "Record Not Found",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
+          );
+        }
+        return GridView.builder(
+          itemCount: controller.products.length,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 10,
-            childAspectRatio: 0.55,
+            childAspectRatio: 0.5,
           ),
           itemBuilder: (context, index) {
-            final Product item = controller.productList[index];
+            final ProductDto item = controller.products[index];
             return productWidget(item);
           },
-        ),
-      ),
+        );
+      }),
     );
   }
 
-  Widget productWidget(Product item) {
+  Widget productWidget(ProductDto item) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -125,7 +140,7 @@ class ProductListView extends GetView<ProductListController> {
               borderRadius: BorderRadius.circular(15),
               color: AppColors.lightGray,
               image: DecorationImage(
-                image: AssetImage(item.image),
+                image: Helper.getImageProvider(item.getImages),
                 fit: BoxFit.cover,
               ),
             ),
@@ -145,16 +160,16 @@ class ProductListView extends GetView<ProductListController> {
         ),
         const SizedBox(height: 10),
         Text(
-          item.name!,
+          item.name,
           style: const TextStyle(
             overflow: TextOverflow.ellipsis,
           ),
         ),
         DiscountPriceWidget(
-          discountPrice: item.discountPrice!,
-          price: item.price!,
+          discountPrice: item.price.toDouble(),
+          price: item.price.toDouble(),
         ),
-        RatingWidget(value: item.rating ?? 0)
+        RatingWidget(value: 0)
       ],
     );
   }

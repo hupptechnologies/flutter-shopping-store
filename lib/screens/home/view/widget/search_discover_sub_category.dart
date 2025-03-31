@@ -27,7 +27,7 @@ class SearchDiscoverSubCategory extends GetView<SearchDiscoverController> {
           return Column(
             children: [
               ListTile(
-                onTap: () => controller.onTapProduct(item.id!, item.name!),
+                onTap: hasSubCategory ? null: () => controller.onTapProduct(item.id!, item.name!),
                 contentPadding: EdgeInsets.only(left: isSubCategory ? 20 : 0),
                 visualDensity:
                     const VisualDensity(horizontal: -4, vertical: -4),
@@ -41,7 +41,7 @@ class SearchDiscoverSubCategory extends GetView<SearchDiscoverController> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Text(
+                    if (!hasSubCategory) Text(
                       '${item.productCount!} Items',
                       style: TextStyle(
                         color: AppColors.darkGray.withOpacityValue(0.6),
@@ -49,11 +49,11 @@ class SearchDiscoverSubCategory extends GetView<SearchDiscoverController> {
                     ),
                   ],
                 ),
-                trailing: const Icon(
+                trailing: !hasSubCategory ? const Icon(
                   Icons.arrow_forward_ios,
                   color: AppColors.darkGray,
                   size: 15,
-                ),
+                ) : null,
               ),
               if (hasSubCategory) ...[
                 const Divider(thickness: 1.0, color: AppColors.lightGray),

@@ -59,6 +59,6 @@ class SearchDiscoverController extends GetxController {
   }
 
   void onTapProduct(int id, String name) {
-    Get.toNamed(AppRoutes.productList, arguments: {'id': id, 'title': name});
+    Get.toNamed(AppRoutes.productList, arguments: {'categoryId': id, 'title': name});
   }
 }
