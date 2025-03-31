@@ -11,7 +11,7 @@ class ProductDto {
   int price;
   String? type;
   List<ImageDto>? images;
-  bool isFavorite = false;
+  bool isFavorite;
 
   ProductDto({
     required this.id,
@@ -20,7 +20,7 @@ class ProductDto {
     required this.price,
     this.type,
     this.images,
-    isFavorite
+    required this.isFavorite
   });
 
   factory ProductDto.fromJson(Map<String, dynamic> json) => ProductDto(

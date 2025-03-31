@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class ProductListController extends GetxController {
   final ProductService productService = ProductService();
   final ProductQueryDto queryDto = ProductQueryDto();
-  final RxList<ProductDto> products= <ProductDto>[].obs;
+  final RxList<ProductDto> products = <ProductDto>[].obs;
 
   late RxList<Product> productList = <Product>[].obs;
   late Meta meta;
@@ -31,12 +31,10 @@ class ProductListController extends GetxController {
     }
   }
 
-  void toggleFavorite(int id) {
-    final index = productList.indexWhere((item) => item.id == id);
-    if (index != -1) {
-      final bool isFavorite = !productList[index].isFavorite;
-      productList[index].isFavorite = isFavorite;
-      productList.refresh();
+  Future<void> toggleFavorite(int id) async {
+    final response = await productService.toggleFavorite(id);
+    if (!response.error) {
+      fetchProductList();
     }
   }
 

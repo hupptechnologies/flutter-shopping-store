@@ -17,4 +17,8 @@ class ProductService extends BaseService {
       ),
     );
   }
+
+  Future<ApiResponse<bool>> toggleFavorite(int id) async {
+    return api.patch(url: [UrlConstant.wishlist, id.toString()]);
+  }
 }
