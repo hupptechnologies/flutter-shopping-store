@@ -1,0 +1,8 @@
+services:
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestjs-shopping-store
+    ports:
+      - "3000:3000"
