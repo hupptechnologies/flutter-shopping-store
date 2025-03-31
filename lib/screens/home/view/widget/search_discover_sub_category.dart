@@ -27,7 +27,7 @@ class SearchDiscoverSubCategory extends GetView<SearchDiscoverController> {
           return Column(
             children: [
               ListTile(
-                onTap: () => controller.onTapProduct(item.name!),
+                onTap: () => controller.onTapProduct(item.id!, item.name!),
                 contentPadding: EdgeInsets.only(left: isSubCategory ? 20 : 0),
                 visualDensity:
                     const VisualDensity(horizontal: -4, vertical: -4),

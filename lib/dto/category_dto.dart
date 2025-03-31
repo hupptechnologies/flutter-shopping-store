@@ -38,7 +38,7 @@ class CategoryDto {
             : null,
         images:
             json['images'] != null ? imageDtoFromJson(json['images']) : null,
-        productCount: json['products']?.length,
+        productCount: json['products']?.length ?? 0,
       );
 
   Color get getColor => AppColors.hexToColor(color) ?? AppColors.dartGratWithOpaity5;

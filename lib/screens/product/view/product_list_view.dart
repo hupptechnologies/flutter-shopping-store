@@ -2,7 +2,7 @@ import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/common/utils/common_getx.dart';
-import 'package:e_commerce/dto/product_dto.dart';
+import 'package:e_commerce/dto/product.dart';
 import 'package:e_commerce/screens/product/controller/product_list_controller.dart';
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/discount_price_widget.dart';
@@ -105,7 +105,7 @@ class ProductListView extends GetView<ProductListController> {
             childAspectRatio: 0.55,
           ),
           itemBuilder: (context, index) {
-            final ProductDto item = controller.productList[index];
+            final Product item = controller.productList[index];
             return productWidget(item);
           },
         ),
@@ -113,7 +113,7 @@ class ProductListView extends GetView<ProductListController> {
     );
   }
 
-  Widget productWidget(ProductDto item) {
+  Widget productWidget(Product item) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

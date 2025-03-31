@@ -1,16 +1,16 @@
-import 'package:e_commerce/dto/product_dto.dart';
+import 'package:e_commerce/dto/product.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
 
 class WishlistController extends GetxController {
-  late RxList<ProductDto> allItems = <ProductDto>[].obs;
+  late RxList<Product> allItems = <Product>[].obs;
   late RxList boardsList = [].obs;
 
   @override
   void onInit() {
     super.onInit();
-    final List<ProductDto> items = productDtoFromJson(DummyData.productList);
+    final List<Product> items = productDtoFromJson(DummyData.productList);
     for (var el in items) {
       el.isFavorite = true;
     }

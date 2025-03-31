@@ -1,10 +1,10 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/dto/product_dto.dart';
+import 'package:e_commerce/dto/product.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:flutter/material.dart';
 
 class CartCardWidget extends StatelessWidget {
-  final ProductDto product;
+  final Product product;
   final Function(int) toggleSelectingCart;
   final bool isSelected;
   final Function(int, bool) incrementDecrementQuantity;

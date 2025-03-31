@@ -1,10 +1,10 @@
-import 'package:e_commerce/dto/product_dto.dart';
+import 'package:e_commerce/dto/product.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
-  late RxList<ProductDto> carts;
+  late RxList<Product> carts;
   late RxSet<int> selectingCart;
   late RxInt productPrice = 0.obs;
 
@@ -17,7 +17,7 @@ class CartController extends GetxController {
 
   void findCart() {
     final result = productDtoFromJson(DummyData.productList).sublist(0, 4);
-    carts = RxList<ProductDto>(result);
+    carts = RxList<Product>(result);
   }
 
   void toggleSelectingCart(int id) {

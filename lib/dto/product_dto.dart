@@ -1,62 +1,33 @@
-import 'dart:convert';
+import 'package:e_commerce/dto/image_dto.dart';
 
-List<ProductDto> productDtoFromJson(String str) =>
-    List<ProductDto>.from(json.decode(str).map((x) => ProductDto.fromJson(x)));
-
-String productDtoToJson(List<ProductDto> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<ProductDto> categoryDtoFromJson(List<dynamic> jsonList) {
+  return jsonList.map((json) => ProductDto.fromJson(json)).toList();
+}
 
 class ProductDto {
-  final int id;
-  final String? name;
-  final double? price;
-  final double? discountPrice;
-  final double? rating;
-  final String image;
-  final int? size;
-  final int? color;
-  int quantity;
-  bool isFavorite;
+  int id;
+  String name;
+  String? description;
+  int price;
+  String? type;
+  List<ImageDto>? images;
 
   ProductDto({
     required this.id,
-    this.name,
-    this.price,
-    this.discountPrice,
-    this.rating,
-    required this.image,
-    this.isFavorite = false,
-    this.size,
-    this.color,
-    this.quantity = 1,
+    required this.name,
+    this.description,
+    required this.price,
+    this.type,
+    this.images,
   });
-
-  factory ProductDto.fromRawJson(String str) =>
-      ProductDto.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
 
   factory ProductDto.fromJson(Map<String, dynamic> json) => ProductDto(
         id: json["id"],
         name: json["name"],
-        price: (json["price"] as num).toDouble(),
-        discountPrice: (json["discountPrice"] as num).toDouble(),
-        rating: (json["rating"] as num).toDouble(),
-        image: json["image"],
-        size: json["size"],
-        color: json["color"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "price": price,
-        "discountPrice": discountPrice,
-        "rating": rating,
-        "image": image,
-        "isFavorite": isFavorite,
-        "size": size,
-        "color": color,
-        "quantity": quantity,
-      };
+        description: json["description"],
+        price: json["price"],
+        type: json["type"],
+        images:
+            json['images'] != null ? imageDtoFromJson(json['images']) : null,
+    );
 }

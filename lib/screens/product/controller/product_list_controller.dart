@@ -1,4 +1,5 @@
-import 'package:e_commerce/dto/product_dto.dart';
+import 'package:e_commerce/common/dto/meta.dart';
+import 'package:e_commerce/dto/product.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/extension/string_extensions.dart';
 import 'package:e_commerce/routers/app_routers.dart';
@@ -6,7 +7,9 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ProductListController extends GetxController {
-  late RxList<ProductDto> productList = <ProductDto>[].obs;
+  late RxList<Product> productList = <Product>[].obs;
+  late Meta meta;
+  // late RxList<CategoryDto> list = RxList();
   late RxString title = ''.obs;
 
   @override
