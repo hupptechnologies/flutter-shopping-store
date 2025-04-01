@@ -40,7 +40,7 @@ class WishlistView extends GetView<WishlistController> {
                     indicatorSize: TabBarIndicatorSize.tab,
                     splashFactory: NoSplash.splashFactory,
                     dividerHeight: 0,
-                    tabs: ['All items', 'Boards']
+                    tabs: ['All items', 'Brands']
                         .map((el) => Tab(height: 34, child: Text(el)))
                         .toList(),
                   ),

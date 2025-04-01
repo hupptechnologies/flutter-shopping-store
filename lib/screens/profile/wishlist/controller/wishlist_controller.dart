@@ -1,5 +1,5 @@
 import 'package:e_commerce/dto/product_dto.dart';
-import 'package:e_commerce/dummydata/dummy_data.dart';
+import 'package:e_commerce/dto/wishlist_brands_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/product_service.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class WishlistController extends GetxController
   late TabController tabController;
 
   late RxList<ProductDto> allItems = <ProductDto>[].obs;
-  late RxList boardsList = [].obs;
+  late RxList<WishlistBrandsDto> boardsList = <WishlistBrandsDto>[].obs;
 
   @override
   void onInit() {
@@ -26,7 +26,6 @@ class WishlistController extends GetxController
               : fetchWishlistBrands();
     });
     fetchWishlistItems();
-    boardsList.value = DummyData.boardsList;
   }
 
   Future<void> fetchWishlistItems() async {
@@ -37,8 +36,12 @@ class WishlistController extends GetxController
     }
   }
 
-  void fetchWishlistBrands() {
-    print("Fetching Wishlist Brands...");
+  Future<void> fetchWishlistBrands() async {
+    final response = await productService.allFavoriteBrands();
+
+    if (!response.error) {
+      boardsList.assignAll(response.data!);
+    }
   }
 
   void toggleFavorite(int id) {

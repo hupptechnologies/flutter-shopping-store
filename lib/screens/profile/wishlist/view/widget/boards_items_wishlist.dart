@@ -1,14 +1,15 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
+import 'package:e_commerce/screens/profile/wishlist/view/widget/network_or_asset_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BoardsItemsWishlist extends StatelessWidget {
   final String title;
   final int conunt;
-  final String firstImage;
-  final String secoundImage;
-  final List<List<String>> thirdImages;
+  final String? firstImage;
+  final String? secoundImage;
+  final List<List<String?>> thirdImages;
 
   const BoardsItemsWishlist({
     super.key,
@@ -41,16 +42,10 @@ class BoardsItemsWishlist extends StatelessWidget {
               spacing: spacing,
               children: [
                 Expanded(
-                  child: Image.asset(
-                    firstImage,
-                    fit: BoxFit.cover,
-                  ),
+                  child: NetworkOrAssetImage(imageUrl: firstImage),
                 ),
                 Expanded(
-                  child: Image.asset(
-                    secoundImage,
-                    fit: BoxFit.cover,
-                  ),
+                  child: NetworkOrAssetImage(imageUrl: secoundImage),
                 ),
                 Expanded(
                   child: Row(
@@ -67,9 +62,8 @@ class BoardsItemsWishlist extends StatelessWidget {
                                 flex: flexValues[rowIndex][index],
                                 child: AspectRatio(
                                   aspectRatio: 1.0,
-                                  child: Image.asset(
-                                    thirdImages[rowIndex][index],
-                                    fit: BoxFit.cover,
+                                  child: NetworkOrAssetImage(
+                                    imageUrl: thirdImages[rowIndex][index],
                                   ),
                                 ),
                               );
@@ -91,7 +85,7 @@ class BoardsItemsWishlist extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               SvgPicture.asset(ImageConstant.rightArrowIcon)
             ],

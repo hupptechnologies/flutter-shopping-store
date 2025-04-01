@@ -26,4 +26,5 @@ abstract class UrlConstant {
   static const String product  = '/product';
 
   static const String wishlist  = '/wishlist';
+  static const String brands  = 'brands';
 }

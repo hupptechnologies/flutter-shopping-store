@@ -24,11 +24,11 @@ class BoardsWishlistWidget extends GetView<WishlistController> {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: BoardsItemsWishlist(
-                  title: item['title'],
-                  conunt: item['conunt'],
-                  firstImage: item['firstImage'],
-                  secoundImage: item['secoundImage'],
-                  thirdImages: item['thirdImages'],
+                  title: item.categoryName,
+                  conunt: item.totalProducts,
+                  firstImage: item.firstImage,
+                  secoundImage: item.secondImage,
+                  thirdImages: item.thirdImage,
                 ),
               );
             },
