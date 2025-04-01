@@ -61,42 +61,52 @@ export class WishListRepository extends BaseRepository {
 
 	public async findWishlistGroupedByCategory(userId: number): Promise<Array<BrandsWishlist>> {
 		const selectData = this.getWishlistSelection();
-		return this.repository
+		const query = this.repository
 			.createQueryBuilder('wishlist')
 			.innerJoin('wishlist.product', 'product')
 			.innerJoin('product.category', 'category')
-			.leftJoin('product.images', 'image')
+			.leftJoin(
+				(qb) =>
+					qb
+						.from('image', 'image')
+						.select([
+							'image.productId AS productId',
+							`JSON_ARRAYAGG(
+								JSON_OBJECT(
+									"id", image.id,
+									"url", image.url
+								)
+							) AS images`,
+						])
+						.where('image.deletedAt IS NULL')
+						.groupBy('image.productId'),
+				'images',
+				'images.productId = product.id',
+			)
 			.select(selectData)
 			.where('wishlist.userId = :userId', {
 				userId,
 			})
-			.groupBy('category.id')
-			.getRawMany<BrandsWishlist>();
+			.groupBy('category.id');
+
+		return query.getRawMany<BrandsWishlist>();
 	}
 
 	private getWishlistSelection(): Array<string> {
 		return [
 			`JSON_OBJECT(
-                	"id", category.id,
-                	"name", category.name
-            	) AS category`,
+				"id", category.id,
+				"name", category.name
+			) AS category`,
 
 			`JSON_ARRAYAGG(
-                	JSON_OBJECT(
-                	    "id", product.id,
-                	    "name", product.name,
-                	    "price", product.price,
-                	    "images", IFNULL(
-                	        (SELECT JSON_ARRAYAGG(
-                	            JSON_OBJECT(
-                	                "id", image.id,
-                	                "url", image.url
-                	            )
-                	        ) FROM image WHERE image.productId = product.id),
-                	        JSON_ARRAY()
-                	    )
-                	)
-            	) AS products`,
+				JSON_OBJECT(
+					"id", product.id,
+					"name", product.name,
+					"price", product.price,
+					"images", IFNULL(images.images, JSON_ARRAY())
+				)
+			) AS products`,
 		];
 	}
 }
