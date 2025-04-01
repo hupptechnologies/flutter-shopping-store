@@ -4,10 +4,10 @@ import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/screens/home/controller/dashboard_controller.dart';
+import 'package:e_commerce/screens/home/view/widget/dashboard_category_circle.dart';
 import 'package:e_commerce/widgets/product_card.dart';
 import 'package:e_commerce/widgets/row_text_with_showall.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -15,52 +15,34 @@ class DashboardView extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildIconsContainer(),
-          _buildImageWithTextContainer(),
-          RowTextWithShowall(
-            text: 'Feature Products',
-            horizontal: MarginPadding.homeHorPadding,
-          ),
-          _buildFeatureProducatList(),
-          _buildNewCollection(),
-          RowTextWithShowall(
-            text: 'Recommended',
-            horizontal: MarginPadding.homeHorPadding,
-          ),
-          _buildRecommended(),
-          const SizedBox(height: 10),
-          RowTextWithShowall(
-            text: 'Top Collection',
-            horizontal: MarginPadding.homeHorPadding,
-          ),
-          _buildTopColletionFirst(),
-          _buildTopColletionSecond(),
-          _buildRowCard(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildIconsContainer() {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: MarginPadding.homeHorPadding,
-        right: MarginPadding.homeHorPadding,
-        top: MarginPadding.homeHorPadding,
-      ),
-      child: Obx(
-        () => Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return RefreshIndicator(
+      onRefresh: controller.fetchDashboardData,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildIcon(ImageConstant.womenIcon, 'Women', 0),
-            _buildIcon(ImageConstant.menIcon, 'Man', 1),
-            _buildIcon(ImageConstant.accessoriesIcon, 'Accessories', 2),
-            _buildIcon(ImageConstant.beautyIcon, 'Beauty', 3),
+            const DashboardCategoryCircle(),
+            _buildImageWithTextContainer(),
+            RowTextWithShowall(
+              text: 'Feature Products',
+              horizontal: MarginPadding.homeHorPadding,
+            ),
+            _buildFeatureProducatList(),
+            _buildNewCollection(),
+            RowTextWithShowall(
+              text: 'Recommended',
+              horizontal: MarginPadding.homeHorPadding,
+            ),
+            _buildRecommended(),
+            const SizedBox(height: 10),
+            RowTextWithShowall(
+              text: 'Top Collection',
+              horizontal: MarginPadding.homeHorPadding,
+            ),
+            _buildTopColletionFirst(),
+            _buildTopColletionSecond(),
+            _buildRowCard(),
           ],
         ),
       ),
@@ -484,42 +466,6 @@ class DashboardView extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildIcon(String svgPath, String label, int index) {
-    bool isSelected = controller.categorySelectedIndex.value == index;
-
-    return GestureDetector(
-      onTap: () => controller.changeCategorySeletedIndex(index),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: isSelected ? const EdgeInsets.all(2) : EdgeInsets.zero,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border:
-                  isSelected ? Border.all(color: Colors.black, width: 2) : null,
-            ),
-            child: Container(
-              width: 60,
-              height: 60,
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: isSelected ? Colors.black : AppColors.lightGray,
-              ),
-              child: SvgPicture.asset(
-                svgPath,
-                color: isSelected ? Colors.white : Colors.black38,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(label, style: const TextStyle(fontSize: 12)),
-        ],
-      ),
-    );
-  }
-
   Widget _customCard(String imageUrl, String overlayText) {
     return Card(
       margin: EdgeInsets.zero,
@@ -559,67 +505,4 @@ class DashboardView extends GetView<DashboardController> {
       ),
     );
   }
-
-  // Widget _buildCategoryCard(Map<String, String> item) {
-  //   return SizedBox(
-  //     width: 120,
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Card(
-  //           elevation: 4,
-  //           margin: EdgeInsets.zero,
-  //           shape: RoundedRectangleBorder(
-  //             borderRadius: BorderRadius.circular(15),
-  //           ),
-  //           child: ClipRRect(
-  //             borderRadius: BorderRadius.circular(15),
-  //             child: Container(
-  //               height: 180,
-  //               color: AppColors.lightGray,
-  //               child: item['image'] != null && item['image']!.isNotEmpty
-  //                   ? Image.asset(
-  //                       item['image']!,
-  //                       fit: BoxFit.cover,
-  //                       errorBuilder: (context, error, stackTrace) {
-  //                         return Container(
-  //                           color: AppColors.lightGray,
-  //                           child: const Center(
-  //                             child: Icon(
-  //                               Icons.image,
-  //                               color: AppColors.darkGray,
-  //                             ),
-  //                           ),
-  //                         );
-  //                       },
-  //                     )
-  //                   : Container(
-  //                       color: AppColors.lightGray,
-  //                       child: const Center(
-  //                         child: Icon(
-  //                           Icons.image,
-  //                           color: AppColors.darkGray,
-  //                         ),
-  //                       ),
-  //                     ),
-  //             ),
-  //           ),
-  //         ),
-  //         const SizedBox(
-  //           height: 5,
-  //         ),
-  //         Text(
-  //           item['category']!,
-  //           style: const TextStyle(
-  //             overflow: TextOverflow.ellipsis,
-  //           ),
-  //         ),
-  //         Text(
-  //           item['price']!,
-  //           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }
