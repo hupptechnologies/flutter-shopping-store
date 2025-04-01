@@ -32,8 +32,8 @@ class SearchDiscoverController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    expandedCategory = RxInt(-1);
     getCategories();
+    expandedCategory = RxInt(-1);
   }
 
   Future<void> getCategories() async {

@@ -4,6 +4,14 @@ List<ProductDto> productDtoFromJson(List<dynamic> jsonList) {
   return jsonList.map((json) => ProductDto.fromJson(json)).toList();
 }
 
+List<ProductDto> wishlistDtoFromJson(List<dynamic> jsonList) {
+  return jsonList.map((json) {
+    final product = ProductDto.fromJson(json['product']);
+    product.isFavorite = true;
+    return product;
+  }).toList();
+}
+
 class ProductDto {
   int id;
   String name;
@@ -20,7 +28,7 @@ class ProductDto {
     required this.price,
     this.type,
     this.images,
-    required this.isFavorite
+    required this.isFavorite,
   });
 
   factory ProductDto.fromJson(Map<String, dynamic> json) => ProductDto(
@@ -32,7 +40,7 @@ class ProductDto {
         images:
             json['images'] != null ? imageDtoFromJson(json['images']) : null,
         isFavorite: json['isFavorite'] ?? false,
-    );
+      );
 
   String? get getImages => images!.isNotEmpty ? images!.first.url : null;
 }

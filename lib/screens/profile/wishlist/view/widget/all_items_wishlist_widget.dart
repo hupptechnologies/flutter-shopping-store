@@ -1,5 +1,6 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
-import 'package:e_commerce/dto/product.dart';
+import 'package:e_commerce/common/utils/helper.dart';
+import 'package:e_commerce/dto/product_dto.dart';
 import 'package:e_commerce/screens/profile/wishlist/controller/wishlist_controller.dart';
 import 'package:e_commerce/widgets/discount_price_widget.dart';
 import 'package:e_commerce/widgets/favorite_widget.dart';
@@ -27,10 +28,10 @@ class AllItemsWishlistWidget extends GetView<WishlistController> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 20,
-              childAspectRatio: 0.54,
+              childAspectRatio: 0.5,
             ),
             itemBuilder: (context, index) {
-              final Product item = controller.allItems[index];
+              final ProductDto item = controller.allItems[index];
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -42,7 +43,7 @@ class AllItemsWishlistWidget extends GetView<WishlistController> {
                         borderRadius: BorderRadius.circular(15),
                         color: AppColors.lightGray,
                         image: DecorationImage(
-                          image: AssetImage(item.image),
+                          image: Helper.getImageProvider(item.getImages),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -63,16 +64,16 @@ class AllItemsWishlistWidget extends GetView<WishlistController> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    item.name!,
+                    item.name,
                     style: const TextStyle(
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   DiscountPriceWidget(
-                    discountPrice: item.discountPrice!,
-                    price: item.price!,
+                    discountPrice: item.price.toDouble(),
+                    price: item.price.toDouble(),
                   ),
-                  RatingWidget(value: item.rating ?? 0)
+                  const RatingWidget(value: 0)
                 ],
               );
             },

@@ -24,38 +24,37 @@ class WishlistView extends GetView<WishlistController> {
             padding: EdgeInsets.symmetric(
               horizontal: MarginPadding.homeHorPadding,
             ),
-            child: DefaultTabController(
-              length: 2,
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: MarginPadding.homeTopPadding),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.black, width: 1),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: TabBar(
-                      indicator: const BoxDecoration(color: AppColors.black),
-                      labelColor: Colors.white,
-                      unselectedLabelColor: Colors.black,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      splashFactory: NoSplash.splashFactory,
-                      dividerHeight: 0,
-                      tabs: ['All items', 'Boards']
-                          .map((el) => Tab(height: 34, child: Text(el)))
-                          .toList(),
-                    ),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: MarginPadding.homeTopPadding),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.black, width: 1),
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                  const Flexible(
-                    child: TabBarView(
-                      children: [
-                        AllItemsWishlistWidget(),
-                        BoardsWishlistWidget(),
-                      ],
-                    ),
+                  child: TabBar(
+                    controller: controller.tabController,
+                    indicator: const BoxDecoration(color: AppColors.black),
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.black,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    splashFactory: NoSplash.splashFactory,
+                    dividerHeight: 0,
+                    tabs: ['All items', 'Boards']
+                        .map((el) => Tab(height: 34, child: Text(el)))
+                        .toList(),
                   ),
-                ],
-              ),
+                ),
+                Flexible(
+                  child: TabBarView(
+                    controller: controller.tabController,
+                    children: const [
+                      AllItemsWishlistWidget(),
+                      BoardsWishlistWidget(),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
