@@ -14,6 +14,7 @@ class WishlistView extends GetView<WishlistController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<WishlistController>(
+      isLoader: controller.productService.api.isLoader,
       child: Scaffold(
         appBar: const BackButtonAppbarTitle(
           centerTitle: true,

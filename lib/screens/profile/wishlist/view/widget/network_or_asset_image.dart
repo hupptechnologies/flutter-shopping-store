@@ -17,10 +17,15 @@ class NetworkOrAssetImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return imageUrl != null && imageUrl!.isNotEmpty
-        ? Image.network(
-            imageUrl!,
-            fit: fit,
-          )
+        ? Container(
+          color: AppColors.lightGray,
+            width: double.infinity,
+            height: double.infinity,
+          child: Image.network(
+              imageUrl!,
+              fit: fit,
+            ),
+        )
         : Container(
             color: AppColors.lightGray,
             width: double.infinity,

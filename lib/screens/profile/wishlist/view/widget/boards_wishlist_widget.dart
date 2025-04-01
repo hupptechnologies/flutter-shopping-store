@@ -9,30 +9,33 @@ class BoardsWishlistWidget extends GetView<WishlistController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.only(top: 15),
-        margin: const EdgeInsets.symmetric(horizontal: 1),
-        child: Obx(() {
-          if (controller.boardsList.isEmpty) {
-            return const NoRecordsWidget();
-          }
-
-          return ListView.builder(
-            itemCount: controller.boardsList.length,
-            itemBuilder: (context, index) {
-              final item = controller.boardsList[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: BoardsItemsWishlist(
-                  title: item.categoryName,
-                  conunt: item.totalProducts,
-                  firstImage: item.firstImage,
-                  secoundImage: item.secondImage,
-                  thirdImages: item.thirdImage,
-                ),
-              );
-            },
-          );
-        }));
+    return RefreshIndicator(
+      onRefresh: controller.fetchWishlistBrands,
+      child: Container(
+          padding: const EdgeInsets.only(top: 15),
+          margin: const EdgeInsets.symmetric(horizontal: 1),
+          child: Obx(() {
+            if (controller.boardsList.isEmpty) {
+              return const NoRecordsWidget();
+            }
+      
+            return ListView.builder(
+              itemCount: controller.boardsList.length,
+              itemBuilder: (context, index) {
+                final item = controller.boardsList[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: BoardsItemsWishlist(
+                    title: item.categoryName,
+                    conunt: item.totalProducts,
+                    firstImage: item.firstImage,
+                    secoundImage: item.secondImage,
+                    thirdImages: item.thirdImage,
+                  ),
+                );
+              },
+            );
+          })),
+    );
   }
 }
