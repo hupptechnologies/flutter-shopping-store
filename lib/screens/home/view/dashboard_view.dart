@@ -5,7 +5,9 @@ import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/screens/home/controller/dashboard_controller.dart';
 import 'package:e_commerce/screens/home/view/widget/dashboard_category_circle.dart';
-import 'package:e_commerce/widgets/product_card.dart';
+import 'package:e_commerce/screens/home/view/widget/dashboard_feature_product_list.dart';
+import 'package:e_commerce/screens/home/view/widget/dashboard_feature_product_section.dart';
+import 'package:e_commerce/screens/home/view/widget/dashboard_image_text_card.dart';
 import 'package:e_commerce/widgets/row_text_with_showall.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,12 +25,8 @@ class DashboardView extends GetView<DashboardController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const DashboardCategoryCircle(),
-            _buildImageWithTextContainer(),
-            RowTextWithShowall(
-              text: 'Feature Products',
-              horizontal: MarginPadding.homeHorPadding,
-            ),
-            _buildFeatureProducatList(),
+            const DashboardImageTextCard(),
+            const DashboardFeatureProductSection(),
             _buildNewCollection(),
             RowTextWithShowall(
               text: 'Recommended',
@@ -46,47 +44,6 @@ class DashboardView extends GetView<DashboardController> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildImageWithTextContainer() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: MarginPadding.homeHorPadding,
-        vertical: 20,
-      ),
-      child: _customCard(ImageConstant.categoryHome, 'Autumn Collection 2022'),
-    );
-  }
-
-  Widget _buildFeatureProducatList() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Obx(() {
-        return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: List.generate(controller.items.length, (index) {
-            final item = controller.items[index];
-            return Padding(
-              padding: EdgeInsets.only(
-                right: index == controller.items.length - 1
-                    ? MarginPadding.homeHorPadding
-                    : 16,
-                left: index == 0 ? MarginPadding.homeHorPadding : 0,
-              ),
-              child: InkWell(
-                onTap: () =>
-                    Get.toNamed(AppRoutes.productDetail, arguments: {'id': 1}),
-                child: ProductCard(
-                  name: item['category']!,
-                  image: item['image'],
-                  price: item['price'],
-                ),
-              ),
-            );
-          }),
-        );
-      }),
     );
   }
 
@@ -456,46 +413,6 @@ class DashboardView extends GetView<DashboardController> {
                       ),
                       Image.asset(image),
                     ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _customCard(String imageUrl, String overlayText) {
-    return Card(
-      margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Container(
-        height: 200,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-            image: AssetImage(imageUrl),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              right: 0,
-              top: 0,
-              bottom: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  overlayText.replaceAll(' ', '\n'),
-                  style: const TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

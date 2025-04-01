@@ -1,10 +1,21 @@
 import 'package:e_commerce/common/constant/image_constant.dart';
-import 'package:e_commerce/dto/dashbaord_dto.dart';
+import 'package:e_commerce/common/dto/dashboard_query_dto.dart';
+import 'package:e_commerce/common/enum/product_type_enum.dart';
+import 'package:e_commerce/dto/dashboard_dto.dart';
 import 'package:e_commerce/service/product_service.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
   final ProductService productService = ProductService();
+  final DashboardQueryDto dashboardQuery = DashboardQueryDto();
+
+  late RxInt categorySelectedIndex = 0.obs;
+  late Rx<DashboardDto> dashboardData = DashboardDto(
+    featuredProducts: [],
+    recommendedProducts: [],
+    topCollections: [],
+  ).obs;
+  
   final List<Map<String, String>> categorys = [
     {
       "image": ImageConstant.womenIcon,
@@ -23,23 +34,19 @@ class DashboardController extends GetxController {
       "label": "Beauty",
     }
   ];
-  late RxInt categorySelectedIndex = 0.obs;
-  late Rx<DashbaordDto> dashboardData = DashbaordDto(
-    featuredProducts: [],
-    recommendedProducts: [],
-    topCollections: [],
-  ).obs;
 
   @override
   void onInit() {
     super.onInit();
+    dashboardQuery.setType(ProductTypeEnum.female);
     fetchDashboardData();
   }
 
   Future<void> fetchDashboardData() async {
-    final response = await productService.dashbaord();
+    final response = await productService.dashbaord(dashboardQuery);
     if (!response.error) {
       dashboardData.value = response.data!;
+      print(dashboardData.value);
     }
   }
 

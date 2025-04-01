@@ -20,6 +20,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      width: width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -36,7 +37,7 @@ class ProductCard extends StatelessWidget {
                 width: width,
                 color: AppColors.lightGray,
                 child: image != null && image!.isNotEmpty
-                    ? Image.asset(
+                    ? Image.network(
                         image!,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
