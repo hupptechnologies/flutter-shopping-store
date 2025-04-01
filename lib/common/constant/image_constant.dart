@@ -58,7 +58,7 @@ abstract class ImageConstant {
   static const String telegramIcon = 'assets/svg/icons/telegram.svg';
   static const String whatsappIcon = 'assets/svg/icons/whatsapp.svg';
 
-  static const String empty = 'assets/image/empty.png';
+  static const String empty = 'assets/image/empty_data.png';
   static const String categoryHome = 'assets/image/category_home.png';
   static const String category1 = 'assets/image/category1.png';
   static const String category2 = 'assets/image/category2.png';

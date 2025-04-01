@@ -141,7 +141,7 @@ class ProductListView extends GetView<ProductListController> {
               color: AppColors.lightGray,
               image: DecorationImage(
                 image: Helper.getImageProvider(item.getImages),
-                fit: BoxFit.cover,
+                // fit: BoxFit.cover,
               ),
             ),
             child: Stack(
