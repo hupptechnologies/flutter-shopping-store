@@ -70,9 +70,9 @@ export class ProductService {
 
 	public async findOne(id: number): Promise<Product> {
 		const product = await this.productRepository.findById(id, [
-			'category',
 			'variants',
 			'reviews',
+			'wishlist',
 		]);
 
 		if (!product) {
