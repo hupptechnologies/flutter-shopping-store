@@ -46,7 +46,6 @@ class DashboardController extends GetxController {
     final response = await productService.dashbaord(dashboardQuery);
     if (!response.error) {
       dashboardData.value = response.data!;
-      print(dashboardData.value);
     }
   }
 
