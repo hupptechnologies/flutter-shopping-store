@@ -16,7 +16,7 @@ class DashboardTopColletion extends GetView<DashboardController> {
     );
     return Obx(() {
       final data = controller.dashboardData.value;
-      
+
       if (data.topCollections.isEmpty) return const SizedBox.shrink();
 
       return Column(
@@ -74,10 +74,18 @@ class DashboardTopColletion extends GetView<DashboardController> {
                       children: index.isEven
                           ? [
                               imageWidget(true, item.getImages),
-                              textWidget(item.name, item.name, true)
+                              textWidget(
+                                true,
+                                item.name,
+                                item.category!.name!,
+                              )
                             ]
                           : [
-                              textWidget(item.name, item.name, false),
+                              textWidget(
+                                false,
+                                item.name,
+                                item.category!.name!,
+                              ),
                               imageWidget(false, item.getImages)
                             ],
                     ),
@@ -92,6 +100,7 @@ class DashboardTopColletion extends GetView<DashboardController> {
   }
 
   Widget imageWidget(bool isLeft, String? image) => Flexible(
+        flex: 4,
         child: ClipRRect(
           borderRadius: BorderRadius.horizontal(
             left: isLeft ? const Radius.circular(15) : Radius.zero,
@@ -105,16 +114,19 @@ class DashboardTopColletion extends GetView<DashboardController> {
         ),
       );
 
-  Widget textWidget(String categoryName, String name, bool isLeft) => Flexible(
+  Widget textWidget(bool isLeft, String name, String? categoryName) => Flexible(
+        flex: 3,
         child: Padding(
           padding: EdgeInsets.only(left: isLeft ? 0 : 3, right: isLeft ? 3 : 0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                categoryName,
-                style: TextStyle(color: Colors.grey[500]),
-              ),
+              if (categoryName != null)
+                Text(
+                  categoryName,
+                  style: TextStyle(color: Colors.grey[500]),
+                ),
               Text(
                 name,
                 style:
