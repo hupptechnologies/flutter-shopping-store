@@ -2,6 +2,7 @@ import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/dto/dashboard_query_dto.dart';
 import 'package:e_commerce/common/enum/product_type_enum.dart';
 import 'package:e_commerce/dto/dashboard_dto.dart';
+import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/product_service.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +16,7 @@ class DashboardController extends GetxController {
     recommendedProducts: [],
     topCollections: [],
   ).obs;
-  
+
   final List<Map<String, String>> categorys = [
     {
       "image": ImageConstant.womenIcon,
@@ -95,4 +96,10 @@ class DashboardController extends GetxController {
       "image": ImageConstant.category4
     },
   ].obs;
+
+  void gotoProductDetail(int id) {
+    Get.toNamed(AppRoutes.productDetail, arguments: {
+      'id': id,
+    });
+  }
 }

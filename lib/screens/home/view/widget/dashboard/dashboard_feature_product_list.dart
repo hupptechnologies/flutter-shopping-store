@@ -1,5 +1,4 @@
 import 'package:e_commerce/common/constant/margin_padding.dart';
-import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/screens/home/controller/dashboard_controller.dart';
 import 'package:e_commerce/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,8 @@ class DashboardFeatureProductList extends GetView<DashboardController> {
       child: Obx(() {
         return Row(
           mainAxisSize: MainAxisSize.min,
-          children: List.generate(controller.dashboardData.value.featuredProducts.length, (index) {
+          children: List.generate(
+              controller.dashboardData.value.featuredProducts.length, (index) {
             final item = controller.dashboardData.value.featuredProducts[index];
             return Padding(
               padding: EdgeInsets.only(
@@ -25,8 +25,7 @@ class DashboardFeatureProductList extends GetView<DashboardController> {
                 left: index == 0 ? MarginPadding.homeHorPadding : 0,
               ),
               child: InkWell(
-                onTap: () =>
-                    Get.toNamed(AppRoutes.productDetail, arguments: {'id': 1}),
+                onTap: () => controller.gotoProductDetail(item.id),
                 child: ProductCard(
                   name: item.name,
                   image: item.getImages,

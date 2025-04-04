@@ -2,7 +2,6 @@ import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/dto/product_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
-import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/screens/home/controller/dashboard_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +27,7 @@ class DashboardRecommendedList extends GetView<DashboardController> {
                   left: index == 0 ? MarginPadding.homeHorPadding : 0,
                 ),
                 child: InkWell(
-                  onTap: () => Get.toNamed(AppRoutes.productDetail, arguments: {'id': 2}),
+                  onTap: () => controller.gotoProductDetail(item.id),
                   child: Container(
                     margin: const EdgeInsets.symmetric(vertical: 2),
                     width: 250,

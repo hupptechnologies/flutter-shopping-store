@@ -26,14 +26,17 @@ class DashboardTopColletion extends GetView<DashboardController> {
               padding: EdgeInsets.symmetric(
                 horizontal: MarginPadding.homeHorPadding,
               ),
-              child: DashboardTopCollectionTextWithImage(
-                height: height,
-                textPadding: textPadding,
-                // title: 'Sele up to 40%',
-                subTitle: data.firstTopCollection!.name,
-                subTitleFontSize: 22,
-                subTitleColor: Colors.black54,
-                image: data.firstTopCollection!.getImages,
+              child: GestureDetector(
+                onTap: () => controller.gotoProductDetail(data.firstTopCollection!.id),
+                child: DashboardTopCollectionTextWithImage(
+                  height: height,
+                  textPadding: textPadding,
+                  title: data.firstTopCollection!.category!.name,
+                  subTitle: data.firstTopCollection!.name,
+                  subTitleFontSize: 22,
+                  subTitleColor: Colors.black54,
+                  image: data.firstTopCollection!.getImages,
+                ),
               ),
             ),
           if (data.secondTopCollection != null)
@@ -41,14 +44,17 @@ class DashboardTopColletion extends GetView<DashboardController> {
               padding: EdgeInsets.symmetric(
                 horizontal: MarginPadding.homeHorPadding,
               ),
-              child: DashboardTopCollectionTextWithImage(
-                height: height,
-                textPadding: textPadding,
-                // title: 'Sele up to 40%',
-                subTitle: data.secondTopCollection!.name,
-                subTitleFontSize: 22,
-                subTitleColor: Colors.black54,
-                image: data.secondTopCollection!.getImages,
+              child: GestureDetector(
+                onTap: () => controller.gotoProductDetail(data.secondTopCollection!.id),
+                child: DashboardTopCollectionTextWithImage(
+                  height: height,
+                  textPadding: textPadding,
+                  title: data.secondTopCollection!.category!.name,
+                  subTitle: data.secondTopCollection!.name,
+                  subTitleFontSize: 22,
+                  subTitleColor: Colors.black54,
+                  image: data.secondTopCollection!.getImages,
+                ),
               ),
             ),
           Padding(
@@ -63,31 +69,34 @@ class DashboardTopColletion extends GetView<DashboardController> {
                   List.generate(data.thirdListTopCollection.length, (index) {
                 final item = data.thirdListTopCollection[index];
                 return Flexible(
-                  child: Container(
-                    height: 190,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      spacing: 5,
-                      children: index.isEven
-                          ? [
-                              imageWidget(true, item.getImages),
-                              textWidget(
-                                true,
-                                item.name,
-                                item.category!.name!,
-                              )
-                            ]
-                          : [
-                              textWidget(
-                                false,
-                                item.name,
-                                item.category!.name!,
-                              ),
-                              imageWidget(false, item.getImages)
-                            ],
+                  child: GestureDetector(
+                    onTap: () => controller.gotoProductDetail(item.id),
+                    child: Container(
+                      height: 190,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Row(
+                        spacing: 5,
+                        children: index.isEven
+                            ? [
+                                imageWidget(true, item.getImages),
+                                textWidget(
+                                  true,
+                                  item.name,
+                                  item.category!.name!,
+                                )
+                              ]
+                            : [
+                                textWidget(
+                                  false,
+                                  item.name,
+                                  item.category!.name!,
+                                ),
+                                imageWidget(false, item.getImages)
+                              ],
+                      ),
                     ),
                   ),
                 );
@@ -121,6 +130,7 @@ class DashboardTopColletion extends GetView<DashboardController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 20,
             children: [
               if (categoryName != null)
                 Text(
