@@ -111,7 +111,7 @@ export class ProductService {
 		);
 		const topCollections = await this.productRepository.topCollections(
 			query,
-			relations.push('category'),
+			relations.concat('category'),
 		);
 		return {
 			featuredProducts: featuredProducts.items,
