@@ -46,4 +46,11 @@ class ProductService extends BaseService {
       fromJsonT: (json) => DashboardDto.fromJson(json),
     );
   }
+
+  Future<ApiResponse<ProductDto>> getById(int id) async {
+    return api.get(
+      url: [UrlConstant.product, id.toString()],
+      fromJsonT: (json) => ProductDto.fromJson(json)
+    );
+  }
 }
