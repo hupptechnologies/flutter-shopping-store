@@ -11,9 +11,7 @@ import { CreateUserDto } from '../user/dto/create-user.dto';
 import { UserService } from '../user/user.service';
 import { ErrorMsgConstant } from '../../common/constant/error-msg.constant';
 import { KeyConstant } from '../../common/constant/key.constant';
-import { MailSubjectConstant } from '../../common/constant/mail-subject.constant';
 import { MessageConstant } from '../../common/constant/message.constant';
-import { TemplateConstant } from '../../common/constant/template.constant';
 import { JWTPayload } from '../../common/interface/jwt.interface';
 import { OtpUtils } from '../../common/utils/otp.utils';
 import { BcryptService } from '../../services/bcrypt/bcrypt.service';
@@ -85,14 +83,7 @@ export class AuthService {
 
 		await this.otpRepository.create(user, otp, expiresAt);
 
-		void this.mailService.send({
-			to: user.email,
-			subject: MailSubjectConstant.OTP,
-			template: TemplateConstant.OTP,
-			context: {
-				otp,
-			},
-		});
+		void this.mailService.sendOtp(user.email, otp);
 		return email;
 	}
 
@@ -159,14 +150,7 @@ export class AuthService {
 
 		await this.otpRepository.delete(otpRecord, false);
 
-		void this.mailService.send({
-			to: user.email,
-			subject: MailSubjectConstant.RESET_PASSWORD_SUCCESS,
-			template: TemplateConstant.RESET_PASSWORD_SUCCESS,
-			context: {
-				name: user.fullname,
-			},
-		});
+		void this.mailService.sendResetPassword(user.email, user.fullname);
 
 		return true;
 	}

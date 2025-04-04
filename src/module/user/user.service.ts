@@ -1,8 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
-import { MailSubjectConstant } from '../../common/constant/mail-subject.constant';
 import { MessageConstant } from '../../common/constant/message.constant';
-import { TemplateConstant } from '../../common/constant/template.constant';
 import { Loggable } from '../../decorator/loggable/loggable.decorator';
 import { ValidationException } from '../../exceptions/validation.exception';
 import { UserRepository } from '../../repository/user/user.repository';
@@ -42,14 +40,7 @@ export class UserService {
 
 		const user = await this.userRepository.create(createUserDto);
 
-		void this.mailService.send({
-			to: user.email,
-			subject: MailSubjectConstant.REGISTRATION,
-			template: TemplateConstant.REGISTRATION,
-			context: {
-				username: user.fullname,
-			},
-		});
+		void this.mailService.sendRegistration(user.email, user.fullname);
 
 		user.image = uploadFile?.url;
 		return user;

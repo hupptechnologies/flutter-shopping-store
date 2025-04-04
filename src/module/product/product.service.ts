@@ -109,7 +109,10 @@ export class ProductService {
 			query,
 			relations,
 		);
-		const topCollections = await this.productRepository.topCollections(query, relations);
+		const topCollections = await this.productRepository.topCollections(
+			query,
+			relations.push('category'),
+		);
 		return {
 			featuredProducts: featuredProducts.items,
 			recommendedProducts: recommendedProducts.items,
