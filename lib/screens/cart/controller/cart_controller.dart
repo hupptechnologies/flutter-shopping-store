@@ -16,7 +16,7 @@ class CartController extends GetxController {
   }
 
   void findCart() {
-    final result = productDtoFromJson(DummyData.productList).sublist(0, 4);
+    final result = productFromJson(DummyData.productList).sublist(0, 4);
     carts = RxList<Product>(result);
   }
 

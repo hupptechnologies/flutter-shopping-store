@@ -57,10 +57,10 @@ class DashboardRecommendedList extends GetView<DashboardController> {
                             borderRadius: const BorderRadius.horizontal(
                               left: Radius.circular(6),
                             ),
-                            child: item.getImages != null &&
-                                    item.getImages!.isNotEmpty
+                            child: item.getImage != null &&
+                                    item.getImage!.isNotEmpty
                                 ? Image.network(
-                                    item.getImages!,
+                                    item.getImage!,
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, error, stackTrace) {
                                       return Container(

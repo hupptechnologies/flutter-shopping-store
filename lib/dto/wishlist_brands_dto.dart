@@ -28,17 +28,17 @@ class WishlistBrandsDto {
   }
 
   String? get firstImage {
-    return products.isNotEmpty ? products[0].getImages : null;
+    return products.isNotEmpty ? products[0].getImage : null;
   }
 
   String? get secondImage {
-    return products.length > 1 ? products[1].getImages : null;
+    return products.length > 1 ? products[1].getImage : null;
   }
   List<List<String?>> get thirdImage {
-    final third = products.length > 2 ? products[2].getImages : null;
-    final fourth = products.length > 3 ? products[3].getImages : null;
-    final fifth = products.length > 4 ? products[4].getImages : null;
-    final sixth = products.length > 5 ? products[5].getImages : null;
+    final third = products.length > 2 ? products[2].getImage : null;
+    final fourth = products.length > 3 ? products[3].getImage : null;
+    final fifth = products.length > 4 ? products[4].getImage : null;
+    final sixth = products.length > 5 ? products[5].getImage : null;
     return [[third, fourth], [fifth, sixth]];
   }
 }

@@ -45,7 +45,7 @@ class AllItemsWishlistWidget extends GetView<WishlistController> {
                           borderRadius: BorderRadius.circular(15),
                           color: AppColors.lightGray,
                           image: DecorationImage(
-                            image: Helper.getImageProvider(item.getImages),
+                            image: Helper.getImageProvider(item.getImage),
                             fit: BoxFit.cover,
                           ),
                         ),

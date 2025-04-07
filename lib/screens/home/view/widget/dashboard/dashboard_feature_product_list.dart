@@ -28,7 +28,7 @@ class DashboardFeatureProductList extends GetView<DashboardController> {
                 onTap: () => controller.gotoProductDetail(item.id),
                 child: ProductCard(
                   name: item.name,
-                  image: item.getImages,
+                  image: item.getImage,
                   price: item.price.toString(),
                 ),
               ),

@@ -4,9 +4,9 @@ List<ImageDto> imageDtoFromJson(List<dynamic> jsonList) {
 
 class ImageDto {
   int? id;
-  String? url;
+  String url;
 
-  ImageDto({this.id, this.url});
+  ImageDto({this.id, required this.url});
 
   factory ImageDto.fromJson(Map<String, dynamic> json) => ImageDto(
         id: json['id'],

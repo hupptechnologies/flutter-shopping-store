@@ -54,5 +54,5 @@ class ProductDto {
         isFavorite: json['isFavorite'] ?? false,
       );
 
-  String? get getImages => images!.isNotEmpty ? images!.first.url : null;
+  String? get getImage => images!.isNotEmpty ? images!.first.url : null;
 }

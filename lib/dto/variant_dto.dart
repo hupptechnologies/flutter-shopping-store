@@ -25,7 +25,9 @@ class VariantDto {
         id: json["id"],
         color: json["color"],
         size: json["size"],
-        price: json["price"]!,
+        price: json["price"] != null
+            ? double.parse(json["price"].toString())
+            : null,
         quantity: json["quantity"],
         images:
             json['images'] != null ? imageDtoFromJson(json['images']) : null,

@@ -1,12 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/dto/product.dart';
+import 'package:e_commerce/dto/product_dto.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController {
+  final ProductService productService = ProductService();
+
   late DraggableScrollableController draggableScrollableController;
   late RxDouble size = (Get.height * 0.50).obs;
 
@@ -15,11 +18,8 @@ class ProductDetailController extends GetxController {
       CarouselSliderController();
 
   late Rx<Product> productDetail;
-  late RxList<String> images = [
-    ImageConstant.category1,
-    ImageConstant.category2,
-    ImageConstant.category3
-  ].obs;
+  late Rxn<ProductDto> productDto = Rxn<ProductDto>();
+
   late RxList<Product> similarProducts;
   late RxList<String> colors;
   late RxList<Map<String, dynamic>> sizes = DummyData.sizes.obs;
@@ -40,8 +40,13 @@ class ProductDetailController extends GetxController {
     });
 
     final id = Get.arguments['id'];
-    final int parsedId = id is int ? id : int.parse(id.toString());
-    productDetail = Rx<Product>(findByIdProduct(parsedId));
+
+    final productList = productFromJson(DummyData.productList);
+    similarProducts = RxList<Product>(productList);
+    colors = RxList<String>(DummyData.colors.sublist(0, 3));
+    productDetail = Rx<Product>(productList.first);
+
+    findByIdProduct(id.toString());
   }
 
   void toggleFavorite() {
@@ -69,14 +74,11 @@ class ProductDetailController extends GetxController {
     Get.toNamed(AppRoutes.cartList);
   }
 
-  Product findByIdProduct(int id) {
-    final productList = productDtoFromJson(DummyData.productList);
-    similarProducts = RxList<Product>(productList);
-    final product = productList.firstWhere(
-      (item) => item.id == id,
-      orElse: () => productList[0],
-    );
-    colors = RxList<String>(DummyData.colors.sublist(0, 3));
-    return product;
+  Future<void> findByIdProduct(String id) async {
+    final response = await productService.getById(id);
+    if (!response.error) {
+      productDto.value = response.data;
+      productDto.refresh();
+    }
   }
 }

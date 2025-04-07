@@ -1,9 +1,11 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/constant/app_colors.dart';
 import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
+import 'package:e_commerce/screens/product/view/widgets/product_detail_back_or_favorite_button.dart';
+import 'package:e_commerce/screens/product/view/widgets/product_detail_image_change_circle.dart';
+import 'package:e_commerce/screens/product/view/widgets/product_detail_images.dart';
 import 'package:e_commerce/widgets/accordion_text_icon.dart';
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/color_widget.dart';
@@ -26,80 +28,9 @@ class ProductDetailView extends GetView<ProductDetailController> {
       backgroundColor: Colors.transparent,
       body: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            color: Colors.white,
-            child: Obx(
-              () => CarouselSlider(
-                items: controller.images.map((image) {
-                  return Builder(
-                    builder: (BuildContext context) {
-                      return Image.asset(
-                        image,
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      );
-                    },
-                  );
-                }).toList(),
-                carouselController: controller.carouselController,
-                options: CarouselOptions(
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  viewportFraction: 1.0,
-                  initialPage: controller.currentImage.value,
-                  autoPlay: false,
-                  enlargeCenterPage: true,
-                  enableInfiniteScroll: false,
-                  onPageChanged: (index, reason) {
-                    controller.changeImage(index);
-                  },
-                ),
-              ),
-            ),
-          ),
-          backButtonAndFavorite(),
-          Obx(
-            () => Positioned(
-              bottom: controller.size.value,
-              left: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(controller.images.length, (index) {
-                  final isSelected = index == controller.currentImage.value;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: GestureDetector(
-                      onTap: () => controller.carouselController.animateToPage(
-                        index,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                      ),
-                      child: Container(
-                        padding: isSelected
-                            ? const EdgeInsets.all(1)
-                            : EdgeInsets.zero,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: isSelected
-                              ? Border.all(color: AppColors.darkGray, width: 1)
-                              : null,
-                        ),
-                        child: Container(
-                          width: 10,
-                          height: 10,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.darkGray,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-          ),
+          const ProductDetailImages(),
+          const ProductDetailBackOrFavoriteButton(),
+          const ProductDetailImageChangeCircle(),
           scrollableSheet()
         ],
       ),

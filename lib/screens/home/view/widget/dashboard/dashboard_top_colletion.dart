@@ -35,7 +35,7 @@ class DashboardTopColletion extends GetView<DashboardController> {
                   subTitle: data.firstTopCollection!.name,
                   subTitleFontSize: 22,
                   subTitleColor: Colors.black54,
-                  image: data.firstTopCollection!.getImages,
+                  image: data.firstTopCollection!.getImage,
                 ),
               ),
             ),
@@ -53,7 +53,7 @@ class DashboardTopColletion extends GetView<DashboardController> {
                   subTitle: data.secondTopCollection!.name,
                   subTitleFontSize: 22,
                   subTitleColor: Colors.black54,
-                  image: data.secondTopCollection!.getImages,
+                  image: data.secondTopCollection!.getImage,
                 ),
               ),
             ),
@@ -81,7 +81,7 @@ class DashboardTopColletion extends GetView<DashboardController> {
                         spacing: 5,
                         children: index.isEven
                             ? [
-                                imageWidget(true, item.getImages),
+                                imageWidget(true, item.getImage),
                                 textWidget(
                                   true,
                                   item.name,
@@ -94,7 +94,7 @@ class DashboardTopColletion extends GetView<DashboardController> {
                                   item.name,
                                   item.category!.name!,
                                 ),
-                                imageWidget(false, item.getImages)
+                                imageWidget(false, item.getImage)
                               ],
                       ),
                     ),
