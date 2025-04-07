@@ -6,6 +6,7 @@ import 'package:e_commerce/screens/product/controller/product_detail_controller.
 import 'package:e_commerce/screens/product/view/widgets/product_detail_back_or_favorite_button.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_detail_image_change_circle.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_detail_images.dart';
+import 'package:e_commerce/screens/product/view/widgets/product_detail_with_scrollable_sheet.dart';
 import 'package:e_commerce/widgets/accordion_text_icon.dart';
 import 'package:e_commerce/widgets/back_button.dart';
 import 'package:e_commerce/widgets/color_widget.dart';
@@ -28,9 +29,10 @@ class ProductDetailView extends GetView<ProductDetailController> {
       backgroundColor: Colors.transparent,
       body: Stack(
         children: [
-          const ProductDetailImages(),
-          const ProductDetailBackOrFavoriteButton(),
-          const ProductDetailImageChangeCircle(),
+          ProductDetailImages(),
+          ProductDetailBackOrFavoriteButton(),
+          ProductDetailImageChangeCircle(),
+          // ProductDetailWithScrollableSheet(),
           scrollableSheet()
         ],
       ),

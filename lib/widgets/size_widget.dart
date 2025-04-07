@@ -15,8 +15,8 @@ class SizeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 28,
-      height: 28,
+      width: 25,
+      height: 25,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: isSelected ? AppColors.darkGray : AppColors.lightGray,
