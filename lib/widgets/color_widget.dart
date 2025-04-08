@@ -13,6 +13,7 @@ class ColorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = isSelected ? 22.0 - 3 : 22.0;
     return Container(
       padding: isSelected ? const EdgeInsets.all(1.5) : EdgeInsets.zero,
       decoration: BoxDecoration(
@@ -20,8 +21,8 @@ class ColorWidget extends StatelessWidget {
         border: isSelected ? Border.all(color: Colors.black, width: 1.5) : null,
       ),
       child: Container(
-        width: 22,
-        height: 22,
+        width: size,
+        height: size,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           shape: BoxShape.circle,

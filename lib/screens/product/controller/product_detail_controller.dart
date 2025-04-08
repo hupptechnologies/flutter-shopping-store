@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/dto/product.dart';
 import 'package:e_commerce/dto/product_dto.dart';
+import 'package:e_commerce/dto/variant_dto.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/product_service.dart';
@@ -19,6 +20,11 @@ class ProductDetailController extends GetxController {
 
   late Rx<Product> productDetail;
   late Rxn<ProductDto> productDto = Rxn<ProductDto>();
+
+  Rxn<String> selectedColor = Rxn<String>(null);
+  Rxn<String> selectedSize = Rxn<String>(null);
+  RxList<VariantDto> filteredColors = <VariantDto>[].obs;
+  RxList<VariantDto> filteredSizes = <VariantDto>[].obs;
 
   late RxList<Product> similarProducts;
   late RxList<String> colors;
@@ -47,6 +53,51 @@ class ProductDetailController extends GetxController {
     productDetail = Rx<Product>(productList.first);
 
     findByIdProduct(id.toString());
+  }
+
+  void setColor(String color) {
+    selectedColor.value = selectedColor.value == color ? null : color;
+    filteredSizes.value = getFilteredSizes();
+  }
+
+  void setSize(String size) {
+    selectedSize.value = selectedSize.value == size ? null : size;
+    filteredColors.value = getFilteredColors();
+  }
+
+  List<VariantDto> getFilteredColors() {
+    return _getUniqueVariants(
+      filterValue: selectedSize.value,
+      match: (v, val) => v.size == val,
+      key: (v) => v.color,
+    );
+  }
+
+  List<VariantDto> getFilteredSizes() {
+    return _getUniqueVariants(
+      filterValue: selectedColor.value,
+      match: (v, val) => v.color == val,
+      key: (v) => v.size,
+    );
+  }
+
+  List<VariantDto> _getUniqueVariants({
+    required String? filterValue,
+    required bool Function(VariantDto, String) match,
+    required String Function(VariantDto) key,
+  }) {
+    final variants = productDto.value?.variants ?? [];
+
+    final filtered = filterValue == null
+        ? variants
+        : variants.where((v) => match(v, filterValue)).toList();
+
+    final uniqueMap = <String, VariantDto>{};
+    for (var variant in filtered) {
+      uniqueMap[key(variant)] = variant;
+    }
+
+    return uniqueMap.values.toList();
   }
 
   void toggleFavorite() {
@@ -78,7 +129,8 @@ class ProductDetailController extends GetxController {
     final response = await productService.getById(id);
     if (!response.error) {
       productDto.value = response.data;
-      productDto.refresh();
+      filteredColors.value = getFilteredColors();
+      filteredSizes.value = getFilteredSizes();
     }
   }
 }

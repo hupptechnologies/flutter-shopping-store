@@ -32,8 +32,8 @@ class ProductDetailView extends GetView<ProductDetailController> {
           ProductDetailImages(),
           ProductDetailBackOrFavoriteButton(),
           ProductDetailImageChangeCircle(),
-          // ProductDetailWithScrollableSheet(),
-          scrollableSheet()
+          ProductDetailWithScrollableSheet(),
+          // scrollableSheet()
         ],
       ),
     );

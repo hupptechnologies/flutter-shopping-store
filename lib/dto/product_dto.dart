@@ -55,24 +55,4 @@ class ProductDto {
       );
 
   String? get getImage => images!.isNotEmpty ? images!.first.url : null;
-
-  List<VariantDto> _getUniqueVariantsBy(
-      String Function(VariantDto) keySelector) {
-    if (variants == null) return [];
-    final seen = <String>{};
-    return variants!.where((variant) {
-      final key = keySelector(variant);
-      if (key.isNotEmpty && !seen.contains(key)) {
-        seen.add(key);
-        return true;
-      }
-      return false;
-    }).toList();
-  }
-
-  List<VariantDto> get getColors =>
-      _getUniqueVariantsBy((variant) => variant.color);
-
-  List<VariantDto> get getSizes =>
-      _getUniqueVariantsBy((variant) => variant.size);
 }

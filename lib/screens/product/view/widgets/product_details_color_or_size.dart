@@ -1,4 +1,5 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/dto/variant_dto.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
 import 'package:e_commerce/widgets/color_widget.dart';
@@ -35,20 +36,34 @@ class ProductDetailsColorOrSize extends GetView<ProductDetailController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 10,
             children: [
-              _buildVariantSection(
-                alignment: Alignment.centerLeft,
-                items: () => controller.productDto.value?.getColors ?? [],
-                itemBuilder: (variant) => ColorWidget(
-                  color: variant.color,
-                  isSelected: false,
+              Obx(
+                () => _buildVariantSection(
+                  alignment: Alignment.centerLeft,
+                  items: controller.filteredColors,
+                  isSelected: (variant) =>
+                      controller.selectedColor.value == variant.color,
+                  onTap: (variant) => controller.setColor(variant.color),
+                  builder: (variant, isSelected) {
+                    return ColorWidget(
+                      color: variant.color,
+                      isSelected: isSelected,
+                    );
+                  },
                 ),
               ),
-              _buildVariantSection(
-                alignment: Alignment.centerRight,
-                items: () => controller.productDto.value?.getSizes ?? [],
-                itemBuilder: (variant) => SizeWidget(
-                  size: variant.size,
-                  isSelected: false,
+              Obx(
+                () => _buildVariantSection(
+                  alignment: Alignment.centerRight,
+                  items: controller.filteredSizes,
+                  isSelected: (variant) =>
+                      controller.selectedSize.value == variant.size,
+                  onTap: (variant) => controller.setSize(variant.size),
+                  builder: (variant, isSelected) {
+                    return SizeWidget(
+                      size: variant.size,
+                      isSelected: isSelected,
+                    );
+                  },
                 ),
               ),
             ],
@@ -60,23 +75,27 @@ class ProductDetailsColorOrSize extends GetView<ProductDetailController> {
 
   Widget _buildVariantSection({
     required Alignment alignment,
-    required List<dynamic> Function() items,
-    required Widget Function(dynamic) itemBuilder,
+    required List<VariantDto> items,
+    required bool Function(VariantDto) isSelected,
+    required void Function(VariantDto) onTap,
+    required Widget Function(VariantDto, bool) builder,
   }) {
     return Expanded(
-      child: Obx(() {
-        final data = items();
-        if (data.isEmpty) return const SizedBox();
-
-        return Align(
-          alignment: alignment,
-          child: Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: data.map(itemBuilder).toList(),
-          ),
-        );
-      }),
+      child: items.isEmpty
+          ? const SizedBox()
+          : Align(
+              alignment: alignment,
+              child: Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: items
+                    .map((variant) => GestureDetector(
+                          onTap: () => onTap(variant),
+                          child: builder(variant, isSelected(variant)),
+                        ))
+                    .toList(),
+              ),
+            ),
     );
   }
 }

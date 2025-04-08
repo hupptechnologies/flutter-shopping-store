@@ -3,6 +3,7 @@ import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_detail_title_or_price_or_rating.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_details_color_or_size.dart';
+import 'package:e_commerce/widgets/description_accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
@@ -45,12 +46,18 @@ class ProductDetailWithScrollableSheet
                         padding: EdgeInsets.symmetric(
                           horizontal: MarginPadding.homeHorPadding,
                         ),
-                        child: const Column(
+                        child: Column(
                           children: [
-                            ProductDetailTitleOrPriceOrRating(),
-                            Divider(),
-                            ProductDetailsColorOrSize(),
-                            Divider(),
+                            const ProductDetailTitleOrPriceOrRating(),
+                            const Divider(),
+                            const ProductDetailsColorOrSize(),
+                            const Divider(),
+                            Obx(() {
+                              final product = controller.productDto.value;
+                              return DescriptionAccordion(
+                                description: product?.description ?? "",
+                              );
+                            })
                           ],
                         ),
                       ),
