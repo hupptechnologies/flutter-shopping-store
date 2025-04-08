@@ -100,9 +100,12 @@ class ProductDetailController extends GetxController {
     return uniqueMap.values.toList();
   }
 
-  void toggleFavorite() {
-    productDetail.value.isFavorite = !prodcut.isFavorite;
-    productDetail.refresh();
+  Future<void> toggleFavorite() async {
+    productDto.value!.isFavorite = !productDto.value!.isFavorite;
+    final response = await productService.toggleFavorite(productDto.value!.id);
+    if (!response.error) {
+      findByIdProduct(productDto.value!.id.toString());
+    }
   }
 
   void changeImage(int index) {
