@@ -4,6 +4,7 @@ import 'package:e_commerce/common/enum/product_type_enum.dart';
 import 'package:e_commerce/dto/dashboard_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/product_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
@@ -40,7 +41,9 @@ class DashboardController extends GetxController {
   void onInit() {
     super.onInit();
     dashboardQuery.setType(ProductTypeEnum.female);
-    fetchDashboardData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchDashboardData();
+    });
   }
 
   Future<void> fetchDashboardData() async {
