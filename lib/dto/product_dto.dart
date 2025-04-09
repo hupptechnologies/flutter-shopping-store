@@ -1,5 +1,6 @@
 import 'package:e_commerce/dto/category_dto.dart';
 import 'package:e_commerce/dto/image_dto.dart';
+import 'package:e_commerce/dto/review_dto.dart';
 import 'package:e_commerce/dto/variant_dto.dart';
 
 List<ProductDto> productDtoFromJson(List<dynamic> jsonList) {
@@ -24,6 +25,7 @@ class ProductDto {
   CategoryDto? category;
   List<VariantDto>? variants;
   List<ProductDto>? similarProducts;
+  List<ReviewDto>? reviews;
   bool isFavorite;
 
   ProductDto({
@@ -36,6 +38,7 @@ class ProductDto {
     this.category,
     this.variants,
     this.similarProducts,
+    this.reviews,
     required this.isFavorite,
   });
 
@@ -56,6 +59,8 @@ class ProductDto {
         similarProducts: json['similarProducts'] != null
             ? productDtoFromJson(json['similarProducts'])
             : null,
+        reviews:
+            json['reviews'] != null ? reviewDtoFromJson(json['reviews']) : null,
         isFavorite: json['isFavorite'] ?? false,
       );
 

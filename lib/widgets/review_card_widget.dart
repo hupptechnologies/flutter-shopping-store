@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 class ReviewCardWidget extends StatelessWidget {
   final String image;
   final String name;
-  final double reting;
-  final String time;
+  final String? rating;
+  final String? ago;
   final String message;
 
   const ReviewCardWidget({
     super.key,
     required this.image,
     required this.name,
-    required this.reting,
-    required this.time,
+    this.rating,
+    this.ago,
     required this.message,
   });
 
@@ -22,6 +22,7 @@ class ReviewCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,8 +42,8 @@ class ReviewCardWidget extends StatelessWidget {
                       style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(height: 5),
-                    const RatingWidget(
-                      value: 5,
+                    RatingWidget(
+                      value: rating != null ? double.parse(rating!) : 0.0,
                       size: 18,
                     )
                   ],
@@ -50,15 +51,13 @@ class ReviewCardWidget extends StatelessWidget {
               ],
             ),
             Text(
-              time,
+              ago ?? '',
               style: TextStyle(color: AppColors.dartGratWithOpaity5),
             ),
           ],
         ),
         const SizedBox(height: 15),
-        const Text(
-          'I love it.  Awesome customer service!! Helped me out with adding an additional item to my order. Thanks again!',
-        )
+        Text(message),
       ],
     );
   }

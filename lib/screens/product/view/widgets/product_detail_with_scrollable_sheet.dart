@@ -5,8 +5,8 @@ import 'package:e_commerce/screens/product/view/widgets/product_detail_add_to_ca
 import 'package:e_commerce/screens/product/view/widgets/product_detail_similar_product.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_detail_title_or_price_or_rating.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_details_color_or_size.dart';
+import 'package:e_commerce/screens/product/view/widgets/product_details_review_section.dart';
 import 'package:e_commerce/widgets/description_accordion.dart';
-import 'package:e_commerce/widgets/review_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
@@ -61,9 +61,7 @@ class ProductDetailWithScrollableSheet
                                 description: product?.description ?? "",
                               );
                             }),
-                            const ReviewWidget(
-                              ratings: [0, 3, 5, 12, 80],
-                            ),
+                            const ProductDetailsReviewSection()
                           ],
                         ),
                       ),

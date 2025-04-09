@@ -46,7 +46,7 @@ class UserDto {
         id: json["id"],
         firstName: json["firstName"],
         lastName: json["lastName"],
-        email: json["email"],
+        email: json["email"] ?? '',
         mobileNumber: json["mobileNumber"],
         image: json["image"],
         gender: json["gender"] != null
@@ -61,4 +61,6 @@ class UserDto {
         "mobileNumber": mobileNumber,
         "gender": gender.toString().split('.').last,
       };
+
+  String get fullName => '$firstName $lastName';
 }
