@@ -23,6 +23,7 @@ class ProductDto {
   List<ImageDto>? images;
   CategoryDto? category;
   List<VariantDto>? variants;
+  List<ProductDto>? similarProducts;
   bool isFavorite;
 
   ProductDto({
@@ -34,6 +35,7 @@ class ProductDto {
     this.images,
     this.category,
     this.variants,
+    this.similarProducts,
     required this.isFavorite,
   });
 
@@ -50,6 +52,9 @@ class ProductDto {
             json['images'] != null ? imageDtoFromJson(json['images']) : null,
         variants: json['variants'] != null
             ? variantDtofromJson(json['variants'])
+            : null,
+        similarProducts: json['similarProducts'] != null
+            ? productDtoFromJson(json['similarProducts'])
             : null,
         isFavorite: json['isFavorite'] ?? false,
       );

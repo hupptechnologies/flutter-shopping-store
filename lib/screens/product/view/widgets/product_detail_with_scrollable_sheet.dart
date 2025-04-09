@@ -1,9 +1,12 @@
 import 'package:e_commerce/common/constant/margin_padding.dart';
 import 'package:e_commerce/extension/color_extensions.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
+import 'package:e_commerce/screens/product/view/widgets/product_detail_add_to_cart_button.dart';
+import 'package:e_commerce/screens/product/view/widgets/product_detail_similar_product.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_detail_title_or_price_or_rating.dart';
 import 'package:e_commerce/screens/product/view/widgets/product_details_color_or_size.dart';
 import 'package:e_commerce/widgets/description_accordion.dart';
+import 'package:e_commerce/widgets/review_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
@@ -57,14 +60,25 @@ class ProductDetailWithScrollableSheet
                               return DescriptionAccordion(
                                 description: product?.description ?? "",
                               );
-                            })
+                            }),
+                            const ReviewWidget(
+                              ratings: [0, 3, 5, 12, 80],
+                            ),
                           ],
                         ),
                       ),
+                      Obx(() {
+                        final similarProducts = controller.productDto.value?.similarProducts;
+                        if (similarProducts == null || similarProducts.isEmpty) {
+                          return const SizedBox.shrink();
+                        }
+                        return const ProductDetailSimilarProduct();
+                      })
                     ],
                   ),
                 ),
               ),
+              const ProductDetailAddToCartButton()
             ],
           ),
         );
