@@ -1,4 +1,3 @@
-import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
 import 'package:e_commerce/widgets/review_card_widget.dart';
 import 'package:flutter/material.dart';
