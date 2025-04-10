@@ -1,7 +1,9 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/screens/product/controller/product_detail_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ReviewSectionReviewWriteTitle extends StatelessWidget {
+class ReviewSectionReviewWriteTitle extends GetView<ProductDetailController> {
   const ReviewSectionReviewWriteTitle({super.key});
 
   @override
@@ -11,12 +13,12 @@ class ReviewSectionReviewWriteTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            '47 Reviews',
+          Obx(() => Text(
+            '${controller.productDto.value?.totalRating ?? 0} Reviews',
             style: TextStyle(
               color: AppColors.dartGratWithOpaity5,
             ),
-          ),
+          ),),
           Row(
             children: [
               Text(
