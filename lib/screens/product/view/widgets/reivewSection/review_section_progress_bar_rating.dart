@@ -60,7 +60,7 @@ class ReviewSectionProgressBarRating extends GetView<ProductDetailController> {
                     child: Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        '${item.value.toString()}%',
+                        '${item.value.round()}%',
                         style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),
