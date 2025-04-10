@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
+import 'package:e_commerce/common/dto/pagination.dart';
 import 'package:e_commerce/dto/review_dto.dart';
 import 'package:e_commerce/service/base_service.dart';
 import 'package:dio/dio.dart';
@@ -19,7 +20,16 @@ class ReviewService extends BaseService {
       multipartFiles.add(MapEntry('images', multipartFile));
     }
     formData.files.addAll(multipartFiles);
-
     return api.post(url: UrlConstant.review, data: formData);
+  }
+
+  Future<ApiResponse<Pagination<ReviewDto>>> allByProductId(int id) async {
+    return api.get(
+      url: [UrlConstant.review, id.toString()],
+      fromJsonT: (item) => Pagination.fromJson(
+        item,
+        (json) => reviewDtoFromJson(json),
+      ),
+    );
   }
 }

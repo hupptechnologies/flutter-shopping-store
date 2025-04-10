@@ -31,4 +31,5 @@ abstract class AppRoutes {
   static const String appSettingTerms = '/app-setting/terms';
   static const String appSettingPolicy = '/app-setting/policy';
   static const String appSettingChat = '/app-setting/chat';
+  static const String productReviews = '/product-reviews';
 }

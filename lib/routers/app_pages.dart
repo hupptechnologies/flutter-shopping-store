@@ -14,6 +14,8 @@ import 'package:e_commerce/screens/appSetting/screens/terms/view/terms_view.dart
 import 'package:e_commerce/screens/appSetting/view/app_setting_view.dart';
 import 'package:e_commerce/screens/notification/binding/notification_binding.dart';
 import 'package:e_commerce/screens/notification/view/notification_view.dart';
+import 'package:e_commerce/screens/product/binding/product_review_list_binging.dart';
+import 'package:e_commerce/screens/product/view/product_review_list.dart';
 import 'package:e_commerce/screens/profile/addAddress/binding/add_address_binding.dart';
 import 'package:e_commerce/screens/profile/addAddress/view/add_address_view.dart';
 import 'package:e_commerce/screens/profile/address/binding/address_binding.dart';
@@ -216,6 +218,11 @@ class AppPages {
       name: AppRoutes.appSettingChat,
       page: () => const ChatView(),
       binding: ChatBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.productReviews,
+      page: () => const ProductReviewList(),
+      binding: ProductReviewListBinging(),
     ),
   ];
 }

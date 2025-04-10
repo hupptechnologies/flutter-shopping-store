@@ -128,6 +128,15 @@ class ProductDetailController extends GetxController {
     Get.toNamed(AppRoutes.cartList);
   }
 
+  void onReviewList() {
+    if (productDto.value != null && productDto.value!.totalRating! > 0) {
+      Get.toNamed(AppRoutes.productReviews, arguments: {
+        'id': productDto.value!.id,
+        'title': productDto.value!.name
+      });
+    }
+  }
+
   Future<void> findByIdProduct(String id) async {
     final response = await productService.getById(id);
     if (!response.error) {
