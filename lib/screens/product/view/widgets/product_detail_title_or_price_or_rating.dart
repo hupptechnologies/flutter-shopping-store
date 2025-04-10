@@ -43,10 +43,13 @@ class ProductDetailTitleOrPriceOrRating
               );
             },
           ),
-          const RatingWidget(
-            value: 4.5,
-            size: 20,
-          ),
+          Obx(() {
+            final value = controller.productDto.value?.averageRating ?? 0;
+            return RatingWidget(
+              value: value,
+              size: 20,
+            );
+          })
         ],
       ),
     );

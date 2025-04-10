@@ -27,6 +27,9 @@ class ProductDto {
   List<ProductDto>? similarProducts;
   List<ReviewDto>? reviews;
   bool isFavorite;
+  int? totalRating;
+  double? averageRating;
+  Map<String, dynamic>? ratingPercentage;
 
   ProductDto({
     required this.id,
@@ -39,6 +42,9 @@ class ProductDto {
     this.variants,
     this.similarProducts,
     this.reviews,
+    this.totalRating,
+    this.averageRating,
+    this.ratingPercentage,
     required this.isFavorite,
   });
 
@@ -61,6 +67,9 @@ class ProductDto {
             : null,
         reviews:
             json['reviews'] != null ? reviewDtoFromJson(json['reviews']) : null,
+        averageRating: json['averageRating'],
+        totalRating: json['totalRating'],
+        ratingPercentage: json['ratingPercentage'],
         isFavorite: json['isFavorite'] ?? false,
       );
 
