@@ -67,7 +67,7 @@ class ProductDto {
             : null,
         reviews:
             json['reviews'] != null ? reviewDtoFromJson(json['reviews']) : null,
-        averageRating: json['averageRating'],
+        averageRating: json['averageRating']?.toDouble(),
         totalRating: json['totalRating'],
         ratingPercentage: json['ratingPercentage'],
         isFavorite: json['isFavorite'] ?? false,
