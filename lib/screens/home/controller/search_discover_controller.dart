@@ -5,11 +5,13 @@ import 'package:e_commerce/dto/category_dto.dart';
 import 'package:e_commerce/dto/search_box_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
 import 'package:e_commerce/service/category_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SearchDiscoverController extends GetxController {
   final CategoryService categoryService = CategoryService();
-  final CategoryQueryDto queryDto = CategoryQueryDto(depth: 2, isProductCount: true);
+  final CategoryQueryDto queryDto =
+      CategoryQueryDto(depth: 2, isProductCount: true);
 
   late Meta meta;
   late RxList<CategoryDto> categoryList = RxList();
@@ -32,8 +34,10 @@ class SearchDiscoverController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getCategories();
-    expandedCategory = RxInt(-1);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getCategories();
+      expandedCategory = RxInt(-1);
+    });
   }
 
   Future<void> getCategories() async {
@@ -44,7 +48,7 @@ class SearchDiscoverController extends GetxController {
       return;
     }
     CommonSnackbar.error(response.message);
-  } 
+  }
 
   void toggleCategory(int id) {
     if (expandedCategory.value == id) {
@@ -59,6 +63,7 @@ class SearchDiscoverController extends GetxController {
   }
 
   void onTapProduct(int id, String name) {
-    Get.toNamed(AppRoutes.productList, arguments: {'categoryId': id, 'title': name});
+    Get.toNamed(AppRoutes.productList,
+        arguments: {'categoryId': id, 'title': name});
   }
 }

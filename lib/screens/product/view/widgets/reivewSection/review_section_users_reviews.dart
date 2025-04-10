@@ -25,7 +25,7 @@ class ReviewSectionUsersReviews extends GetView<ProductDetailController> {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: ReviewCardWidget(
-              image: ImageConstant.category1,
+              image: review.user?.image,
               name: review.user?.fullName ?? '',
               rating: review.rating,
               ago: review.ago ?? '',

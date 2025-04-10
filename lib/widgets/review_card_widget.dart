@@ -1,9 +1,11 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/common/constant/image_constant.dart';
 import 'package:e_commerce/widgets/rating_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ReviewCardWidget extends StatelessWidget {
-  final String image;
+  final String? image;
   final String name;
   final String? rating;
   final String? ago;
@@ -30,8 +32,17 @@ class ReviewCardWidget extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(image),
+                  backgroundColor: AppColors.lightGray,
+                  backgroundImage: image != null ? NetworkImage(image!) : null,
                   radius: 25,
+                  child: image == null
+                      ? SvgPicture.asset(
+                          ImageConstant.profileIcon,
+                          width: 30,
+                          height: 30,
+                          color: AppColors.darkGray,
+                        )
+                      : null,
                 ),
                 const SizedBox(width: 15),
                 Column(
