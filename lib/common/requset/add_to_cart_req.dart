@@ -1,6 +1,5 @@
 import 'package:e_commerce/dto/variant_dto.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 
 class AddToCartReq {
   int? productId;
@@ -13,6 +12,8 @@ class AddToCartReq {
   Rxn<String> selectedSize = Rxn<String>(null);
   RxList<VariantDto> filteredColors = <VariantDto>[].obs;
   RxList<VariantDto> filteredSizes = <VariantDto>[].obs;
+
+  bool get isValid => productId != null && variantId != null && quantity != null; 
 
   AddToCartReq({this.productId, this.quantity = 1});
 

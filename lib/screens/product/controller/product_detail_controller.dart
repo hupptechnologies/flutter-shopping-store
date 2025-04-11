@@ -1,14 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce/common/args/product_review_list_args.dart';
 import 'package:e_commerce/common/requset/add_to_cart_req.dart';
+import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/dto/product_dto.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/cart_service.dart';
 import 'package:e_commerce/service/product_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController {
   final ProductService productService = ProductService();
+  final CartService cartService = CartService();
   final AddToCartReq addToCartReq = AddToCartReq();
 
   late DraggableScrollableController draggableScrollableController;
@@ -49,8 +52,21 @@ class ProductDetailController extends GetxController {
     currentImage.value = index;
   }
 
-  void onTapAddToCart() {
-    Get.toNamed(AppRoutes.cartList);
+  Future<void> onTapAddToCart() async {
+    if (!addToCartReq.isValid) return;
+
+    final response = await cartService.addToCart(addToCartReq);
+    if (response.error) {
+      CommonSnackbar.error(response.message);
+      return;
+    }
+
+    CommonSnackbar.success(response.message);
+    final bool result = await Get.toNamed(AppRoutes.cartList);
+
+    if (result == true) {
+      findByIdProduct();
+    }
   }
 
   void onReviewList() {
