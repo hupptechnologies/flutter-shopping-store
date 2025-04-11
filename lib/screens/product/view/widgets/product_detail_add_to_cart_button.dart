@@ -12,8 +12,8 @@ class ProductDetailAddToCartButton extends GetView<ProductDetailController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      final isDisabled = controller.selectedColor.value == null ||
-          controller.selectedSize.value == null;
+      final isDisabled = controller.addToCartReq.selectedColor.value == null ||
+          controller.addToCartReq.selectedSize.value == null;
       return GestureDetector(
         onTap: isDisabled ? null : controller.onTapAddToCart,
         child: Container(

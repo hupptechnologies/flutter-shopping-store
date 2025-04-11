@@ -12,6 +12,7 @@ class ProductDetailsColorOrSize extends GetView<ProductDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    final addToCartReq = controller.addToCartReq;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Column(
@@ -39,10 +40,10 @@ class ProductDetailsColorOrSize extends GetView<ProductDetailController> {
               Obx(
                 () => _buildVariantSection(
                   alignment: Alignment.centerLeft,
-                  items: controller.filteredColors,
+                  items: addToCartReq.filteredColors,
                   isSelected: (variant) =>
-                      controller.selectedColor.value == variant.color,
-                  onTap: (variant) => controller.setColor(variant.color),
+                      addToCartReq.selectedColor.value == variant.color,
+                  onTap: (variant) => addToCartReq.setColor(variant.color),
                   builder: (variant, isSelected) {
                     return ColorWidget(
                       color: variant.color,
@@ -54,10 +55,10 @@ class ProductDetailsColorOrSize extends GetView<ProductDetailController> {
               Obx(
                 () => _buildVariantSection(
                   alignment: Alignment.centerRight,
-                  items: controller.filteredSizes,
+                  items: addToCartReq.filteredSizes,
                   isSelected: (variant) =>
-                      controller.selectedSize.value == variant.size,
-                  onTap: (variant) => controller.setSize(variant.size),
+                      addToCartReq.selectedSize.value == variant.size,
+                  onTap: (variant) => addToCartReq.setSize(variant.size),
                   builder: (variant, isSelected) {
                     return SizeWidget(
                       size: variant.size,

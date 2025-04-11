@@ -47,9 +47,9 @@ class ProductService extends BaseService {
     );
   }
 
-  Future<ApiResponse<ProductDto>> getById(String id) async {
+  Future<ApiResponse<ProductDto>> getById(int id) async {
     return api.get(
-      url: [UrlConstant.product, id],
+      url: [UrlConstant.product, id.toString()],
       fromJsonT: (json) => ProductDto.fromJson(json)
     );
   }
