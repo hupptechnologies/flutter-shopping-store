@@ -1,9 +1,15 @@
+import 'package:e_commerce/common/utils/common_snackbar.dart';
 import 'package:e_commerce/dto/product.dart';
+import 'package:e_commerce/dto/your_cart_dto.dart';
 import 'package:e_commerce/dummydata/dummy_data.dart';
 import 'package:e_commerce/routers/app_routers.dart';
+import 'package:e_commerce/service/cart_service.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
+  final CartService cartService = CartService();
+  final Rxn<YourCartDto> yourCartDto = Rxn<YourCartDto>();
+
   late RxList<Product> carts;
   late RxSet<int> selectingCart;
   late RxInt productPrice = 0.obs;
@@ -12,6 +18,7 @@ class CartController extends GetxController {
   void onInit() {
     findCart();
     selectingCart = <int>{}.obs;
+    Future.microtask(() => fetchAllCarts());
     super.onInit();
   }
 
@@ -20,22 +27,17 @@ class CartController extends GetxController {
     carts = RxList<Product>(result);
   }
 
-  void toggleSelectingCart(int id) {
-    if (selectingCart.contains(id)) {
-      selectingCart.remove(id);
-    } else {
-      selectingCart.add(id);
+  Future<void> toggleSelectingCart(int id) async {
+    final cart =
+        yourCartDto.value?.carts.firstWhereOrNull((cart) => cart.id == id);
+    if (cart == null) return;
+
+    final response = await cartService.toggleSelecting(id, !cart.isSelected);
+    if (response.error) {
+      CommonSnackbar.error(response.message);
+      return;
     }
-    sumProductPrice();
-  }
-
-  void sumProductPrice() {
-    final total = carts
-        .where((item) => selectingCart.contains(item.id))
-        .map((item) => item.discountPrice ?? 0)
-        .fold(0.0, (sum, price) => sum + price);
-
-    productPrice.value = total.toInt();
+    yourCartDto.value = response.data;
   }
 
   void proceedToCheckout() {
@@ -51,5 +53,12 @@ class CartController extends GetxController {
       cart.quantity = (cart.quantity) - 1;
     }
     carts.refresh();
+  }
+
+  Future<void> fetchAllCarts() async {
+    final response = await cartService.list();
+    if (!response.error) {
+      yourCartDto.value = response.data;
+    }
   }
 }

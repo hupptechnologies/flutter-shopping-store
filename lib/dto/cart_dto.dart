@@ -26,7 +26,7 @@ class CartDto {
     return CartDto(
       id: json['id'],
       quantity: json['quantity'],
-      price: json['price'].toDouble,
+      price: json['price'].toDouble(),
       isSelected: json['isSelected'],
       product: ProductDto.fromJson(json['product']),
       variant: VariantDto.fromJson(json['variant']),

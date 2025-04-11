@@ -9,7 +9,7 @@ class CalculateDto {
     required this.total,
   });
 
-  factory CalculateDto.fromJson(Map<String, num> json) => CalculateDto(
+  factory CalculateDto.fromJson(Map<String, dynamic> json) => CalculateDto(
         productPrice: json["productPrice"]!.toDouble(),
         shipping: json["shipping"]!.toDouble(),
         total: json["total"]!.toDouble(),
