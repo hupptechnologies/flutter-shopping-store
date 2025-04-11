@@ -24,7 +24,7 @@ class CommonGetX extends GetxController {
   /// ```dart
   /// CommonGetX.backPage();
   /// ```
-  static void backPage() {
-    Get.back();
+  static void backPage({dynamic result}) {
+    Get.back(result: result);
   }
 }

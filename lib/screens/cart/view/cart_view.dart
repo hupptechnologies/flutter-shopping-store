@@ -14,8 +14,11 @@ class CartView extends GetView<CartController> {
     return PopScopeWrapper<CartController>(
       isLoader: controller.cartService.api.isLoader,
       child: Scaffold(
-        appBar:
-            const BackButtonAppbarTitle(title: 'Your cart', centerTitle: true),
+        appBar: const BackButtonAppbarTitle(
+          title: 'Your cart',
+          centerTitle: true,
+          result: true,
+        ),
         body: RefreshIndicator(
           onRefresh: controller.fetchAllCarts,
           child: const SafeArea(

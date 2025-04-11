@@ -62,7 +62,7 @@ class ProductDetailController extends GetxController {
     }
 
     CommonSnackbar.success(response.message);
-    final bool result = await Get.toNamed(AppRoutes.cartList);
+    final result = await Get.toNamed(AppRoutes.cartList);
 
     if (result == true) {
       findByIdProduct();

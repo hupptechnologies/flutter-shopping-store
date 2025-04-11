@@ -1,7 +1,9 @@
 import 'package:e_commerce/common/constant/app_colors.dart';
+import 'package:e_commerce/screens/cart/controller/cart_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 
-class CartCardQuantityButton extends StatelessWidget {
+class CartCardQuantityButton extends GetView<CartController> {
   final bool isIncrement;
   final int id;
 
@@ -14,7 +16,7 @@ class CartCardQuantityButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // onTap: () => incrementDecrementQuantity(product.id, isIncrement),
+      onTap: () => controller.updateQuantity(id, isIncrement),
       child: Icon(
         isIncrement ? Icons.add : Icons.remove,
         size: 15,

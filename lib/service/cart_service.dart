@@ -16,11 +16,19 @@ class CartService extends BaseService {
     );
   }
 
-  Future<ApiResponse<YourCartDto>> toggleSelecting(int id, bool isSelected) {
+  Future<ApiResponse<YourCartDto>> _update(int id, dynamic data) {
     return api.patch(
       url: [UrlConstant.cart, id.toString()],
-      data: {'isSelected': isSelected},
+      data: data,
       fromJsonT: (data) => YourCartDto.fromJson(data),
     );
+  }
+
+  Future<ApiResponse<YourCartDto>> toggleSelecting(int id, bool isSelected) {
+    return _update(id, {'isSelected': isSelected});
+  }
+
+  Future<ApiResponse<YourCartDto>> updateQuantity(int id, int quantity) {
+    return _update(id, {'quantity': quantity});
   }
 }

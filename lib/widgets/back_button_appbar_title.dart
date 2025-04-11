@@ -6,8 +6,14 @@ class BackButtonAppbarTitle extends StatelessWidget
     implements PreferredSizeWidget {
   final bool? centerTitle;
   final String? title;
+  final dynamic result;
 
-  const BackButtonAppbarTitle({super.key, this.centerTitle, this.title});
+  const BackButtonAppbarTitle({
+    super.key,
+    this.centerTitle,
+    this.title,
+    this.result,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +25,7 @@ class BackButtonAppbarTitle extends StatelessWidget
         scrolledUnderElevation: 0,
         leading: Padding(
           padding: EdgeInsets.only(left: MarginPadding.homeHorPadding),
-          child: const BuildBackButton(),
+          child: BuildBackButton(result: result),
         ),
         title: title != null && title!.isNotEmpty
             ? Text(

@@ -3,6 +3,7 @@ import 'package:e_commerce/dto/cart_dto.dart';
 import 'package:e_commerce/screens/cart/controller/cart_controller.dart';
 import 'package:e_commerce/screens/cart/view/widgets/cart_card_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/state_manager.dart';
 
 class CartList extends GetView<CartController> {
@@ -16,9 +17,12 @@ class CartList extends GetView<CartController> {
           final carts = controller.yourCartDto.value?.carts ?? [];
 
           if (carts.isEmpty) {
-            return const Center(
-              child: Text(
-                "Record Not Found",
+            return SizedBox(
+              height: Get.height * 0.5,
+              child: const Center(
+                child: Text(
+                  "Record Not Found",
+                ),
               ),
             );
           }

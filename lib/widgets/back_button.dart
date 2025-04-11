@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 
 class BuildBackButton extends StatelessWidget {
   final VoidCallback? backPage;
+  final dynamic result;
   const BuildBackButton({
     super.key,
-    this.backPage,
+    this.backPage, this.result,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => backPage != null ? backPage!() : CommonGetX.backPage(),
+      onTap: () => backPage != null ? backPage!() : CommonGetX.backPage(result: result),
       child: Container(
         width: 35,
         height: 35,

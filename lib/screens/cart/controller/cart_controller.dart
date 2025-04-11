@@ -44,15 +44,13 @@ class CartController extends GetxController {
     Get.toNamed(AppRoutes.checkout);
   }
 
-  void incrementDecrementQuantity(int id, bool isIncrement) {
-    final cart = carts.firstWhere((item) => item.id == id);
-
-    if (isIncrement) {
-      cart.quantity = (cart.quantity) + 1;
-    } else if (cart.quantity > 0) {
-      cart.quantity = (cart.quantity) - 1;
+  Future<void> updateQuantity(int id, bool isIncrement) async {
+    final response = await cartService.updateQuantity(id, isIncrement ? 1 : -1);
+    if (response.error) {
+      CommonSnackbar.error(response.message);
+      return;
     }
-    carts.refresh();
+    yourCartDto.value = response.data;
   }
 
   Future<void> fetchAllCarts() async {
