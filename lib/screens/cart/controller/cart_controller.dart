@@ -40,8 +40,12 @@ class CartController extends GetxController {
     yourCartDto.value = response.data;
   }
 
-  void proceedToCheckout() {
-    Get.toNamed(AppRoutes.checkout);
+  Future<void> proceedToCheckout() async {
+    final result = await Get.toNamed(AppRoutes.checkout);
+
+    if (result == true) {
+      fetchAllCarts();
+    }
   }
 
   Future<void> updateQuantity(int id, bool isIncrement) async {

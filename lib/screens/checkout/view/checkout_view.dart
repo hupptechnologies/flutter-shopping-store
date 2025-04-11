@@ -19,6 +19,7 @@ class CheckoutView extends GetView<CheckoutController> {
       appBar: const BackButtonAppbarTitle(
         title: 'Check out',
         centerTitle: true,
+        result: true,
       ),
       body: SafeArea(
         child: Padding(
