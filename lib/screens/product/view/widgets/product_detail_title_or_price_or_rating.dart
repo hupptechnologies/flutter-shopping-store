@@ -44,9 +44,12 @@ class ProductDetailTitleOrPriceOrRating
             },
           ),
           Obx(() {
-            final value = controller.productDto.value?.averageRating ?? 0;
+            final product = controller.productDto.value;
+            if (product == null || product.reviews!.isEmpty) {
+              return const SizedBox.shrink();
+            }
             return RatingWidget(
-              value: value,
+              value: product.averageRating!,
               size: 20,
             );
           })

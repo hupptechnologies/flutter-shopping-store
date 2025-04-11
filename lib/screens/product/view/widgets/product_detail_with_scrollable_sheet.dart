@@ -61,13 +61,22 @@ class ProductDetailWithScrollableSheet
                                 description: product?.description ?? "",
                               );
                             }),
-                            const ProductDetailsReviewSection()
+                            Obx(() {
+                              final reviews =
+                                  controller.productDto.value?.reviews ?? [];
+                              if (reviews.isEmpty) {
+                                return const SizedBox.shrink();
+                              }
+                              return const ProductDetailsReviewSection();
+                            }),
                           ],
                         ),
                       ),
                       Obx(() {
-                        final similarProducts = controller.productDto.value?.similarProducts;
-                        if (similarProducts == null || similarProducts.isEmpty) {
+                        final similarProducts =
+                            controller.productDto.value?.similarProducts;
+                        if (similarProducts == null ||
+                            similarProducts.isEmpty) {
                           return const SizedBox.shrink();
                         }
                         return const ProductDetailSimilarProduct();
