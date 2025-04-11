@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:e_commerce/common/constant/url_constant.dart';
 import 'package:e_commerce/common/dto/api_response.dart';
 import 'package:e_commerce/common/dto/pagination.dart';
+import 'package:e_commerce/common/dto/query_dto.dart';
 import 'package:e_commerce/dto/review_dto.dart';
 import 'package:e_commerce/service/base_service.dart';
 import 'package:dio/dio.dart';
@@ -23,9 +24,10 @@ class ReviewService extends BaseService {
     return api.post(url: UrlConstant.review, data: formData);
   }
 
-  Future<ApiResponse<Pagination<ReviewDto>>> allByProductId(int id) async {
+  Future<ApiResponse<Pagination<ReviewDto>>> allByProductId(int id, QueryDto queryDto) async {
     return api.get(
       url: [UrlConstant.review, id.toString()],
+      queryParameters: queryDto.toJson(),
       fromJsonT: (item) => Pagination.fromJson(
         item,
         (json) => reviewDtoFromJson(json),

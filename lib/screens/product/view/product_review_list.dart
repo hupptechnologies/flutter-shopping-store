@@ -12,12 +12,13 @@ class ProductReviewList extends GetView<ProductReviewListController> {
   @override
   Widget build(BuildContext context) {
     return PopScopeWrapper<ProductReviewListController>(
+      isLoader: controller.reviewService.api.isLoader,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Obx(() {
             return BackButtonAppbarTitle(
-              title: controller.title.value ?? 'Reviews',
+              title: controller.args.value?.productName ?? 'Reviews',
               centerTitle: true,
             );
           }),
@@ -28,14 +29,18 @@ class ProductReviewList extends GetView<ProductReviewListController> {
               horizontal: MarginPadding.homeHorPadding,
               vertical: MarginPadding.homeTopPadding,
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Obx(() {
-                    final reviews = controller.reviews.value;
-                    return ReviewSectionUsersReviews(reviews: reviews);
-                  }),
-                ],
+            child: RefreshIndicator(
+              onRefresh: controller.onRefresh,
+              child: SingleChildScrollView(
+                controller: controller.scrollController,
+                child: Column(
+                  children: [
+                    Obx(() {
+                      final reviews = controller.reviews.value;
+                      return ReviewSectionUsersReviews(reviews: reviews);
+                    }),
+                  ],
+                ),
               ),
             ),
           ),

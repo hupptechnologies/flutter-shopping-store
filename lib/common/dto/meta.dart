@@ -28,4 +28,7 @@ class Meta {
       'perPage': perPage,
     };
   }
+
+  bool get hasNextPage => currentPage < totalPage;
+  int get nextPage => currentPage + 1;
 }
