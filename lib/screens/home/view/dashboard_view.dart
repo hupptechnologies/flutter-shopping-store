@@ -17,7 +17,7 @@ class DashboardView extends GetView<DashboardController> {
     return RefreshIndicator(
       onRefresh: controller.fetchDashboardData,
       child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
